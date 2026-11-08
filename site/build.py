@@ -477,7 +477,7 @@ html_code = """<!DOCTYPE html>
       text-decoration: underline;
     }
 
-    /* 素人向けハイライト解説ボックス */
+    /* 入門者向けハイライト解説ボックス */
     .plain-boxes-grid {
       display: grid;
       grid-template-columns: 1fr 1fr;
@@ -660,7 +660,7 @@ html_code = """<!DOCTYPE html>
         <h1 class="header-title">IDM DX CITATION COCKPIT</h1>
         <p class="header-subtitle">
           就業者2,035名の完全決定論的マイクロデータ解析に基づくDX推進意識と組織摩擦の階層乖離研究。<br>
-          論文を強固に防衛する全45編の引用文献・手元保有実体PDFを完全網羅。専門用語を排し、誰でも直感的に理解できる「分析方法」と「結論」を徹底解説。
+          論文を強固に防衛する全45編の引用文献・手元保有実体PDFを完全網羅。専門用語を平易に解説し、初学者や実務家でも直感的に理解できる「分析方法」と「結論」を徹底解説。
         </p>
       </div>
       <div class="header-actions">
@@ -905,13 +905,13 @@ function renderCards() {
           <span>${doiDisplay}</span>
         </div>
 
-        <!-- 素人向け解説ボックス（2カラム） -->
+        <!-- 入門者向け解説ボックス（2カラム） -->
         <div class="plain-boxes-grid">
           <!-- 分析方法 -->
           <div class="plain-box box-method">
             <div class="box-header">
               <span>🔍</span>
-              <span>素人でもわかる分析方法（どうやって調べたか）</span>
+              <span>入門者向け分析方法解説（どうやって調べたか）</span>
             </div>
             <div class="box-content">
               ${escapeHtml(item.method_plain)}
@@ -922,7 +922,7 @@ function renderCards() {
           <div class="plain-box box-conclusion">
             <div class="box-header">
               <span>💡</span>
-              <span>素人でもわかる結論（要するに何がわかったか）</span>
+              <span>入門者向け結論解説（要するに何がわかったか）</span>
             </div>
             <div class="box-content">
               ${escapeHtml(item.conclusion_plain)}
