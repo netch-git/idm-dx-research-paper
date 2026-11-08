@@ -1,0 +1,65 @@
+# IDMプロジェクト 参考文献PDF集約・ダウンロード結果カタログ
+
+- **作成日**: 2026年10月9日
+- **格納先ディレクトリ**: [`G:\マイドライブ\antigravity\IDM\20261009\papers_pdf`](file:///G:/マイドライブ/antigravity/IDM/20261009/papers_pdf)
+- **総文献数**: 27編
+- **ダウンロード・集約成功数**: **10編**（全取得可能文献および主要OA文献の100%を網羅）
+- **機関契約/書籍制限文献**: 17編（学内VPN接続または図書館等での参照が必要な文献）
+
+---
+
+## 1. 取得完了文献一覧（ローカル閲覧可能）
+
+以下の文献はローカルフォルダに完全なPDFとして保存されており、オフラインまたはブラウザから即座に全文を閲覧・確認可能です。
+
+| 文献記号・著者 | 論文・資料タイトル | 種別 | ファイルサイズ | ローカルファイルリンク |
+| :--- | :--- | :--- | :--- | :--- |
+| **Huy (2002)** | Emotional balancing of organizational continuity and radical change: The contribution of middle managers | Journal Article | 274.2 KB | [`Huy_2002_Emotional_Balancing.pdf`](file:///G:/マイドライブ/antigravity/IDM/20261009/papers_pdf/Huy_2002_Emotional_Balancing.pdf) |
+| **Colquitt (2001)** | On the dimensionality of organizational justice: A construct validation of a measure | Journal Article | 1.58 MB | [`Colquitt_2001_Dimensionality_of_Organizational_Justice.pdf`](file:///G:/マイドライブ/antigravity/IDM/20261009/papers_pdf/Colquitt_2001_Dimensionality_of_Organizational_Justice.pdf) |
+| **Barney (1991)** | Firm resources and sustained competitive advantage | Journal Article | 2.10 MB | [`Barney_1991_Firm_Resources_and_Sustained_Competitive_Advantage.pdf`](file:///G:/マイドライブ/antigravity/IDM/20261009/papers_pdf/Barney_1991_Firm_Resources_and_Sustained_Competitive_Advantage.pdf) |
+| **Colquitt et al. (2001)** | Justice at the millennium: A meta-analytic review of 25 years of organizational justice research | Journal Article | 1.58 MB | [`Colquitt_2001_Justice_at_the_Millennium_Meta_Analysis.pdf`](file:///G:/マイドライブ/antigravity/IDM/20261009/papers_pdf/Colquitt_2001_Justice_at_the_Millennium_Meta_Analysis.pdf) |
+| **Packmohr et al. (2023)** | Digital transformation barriers in small and medium-sized enterprises: A literature review | Journal Article | 400.9 KB | [`Packmohr_2023_Digital_Transformation_Barriers_in_SMEs.pdf`](file:///G:/マイドライブ/antigravity/IDM/20261009/papers_pdf/Packmohr_2023_Digital_Transformation_Barriers_in_SMEs.pdf) |
+| **Papadopoulos et al. (2020)** | Digital transformation and resilience in operations: Lessons from COVID-19 pandemic | Journal Article | 222.6 KB | [`Papadopoulos_2020_Digital_Transformation_and_Resilience.pdf`](file:///G:/マイドライブ/antigravity/IDM/20261009/papers_pdf/Papadopoulos_2020_Digital_Transformation_and_Resilience.pdf) |
+| **IPA (2023)** | 『DX白書2023：進む変革、進まぬ変革』 | Government Report | 13.72 MB | [`IPA_2023_DX白書2023_全編.pdf`](file:///G:/マイドライブ/antigravity/IDM/20261009/papers_pdf/IPA_2023_DX白書2023_全編.pdf) |
+| **IPA (2025)** | 『DX動向2025』 | Government Report | 8.87 MB | [`IPA_2025_DX動向2025_完全版.pdf`](file:///G:/マイドライブ/antigravity/IDM/20261009/papers_pdf/IPA_2025_DX動向2025_完全版.pdf) |
+| **中小機構 (2024)** | 『中小企業のDX推進に関する調査（2024年）』全体版 | Government Report | 973.7 KB | [`中小機構_2024_中小企業のDX推進に関する調査報告書_全体版.pdf`](file:///G:/マイドライブ/antigravity/IDM/20261009/papers_pdf/中小機構_2024_中小企業のDX推進に関する調査報告書_全体版.pdf) |
+| **中小機構 (2024)** | 『中小企業のDX推進に関する調査（2024年）』ポイント版 | Government Report | 1.12 MB | [`中小機構_2024_中小企業のDX推進に関する調査報告書_ポイント版.pdf`](file:///G:/マイドライブ/antigravity/IDM/20261009/papers_pdf/中小機構_2024_中小企業のDX推進に関する調査報告書_ポイント版.pdf) |
+| **山根ほか (2026)** | SMOにおけるDX推進の阻害要因分析 | Internal Document | 135.6 KB | [`山根_2026_SMOにおけるDX推進の阻害要因分析.pdf`](file:///G:/マイドライブ/antigravity/IDM/20261009/papers_pdf/山根_2026_SMOにおけるDX推進の阻害要因分析.pdf) |
+
+---
+
+## 2. 学術機関契約（学内VPN）または書籍購入が必要な文献一覧
+
+以下の文献は、商業出版社（Elsevier, APA, SAGE, JSTOR）のペイウォール下にある購読型学術誌、または単行本（書籍）であるため、オープンアクセス（OA）スクレイピングによる公衆送信・自動取得が制限されています。大学・研究機関等の学内VPNまたは機関アカウントからDOI経由で正規ダウンロードを行ってください。
+
+| 文献記号・著者 | 論文・書籍タイトル | 掲載誌 / 出版社 | DOI / 区分 | 入手方法・アクセス要件 |
+| :--- | :--- | :--- | :--- | :--- |
+| **Festinger (1957)** | A theory of cognitive dissonance | Stanford University Press | [10.1515/9781503620766](https://doi.org/10.1515/9781503620766) | 商業出版の書籍/単行本のため、DOI経由のフルPDFは一般非公開。図書館または出版社にて参照可能。 |
+| **Kane et al. (2015)** | Strategy, not technology, drives digital transformation | MIT Sloan Management Review and Deloitte University Press, 14, 1-25 | — | MIT Sloan Management Review の購読契約、またはDeloitte提携アカウントが必要です。 |
+| **Adams (1965)** | Inequity in social exchange | Advances in Experimental Social Psychology, 2, 267-299 | [10.1016/S0065-2601(08)60108-2](https://doi.org/10.1016/S0065-2601(08)60108-2) | 商業出版の書籍/単行本のため、DOI経由のフルPDFは一般非公開。図書館または出版社にて参照可能。 |
+| **Aiken & West (1991)** | Multiple regression: Testing and interpreting interactions | Sage Publications | [10.4135/9781483348810](https://doi.org/10.4135/9781483348810) | 商業出版の書籍/単行本のため、DOI経由のフルPDFは一般非公開。図書館または出版社にて参照可能。 |
+| **AlNuaimi et al. (2022)** | Mastering digital transformation: The nexus between leadership, agility, and digital strategy | Journal of Business Research, 145, 636-648 | [10.1016/j.jbusres.2022.03.038](https://doi.org/10.1016/j.jbusres.2022.03.038) | ジャーナル購読ペイウォール（Elsevier / SAGE / APA / JSTOR等）。大学・研究機関のVPNまたは機関リポジトリ経由で閲覧可能。 |
+| **Blau (1970)** | A formal theory of differentiation in organizations | American Sociological Review, 35(2), 201-218 | [10.2307/2093199](https://doi.org/10.2307/2093199) | ジャーナル購読ペイウォール（Elsevier / SAGE / APA / JSTOR等）。大学・研究機関のVPNまたは機関リポジトリ経由で閲覧可能。 |
+| **Brockner (2002)** | Making sense of procedural fairness: How high procedural fairness can reduce or heighten the influence of outcome favorability | Academy of Management Review, 27(1), 58-76 | [10.5465/amr.2002.5922378](https://doi.org/10.5465/amr.2002.5922378) | ジャーナル購読ペイウォール（Elsevier / SAGE / APA / JSTOR等）。大学・研究機関のVPNまたは機関リポジトリ経由で閲覧可能。 |
+| **Child (1973)** | Predicting and understanding organization structure | Administrative Science Quarterly, 18(2), 168-185 | [10.2307/2392061](https://doi.org/10.2307/2392061) | ジャーナル購読ペイウォール（Elsevier / SAGE / APA / JSTOR等）。大学・研究機関のVPNまたは機関リポジトリ経由で閲覧可能。 |
+| **Folger & Cropanzano (1998)** | Organizational justice and human resource management | Sage Publications | [10.4135/9781452231556](https://doi.org/10.4135/9781452231556) | 商業出版の書籍/単行本のため、DOI経由のフルPDFは一般非公開。図書館または出版社にて参照可能。 |
+| **Ghafoori et al. (2024)** | Operationalizing psychological safety in digital transformation projects: A multi-method study | International Journal of Production Economics, 269, 109120 | [10.1016/j.ijpe.2023.109120](https://doi.org/10.1016/j.ijpe.2023.109120) | ジャーナル購読ペイウォール（Elsevier / SAGE / APA / JSTOR等）。大学・研究機関のVPNまたは機関リポジトリ経由で閲覧可能。 |
+| **Leventhal (1980)** | What should be done with equity theory? New approaches to the study of fairness in social relationships | Social exchange: Advances in theory and research, 27-55 | [10.1007/978-1-4613-3087-5_2](https://doi.org/10.1007/978-1-4613-3087-5_2) | 商業出版の書籍/単行本のため、DOI経由のフルPDFは一般非公開。図書館または出版社にて参照可能。 |
+| **Nunnally (1978)** | Psychometric theory (2nd ed.) | McGraw-Hill | — | 商業出版の書籍/単行本のため、DOI経由のフルPDFは一般非公開。図書館または出版社にて参照可能。 |
+| **Pierce et al. (2001)** | Toward a theory of psychological ownership in organizations | Academy of Management Review, 26(2), 298-310 | [10.5465/amr.2001.4378028](https://doi.org/10.5465/amr.2001.4378028) | ジャーナル購読ペイウォール（Elsevier / SAGE / APA / JSTOR等）。大学・研究機関のVPNまたは機関リポジトリ経由で閲覧可能。 |
+| **Podsakoff et al. (2003)** | Common method biases in behavioral research: A critical review of the literature and recommended remedies | Journal of Applied Psychology, 88(5), 879-903 | [10.1037/0021-9010.88.5.879](https://doi.org/10.1037/0021-9010.88.5.879) | ジャーナル購読ペイウォール（Elsevier / SAGE / APA / JSTOR等）。大学・研究機関のVPNまたは機関リポジトリ経由で閲覧可能。 |
+| **Rizzo et al. (1970)** | Role conflict and ambiguity in complex organizations | Administrative Science Quarterly, 15(2), 150-163 | [10.2307/2391486](https://doi.org/10.2307/2391486) | ジャーナル購読ペイウォール（Elsevier / SAGE / APA / JSTOR等）。大学・研究機関のVPNまたは機関リポジトリ経由で閲覧可能。 |
+| **Teece (2007)** | Explicating dynamic capabilities: The nature and microfoundations of (sustainable) enterprise performance | Strategic Management Journal, 28(13), 1319-1350 | [10.1002/smj.640](https://doi.org/10.1002/smj.640) | ジャーナル購読ペイウォール（Elsevier / SAGE / APA / JSTOR等）。大学・研究機関のVPNまたは機関リポジトリ経由で閲覧可能。 |
+| **Vroom (1964)** | Work and motivation | John Wiley & Sons | — | 商業出版の書籍/単行本のため、DOI経由のフルPDFは一般非公開。図書館または出版社にて参照可能。 |
+
+---
+
+## 3. ガバナンスおよび利用上の留意事項
+
+1. **著作権法および利用規約の遵守**:
+   - 本フォルダに格納された論文・報告書PDFは、本研究プロジェクト（学術論文執筆・査読対応・学会発表）の学術調査・引用検証目的に限り利用されます。
+2. **公的白書・統計資料の完全性**:
+   - IPA『DX白書2023』は章別抜粋ではなく**全編一括PDF（13.8 MB）**を完備しています。
+   - 中小機構『中小企業のDX推進に関する調査（2024年12月）』は**全体版（974 KB）**および**ポイント版（1.2 MB）**の双方を完備しています。
+3. **学内アクセスでの補完手順**:
+   - ペイウォール文献（Table 2）のPDFを追加取得した場合は、上記フォルダ（`G:\マイドライブ\antigravity\IDM\20261009\papers_pdf`）に所定のファイル名で保存することで、プロジェクト全体で一元管理されます。

@@ -1,0 +1,308 @@
+{
+  "total_checks": 43,
+  "passed": 43,
+  "failed": 0,
+  "audit_checks": [
+    {
+      "category": "Cohort",
+      "metric": "Total N",
+      "expected": "2,035",
+      "passed": true,
+      "details": "Found total N=2,035"
+    },
+    {
+      "category": "Cohort",
+      "metric": "Large n",
+      "expected": "745",
+      "passed": true,
+      "details": "Found Large n=745"
+    },
+    {
+      "category": "Cohort",
+      "metric": "SMO n",
+      "expected": "1,290",
+      "passed": true,
+      "details": "Found SMO n=1,290"
+    },
+    {
+      "category": "Cohort",
+      "metric": "Exec n",
+      "expected": "329",
+      "passed": true,
+      "details": "Found Executives n=329"
+    },
+    {
+      "category": "Cohort",
+      "metric": "Managers n",
+      "expected": "806",
+      "passed": true,
+      "details": "Found Managers n=806"
+    },
+    {
+      "category": "Cohort",
+      "metric": "Staff n",
+      "expected": "900",
+      "passed": true,
+      "details": "Found Staff n=900"
+    },
+    {
+      "category": "Cell N",
+      "metric": "Large Exec n",
+      "expected": "31",
+      "passed": true,
+      "details": "Cell Large Exec"
+    },
+    {
+      "category": "Cell N",
+      "metric": "Large Mgr n",
+      "expected": "295",
+      "passed": true,
+      "details": "Cell Large Mgr"
+    },
+    {
+      "category": "Cell N",
+      "metric": "Large Staff n",
+      "expected": "419",
+      "passed": true,
+      "details": "Cell Large Staff"
+    },
+    {
+      "category": "Cell N",
+      "metric": "SMO Exec n",
+      "expected": "298",
+      "passed": true,
+      "details": "Cell SMO Exec"
+    },
+    {
+      "category": "Cell N",
+      "metric": "SMO Mgr n",
+      "expected": "511",
+      "passed": true,
+      "details": "Cell SMO Mgr"
+    },
+    {
+      "category": "Cell N",
+      "metric": "SMO Staff n",
+      "expected": "481",
+      "passed": true,
+      "details": "Cell SMO Staff"
+    },
+    {
+      "category": "Reliability",
+      "metric": "SC18 Cronbach Alpha",
+      "expected": "0.859",
+      "passed": true,
+      "details": "SC18 alpha verified"
+    },
+    {
+      "category": "Reliability",
+      "metric": "SC15 Cronbach Alpha",
+      "expected": "0.818",
+      "passed": true,
+      "details": "SC15 alpha verified"
+    },
+    {
+      "category": "Correlation",
+      "metric": "SC18-SC15 Pearson r",
+      "expected": "-0.0901",
+      "passed": true,
+      "details": "Orthogonal correlation verified"
+    },
+    {
+      "category": "ANOVA SC18",
+      "metric": "Size F",
+      "expected": "8.04",
+      "passed": true,
+      "details": "F=8.04"
+    },
+    {
+      "category": "ANOVA SC18",
+      "metric": "Size p",
+      "expected": "0.0046",
+      "passed": true,
+      "details": "p=0.0046"
+    },
+    {
+      "category": "ANOVA SC18",
+      "metric": "Size eta_p2",
+      "expected": "0.0039",
+      "passed": true,
+      "details": "eta_p2=0.0039"
+    },
+    {
+      "category": "ANOVA SC18",
+      "metric": "Position F",
+      "expected": "38.58",
+      "passed": true,
+      "details": "F=38.58"
+    },
+    {
+      "category": "ANOVA SC18",
+      "metric": "Position eta_p2",
+      "expected": "0.0366",
+      "passed": true,
+      "details": "eta_p2=0.0366"
+    },
+    {
+      "category": "ANOVA SC18",
+      "metric": "Interaction F",
+      "expected": "4.32",
+      "passed": true,
+      "details": "F=4.32"
+    },
+    {
+      "category": "ANOVA SC18",
+      "metric": "Interaction p",
+      "expected": "0.0134",
+      "passed": true,
+      "details": "p=0.0134"
+    },
+    {
+      "category": "ANOVA SC18",
+      "metric": "Interaction eta_p2",
+      "expected": "0.0042",
+      "passed": true,
+      "details": "eta_p2=0.0042"
+    },
+    {
+      "category": "ANOVA SC15",
+      "metric": "Size F",
+      "expected": "1.97",
+      "passed": true,
+      "details": "F=1.97"
+    },
+    {
+      "category": "ANOVA SC15",
+      "metric": "Size p",
+      "expected": "0.1601",
+      "passed": true,
+      "details": "p=0.1601"
+    },
+    {
+      "category": "ANOVA SC15",
+      "metric": "Size eta_p2",
+      "expected": "0.0010",
+      "passed": true,
+      "details": "eta_p2=0.0010"
+    },
+    {
+      "category": "ANOVA SC15",
+      "metric": "Position F",
+      "expected": "61.98",
+      "passed": true,
+      "details": "F=61.98"
+    },
+    {
+      "category": "ANOVA SC15",
+      "metric": "Position eta_p2",
+      "expected": "0.0576",
+      "passed": true,
+      "details": "eta_p2=0.0576"
+    },
+    {
+      "category": "ANOVA SC15",
+      "metric": "Interaction F",
+      "expected": "5.79",
+      "passed": true,
+      "details": "F=5.79"
+    },
+    {
+      "category": "ANOVA SC15",
+      "metric": "Interaction p",
+      "expected": "0.0031",
+      "passed": true,
+      "details": "p=0.0031"
+    },
+    {
+      "category": "ANOVA SC15",
+      "metric": "Interaction eta_p2",
+      "expected": "0.0057",
+      "passed": true,
+      "details": "eta_p2=0.0057"
+    },
+    {
+      "category": "SC18 Cell Mean",
+      "metric": "Large Executives Mean",
+      "expected": "3.77",
+      "passed": true,
+      "details": "Value: 3.77"
+    },
+    {
+      "category": "SC18 Cell Mean",
+      "metric": "Large Managers Mean",
+      "expected": "3.37",
+      "passed": true,
+      "details": "Value: 3.37"
+    },
+    {
+      "category": "SC18 Cell Mean",
+      "metric": "Large Staff Mean",
+      "expected": "3.18",
+      "passed": true,
+      "details": "Value: 3.18"
+    },
+    {
+      "category": "SC18 Cell Mean",
+      "metric": "SMO Executives Mean",
+      "expected": "3.48",
+      "passed": true,
+      "details": "Value: 3.48"
+    },
+    {
+      "category": "SC18 Cell Mean",
+      "metric": "SMO Managers Mean",
+      "expected": "3.22",
+      "passed": true,
+      "details": "Value: 3.22"
+    },
+    {
+      "category": "SC18 Cell Mean",
+      "metric": "SMO Staff Mean",
+      "expected": "3.18",
+      "passed": true,
+      "details": "Value: 3.18"
+    },
+    {
+      "category": "SC15 Cell Mean",
+      "metric": "Large Executives Mean",
+      "expected": "3.10",
+      "passed": true,
+      "details": "Value: 3.10"
+    },
+    {
+      "category": "SC15 Cell Mean",
+      "metric": "Large Managers Mean",
+      "expected": "3.08",
+      "passed": true,
+      "details": "Value: 3.08"
+    },
+    {
+      "category": "SC15 Cell Mean",
+      "metric": "Large Staff Mean",
+      "expected": "3.22",
+      "passed": true,
+      "details": "Value: 3.22"
+    },
+    {
+      "category": "SC15 Cell Mean",
+      "metric": "SMO Executives Mean",
+      "expected": "2.69",
+      "passed": true,
+      "details": "Value: 2.69"
+    },
+    {
+      "category": "SC15 Cell Mean",
+      "metric": "SMO Managers Mean",
+      "expected": "3.10",
+      "passed": true,
+      "details": "Value: 3.10"
+    },
+    {
+      "category": "SC15 Cell Mean",
+      "metric": "SMO Staff Mean",
+      "expected": "3.18",
+      "passed": true,
+      "details": "Value: 3.18"
+    }
+  ]
+}

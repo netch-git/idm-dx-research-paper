@@ -1,0 +1,117 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:epub="http://www.idpf.org/2007/ops" xml:lang="ja">
+<head>
+  <meta charset="utf-8" />
+  <title>CHAPTER 01: グループの差を丁寧に確かめる — 分散分析（ANOVA）と効果量 η²</title>
+  <link rel="stylesheet" type="text/css" href="../styles/stylesheet.css" />
+</head>
+<body>
+  <div class="chapter-number">CHAPTER 01</div>
+  <h2 class="chapter-title">グループの差を丁寧に確かめる — 分散分析（ANOVA）と効果量 η²</h2>
+  <p class="chapter-lead">なぜ2群の比較を何度も繰り返してはいけないのか？ 偶然の蓄積を防ぎ、シグナルとノイズの比率を見極める。</p>
+
+  
+  <h3 class="subhead">1. 直感アナロジー: コイン投げの回数と「偶然」の蓄積</h3>
+  
+<p>
+「経営層」「中間管理職」「一般社員」の3つの階層間で、DX推進に対する意識に違いがあるかを確かめたいとします。初学者がよく考えるアプローチは、「経営層 vs 管理職」「管理職 vs 一般社員」「経営層 vs 一般社員」というように、2群の平均値差を検定する <strong>t 検定を3回繰り返す</strong> ことです。
+</p>
+<p>
+しかし、このアプローチには統計学的に見過ごせない落とし穴があります。1回の検定において「本当は差がないのに、たまたま偶然で有意差ありと誤判定してしまう確率（第一種の過誤: α）」を 5%（0.05）に設定していたとしても、検定を3回繰り返すと「3回のうち少なくとも1回は偶然の有意差を拾ってしまう確率」は以下のように跳ね上がってしまいます：
+</p>
+
+<div class="epub-formula-card">
+  <div class="formula-line"><strong>α<sub>family</sub> = 1 − (1 − 0.05)³ = 1 − (0.95)³ = 1 − 0.857 = 14.3%</strong></div>
+  <div class="formula-note">※ 3回の検定で偶然有意差が出る確率が 5% から 14.3% へと約3倍に膨張する</div>
+</div>
+
+<p>
+3回テストするだけで、誤判定のリスクは 5% から 14.3% へと約3倍に膨らみます。もしこれが10グループの比較なら、何と <strong>約40% の確率で「本当は差がないのに差がある」と大誤診</strong> してしまうのです。
+</p>
+
+
+  <h3 class="subhead">2. 分散分析（ANOVA）の核心: 「シグナル」と「ノイズ」の比率（F値）</h3>
+  
+<p>
+そこで登場するのが <strong>分散分析（ANOVA: Analysis of Variance）</strong> です。分散分析は、何回も個別に比べるのではなく、「3つのグループ全体のバラツキ」を一度の計算で判定します。その数理的発想は驚くほどシンプルで、<strong>「シグナル（群間分散）」と「ノイズ（群内分散）」の割り算（比率）</strong> です。
+</p>
+
+<div class="epub-formula-card">
+  <div class="formula-line">
+    <table class="formula-frac-table" style="margin: 0 auto; text-align: center; border-collapse: collapse;">
+      <tr>
+        <td rowspan="2" style="vertical-align: middle; padding-right: 8px; font-weight: bold; font-size: 1.15rem;">F =</td>
+        <td style="border-bottom: 2px solid #005BAC; padding: 4px 8px; font-weight: bold;">群間分散 MS<sub>between</sub>（各グループ平均値の離れ具合 ＝ シグナル）</td>
+      </tr>
+      <tr>
+        <td style="padding: 4px 8px; font-weight: bold;">群内分散 MS<sub>within</sub>（グループ内の個人のバラツキ ＝ ノイズ）</td>
+      </tr>
+    </table>
+  </div>
+</div>
+
+<p>
+もし各グループの平均値が大きく離れていて（シグナルが大）、個人差のバラツキが小さければ（ノイズが小）、天秤は大きく傾き、F値は跳ね上がります。逆に、平均値がいくら離れて見えても、個人のバラツキが激しければ「それは単なる個人のばらつき（偶然）の範囲内だ」と判定され、F値は小さくなります。
+</p>
+
+
+  
+<div class="foundations-box">
+  <div class="foundations-header">
+    <span class="foundations-tag">Roots &amp; Foundations</span>
+    <h4 class="foundations-title">難易度の階層を下げる基礎学習: t検定・分散・平均の根本原理へ遡る</h4>
+  </div>
+  
+  <div class="drilldown-step">
+    <div class="step-badge">1</div>
+    <div class="step-content">
+      <div class="step-title">そもそも何のために「検定」をするのか？</div>
+      <div class="step-desc">Aグループの平均が3.5点、Bグループが3.2点だったとき、「0.3点の差がある」ことは事実です。しかし問題は、「この0.3点の差は、たまたま選んだメンバーのバラツキ（誤差）でも生じる範囲なのか、それとも母集団全体に明確な実力差があると言えるのか」です。検定とは、「偶然の誤差で片付けられる限界線」を数理的に引く手続きです。</div>
+    </div>
+  </div>
+
+  <div class="drilldown-step">
+    <div class="step-badge">2</div>
+    <div class="step-content">
+      <div class="step-title">データのバラツキを表す「偏差」と「分散」</div>
+      <div class="step-desc">各データが平均値からどれくらい離れているかを「偏差（x<sub>i</sub> - x̄）」と呼びます。全員の偏差をそのまま足し算すると、プラスとマイナスが相殺されて必ず「ゼロ」になってしまいます。</div>
+    </div>
+  </div>
+
+  <div class="drilldown-step">
+    <div class="step-badge">3</div>
+    <div class="step-content">
+      <div class="step-title">なぜ偏差をそのまま足さずに「2乗」するのか？</div>
+      <div class="step-desc">マイナスをプラスに変えて合計するために、偏差を2乗（平方）します。これが「偏差平方和」です。2乗することで、「平均から大きく外れた異常値」に強い重み（ペナルティ）がかかるという数学的性質も生まれます。</div>
+    </div>
+  </div>
+
+  <div class="drilldown-step">
+    <div class="step-badge">4</div>
+    <div class="step-content">
+      <div class="step-title">なぜサンプル数 n ではなく n - 1（自由度）で割るのか？（不偏分散の謎）</div>
+      <div class="step-desc">手元のデータだけで分散を計算すると、母集団全体の真の分散よりも「少し小さめ」に推定されてしまうという数学的宿命があります。手元データの平均値を使って計算しているため、自由度が1つ消費されているからです。この縮みを補正して、母集団の分散を正確に推測するために、n ではなく n - 1 で割った「不偏分散（Unbiased Variance）」を使用します。</div>
+    </div>
+  </div>
+
+  <div class="drilldown-step">
+    <div class="step-badge">5</div>
+    <div class="step-content">
+      <div class="step-title">標準偏差（SD）— なぜ平方根をとるのか？</div>
+      <div class="step-desc">分散は数値を2乗してしまっているため、単位が「点の2乗」になってしまい、現実の尺度と合いません。そこで平方根（√）を取ることで、元のアンケートの単位（「点」）に戻したものが「標準偏差（Standard Deviation: SD）」です。</div>
+    </div>
+  </div>
+
+  <div class="drilldown-step">
+    <div class="step-badge">6</div>
+    <div class="step-content">
+      <div class="step-title">そもそも「平均」の計算方法はひとつではない</div>
+      <div class="step-desc">私たちが普段使う「全部足して人数で割る」平均は「相加平均」です。しかし、成長率や変化率を掛けていく場合は「相乗平均（幾何平均）」、時速のように単位あたりを測る場合は「調和平均」、重要度に応じる「加重平均」など、問いに応じて使い分けます。また、極端な億万長者が1人いるだけで跳ね上がってしまう平均値に対し、順番に並べてちょうど真ん中を取る「中央値（メディアン）」の視点も不可欠です。</div>
+    </div>
+  </div>
+
+</div>
+
+</body>
+</html>

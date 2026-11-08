@@ -1,0 +1,188 @@
+{
+  "sc1_diffs": [
+    {
+      "row_idx": 4,
+      "K_ID": "RM4e78cvdSkeGaSgp6rdHQtGQ_EqALrTw4YrSnnAFCew",
+      "clean_val": "建設業",
+      "raw_text_val": "",
+      "raw_num_val": "4",
+      "raw_other_text (SC1-22)": "nan"
+    },
+    {
+      "row_idx": 7,
+      "K_ID": "R-3b1XWYIEmEdsRJgEjRIyc4VNslHUVlvKJ9EkpAx23s",
+      "clean_val": "建設業",
+      "raw_text_val": "",
+      "raw_num_val": "4",
+      "raw_other_text (SC1-22)": "nan"
+    },
+    {
+      "row_idx": 9,
+      "K_ID": "R_HHeKc3q2rJNi_xf8uuGGkAypPhA3NR9hGrpuuTHqeo",
+      "clean_val": "製造業",
+      "raw_text_val": "",
+      "raw_num_val": "5",
+      "raw_other_text (SC1-22)": "nan"
+    },
+    {
+      "row_idx": 10,
+      "K_ID": "RZsm6ppPIWRuxzRTaU4Jsj4W8WYp1JKgFsaZUOJgDVlA",
+      "clean_val": "建設業",
+      "raw_text_val": "",
+      "raw_num_val": "4",
+      "raw_other_text (SC1-22)": "nan"
+    },
+    {
+      "row_idx": 11,
+      "K_ID": "RVyoUVP4T99resjTYycGwvgLboSiOzYyw42I3Yvf0XHM",
+      "clean_val": "製造業",
+      "raw_text_val": "",
+      "raw_num_val": "5",
+      "raw_other_text (SC1-22)": "nan"
+    },
+    {
+      "row_idx": 12,
+      "K_ID": "RqyHcbphm9OMoeR8jz8_UqqxRpggLsWMuDGQEcxYiJ98",
+      "clean_val": "運輸業、郵便業",
+      "raw_text_val": "",
+      "raw_num_val": "8",
+      "raw_other_text (SC1-22)": "nan"
+    },
+    {
+      "row_idx": 13,
+      "K_ID": "RLYLDdL-C_146en0j1YYCjALv0cl6iokX8TQMM8-3e7U",
+      "clean_val": "製造業",
+      "raw_text_val": "",
+      "raw_num_val": "5",
+      "raw_other_text (SC1-22)": "nan"
+    },
+    {
+      "row_idx": 14,
+      "K_ID": "Rb53aeHO3LZARFGS-yJ1ffWyK3RtXiFEHm-aXgxuEQiE",
+      "clean_val": "卸売業、小売業",
+      "raw_text_val": "",
+      "raw_num_val": "9",
+      "raw_other_text (SC1-22)": "nan"
+    },
+    {
+      "row_idx": 15,
+      "K_ID": "RlUSokr5wQgM17qYiAgbMj6E2qOIQV0qK1SSreq7JBZQ",
+      "clean_val": "運輸業、郵便業",
+      "raw_text_val": "",
+      "raw_num_val": "8",
+      "raw_other_text (SC1-22)": "nan"
+    },
+    {
+      "row_idx": 18,
+      "K_ID": "RgL_a9kuYUSQhxu9laOOTzMU6HS9ulu4ROy2IdKePjtg",
+      "clean_val": "金融業、保険業",
+      "raw_text_val": "",
+      "raw_num_val": "10",
+      "raw_other_text (SC1-22)": "nan"
+    },
+    {
+      "row_idx": 19,
+      "K_ID": "Rv8L4pBFi6QLbq3Ea3KztUiZw9a2yr4AfcEdfFiyzxzU",
+      "clean_val": "サービス業（他に分類されないもの）",
+      "raw_text_val": "",
+      "raw_num_val": "18",
+      "raw_other_text (SC1-22)": "nan"
+    },
+    {
+      "row_idx": 20,
+      "K_ID": "RJVOEqGX4EbwyTKAYmZY7xiWk8U9ZJFMOhgCbYeWN9tM",
+      "clean_val": "医療、福祉",
+      "raw_text_val": "",
+      "raw_num_val": "16",
+      "raw_other_text (SC1-22)": "nan"
+    },
+    {
+      "row_idx": 22,
+      "K_ID": "RMov9-uGvhSOLGzKdGlj7G473l5N0aba34fRe7F9AC7E",
+      "clean_val": "製造業",
+      "raw_text_val": "",
+      "raw_num_val": "5",
+      "raw_other_text (SC1-22)": "nan"
+    },
+    {
+      "row_idx": 23,
+      "K_ID": "RRCKeecWSwWdakw0e3PS-ljQ8jnGJkdLW6S19CVxiPtg",
+      "clean_val": "複合サービス事業",
+      "raw_text_val": "",
+      "raw_num_val": "17",
+      "raw_other_text (SC1-22)": "nan"
+    },
+    {
+      "row_idx": 24,
+      "K_ID": "RTAXZb8Oj0GX_717YOPWbGr5CQg-VcjYK2fMQZXQwNKw",
+      "clean_val": "サービス業（他に分類されないもの）",
+      "raw_text_val": "",
+      "raw_num_val": "18",
+      "raw_other_text (SC1-22)": "nan"
+    },
+    {
+      "row_idx": 25,
+      "K_ID": "RcAOXf4Msxjm1yc1h00hDwb96DTOwAoIsS01jYQwkzws",
+      "clean_val": "いずれも当てはまらない",
+      "raw_text_val": "",
+      "raw_num_val": "23",
+      "raw_other_text (SC1-22)": "nan"
+    },
+    {
+      "row_idx": 26,
+      "K_ID": "RlurgwXSrK8gSRtBDzA8n9FC47fQTFEw4mPm-S9RDmfk",
+      "clean_val": "製造業",
+      "raw_text_val": "",
+      "raw_num_val": "5",
+      "raw_other_text (SC1-22)": "nan"
+    },
+    {
+      "row_idx": 27,
+      "K_ID": "R1RW_h8atR1faBDxsv0pFJOeMvKTk9L0BLUvIwLsbXPg",
+      "clean_val": "建設業",
+      "raw_text_val": "",
+      "raw_num_val": "4",
+      "raw_other_text (SC1-22)": "nan"
+    },
+    {
+      "row_idx": 28,
+      "K_ID": "RatWJLJhSC-MUVm8YZw-afkRRPialgyWupSa8AN0ogys",
+      "clean_val": "金融業、保険業",
+      "raw_text_val": "",
+      "raw_num_val": "10",
+      "raw_other_text (SC1-22)": "nan"
+    }
+  ],
+  "normalized_col_diffs": [
+    {
+      "raw_col": "SC1",
+      "cleaned_col": " SC1.あなたのお仕事の業種をお答えください。",
+      "diff_count": 19,
+      "sample_raw": [
+        "",
+        "",
+        ""
+      ],
+      "sample_clean": [
+        "建設業",
+        "建設業",
+        "製造業"
+      ]
+    },
+    {
+      "raw_col": "Q4",
+      "cleaned_col": "Q4.あなたは、お勤め先のDXの取組の成果について、総合的にどのように評価していますか。0（不十分である）～10（十分である）の11段階でお答えください。",
+      "diff_count": 2035,
+      "sample_raw": [
+        "6",
+        "4",
+        "5"
+      ],
+      "sample_clean": [
+        "6.0",
+        "4.0",
+        "5.0"
+      ]
+    }
+  ]
+}

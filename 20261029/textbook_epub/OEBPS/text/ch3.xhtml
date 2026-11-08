@@ -1,0 +1,88 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:epub="http://www.idpf.org/2007/ops" xml:lang="ja">
+<head>
+  <meta charset="utf-8" />
+  <title>CHAPTER 03: 境界のある確率を誠実に捉える — 二項＆多項ロジスティック回帰分析</title>
+  <link rel="stylesheet" type="text/css" href="../styles/stylesheet.css" />
+</head>
+<body>
+  <div class="chapter-number">CHAPTER 03</div>
+  <h2 class="chapter-title">境界のある確率を誠実に捉える — 二項＆多項ロジスティック回帰分析</h2>
+  <p class="chapter-lead">直線の回帰式では予測確率が100%を超えたり0%を下回ってしまう。S字のシグモイド曲線で確率を捉える数理。</p>
+
+  
+  <h3 class="subhead">1. 直線回帰（OLS）の破綻とS字カーブの必然性</h3>
+  
+<p>
+「ある社員がDX推進に積極的になるか（Yes = 1, No = 0）」という二値の行動を予測したいとします。もし通常の直線回帰（最小二乗法: OLS）を当てはめるとどうなるでしょうか？
+</p>
+<p>
+直線はどこまでも伸びていくため、説明変数が大きくなると予測確率が 120% や 150% になり、小さくなると -20% という「現実にはあり得ない確率」を弾き出してしまいます。確率は絶対に 0 から 1（0%〜100%）の間に収まらなければなりません。
+</p>
+
+
+  <h3 class="subhead">2. 対数オッズ（Logit）とシグモイド関数</h3>
+  
+<p>
+そこで登場するのが <strong>ロジット変換</strong> です。確率 P に対し、「起こる確率と起こらない確率の比率（オッズ = P / (1 - P)）」を計算し、その自然対数をとります：
+</p>
+<div class="formula-card">
+  $$\ln\left(\frac{P}{1 - P}\right) = \beta_0 + \beta_1 X \quad \Longleftrightarrow \quad P = \frac{1}{1 + e^{-(\beta_0 + \beta_1 X)}}$$
+</div>
+<p>
+この変換を行うことで、どんなに極端な入力値が入ってきても、出力される確率 P は滑らかなS字カーブを描きながら、0 と 1 の間に美しく収まり続けます。
+</p>
+
+
+  
+<div class="foundations-box">
+  <div class="foundations-header">
+    <span class="foundations-tag">Roots &amp; Foundations</span>
+    <h4 class="foundations-title">難易度の階層を下げる基礎学習: 確率・オッズ・対数の架け橋へ遡る</h4>
+  </div>
+  
+  <div class="drilldown-step">
+    <div class="step-badge">1</div>
+    <div class="step-content">
+      <div class="step-title">「確率（Probability）」と「オッズ（Odds）」の決定的な違い</div>
+      <div class="step-desc">サイコロで1が出る確率は「1/6（約16.7%）」です。一方、オッズとは「起こる確率 ÷ 起こらない確率」の比率です。サイコロで1が出るオッズは「(1/6) ÷ (5/6) = 1/5（0.2）」、つまり「外れる回数に対して当たる回数は何倍か」を表します。</div>
+    </div>
+  </div>
+
+  <div class="drilldown-step">
+    <div class="step-badge">2</div>
+    <div class="step-content">
+      <div class="step-title">なぜ通常の直線回帰（OLS）では「確率」を予測できないのか？</div>
+      <div class="step-desc">直線の式（y = ax + b）で確率を予測しようとすると、x が大きくなれば確率は 100%（1.0）を突き抜けて 150% になり、x が小さくなれば 0%（0.0）を下回って -30% になってしまいます。現実に存在しない「マイナスの確率」や「100%を超える確率」が出てしまうため、直線の当てはめは数学的に破綻します。</div>
+    </div>
+  </div>
+
+  <div class="drilldown-step">
+    <div class="step-badge">3</div>
+    <div class="step-content">
+      <div class="step-title">なぜ「対数（log）」をとるのか？</div>
+      <div class="step-desc">オッズ（比率）は 0 から無限大までの値をとりますが、「成功しやすい」ときは 1 から無限大へと広がるのに対し、「失敗しやすい」ときは 0 から 1 の狭い間に押し込められて非対称になります。そこで「自然対数 ln(オッズ)」をとると、マイナス無限大からプラス無限大まで左右均等に広がる美しい物差し（ロジット）に変換されます。</div>
+    </div>
+  </div>
+
+  <div class="drilldown-step">
+    <div class="step-badge">4</div>
+    <div class="step-content">
+      <div class="step-title">シグモイド関数 — 直線を 0〜1 の滑らかなS字曲線に折り畳む魔法</div>
+      <div class="step-desc">ロジットの式を「確率 P = ...」の形に逆変換すると、P = 1 / (1 + e^(-z)) というシグモイド関数が現れます。どんなに大きな入力でも決して 1 を超えず、どんなに小さな入力でも決して 0 を下回らない、緩やかなS字カーブによって、物理的に正しい確率予測が可能になります。</div>
+    </div>
+  </div>
+
+  <div class="drilldown-step">
+    <div class="step-badge">5</div>
+    <div class="step-content">
+      <div class="step-title">オッズ比（Odds Ratio）の解釈 — 「1」が基準で、「2」なら発生しやすさが2倍</div>
+      <div class="step-desc">回帰係数 β を元の世界に戻すために指数変換した e^β が「オッズ比」です。オッズ比が 1 なら「影響なし（差がない）」、1.5 なら「その要因が1単位増えると、発生するオッズが1.5倍に高まる」、0.7 なら「0.7倍に低下する（抑制要因）」と直感的に解釈できます。</div>
+    </div>
+  </div>
+
+</div>
+
+</body>
+</html>

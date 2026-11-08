@@ -1,0 +1,83 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:epub="http://www.idpf.org/2007/ops" xml:lang="ja">
+<head>
+  <meta charset="utf-8" />
+  <title>CHAPTER 10: 時間と企業個性をコントロールする — パネルデータ分析（固定効果・ランダム効果）</title>
+  <link rel="stylesheet" type="text/css" href="../styles/stylesheet.css" />
+</head>
+<body>
+  <div class="chapter-number">CHAPTER 10</div>
+  <h2 class="chapter-title">時間と企業個性をコントロールする — パネルデータ分析（固定効果・ランダム効果）</h2>
+  <p class="chapter-lead">「その企業独自の風土やカリスマ性」を数理的に消去する。複数年追跡データで真の因果関係を浮き彫りにする。</p>
+
+  
+  <h3 class="subhead">1. 横断面データと時系列データの交差点</h3>
+  
+<p>
+ある一時点のアンケート調査（横断面データ）では、「業績が良い企業ほどDXが進んでいる」という相関が見つかったとしても、「もともと優秀な企業だからDXも業績も良いのか（見えない企業個性）」それとも「DXのおかげで業績が伸びたのか（純粋な因果）」を厳密に区別できません。
+</p>
+<p>
+同じ企業群（i）を複数年（t）にわたって繰り返し追跡した <strong>パネルデータ（Panel Data）</strong> を用いることで、この「見えない個性」を数理的に分離することが可能になります。
+</p>
+
+<div class="epub-formula-card">
+  <div class="formula-line"><strong>Y<sub>it</sub> = β X<sub>it</sub> + α<sub>i</sub> + ε<sub>it</sub></strong> &#8195; (α<sub>i</sub>: 企業固有の観測不能な特性)</div>
+  <div class="formula-note">※ 平均値との差分をとる（Within変換）ことで、固有の個性 α<sub>i</sub> を完全に消去する</div>
+</div>
+
+
+
+  <h3 class="subhead">2. 固定効果モデル（Fixed Effects）の魔術: 引き算で個性を消す</h3>
+  
+<p>
+固定効果モデルでは、各企業のデータから「その企業の複数年平均値」を引き算します（Within変換）。
+</p>
+<p>
+すると、時間を通じて変わらない「創業者のカリスマ性」や「企業風土（α<sub>i</sub>）」は平均値と等しいため、引き算によって完全に相殺されて数式から消滅します！ その結果、他社との比較ではなく、「自社がDX投資を増やしたことで、自社の業績がどれだけ上向いたか」という純粋な社内変化の因果関係だけが美しく抽出されます。
+</p>
+
+
+  
+<div class="foundations-box">
+  <div class="foundations-header">
+    <span class="foundations-tag">Roots &amp; Foundations</span>
+    <h4 class="foundations-title">難易度の階層を下げる基礎学習: 時間軸と個体差の分離へ遡る</h4>
+  </div>
+  
+  <div class="drilldown-step">
+    <div class="step-badge">1</div>
+    <div class="step-content">
+      <div class="step-title">「クロスセクション（横断面）」と「時系列（タイムシリーズ）」の限界</div>
+      <div class="step-desc">ある一時点だけを調べた「横断面データ」では、企業ごとの業績の違いが「DX投資の成果」なのか「もともと優秀な企業だったから」なのかを区別できません。一方、1社だけを長年追った「時系列データ」では、他社との比較ができません。この2つを掛け合わせ、「複数企業（個体 i）を複数年（時点 t）にわたって追跡したデータ」が「パネルデータ」です。</div>
+    </div>
+  </div>
+
+  <div class="drilldown-step">
+    <div class="step-badge">2</div>
+    <div class="step-content">
+      <div class="step-title">企業ごとの「見えない個性（不変の社風や経営者のカリスマ）」が引き起こすバイアス</div>
+      <div class="step-desc">アンケートや財務諸表では測定できない「創業者のカリスマ性」や「挑戦を好む企業文化」などの固有特性（α<sub>i</sub>）が存在します。これがDX投資（X）にも業績（Y）にもプラスの影響を与えている場合、単純な回帰分析を行うとDX投資の効果を過大評価してしまいます（脱落変数バイアス）。</div>
+    </div>
+  </div>
+
+  <div class="drilldown-step">
+    <div class="step-badge">3</div>
+    <div class="step-content">
+      <div class="step-title">固定効果モデル（Fixed Effects）— 引き算で個性を消し去る魔術</div>
+      <div class="step-desc">各企業について、「各年のデータ」から「その企業の複数年平均値」を引き算します（Within変換）。すると、その企業が持つ「時間を通じて変わらない固有の社風や個性（α<sub>i</sub>）」は平均値と同じなので、完全に引き算で相殺されて数式から消滅します！ これにより、見えない社風に邪魔されることなく、「自社がDX投資を増やしたことで、自社の業績がどれだけ伸びたか」という純粋な社内変化の因果関係だけを綺麗に抽出できます。</div>
+    </div>
+  </div>
+
+  <div class="drilldown-step">
+    <div class="step-badge">4</div>
+    <div class="step-content">
+      <div class="step-title">ハウスマン検定（Hausman Test）— 固定効果かランダム効果かの判定分岐点</div>
+      <div class="step-desc">もし見えない個性がDX投資と全く無関係（無相関）であると仮定できるなら、個性を誤差の一部として扱う「ランダム効果モデル」の方が効率的に推定できます。両方のモデルの推定値を比較し、「個性と説明変数に相関があるか（固定効果を採用すべきか）」を統計的に判定するのがハウスマン検定です。</div>
+    </div>
+  </div>
+
+</div>
+
+</body>
+</html>

@@ -1,0 +1,242 @@
+/* Kindle & EPUB 3.0 Standard Stylesheet */
+body {
+  font-family: "Noto Sans JP", "Hiragino Kaku Gothic ProN", "Meiryo", sans-serif;
+  line-height: 1.8;
+  color: #1A1A1A;
+  margin: 0;
+  padding: 1.2rem;
+  background-color: #FFFFFF;
+}
+
+h1, h2, h3, h4 {
+  font-family: "Noto Sans JP", sans-serif;
+  color: #0F172A;
+  font-weight: 700;
+  margin-top: 1.5rem;
+  margin-bottom: 0.8rem;
+  page-break-after: avoid;
+}
+
+h1.book-title {
+  font-size: 2rem;
+  color: #005BAC;
+  text-align: center;
+  margin-top: 2rem;
+  margin-bottom: 0.5rem;
+}
+
+p.book-subtitle {
+  font-size: 1.1rem;
+  color: #475569;
+  text-align: center;
+  margin-bottom: 2rem;
+}
+
+.cover-badge {
+  text-align: center;
+  font-size: 0.75rem;
+  letter-spacing: 0.15em;
+  color: #005BAC;
+  font-weight: bold;
+  text-transform: uppercase;
+}
+
+.cover-authors {
+  text-align: center;
+  margin-top: 3rem;
+  font-size: 1rem;
+}
+
+.cover-pub {
+  text-align: center;
+  margin-top: 2rem;
+  font-size: 0.85rem;
+  color: #64748B;
+}
+
+.chapter-number {
+  font-size: 0.85rem;
+  font-weight: bold;
+  color: #005BAC;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  margin-bottom: 0.3rem;
+}
+
+h2.chapter-title {
+  font-size: 1.45rem;
+  color: #0F172A;
+  border-bottom: 2px solid #005BAC;
+  padding-bottom: 0.5rem;
+  margin-top: 0;
+}
+
+p.chapter-lead {
+  font-size: 1.05rem;
+  font-weight: 500;
+  color: #334155;
+  background: #F8FAFC;
+  border-left: 4px solid #005BAC;
+  padding: 0.8rem 1rem;
+  margin-bottom: 1.5rem;
+}
+
+h3.subhead {
+  font-size: 1.2rem;
+  color: #005BAC;
+  border-left: 4px solid #00838F;
+  padding-left: 0.6rem;
+  margin-top: 1.8rem;
+}
+
+p {
+  margin: 0.8rem 0;
+  text-align: justify;
+}
+
+strong {
+  color: #0F172A;
+}
+
+/* Formula Card for EPUB */
+.epub-formula-card {
+  background: #F1F5F9;
+  border: 1px solid #CBD5E1;
+  border-left: 4px solid #005BAC;
+  border-radius: 6px;
+  padding: 1rem;
+  margin: 1.2rem 0;
+  text-align: center;
+}
+
+.formula-line {
+  font-size: 1.1rem;
+  color: #0F172A;
+  margin-bottom: 0.4rem;
+}
+
+.formula-note {
+  font-size: 0.85rem;
+  color: #64748B;
+}
+
+/* Foundations Drill-down Box */
+.foundations-box {
+  background: #F8FAFC;
+  border: 1px solid #E2E8F0;
+  border-top: 3px solid #00838F;
+  border-radius: 6px;
+  padding: 1.2rem;
+  margin: 2rem 0;
+}
+
+.foundations-header {
+  margin-bottom: 1rem;
+}
+
+.foundations-tag {
+  display: inline-block;
+  font-size: 0.75rem;
+  font-weight: bold;
+  color: #00838F;
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+  background: #E0F2FE;
+  padding: 2px 8px;
+  border-radius: 4px;
+}
+
+.foundations-title {
+  font-size: 1.1rem;
+  color: #0F172A;
+  margin: 0.4rem 0 0;
+}
+
+.drilldown-step {
+  display: table;
+  width: 100%;
+  margin-bottom: 0.8rem;
+  padding-bottom: 0.8rem;
+  border-bottom: 1px dashed #CBD5E1;
+}
+
+.drilldown-step:last-child {
+  border-bottom: none;
+  margin-bottom: 0;
+  padding-bottom: 0;
+}
+
+.step-badge {
+  display: table-cell;
+  width: 28px;
+  vertical-align: top;
+  font-weight: bold;
+  color: #00838F;
+  font-size: 1rem;
+}
+
+.step-content {
+  display: table-cell;
+  vertical-align: top;
+}
+
+.step-title {
+  font-weight: bold;
+  color: #1E293B;
+  font-size: 0.95rem;
+  margin-bottom: 0.2rem;
+}
+
+.step-desc {
+  font-size: 0.9rem;
+  color: #475569;
+  line-height: 1.6;
+}
+
+/* Tables */
+table.epub-table, table.data-table {
+  width: 100%;
+  border-collapse: collapse;
+  margin: 1.2rem 0;
+  font-size: 0.85rem;
+}
+
+table.epub-table th, table.data-table th {
+  background: #005BAC;
+  color: #FFFFFF;
+  padding: 8px 10px;
+  text-align: left;
+  border: 1px solid #004582;
+}
+
+table.epub-table td, table.data-table td {
+  padding: 8px 10px;
+  border: 1px solid #CBD5E1;
+  vertical-align: top;
+}
+
+table.epub-table tr:nth-child(even), table.data-table tr:nth-child(even) {
+  background: #F8FAFC;
+}
+
+/* QA Items */
+.epub-qa-item {
+  margin: 1.5rem 0;
+  padding: 1rem;
+  background: #F8FAFC;
+  border: 1px solid #E2E8F0;
+  border-radius: 6px;
+}
+
+.epub-qa-q {
+  font-weight: bold;
+  color: #005BAC;
+  font-size: 1rem;
+  margin-bottom: 0.5rem;
+}
+
+.epub-qa-a {
+  font-size: 0.95rem;
+  color: #334155;
+  line-height: 1.7;
+}

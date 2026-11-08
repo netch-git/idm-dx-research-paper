@@ -1,0 +1,2610 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0, user-scalable=yes">
+  <title>【インタラクティブ・スクラブWebApp】企業規模と組織階層によるDX変革当事者意識の差異と組織内摩擦認知 (N = 2,035)</title>
+  <style>
+    :root {
+      --dads-primary: #005BAC;
+      --dads-primary-dark: #003E78;
+      --dads-primary-light: #E8F2FC;
+      --dads-secondary: #00838F;
+      --dads-secondary-light: #E0F2F1;
+      --dads-success: #228543;
+      --dads-success-light: #E8F5E9;
+      --dads-error: #D32F2F;
+      --dads-error-light: #FFEBEE;
+      --dads-warning: #E65100;
+      --dads-warning-light: #FFF3E0;
+      --dads-bg-body: #F8F9FA;
+      --dads-bg-card: #FFFFFF;
+      --dads-text-main: #1A1A1A;
+      --dads-text-sub: #4A5568;
+      --dads-border: #DDE2E5;
+      --dads-border-light: #E2E8F0;
+      --font-base: 'Noto Sans JP', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+    }
+
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+      -webkit-tap-highlight-color: transparent;
+    }
+
+    body {
+      font-family: var(--font-base);
+      color: var(--dads-text-main);
+      background-color: var(--dads-bg-body);
+      line-height: 1.65;
+      font-size: 15px;
+      padding-bottom: 110px;
+    }
+
+    /* Top Header */
+    .app-header {
+      position: sticky;
+      top: 0;
+      z-index: 900;
+      background: #FFFFFF;
+      border-bottom: 2px solid var(--dads-primary);
+      box-shadow: 0 2px 10px rgba(0, 0, 0, 0.06);
+      padding: 10px 18px;
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: space-between;
+      align-items: center;
+      gap: 10px;
+    }
+
+    .brand-group {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      min-width: 0;
+    }
+
+    .badge-live {
+      background: var(--dads-primary);
+      color: #FFFFFF;
+      font-size: 11px;
+      font-weight: 800;
+      padding: 4px 8px;
+      border-radius: 4px;
+      letter-spacing: 0.5px;
+      white-space: nowrap;
+    }
+
+    .app-title {
+      font-size: 15px;
+      font-weight: 800;
+      color: var(--dads-primary-dark);
+      white-space: nowrap;
+      overflow: hidden;
+      text-overflow: ellipsis;
+      max-width: 480px;
+    }
+
+    .mode-tabs {
+      display: flex;
+      gap: 6px;
+      flex-wrap: wrap;
+    }
+
+    .mode-btn {
+      padding: 6px 12px;
+      font-size: 12.5px;
+      font-weight: 700;
+      border: 1.5px solid var(--dads-border);
+      background: #FFFFFF;
+      color: var(--dads-text-sub);
+      border-radius: 6px;
+      cursor: pointer;
+      transition: all 0.18s;
+      font-family: var(--font-base);
+      display: flex;
+      align-items: center;
+      gap: 5px;
+    }
+
+    .mode-btn:hover {
+      background: var(--dads-primary-light);
+      color: var(--dads-primary);
+    }
+
+    .mode-btn.active {
+      background: var(--dads-primary);
+      color: #FFFFFF;
+      border-color: var(--dads-primary);
+    }
+
+    /* Main Container */
+    .container {
+      max-width: 1200px;
+      margin: 0 auto;
+      padding: 16px;
+    }
+
+    .view-panel {
+      display: none;
+    }
+
+    .view-panel.active {
+      display: block;
+      animation: fadeIn 0.22s ease-out;
+    }
+
+    @keyframes fadeIn {
+      from { opacity: 0; transform: translateY(4px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+
+    /* Chapter Ribbon */
+    .chapter-ribbon {
+      display: grid;
+      grid-template-columns: repeat(7, 1fr);
+      gap: 6px;
+      margin-bottom: 14px;
+    }
+
+    @media (max-width: 900px) {
+      .chapter-ribbon {
+        grid-template-columns: repeat(4, 1fr);
+      }
+    }
+    @media (max-width: 560px) {
+      .chapter-ribbon {
+        grid-template-columns: repeat(2, 1fr);
+      }
+    }
+
+    .chapter-pill {
+      background: #FFFFFF;
+      border: 1.5px solid var(--dads-border);
+      border-radius: 8px;
+      padding: 8px 10px;
+      cursor: pointer;
+      text-align: left;
+      transition: all 0.18s;
+      position: relative;
+      overflow: hidden;
+      font-family: var(--font-base);
+    }
+
+    .chapter-pill:hover {
+      border-color: var(--dads-primary);
+      background: #F4F9FF;
+    }
+
+    .chapter-pill.active {
+      border-color: var(--dads-primary);
+      background: var(--dads-primary-light);
+      box-shadow: 0 2px 8px rgba(0, 91, 172, 0.14);
+    }
+
+    .chapter-pill .cp-num {
+      font-size: 11px;
+      font-weight: 800;
+      color: var(--dads-primary);
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+
+    .chapter-pill .cp-title {
+      font-size: 12.5px;
+      font-weight: 800;
+      color: var(--dads-text-main);
+      margin-top: 2px;
+      white-space: nowrap;
+      overflow: hidden;
+      text-overflow: ellipsis;
+    }
+
+    .chapter-pill .cp-bar {
+      position: absolute;
+      bottom: 0;
+      left: 0;
+      height: 3px;
+      background: var(--dads-primary);
+      width: 0%;
+      transition: width 0.08s linear;
+    }
+
+    /* Scrubber Stage Grid */
+    .stage-grid {
+      display: grid;
+      grid-template-columns: 1.45fr 1fr;
+      gap: 16px;
+      align-items: stretch;
+    }
+
+    @media (max-width: 960px) {
+      .stage-grid {
+        grid-template-columns: 1fr;
+      }
+    }
+
+    .canvas-card {
+      background: #FFFFFF;
+      border: 1.5px solid var(--dads-border);
+      border-radius: 12px;
+      padding: 16px;
+      box-shadow: 0 4px 14px rgba(0, 0, 0, 0.04);
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+    }
+
+    .stage-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: flex-start;
+      gap: 12px;
+      border-bottom: 1.5px solid var(--dads-border-light);
+      padding-bottom: 10px;
+      margin-bottom: 10px;
+    }
+
+    .stage-badge-row {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      margin-bottom: 4px;
+      flex-wrap: wrap;
+    }
+
+    .stage-tag {
+      background: var(--dads-primary);
+      color: #FFFFFF;
+      font-size: 11px;
+      font-weight: 800;
+      padding: 2px 8px;
+      border-radius: 4px;
+    }
+
+    .stage-phase-tag {
+      background: var(--dads-secondary-light);
+      color: var(--dads-secondary);
+      font-size: 11.5px;
+      font-weight: 800;
+      padding: 2px 8px;
+      border-radius: 4px;
+      border: 1px solid #B2DFDB;
+    }
+
+    .stage-title {
+      font-size: 18px;
+      font-weight: 800;
+      color: var(--dads-primary-dark);
+      line-height: 1.35;
+    }
+
+    .canvas-wrapper {
+      position: relative;
+      width: 100%;
+      height: 410px;
+      background: #FAFBFD;
+      border: 1px solid var(--dads-border-light);
+      border-radius: 8px;
+      overflow: hidden;
+    }
+
+    @media (max-width: 600px) {
+      .canvas-wrapper {
+        height: 340px;
+      }
+    }
+
+    canvas#scrubCanvas {
+      width: 100%;
+      height: 100%;
+      display: block;
+    }
+
+    /* Local Phase Scrubber & Scene Controls inside Canvas Card */
+    .local-scrub-box {
+      margin-top: 12px;
+      background: #F8FAFC;
+      border: 1px solid var(--dads-border);
+      border-radius: 8px;
+      padding: 10px 14px;
+    }
+
+    .local-scrub-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      font-size: 12.5px;
+      font-weight: 700;
+      color: var(--dads-primary-dark);
+      margin-bottom: 6px;
+    }
+
+    .scrub-slider {
+      -webkit-appearance: none;
+      appearance: none;
+      width: 100%;
+      height: 8px;
+      border-radius: 4px;
+      background: #CBD5E0;
+      outline: none;
+      cursor: pointer;
+    }
+
+    .scrub-slider::-webkit-slider-thumb {
+      -webkit-appearance: none;
+      appearance: none;
+      width: 20px;
+      height: 20px;
+      border-radius: 50%;
+      background: var(--dads-primary);
+      border: 3px solid #FFFFFF;
+      box-shadow: 0 2px 6px rgba(0,0,0,0.25);
+      cursor: grab;
+      transition: transform 0.1s;
+    }
+
+    .scrub-slider::-webkit-slider-thumb:active {
+      cursor: grabbing;
+      transform: scale(1.15);
+      background: var(--dads-error);
+    }
+
+    .scene-interactive-controls {
+      margin-top: 10px;
+      padding-top: 10px;
+      border-top: 1px dashed var(--dads-border);
+      display: flex;
+      flex-wrap: wrap;
+      align-items: center;
+      gap: 10px;
+      font-size: 12.5px;
+    }
+
+    .ctrl-chip {
+      padding: 4px 10px;
+      border-radius: 16px;
+      border: 1px solid var(--dads-border);
+      background: #FFFFFF;
+      color: var(--dads-text-main);
+      font-size: 12px;
+      font-weight: 700;
+      cursor: pointer;
+      font-family: var(--font-base);
+    }
+
+    .ctrl-chip.active {
+      background: var(--dads-primary);
+      color: #FFFFFF;
+      border-color: var(--dads-primary);
+    }
+
+    /* Right Narrative & Live Metrics Column */
+    .narrative-card {
+      background: #FFFFFF;
+      border: 1.5px solid var(--dads-border);
+      border-radius: 12px;
+      padding: 18px;
+      box-shadow: 0 4px 14px rgba(0, 0, 0, 0.04);
+      display: flex;
+      flex-direction: column;
+      gap: 14px;
+    }
+
+    .kpi-grid {
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+      gap: 10px;
+    }
+
+    .kpi-box {
+      background: #F8FAFC;
+      border: 1px solid var(--dads-border);
+      border-left: 4px solid var(--dads-primary);
+      border-radius: 6px;
+      padding: 10px 12px;
+    }
+
+    .kpi-box.red { border-left-color: var(--dads-error); }
+    .kpi-box.green { border-left-color: var(--dads-success); }
+    .kpi-box.teal { border-left-color: var(--dads-secondary); }
+
+    .kpi-label {
+      font-size: 11.5px;
+      font-weight: 700;
+      color: var(--dads-text-sub);
+    }
+
+    .kpi-val {
+      font-size: 20px;
+      font-weight: 800;
+      color: var(--dads-text-main);
+      margin-top: 2px;
+      font-variant-numeric: tabular-nums;
+    }
+
+    .kpi-sub {
+      font-size: 11px;
+      color: var(--dads-text-sub);
+      margin-top: 2px;
+    }
+
+    .story-callout {
+      background: var(--dads-primary-light);
+      border-left: 4px solid var(--dads-primary);
+      padding: 12px 14px;
+      border-radius: 0 8px 8px 0;
+      font-size: 13.5px;
+      line-height: 1.65;
+      color: var(--dads-text-main);
+    }
+
+    .story-callout strong {
+      color: var(--dads-primary-dark);
+    }
+
+    .phase-steps-list {
+      display: flex;
+      flex-direction: column;
+      gap: 8px;
+    }
+
+    .phase-step-item {
+      border: 1px solid var(--dads-border-light);
+      border-radius: 8px;
+      padding: 10px 12px;
+      font-size: 13px;
+      background: #FAFAFA;
+      cursor: pointer;
+      transition: all 0.15s;
+    }
+
+    .phase-step-item:hover {
+      border-color: var(--dads-primary);
+      background: #F4F9FF;
+    }
+
+    .phase-step-item.active {
+      border: 1.5px solid var(--dads-primary);
+      background: #FFFFFF;
+      box-shadow: 0 2px 8px rgba(0, 91, 172, 0.08);
+    }
+
+    .phase-step-head {
+      display: flex;
+      justify-content: space-between;
+      font-weight: 800;
+      color: var(--dads-primary-dark);
+      margin-bottom: 3px;
+      font-size: 12.5px;
+    }
+
+    .caution-note {
+      background: #FFFDF5;
+      border: 1px solid #F6E05E;
+      border-left: 4px solid #D69E2E;
+      border-radius: 6px;
+      padding: 10px 12px;
+      font-size: 12px;
+      color: #4A5568;
+      line-height: 1.55;
+    }
+
+    /* Sticky Bottom Master Timeline Scrubber Dock */
+    .scrubber-dock {
+      position: fixed;
+      bottom: 0;
+      left: 0;
+      right: 0;
+      z-index: 950;
+      background: rgba(255, 255, 255, 0.97);
+      backdrop-filter: blur(8px);
+      border-top: 2px solid var(--dads-primary);
+      box-shadow: 0 -4px 16px rgba(0, 0, 0, 0.1);
+      padding: 10px 20px 12px 20px;
+    }
+
+    .dock-inner {
+      max-width: 1200px;
+      margin: 0 auto;
+      display: flex;
+      flex-direction: column;
+      gap: 6px;
+    }
+
+    .dock-controls-row {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+    }
+
+    .btn-play {
+      background: var(--dads-primary);
+      color: #FFFFFF;
+      border: none;
+      border-radius: 8px;
+      padding: 8px 16px;
+      font-size: 13.5px;
+      font-weight: 800;
+      cursor: pointer;
+      display: flex;
+      align-items: center;
+      gap: 6px;
+      white-space: nowrap;
+      font-family: var(--font-base);
+      box-shadow: 0 2px 6px rgba(0, 91, 172, 0.25);
+    }
+
+    .btn-play:hover {
+      background: var(--dads-primary-dark);
+    }
+
+    .btn-step {
+      background: #FFFFFF;
+      color: var(--dads-primary-dark);
+      border: 1.5px solid var(--dads-border);
+      border-radius: 6px;
+      padding: 6px 10px;
+      font-size: 12px;
+      font-weight: 700;
+      cursor: pointer;
+      white-space: nowrap;
+      font-family: var(--font-base);
+    }
+
+    .btn-step:hover {
+      background: var(--dads-primary-light);
+      border-color: var(--dads-primary);
+    }
+
+    .master-track-wrap {
+      flex: 1;
+      display: flex;
+      flex-direction: column;
+      gap: 3px;
+    }
+
+    .master-ticks {
+      display: flex;
+      justify-content: space-between;
+      font-size: 10.5px;
+      font-weight: 700;
+      color: var(--dads-text-sub);
+      padding: 0 4px;
+    }
+
+    .master-ticks span {
+      cursor: pointer;
+      transition: color 0.15s;
+    }
+
+    .master-ticks span:hover, .master-ticks span.active {
+      color: var(--dads-primary);
+      font-weight: 800;
+    }
+
+    .speed-select {
+      padding: 5px 8px;
+      border: 1.5px solid var(--dads-border);
+      border-radius: 6px;
+      font-size: 12px;
+      font-weight: 700;
+      color: var(--dads-text-main);
+      background: #FFFFFF;
+      font-family: var(--font-base);
+    }
+
+    .pct-readout {
+      font-size: 13px;
+      font-weight: 800;
+      color: var(--dads-primary-dark);
+      min-width: 54px;
+      text-align: right;
+      font-variant-numeric: tabular-nums;
+    }
+
+    /* Tab 2: What-If Lab Simulator */
+    .sim-grid {
+      display: grid;
+      grid-template-columns: 1fr 1.25fr;
+      gap: 18px;
+    }
+
+    @media (max-width: 900px) {
+      .sim-grid { grid-template-columns: 1fr; }
+    }
+
+    .sim-card {
+      background: #FFFFFF;
+      border: 1.5px solid var(--dads-border);
+      border-radius: 12px;
+      padding: 20px;
+      box-shadow: 0 3px 12px rgba(0, 0, 0, 0.04);
+    }
+
+    .slider-group {
+      margin-bottom: 14px;
+      padding-bottom: 12px;
+      border-bottom: 1px solid var(--dads-border-light);
+    }
+
+    .slider-label-row {
+      display: flex;
+      justify-content: space-between;
+      font-size: 13px;
+      font-weight: 700;
+      margin-bottom: 6px;
+    }
+
+    .horiz-bar-row {
+      margin-bottom: 14px;
+    }
+
+    .horiz-bar-head {
+      display: flex;
+      justify-content: space-between;
+      font-size: 13px;
+      font-weight: 700;
+      margin-bottom: 4px;
+    }
+
+    .horiz-bar-track {
+      height: 18px;
+      background: #EDF2F7;
+      border-radius: 6px;
+      overflow: hidden;
+      position: relative;
+    }
+
+    .horiz-bar-fill {
+      height: 100%;
+      background: var(--dads-primary);
+      border-radius: 6px;
+      transition: width 0.2s ease, background-color 0.2s ease;
+    }
+
+    /* Tab 3 & 4: Full Paper Digest & Literature Cards */
+    .paper-card {
+      background: #FFFFFF;
+      border: 1.5px solid var(--dads-border);
+      border-radius: 12px;
+      padding: 24px;
+      margin-bottom: 20px;
+      box-shadow: 0 2px 10px rgba(0,0,0,0.03);
+    }
+
+    .paper-card h2 {
+      font-size: 18px;
+      color: var(--dads-primary-dark);
+      border-bottom: 2px solid var(--dads-primary);
+      padding-bottom: 8px;
+      margin-bottom: 14px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      flex-wrap: wrap;
+      gap: 8px;
+    }
+
+    .paper-card h3 {
+      font-size: 15.5px;
+      color: var(--dads-primary);
+      border-left: 4px solid var(--dads-primary);
+      padding-left: 10px;
+      margin: 18px 0 10px 0;
+    }
+
+    .btn-jump-scrub {
+      background: var(--dads-primary-light);
+      color: var(--dads-primary-dark);
+      border: 1px solid var(--dads-primary);
+      border-radius: 6px;
+      padding: 4px 10px;
+      font-size: 12px;
+      font-weight: 800;
+      cursor: pointer;
+      font-family: var(--font-base);
+    }
+
+    .btn-jump-scrub:hover {
+      background: var(--dads-primary);
+      color: #FFFFFF;
+    }
+
+    .table-wrap {
+      width: 100%;
+      overflow-x: auto;
+      margin: 12px 0;
+      border: 1px solid var(--dads-border);
+      border-radius: 6px;
+    }
+
+    table.dads-table {
+      width: 100%;
+      border-collapse: collapse;
+      font-size: 13px;
+      min-width: 540px;
+    }
+
+    table.dads-table th {
+      background: var(--dads-primary-light);
+      color: var(--dads-primary-dark);
+      font-weight: 700;
+      padding: 8px 12px;
+      border-bottom: 2px solid var(--dads-primary);
+      text-align: left;
+      white-space: nowrap;
+    }
+
+    table.dads-table td {
+      padding: 8px 12px;
+      border-bottom: 1px solid var(--dads-border-light);
+    }
+
+    table.dads-table tr.row-hi td {
+      background: #FFF8E7;
+      font-weight: 700;
+    }
+
+    .lit-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(330px, 1fr));
+      gap: 14px;
+    }
+
+    .lit-card {
+      background: #FFFFFF;
+      border: 1px solid var(--dads-border);
+      border-radius: 8px;
+      padding: 15px;
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+      gap: 8px;
+    }
+
+    .lit-author {
+      font-size: 14.5px;
+      font-weight: 800;
+      color: var(--dads-primary-dark);
+    }
+
+    .lit-role {
+      background: #F7FAFC;
+      border-left: 3px solid var(--dads-secondary);
+      padding: 8px 10px;
+      font-size: 12.5px;
+      border-radius: 0 4px 4px 0;
+    }
+  </style>
+</head>
+<body>
+
+  <!-- Top Navigation Header -->
+  <header class="app-header">
+    <div class="brand-group">
+      <span class="badge-live">N = 2,035 実証データ連動</span>
+      <div class="app-title">企業規模と組織階層によるDX変革当事者意識の差異と組織内摩擦認知（インタラクティブ・スクラブWebApp）</div>
+    </div>
+    <div class="mode-tabs">
+      <button class="mode-btn active" id="tabBtn-scrub" onclick="switchView('scrub')">🎬 ストーリー・スクラブ再生</button>
+      <button class="mode-btn" id="tabBtn-sim" onclick="switchView('sim')">🎛️ 統計What-Ifシミュレーター</button>
+      <button class="mode-btn" id="tabBtn-paper" onclick="switchView('paper')">📄 論文要旨・統計表</button>
+      <button class="mode-btn" id="tabBtn-refs" onclick="switchView('refs')">📚 検証済み文献 (24篇)</button>
+      <button class="mode-btn" onclick="toggleFullscreen()" title="全画面表示 (Fキー)">⛶ 全画面</button>
+    </div>
+  </header>
+
+  <main class="container">
+
+    <!-- ==========================================
+         VIEW 1: INTERACTIVE STORY SCRUBBER
+         ========================================== -->
+    <section id="view-scrub" class="view-panel active">
+
+      <!-- 7 Key Moments Chapter Ribbon -->
+      <div class="chapter-ribbon" id="chapterRibbon">
+        <button class="chapter-pill active" onclick="jumpToMoment(0)">
+          <div class="cp-num"><span>M1 (第3章)</span><span>0–14%</span></div>
+          <div class="cp-title">標本確定 8,608→2,035</div>
+          <div class="cp-bar" id="cpBar0"></div>
+        </button>
+        <button class="chapter-pill" onclick="jumpToMoment(1)">
+          <div class="cp-num"><span>M2 (仮説1)</span><span>14–28%</span></div>
+          <div class="cp-title">規模×階層の交互作用</div>
+          <div class="cp-bar" id="cpBar1"></div>
+        </button>
+        <button class="chapter-pill" onclick="jumpToMoment(2)">
+          <div class="cp-num"><span>M3 (仮説2)</span><span>28–43%</span></div>
+          <div class="cp-title">3類型と分配的公正</div>
+          <div class="cp-bar" id="cpBar2"></div>
+        </button>
+        <button class="chapter-pill" onclick="jumpToMoment(3)">
+          <div class="cp-num"><span>M4 (仮説3)</span><span>43–57%</span></div>
+          <div class="cp-title">手続的公正の調整効果</div>
+          <div class="cp-bar" id="cpBar3"></div>
+        </button>
+        <button class="chapter-pill" onclick="jumpToMoment(4)">
+          <div class="cp-num"><span>M5 (仮説4)</span><span>57–72%</span></div>
+          <div class="cp-title">能力GAPとPMO機能</div>
+          <div class="cp-bar" id="cpBar4"></div>
+        </button>
+        <button class="chapter-pill" onclick="jumpToMoment(5)">
+          <div class="cp-num"><span>M6 (仮説5)</span><span>72–86%</span></div>
+          <div class="cp-title">継続意向と成果の乖離</div>
+          <div class="cp-bar" id="cpBar5"></div>
+        </button>
+        <button class="chapter-pill" onclick="jumpToMoment(6)">
+          <div class="cp-num"><span>M7 (第5章)</span><span>86–100%</span></div>
+          <div class="cp-title">8大感度分析・SC18項目</div>
+          <div class="cp-bar" id="cpBar6"></div>
+        </button>
+      </div>
+
+      <div class="stage-grid">
+        <!-- Left: Interactive Animated Canvas Card -->
+        <div class="canvas-card">
+          <div>
+            <div class="stage-header">
+              <div>
+                <div class="stage-badge-row">
+                  <span class="stage-tag" id="stageMomentTag">MOMENT 1 / 7</span>
+                  <span class="stage-phase-tag" id="stagePhaseTag">Phase 1: スクリーニング調査の開始</span>
+                </div>
+                <h1 class="stage-title" id="stageTitle">スクリーニング4段階除外基準と標本確定プロセス (N = 8,608 → 2,035)</h1>
+              </div>
+            </div>
+
+            <div class="canvas-wrapper">
+              <canvas id="scrubCanvas"></canvas>
+            </div>
+          </div>
+
+          <!-- Local Scene Scrubber & Scene-Specific Controls -->
+          <div class="local-scrub-box">
+            <div class="local-scrub-header">
+              <span>🎞️ この場面のアニメーション進行度 (ドラッグで連続変形)</span>
+              <span id="localPctLabel">0%</span>
+            </div>
+            <input type="range" id="localScrubSlider" class="scrub-slider" min="0" max="1000" value="0" oninput="onLocalScrub(this.value)">
+            <div class="scene-interactive-controls" id="sceneCustomControls">
+              <!-- Populated dynamically per Moment -->
+            </div>
+          </div>
+        </div>
+
+        <!-- Right: Live Synchronized Metrics & Story Callouts -->
+        <div class="narrative-card">
+          <div class="kpi-grid" id="liveKpiGrid">
+            <div class="kpi-box">
+              <div class="kpi-label" id="kpi1Label">残存モニター数</div>
+              <div class="kpi-val" id="kpi1Val">8,608名</div>
+              <div class="kpi-sub" id="kpi1Sub">初期スクリーニング回収</div>
+            </div>
+            <div class="kpi-box red">
+              <div class="kpi-label" id="kpi2Label">累積除外数</div>
+              <div class="kpi-val" id="kpi2Val">0名</div>
+              <div class="kpi-sub" id="kpi2Sub">4段階適格基準による除外</div>
+            </div>
+            <div class="kpi-box teal">
+              <div class="kpi-label" id="kpi3Label">大企業 (1,000人以上)</div>
+              <div class="kpi-val" id="kpi3Val">745名 (36.6%)</div>
+              <div class="kpi-sub" id="kpi3Sub">経営31 / 管理295 / 一般419</div>
+            </div>
+            <div class="kpi-box green">
+              <div class="kpi-label" id="kpi4Label">SMO (1,000人未満)</div>
+              <div class="kpi-val" id="kpi4Val">1,290名 (63.4%)</div>
+              <div class="kpi-sub" id="kpi4Sub">経営298 / 管理511 / 一般481</div>
+            </div>
+          </div>
+
+          <div class="story-callout" id="storyCallout">
+            スライダーを右へ動かすと、スクリーニング調査回答者 8,608名から 4段階の適格基準を経て有効本調査回答 N = 2,035名が確定するまでの過程が連続アニメーションで再現されます。
+          </div>
+
+          <div>
+            <div style="font-size: 12px; font-weight: 800; color: var(--dads-text-sub); margin-bottom: 6px;">
+              📌 場面内のキーフレーム（クリックで該当進行度へジャンプ）
+            </div>
+            <div class="phase-steps-list" id="phaseStepsList">
+              <!-- Populated dynamically -->
+            </div>
+          </div>
+
+          <div class="caution-note" id="methodNoteBox">
+            <strong>方法論的注記：</strong>第4段階-B（セル割付上限到達）で終了した810名と本調査2,035名の意識差（SC18, SC9）は全項目で |d| ≤ 0.111 であり、割付打ち切りに伴う選択バイアスは小さいことを確認しています。
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ==========================================
+         VIEW 2: STATISTICAL WHAT-IF SIMULATOR
+         ========================================== -->
+    <section id="view-sim" class="view-panel">
+      <div class="sim-grid">
+        <div class="sim-card">
+          <h2 style="font-size: 17px; color: var(--dads-primary-dark); border-bottom: 2px solid var(--dads-primary); padding-bottom: 8px; margin-bottom: 14px;">
+            🎛️ 組織条件・公正認知 パラメータ設定
+          </h2>
+          <p style="font-size: 12.5px; color: var(--dads-text-sub); margin-bottom: 14px;">
+            論文第4章で推定された回帰係数・分散分析セル平均（N = 2,035）に基づき、各変数を動かした際の予測値をリアルタイムに算出します。
+          </p>
+
+          <div class="slider-group">
+            <div class="slider-label-row">
+              <span>1. 企業規模 × 組織階層セル選択 (H1 / H5)</span>
+              <span id="simCellLabel" style="color: var(--dads-primary);">SMO × 中間管理職 (n=511)</span>
+            </div>
+            <div style="display: grid; grid-template-columns: repeat(3, 1fr); gap: 6px;">
+              <button class="ctrl-chip" id="simCell-L0" onclick="setSimCell('L', 0)">大企業・経営層</button>
+              <button class="ctrl-chip" id="simCell-L1" onclick="setSimCell('L', 1)">大企業・管理職</button>
+              <button class="ctrl-chip" id="simCell-L2" onclick="setSimCell('L', 2)">大企業・一般職</button>
+              <button class="ctrl-chip" id="simCell-S0" onclick="setSimCell('S', 0)">SMO・経営層</button>
+              <button class="ctrl-chip active" id="simCell-S1" onclick="setSimCell('S', 1)">SMO・管理職</button>
+              <button class="ctrl-chip" id="simCell-S2" onclick="setSimCell('S', 2)">SMO・一般職</button>
+            </div>
+          </div>
+
+          <div class="slider-group">
+            <div class="slider-label-row">
+              <span>2. 分配的公正の認知 (給与・評価還元: 1.0〜5.0) [H2]</span>
+              <span id="simDistVal" style="color: var(--dads-error);">2.39 点 (低水準)</span>
+            </div>
+            <input type="range" class="scrub-slider" id="simDistSlider" min="100" max="500" value="239" oninput="updateSimulator()">
+            <div style="display:flex; justify-content:space-between; font-size:11px; color:#718096; margin-top:3px;">
+              <span>1.0 (還元期待なし)</span><span>平均 2.91</span><span>5.0 (高い還元期待)</span>
+            </div>
+          </div>
+
+          <div class="slider-group">
+            <div class="slider-label-row">
+              <span>3. 手続的公正の認知 (経営層傾聴・行動: 1.0〜5.0) [H3]</span>
+              <span id="simProcVal" style="color: var(--dads-primary);">3.10 点 (平均水準)</span>
+            </div>
+            <input type="range" class="scrub-slider" id="simProcSlider" min="100" max="500" value="310" oninput="updateSimulator()">
+            <div style="display:flex; justify-content:space-between; font-size:11px; color:#718096; margin-top:3px;">
+              <span>2.37 (-1SD)</span><span>平均 3.10</span><span>3.83 (+1SD)</span>
+            </div>
+          </div>
+
+          <div class="slider-group">
+            <div class="slider-label-row">
+              <span>4. 組織内摩擦認知 (業務混乱・負担増: 1.0〜5.0) [H3]</span>
+              <span id="simFricVal">3.37 点</span>
+            </div>
+            <input type="range" class="scrub-slider" id="simFricSlider" min="100" max="500" value="337" oninput="updateSimulator()">
+            <div style="display:flex; justify-content:space-between; font-size:11px; color:#718096; margin-top:3px;">
+              <span>2.45 (-1SD: 低摩擦)</span><span>平均 3.08</span><span>3.71 (+1SD: 高摩擦)</span>
+            </div>
+          </div>
+
+          <div class="slider-group" style="border-bottom:none; margin-bottom:0; padding-bottom:0;">
+            <div class="slider-label-row">
+              <span>5. PMO機能充足度 (Q9-2〜9: 1.0〜5.0) vs デジタル知識 (Q9-1) [H4]</span>
+              <span id="simPmoVal" style="color: var(--dads-primary);">PMO 3.04 / 技術 3.30</span>
+            </div>
+            <div style="display:grid; grid-template-columns: 1fr 1fr; gap: 10px;">
+              <div>
+                <div style="font-size:11.5px; font-weight:700;">PMO機能 (β = 0.439***)</div>
+                <input type="range" class="scrub-slider" id="simPmoSlider" min="100" max="500" value="304" oninput="updateSimulator()">
+              </div>
+              <div>
+                <div style="font-size:11.5px; font-weight:700;">デジタル技術知識 (β = 0.047 ns)</div>
+                <input type="range" class="scrub-slider" id="simTechSlider" min="100" max="500" value="330" oninput="updateSimulator()">
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div class="sim-card">
+          <h2 style="font-size: 17px; color: var(--dads-primary-dark); border-bottom: 2px solid var(--dads-primary); padding-bottom: 8px; margin-bottom: 14px;">
+            📊 推定モデル出力（横棒グラフによるリアルタイム比較）
+          </h2>
+
+          <div class="horiz-bar-row">
+            <div class="horiz-bar-head">
+              <span>【H1】選択セルの変革当事者意識 平均値 M (95% CI)</span>
+              <span id="simOutH1">3.306 [3.255, 3.358] (全社平均 3.323)</span>
+            </div>
+            <div class="horiz-bar-track">
+              <div class="horiz-bar-fill" id="simBarH1" style="width: 66.1%;"></div>
+            </div>
+          </div>
+
+          <div class="horiz-bar-row">
+            <div class="horiz-bar-head">
+              <span>【H2】クラスタ3（低当事者意識・高摩擦群）所属予測確率 (主分析モデル2)</span>
+              <span id="simOutH2" style="color: var(--dads-error);">62.4% (OR = 3.951 / 低認知1単位)</span>
+            </div>
+            <div class="horiz-bar-track">
+              <div class="horiz-bar-fill" id="simBarH2" style="width: 62.4%; background: var(--dads-error);"></div>
+            </div>
+          </div>
+
+          <div class="horiz-bar-row">
+            <div class="horiz-bar-head">
+              <span>【H3】手続的公正×摩擦 調整重回帰による当事者意識 推定値</span>
+              <span id="simOutH3">3.340 (条件付き傾き B = -0.0089)</span>
+            </div>
+            <div class="horiz-bar-track">
+              <div class="horiz-bar-fill" id="simBarH3" style="width: 66.8%; background: var(--dads-secondary);"></div>
+            </div>
+          </div>
+
+          <div class="horiz-bar-row">
+            <div class="horiz-bar-head">
+              <span>【H4】重回帰モデルによるDX総合成果実感 (Q4: 0〜10点) 予測値</span>
+              <span id="simOutH4" style="color: var(--dads-success);">5.12 点 / 10点 (R² = 0.2391)</span>
+            </div>
+            <div class="horiz-bar-track">
+              <div class="horiz-bar-fill" id="simBarH4" style="width: 51.2%; background: var(--dads-success);"></div>
+            </div>
+          </div>
+
+          <div class="horiz-bar-row">
+            <div class="horiz-bar-head">
+              <span>【H5】選択セルの「推進継続意向(Q6) − 成果実感(Q4)」乖離幅 Δ</span>
+              <span id="simOutH5">+1.446 点 (正比率 54.0%)</span>
+            </div>
+            <div class="horiz-bar-track">
+              <div class="horiz-bar-fill" id="simBarH5" style="width: 72.3%; background: var(--dads-warning);"></div>
+            </div>
+          </div>
+
+          <div class="story-callout" id="simInterpretationBox" style="margin-top: 16px;">
+            各スライダーを動かすと、論文の推定式に基づき各仮説の予測値が即座に更新されます。
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ==========================================
+         VIEW 3: FULL PAPER DIGEST & TABLES
+         ========================================== -->
+    <section id="view-paper" class="view-panel">
+      <div class="paper-card">
+        <h2>
+          <span>要約・研究課題（RQ1〜RQ5）と5大仮説の検証結果</span>
+          <button class="btn-jump-scrub" onclick="jumpToMomentAndSwitch(0)">▶ M1から順番にアニメーション再生</button>
+        </h2>
+        <p style="margin-bottom: 12px;">
+          本研究は、国内企業就業者 2,035名（大企業［従業員1,000人以上］n = 745、SMO［従業員1,000人未満］n = 1,290）の調査データに基づき、DX推進過程における変革当事者意識および組織内摩擦認知の差異と、組織的公正（分配的公正・手続的公正）およびPMO機能の役割を定量的に検証した。
+        </p>
+        <div class="table-wrap">
+          <table class="dads-table">
+            <thead>
+              <tr>
+                <th>仮説</th>
+                <th>分析内容・事前予測</th>
+                <th>主要な統計結果 (N = 2,035)</th>
+                <th>効果量・モデル指標</th>
+                <th>スクラブ再生</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td><strong>標本確定</strong></td>
+                <td>SC調査8,608名から4段階基準で本調査2,035名を確定</td>
+                <td>大企業745名 (36.6%) / SMO 1,290名 (63.4%)</td>
+                <td>割付終了810名との差 |d| ≤ 0.111</td>
+                <td><button class="btn-jump-scrub" onclick="jumpToMomentAndSwitch(0)">▶ M1へ</button></td>
+              </tr>
+              <tr class="row-hi">
+                <td><strong>H1 (支持)</strong></td>
+                <td>企業規模×組織階層の二元配置交互作用</td>
+                <td>交互作用 F(2, 2029) = 4.619, p = 0.010*。中間管理職は大企業(3.400)よりSMO(3.306)が低い(p = 0.038*)。一般社員は差なし(p = 0.699)</td>
+                <td>partial η² = 0.0045, 管理職差 d = 0.154</td>
+                <td><button class="btn-jump-scrub" onclick="jumpToMomentAndSwitch(1)">▶ M2へ</button></td>
+              </tr>
+              <tr>
+                <td><strong>H2 (支持)</strong></td>
+                <td>分配的公正の低認知とクラスタ3（低当事者意識・高摩擦群 45.8%）への所属</td>
+                <td>低認知1点上昇につき所属オッズ約3.95倍（重複除外3項目版の感度分析でも OR = 2.409***）</td>
+                <td>OR = 3.951 [3.26, 4.79], p &lt; 0.001</td>
+                <td><button class="btn-jump-scrub" onclick="jumpToMomentAndSwitch(2)">▶ M3へ</button></td>
+              </tr>
+              <tr class="row-hi">
+                <td><strong>H3 (支持)</strong></td>
+                <td>手続的公正による組織内摩擦と当事者意識の調整効果</td>
+                <td>交互作用 B = +0.0826 (t = 3.66, p &lt; 0.001)。低公正で B = -0.0692*、高公正で B = +0.0515*</td>
+                <td>R² = 0.4675, ΔR² = 0.0035</td>
+                <td><button class="btn-jump-scrub" onclick="jumpToMomentAndSwitch(3)">▶ M4へ</button></td>
+              </tr>
+              <tr>
+                <td><strong>H4 (支持)</strong></td>
+                <td>デジタル技術知識とPMO機能のDX成果実感(Q4)との関連比較</td>
+                <td>技術知識(β = 0.047, p = 0.098 ns)に対しPMO機能(β = 0.439, p &lt; 0.001***)が中程度の正の関連</td>
+                <td>R² = 0.2391, 最大能力GAP +1.083点</td>
+                <td><button class="btn-jump-scrub" onclick="jumpToMomentAndSwitch(4)">▶ M5へ</button></td>
+              </tr>
+              <tr class="row-hi">
+                <td><strong>H5 (支持)</strong></td>
+                <td>推進継続意向(Q6)と成果実感(Q4)の乖離</td>
+                <td>全社平均差 +1.254点 (t = 25.30, p &lt; 0.001)。SMO中間管理職で正比率最大(54.0%, 平均差 +1.446点)</td>
+                <td>全社 dz = 0.561, 管理職規模差 d = 0.168</td>
+                <td><button class="btn-jump-scrub" onclick="jumpToMomentAndSwitch(5)">▶ M6へ</button></td>
+              </tr>
+              <tr>
+                <td><strong>第5章 感度分析</strong></td>
+                <td>8通りの分析仕様とSC18個別9項目(Holm補正)</td>
+                <td>7仕様で5%有意維持。SC18-8(経営層のリーダーシップ発揮)のみHolm補正後も有意(F = 5.57, p = 0.0342*)</td>
+                <td>大企業管理職 3.25 vs SMO管理職 2.87</td>
+                <td><button class="btn-jump-scrub" onclick="jumpToMomentAndSwitch(6)">▶ M7へ</button></td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+
+      <div class="paper-card">
+        <h2>
+          <span>主要統計表：企業規模 × 組織階層 6セル平均値および重回帰モデル</span>
+          <button class="btn-jump-scrub" onclick="jumpToMomentAndSwitch(1)">▶ H1 交互作用をスクラブ</button>
+        </h2>
+        <h3>表 4-3 &amp; 表 4-11 統合：2要因6セルにおける変革当事者意識 (SC18) と 継続意向−成果実感の差 (Q6 − Q4)</h3>
+        <div class="table-wrap">
+          <table class="dads-table">
+            <thead>
+              <tr>
+                <th>企業規模区分</th>
+                <th>組織階層</th>
+                <th>標本数 n</th>
+                <th>変革当事者意識 M (SD) [95% CI]</th>
+                <th>成果実感 Q4 M</th>
+                <th>継続意向 Q6 M</th>
+                <th>乖離幅 Δ = Q6 − Q4 (SD) [正比率]</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td>大企業 (1,000人以上)</td>
+                <td>役員・経営層</td>
+                <td>31名</td>
+                <td>3.852 (0.595) [3.642, 4.061]</td>
+                <td>5.516</td>
+                <td>7.194</td>
+                <td>+1.677 (2.271) [51.6%]</td>
+              </tr>
+              <tr class="row-hi">
+                <td>大企業 (1,000人以上)</td>
+                <td>中間管理職</td>
+                <td>295名</td>
+                <td>3.400 (0.629) [3.328, 3.472]</td>
+                <td>5.519</td>
+                <td>6.597</td>
+                <td>+1.078 (2.031) [45.1%]</td>
+              </tr>
+              <tr>
+                <td>大企業 (1,000人以上)</td>
+                <td>一般社員・非管理職</td>
+                <td>419名</td>
+                <td>3.227 (0.643) [3.165, 3.288]</td>
+                <td>5.236</td>
+                <td>6.403</td>
+                <td>+1.167 (2.101) [45.1%]</td>
+              </tr>
+              <tr>
+                <td>SMO (1,000人未満)</td>
+                <td>役員・経営層</td>
+                <td>298名</td>
+                <td>3.519 (0.665) [3.444, 3.595]</td>
+                <td>5.017</td>
+                <td>6.356</td>
+                <td>+1.339 (2.427) [53.0%]</td>
+              </tr>
+              <tr class="row-hi">
+                <td><strong>SMO (1,000人未満)</strong></td>
+                <td><strong>中間管理職</strong></td>
+                <td><strong>511名</strong></td>
+                <td><strong>3.306 (0.593) [3.255, 3.358]</strong></td>
+                <td><strong>4.892</strong></td>
+                <td><strong>6.339</strong></td>
+                <td><strong>+1.446 (2.292) [54.0% ★最高]</strong></td>
+              </tr>
+              <tr>
+                <td>SMO (1,000人未満)</td>
+                <td>一般社員・非管理職</td>
+                <td>481名</td>
+                <td>3.243 (0.599) [3.189, 3.296]</td>
+                <td>4.956</td>
+                <td>6.110</td>
+                <td>+1.154 (2.277) [45.1%]</td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+    </section>
+
+    <!-- ==========================================
+         VIEW 4: VERIFIED 24 CITATIONS DATABASE
+         ========================================== -->
+    <section id="view-refs" class="view-panel">
+      <div class="paper-card">
+        <h2>
+          <span>📚 引用文献一覧（本文引用24篇・実在性およびDOI完全検証済み）</span>
+        </h2>
+        <div style="margin-bottom: 14px;">
+          <input type="text" id="litSearchBox" placeholder="著者名・年号・仮説番号（H1〜H5）・キーワードで検索..."
+                 style="width:100%; padding:10px 14px; border:1.5px solid var(--dads-border); border-radius:8px; font-size:14px; font-family:var(--font-base);"
+                 oninput="renderLitList()">
+        </div>
+        <div class="lit-grid" id="litGridContainer"></div>
+      </div>
+    </section>
+
+  </main>
+
+  <!-- ==========================================
+       STICKY MASTER TIMELINE SCRUBBER DOCK
+       ========================================== -->
+  <div class="scrubber-dock">
+    <div class="dock-inner">
+      <div class="dock-controls-row">
+        <button class="btn-play" id="btnPlayPause" onclick="togglePlay()">▶ 自動再生</button>
+        <button class="btn-step" onclick="stepMoment(-1)" title="前の場面へ (Shift+←)">⏮ 前へ</button>
+        <button class="btn-step" onclick="stepMoment(1)" title="次の場面へ (Shift+→)">次へ ⏭</button>
+
+        <div class="master-track-wrap">
+          <div class="master-ticks" id="masterTicks">
+            <span onclick="jumpToMoment(0)" id="mTick0">M1:標本(0%)</span>
+            <span onclick="jumpToMoment(1)" id="mTick1">M2:H1交互作用(14%)</span>
+            <span onclick="jumpToMoment(2)" id="mTick2">M3:H2分配公正(29%)</span>
+            <span onclick="jumpToMoment(3)" id="mTick3">M4:H3手続公正(43%)</span>
+            <span onclick="jumpToMoment(4)" id="mTick4">M5:H4 PMO機能(57%)</span>
+            <span onclick="jumpToMoment(5)" id="mTick5">M6:H5意向乖離(71%)</span>
+            <span onclick="jumpToMoment(6)" id="mTick6">M7:感度分析(86%)</span>
+          </div>
+          <input type="range" id="masterScrubSlider" class="scrub-slider" min="0" max="7000" value="0" oninput="onMasterScrub(this.value)">
+        </div>
+
+        <div class="pct-readout" id="globalPctReadout">0.0%</div>
+        <select class="speed-select" id="speedSelect" onchange="setPlaySpeed(this.value)">
+          <option value="0.5">0.5× 速度</option>
+          <option value="1" selected>1.0× 標準</option>
+          <option value="1.5">1.5× 高速</option>
+          <option value="2">2.0× 倍速</option>
+        </select>
+      </div>
+    </div>
+  </div>
+
+  <script>
+    // =========================================================================
+    // 1. VERIFIED EMPIRICAL DATA CONSTANTS (N = 2,035, 100% Deterministic)
+    // =========================================================================
+    const MOMENTS_META = [
+      {
+        id: 0,
+        tag: "MOMENT 1 / 7 ・ 第3章 3.1節",
+        title: "スクリーニング4段階除外基準と標本確定プロセス (N = 8,608 → 2,035)",
+        note: "方法論的注記：第4段階-B（セル割付上限到達）で終了した810名と本調査2,035名の意識差（SC18, SC9）は全項目で |d| ≤ 0.111 であり、割付打ち切りに伴う選択バイアスは小さいことを確認しています。",
+        phases: [
+          { range: [0, 0.33], label: "Phase 1: スクリーニング開始と非適格層の除外", desc: "初期モニター 8,608名から、第1段階（SC1: 非就業者 334名除外 → 8,274名）および第2段階（SC7: 役職不明 125名除外 → 8,149名）を経て就業者母集団を特定します。" },
+          { range: [0.33, 0.68], label: "Phase 2: DX未理解・未取組企業の除外", desc: "第3段階（SC17: DXの言葉・内容を知らない 3,927名除外 → 4,222名）および第4段階-A（SC19: DX未取組企業 1,377名除外 → 適格者 2,845名）をフィルタリングします。" },
+          { range: [0.68, 1.0], label: "Phase 3: 2要因6セルの有効本調査標本 (N = 2,035) 確定", desc: "セル割付上限到達（810名）を除き、欠測値なしの有効本調査回答 N = 2,035名（大企業 745名 [36.6%] vs SMO 1,290名 [63.4%] × 3職階）が確定します。" }
+        ]
+      },
+      {
+        id: 1,
+        tag: "MOMENT 2 / 7 ・ 第4章 4.2節 【仮説1 (H1)】",
+        title: "企業規模（大企業 vs SMO）× 組織階層の二元配置交互作用 (F = 4.619, p = 0.010*)",
+        note: "統計的留意点：交互作用の偏イータ二乗（partial η² = 0.0045）および中間管理職の規模間差（d = 0.154）は小さい効果量であり、2,035名の標本規模により検出された緩やかな差である点に留意が必要です。",
+        phases: [
+          { range: [0, 0.33], label: "Phase 1: 組織階層の主効果 (F = 28.867, p < 0.001)", desc: "全社平均 M = 3.323 (SD = 0.629) から、経営層・中間管理職・一般社員の階層別主効果（partial η² = 0.0277）が分離します。" },
+          { range: [0.33, 0.68], label: "Phase 2: 企業規模 × 組織階層の交互作用プロット展開", desc: "大企業（青線: 3.852 → 3.400 → 3.227）と SMO（赤線: 3.519 → 3.306 → 3.243）の軌跡が分岐し、有意な交互作用（F(2, 2029) = 4.619, p = 0.010）が現れます。" },
+          { range: [0.68, 1.0], label: "Phase 3: SMO中間管理職の落ち込み (-0.094点) と一般社員の収束", desc: "中間管理職ではSMO(3.306)が大企業(3.400)より有意に低い（t = 2.075, p = 0.038, d = 0.154）一方、一般社員層では大企業(3.227)とSMO(3.243)に有意差がありません（p = 0.699）。" }
+        ]
+      },
+      {
+        id: 2,
+        tag: "MOMENT 3 / 7 ・ 第4章 4.3節 【仮説2 (H2)】",
+        title: "k-means 3類型クラスタリングと分配的公正の低認知オッズ比 (OR = 3.951***)",
+        note: "感度分析による検証：分配的公正（SC18-1, 4）と当事者意識（SC18-1〜5）の項目重複を完全に除外した3項目版（SC18-2, 3, 5）による再クラスタリングでも、OR = 2.409 (95% CI [2.092, 2.774], p < 0.001) と有意な正の関連が維持されます。",
+        phases: [
+          { range: [0, 0.40], label: "Phase 1: 変革当事者意識 × 組織内摩擦認知の3類型分離", desc: "無相関の2軸（r = 0.007）から k-means法（random_state = 42）により、変革牽引層（17.3%）、受動的追随層（36.9%）、低当事者意識・高摩擦層（クラスタ3: 45.8%, n = 933）の3群が抽出されます。" },
+          { range: [0.40, 0.72], label: "Phase 2: 分配的公正の低認知による所属オッズ上昇 (OR = 3.951)", desc: "二項ロジスティック回帰（モデル2: Pseudo R² = 0.0974）により、分配的公正（給与・評価還元）の低認知が1点高まるごとにクラスタ3所属オッズが 3.951倍（95% CI [3.26, 4.79]）に高まります。" },
+          { range: [0.72, 1.0], label: "Phase 3: 重複除外3項目版による感度分析 (OR = 2.409***)", desc: "共通項目（SC18-1, 4）を除いた3項目版でもクラスタ3（32.4%, n = 659）への所属オッズ比は 2.409倍（多項ロジット対牽引層では OR = 3.842）と頑健に支持されます。" }
+        ]
+      },
+      {
+        id: 3,
+        tag: "MOMENT 4 / 7 ・ 第4章 4.4節 【仮説3 (H3)】",
+        title: "手続的公正による組織内摩擦認知の調整効果と単純傾斜の反転 (交互作用 B = +0.0826***)",
+        note: "解釈上の留意点：交互作用項による決定係数の増分（ΔR² = 0.0035）および各水準の単純傾斜の絶対値（-0.0692, +0.0515）は小さく、横断データにおける関連の向きの違いを示したものです。",
+        phases: [
+          { range: [0, 0.33], label: "Phase 1: 低手続的公正 (-1SD = -0.730) における負の傾斜", desc: "経営層の現場傾聴・リーダーシップ（手続的公正）が低い環境では、組織内摩擦が高いほど当事者意識が低下する有意な負の関連（B = -0.0692, t = -2.44, p = 0.0148*）を示します。" },
+          { range: [0.33, 0.66], label: "Phase 2: 平均水準 (Mean = 0.000) における傾斜の緩衝", desc: "手続的公正が平均水準に達すると、組織内摩擦の負の傾きはほぼ水平（B = -0.0089, t = -0.43, p = 0.6684 ns）となり、摩擦による当事者意識の低下が緩和されます。" },
+          { range: [0.66, 1.0], label: "Phase 3: 高手続的公正 (+1SD = +0.730) における正の傾斜への反転", desc: "手続的公正が高い環境では、条件付き傾斜が正（B = +0.0515, t = +2.11, p = 0.0349*）へと反転し、摩擦認知が高い状況でも高い当事者意識（3.310 → 3.375）が保たれます。" }
+        ]
+      },
+      {
+        id: 4,
+        tag: "MOMENT 5 / 7 ・ 第4章 4.5節 【仮説4 (H4)】",
+        title: "DX人材能力9項目のギャップとPMO機能の成果規定力 (PMO β = 0.439*** vs 技術知識 β = 0.047 ns)",
+        note: "測定上の留意点：単一項目（デジタル技術知識 Q9-1）に比べ、8項目合成尺度（PMO機能 Q9-2〜9, α = 0.916）は測定誤差が小さいため回帰係数が大きく推定されやすい特性にも配慮が必要です。",
+        phases: [
+          { range: [0, 0.48], label: "Phase 1: DX人材能力9項目の重要度(Q8) − 充足度(Q9) ギャップ", desc: "全9項目で重要度が充足度を有意に上回り、「現場の声を聞き取り課題を見つける能力」（+1.083点, dz = 0.849）と「業務プロセス導入デザイン能力」（+1.003点, dz = 0.852）が最大ギャップを示します。" },
+          { range: [0.48, 1.0], label: "Phase 2: DX総合成果実感(Q4)に対する重回帰分析 (R² = 0.2391)", desc: "重回帰分析（F(7, 2027) = 90.97, p < 0.001）において、デジタル技術知識（β = 0.0473, p = 0.098 ns）は非有意である一方、PMO機能（β = 0.4388, t = 15.33, p < 0.001）は中程度の正の関連を示します。" }
+        ]
+      },
+      {
+        id: 5,
+        tag: "MOMENT 6 / 7 ・ 第4章 4.6節 【仮説5 (H5)】",
+        title: "推進継続意向(Q6)と成果実感(Q4)の乖離：SMO中間管理職における最大ギャップ (+1.446点)",
+        note: "統計的留意点：SMO中間管理職（+1.446点）と大企業中間管理職（+1.078点）の差（+0.368点, 未補正 t = 2.288, p = 0.0224, d = 0.168）は効果量が小さく、多重比較補正下では慎重な解釈が求められます。",
+        phases: [
+          { range: [0, 0.35], label: "Phase 1: DX総合成果実感 (Q4) のベースライン分布", desc: "全社平均の成果実感 Q4 は 5.097点（SD = 1.636）。6セルの中で SMO中間管理職（4.892点）が最も低い成果実感にとどまっています。" },
+          { range: [0.35, 0.72], label: "Phase 2: 推進継続意向 (Q6) の伸長と全社乖離 (+1.254点)", desc: "今後の推進継続意向 Q6（全社平均 6.351点）は成果実感を平均 +1.254点上回り（対応のある t(2034) = 25.30, p < 0.001, dz = 0.561）、全体の 48.6% で継続意向が成果実感を上回っています。" },
+          { range: [0.72, 1.0], label: "Phase 3: SMO中間管理職における正比率最大化 (54.0%)", desc: "SMO中間管理職（n = 511）では継続意向(6.339) − 成果実感(4.892) = +1.446点となり、継続意向が成果実感を上回る回答者の割合（54.0%）が全6セル中で最高となります。" }
+        ]
+      },
+      {
+        id: 6,
+        tag: "MOMENT 7 / 7 ・ 第5章 5.1〜5.2節",
+        title: "8通りの感度分析モデルとSC18個別9項目検証（Holm多重比較補正）",
+        note: "総合評価：8仕様中7仕様で交互作用が5%水準有意（順序ロジットは p = 0.0655）。個別9項目では手続的公正を構成する SC18-8（経営層のリーダーシップ発揮）のみが Holm補正後も p = 0.0342* と有意性を維持します。",
+        phases: [
+          { range: [0, 0.50], label: "Phase 1: 8通りの分析仕様による交互作用 F値の安定性検証", desc: "主分析(F=4.619)、Type III(F=4.619)、共変量統制ANCOVA(F=4.370)、9項目平均(F=4.320)、EFA因子得点(F=4.237)、監督職編入(F=3.275)、HC3頑健標準誤差(F=4.705)の7モデルで5%有意を確認します。" },
+          { range: [0.50, 1.0], label: "Phase 2: SC18個別9項目の二元配置ANOVAとHolm補正", desc: "全9項目にHolm補正を適用すると、SC18-8「経営層はDXについてリーダーシップを発揮している」（F = 5.57, Holm補正後 p = 0.0342*；大企業管理職 3.25 vs SMO管理職 2.87）のみが有意に維持されます。" }
+        ]
+      }
+    ];
+
+    const LIT_LIST = [
+      { author: "Adams, J. S. (1965)", title: "Inequity in social exchange", journal: "Advances in Experimental Social Psychology, 2, 267–299", hypo: "H2 (分配的公正・公平理論)", role: "自己の貢献と報酬の不均衡が消極的態度を生む公平理論の基礎。", url: "https://doi.org/10.1016/S0065-2601(08)60108-2" },
+      { author: "Aiken, L. S., & West, S. G. (1991)", title: "Multiple regression: Testing and interpreting interactions", journal: "Sage Publications", hypo: "H3 (単純傾斜分析)", role: "平均中心化および水準別（±1SD）単純傾斜検定の統計的標準手順。", url: "" },
+      { author: "Armenakis, A. A., Harris, S. G., & Mossholder, K. W. (1993)", title: "Creating readiness for organizational change", journal: "Human Relations, 46(6), 681–703", hypo: "H1 (変革準備性)", role: "組織変革における従業員の当事者意識・準備性の基本概念。", url: "https://doi.org/10.1177/001872679304600601" },
+      { author: "Balogun, J., & Johnson, G. (2004)", title: "Organizational restructuring and middle manager sensemaking", journal: "Academy of Management Journal, 47(4), 523–549", hypo: "H1 (階層間意識差)", role: "組織再編における中間管理職の意味形成（センスメイキング）と階層間ギャップ。", url: "https://doi.org/10.2307/20159599" },
+      { author: "Besson, P., & Rowe, F. (2012)", title: "Strategizing information systems-enabled organizational transformation", journal: "The Journal of Strategic Information Systems, 21(2), 103–124", hypo: "第1章 (組織変革と摩擦)", role: "情報システム導入が既存の権限・評価基準の見直しと組織慣性を伴うことを指摘。", url: "https://doi.org/10.1016/j.jsis.2012.05.001" },
+      { author: "Colquitt, J. A. (2001)", title: "On the dimensionality of organizational justice: A construct validation of a measure", journal: "Journal of Applied Psychology, 86(3), 386–400", hypo: "H2/H3 (組織的公正尺度)", role: "分配的公正・手続的公正・情報的公正の次元構造と妥当性を確立。", url: "https://doi.org/10.1037/0021-9010.86.3.386" },
+      { author: "Dean, J. W., Brandes, P., & Dharwadkar, R. (1998)", title: "Organizational cynicism", journal: "Academy of Management Review, 23(2), 341–352", hypo: "H2 (組織シニシズム)", role: "処遇還元なき変革要請に対して従業員が抱く冷めた態度・心理的離反の概念化。", url: "https://doi.org/10.5465/amr.1998.533230" },
+      { author: "Festinger, L. (1957)", title: "A theory of cognitive dissonance", journal: "Stanford University Press", hypo: "H5 (認知的不協和)", role: "推進継続意向（Q6）と成果実感（Q4）の食い違いが生む心理的葛藤の理論基盤。", url: "" },
+      { author: "Folger, R. (1977)", title: "Distributive and procedural justice: Combined impact of voice and process outcome on satisfaction", journal: "Journal of Personality and Social Psychology, 35(2), 108–119", hypo: "H3 (発言機会と手続的公正)", role: "意思決定過程における現場の発言機会（Voice）の重要性を実証。", url: "https://doi.org/10.1037/0022-3514.35.2.108" },
+      { author: "Greenberg, J. (1990)", title: "Organizational justice: Yesterday, today, and tomorrow", journal: "Journal of Management, 16(2), 399–432", hypo: "H2/H3 (組織的公正レビュー)", role: "組織的公正研究の体系的整理。", url: "https://doi.org/10.1177/014920639001600208" },
+      { author: "Herscovitch, L., & Meyer, J. P. (2002)", title: "Commitment to organizational change: Extension of a three-component model", journal: "Journal of Applied Psychology, 87(3), 474–487", hypo: "H1 (変革コミットメント)", role: "組織変革に対する従業員のコミットメント3成分モデル。", url: "https://doi.org/10.1037/0021-9010.87.3.474" },
+      { author: "Huy, Q. N. (2002)", title: "Emotional balancing of organizational continuity and radical change: The contribution of middle managers", journal: "Administrative Science Quarterly, 47(1), 31–69", hypo: "H1/H3 (感情バランシング)", role: "変革の強い推進と現場の感情配慮の両立における中間管理職・経営層の役割。", url: "https://doi.org/10.2307/3094890" },
+      { author: "情報処理推進機構 (IPA) (2023)", title: "DX白書2023：進む変革、進まぬ変革", journal: "独立行政法人情報処理推進機構", hypo: "第1章 (国内DX実態)", role: "国内企業におけるIT投資とDX成果実感のギャップに関する公的調査。", url: "" },
+      { author: "Kane, G. C., Palmer, D., Phillips, A. N., Kiron, D., & Buckley, N. (2015)", title: "Strategy, not technology, drives digital transformation", journal: "MIT Sloan Management Review & Deloitte University Press", hypo: "H4 (戦略・推進体制の優位性)", role: "デジタル成熟度を規定するのは技術単体ではなく戦略と推進体制であることを指摘。", url: "" },
+      { author: "経済産業省 (2018)", title: "DXレポート：ITシステム「2025年の崖」克服とDXの本格的な展開", journal: "経済産業省", hypo: "第1章 (DX政策背景)", role: "日本企業における老朽化システムとDX推進の政策的課題提起。", url: "" },
+      { author: "Kerzner, H. (2018)", title: "Project management best practices: Achieving global excellence (4th ed.)", journal: "John Wiley & Sons", hypo: "H4 (PMO機能)", role: "課題抽出・プロセス再設計・部門間調整を担うPMO機能の定義。", url: "" },
+      { author: "Leventhal, G. S. (1980)", title: "What should be done with equity theory? New approaches to the study of fairness in social relationships", journal: "Social exchange: Advances in theory and research (pp. 27–55)", hypo: "H3 (手続的公正基準)", role: "手続的公正の6原則（一貫性、代表性、修正可能性など）を定式化。", url: "https://doi.org/10.1007/978-1-4613-3087-5_2" },
+      { author: "Nonaka, I., & Takeuchi, H. (1995)", title: "The knowledge-creating company", journal: "Oxford University Press", hypo: "H1 (ミドル・アップダウン)", role: "経営層と現場の結節点としての中間管理職の役割。", url: "" },
+      { author: "Pfeffer, J., & Salancik, G. R. (1978)", title: "The external control of organizations: A resource dependence perspective", journal: "Harper & Row", hypo: "H1 (資源依存理論)", role: "大企業とSMOにおける組織的資源・専門部署の余裕の差。", url: "" },
+      { author: "Rizzo, J. R., House, R. J., & Lirtzman, S. I. (1970)", title: "Role conflict and ambiguity in complex organizations", journal: "Administrative Science Quarterly, 15(2), 150–163", hypo: "H1/H5 (役割葛藤・板挟み)", role: "経営方針と現場維持の間で中間管理職が直面する役割葛藤と曖昧性。", url: "https://doi.org/10.2307/2391486" },
+      { author: "Siemsen, E., Roth, A., & Oliveira, P. (2010)", title: "Common method bias in regression models with linear, quadratic, and interaction effects", journal: "Organizational Research Methods, 13(3), 456–476", hypo: "第5章 (CMBと交互作用)", role: "交互作用効果は共通方法バイアス（CMB）のアーティファクトではなく保守的に抑制されることを数理証明。", url: "https://doi.org/10.1177/1094428109351241" },
+      { author: "中小企業庁 (2022)", title: "中小企業白書2022年版：新たな時代を切り拓く中小企業", journal: "中小企業庁", hypo: "H1 (SMOの兼務実態)", role: "中小・中堅組織（SMO）におけるDX専任人材の不足と管理職の兼務実態。", url: "" },
+      { author: "Thibaut, J. W., & Walker, L. (1975)", title: "Procedural justice: A psychological analysis", journal: "L. Erlbaum Associates", hypo: "H3 (手続的公正の古典)", role: "意思決定プロセスへの関与と手続的公正の心理学的基礎。", url: "" },
+      { author: "Vial, G. (2019)", title: "Understanding digital transformation: A review and a research agenda", journal: "The Journal of Strategic Information Systems, 28(2), 118–144", hypo: "第1章 (DX概念定義)", role: "DXの包括的文献レビューと組織変革としての定義。", url: "https://doi.org/10.1016/j.jsis.2019.01.003" }
+    ];
+
+    function createSeededRandom(seed) {
+      let s = seed % 2147483647;
+      return function() {
+        s = (s * 16807) % 2147483647;
+        return (s - 1) / 2147483646;
+      };
+    }
+
+    const rng = createSeededRandom(42);
+    const CLUSTER_POINTS = [];
+    const cSpecs = [
+      { id: 0, count: 42, cx: 4.160, cy: 3.059, sx: 0.32, sy: 0.35, color: '#228543' },
+      { id: 1, count: 88, cx: 3.465, cy: 2.728, sx: 0.30, sy: 0.32, color: '#005BAC' },
+      { id: 2, count: 110, cx: 2.790, cy: 3.374, sx: 0.36, sy: 0.38, color: '#D32F2F' }
+    ];
+    cSpecs.forEach(spec => {
+      for (let i = 0; i < spec.count; i++) {
+        const u1 = Math.max(0.0001, rng());
+        const u2 = rng();
+        const z0 = Math.sqrt(-2.0 * Math.log(u1)) * Math.cos(2.0 * Math.PI * u2);
+        const z1 = Math.sqrt(-2.0 * Math.log(u1)) * Math.sin(2.0 * Math.PI * u2);
+        const tx = Math.max(1.2, Math.min(4.9, spec.cx + z0 * spec.sx));
+        const ty = Math.max(1.2, Math.min(4.8, spec.cy + z1 * spec.sy));
+        const ix = 3.323 + (rng() - 0.5) * 1.6;
+        const iy = 3.081 + (rng() - 0.5) * 1.6;
+        CLUSTER_POINTS.push({ cluster: spec.id, ix, iy, tx, ty, color: spec.color });
+      }
+    });
+
+    let globalProgress = 0;
+    let isPlaying = false;
+    let playSpeed = 1.0;
+    let lastFrameTime = null;
+
+    let sceneState = {
+      m1ShowCI: true,
+      m1ShowSC18_8: false,
+      m2ModelMode: 'main',
+      m2DistScore: null,
+      m3ManualSD: null,
+      m4ChartMode: 'auto',
+      m6ChartMode: 'auto'
+    };
+
+    function lerp(a, b, t) {
+      return a + (b - a) * Math.max(0, Math.min(1, t));
+    }
+
+    function easeInOutCubic(t) {
+      t = Math.max(0, Math.min(1, t));
+      return t < 0.5 ? 4 * t * t * t : 1 - Math.pow(-2 * t + 2, 3) / 2;
+    }
+
+    function subProgress(t, start, end) {
+      if (t <= start) return 0;
+      if (t >= end) return 1;
+      return (t - start) / (end - start);
+    }
+
+    function getCurrentMomentIndex() {
+      return Math.min(6, Math.floor(globalProgress / 1000));
+    }
+
+    function getLocalT() {
+      const mIdx = getCurrentMomentIndex();
+      return Math.max(0, Math.min(1, (globalProgress - mIdx * 1000) / 1000));
+    }
+
+    let lastRenderedMoment = -1;
+
+    function updateScrubUI() {
+      const mIdx = getCurrentMomentIndex();
+      const localT = getLocalT();
+      const meta = MOMENTS_META[mIdx];
+
+      document.getElementById('masterScrubSlider').value = Math.round(globalProgress);
+      document.getElementById('globalPctReadout').textContent = (globalProgress / 70).toFixed(1) + '%';
+
+      document.getElementById('localScrubSlider').value = Math.round(localT * 1000);
+      document.getElementById('localPctLabel').textContent = Math.round(localT * 100) + '%';
+
+      const pills = document.querySelectorAll('.chapter-pill');
+      pills.forEach((pill, idx) => {
+        pill.classList.toggle('active', idx === mIdx);
+        const bar = document.getElementById('cpBar' + idx);
+        if (bar) {
+          if (idx < mIdx) bar.style.width = '100%';
+          else if (idx === mIdx) bar.style.width = (localT * 100).toFixed(1) + '%';
+          else bar.style.width = '0%';
+        }
+        const tick = document.getElementById('mTick' + idx);
+        if (tick) tick.classList.toggle('active', idx === mIdx);
+      });
+
+      let activePhase = meta.phases[0];
+      let activePhaseIdx = 0;
+      meta.phases.forEach((p, idx) => {
+        if (localT >= p.range[0] && localT <= p.range[1]) {
+          activePhase = p;
+          activePhaseIdx = idx;
+        }
+      });
+
+      document.getElementById('stageMomentTag').textContent = meta.tag;
+      document.getElementById('stagePhaseTag').textContent = activePhase.label;
+      document.getElementById('stageTitle').textContent = meta.title;
+      document.getElementById('storyCallout').innerHTML = '<strong>' + activePhase.label + '：</strong>' + activePhase.desc;
+      document.getElementById('methodNoteBox').innerHTML = '<strong>方法論的・統計的注記：</strong>' + meta.note;
+
+      if (lastRenderedMoment !== mIdx) {
+        lastRenderedMoment = mIdx;
+        renderPhaseStepsList(mIdx, activePhaseIdx);
+        renderSceneCustomControls(mIdx);
+      } else {
+        const items = document.querySelectorAll('.phase-step-item');
+        items.forEach((el, idx) => el.classList.toggle('active', idx === activePhaseIdx));
+      }
+
+      updateLiveKPIs(mIdx, localT);
+      drawCurrentMomentCanvas(mIdx, localT);
+    }
+
+    function renderPhaseStepsList(mIdx, activeIdx) {
+      const meta = MOMENTS_META[mIdx];
+      const container = document.getElementById('phaseStepsList');
+      container.innerHTML = '';
+      meta.phases.forEach((p, idx) => {
+        const div = document.createElement('div');
+        div.className = 'phase-step-item' + (idx === activeIdx ? ' active' : '');
+        const startPct = Math.round(p.range[0] * 100);
+        const endPct = Math.round(p.range[1] * 100);
+        div.innerHTML =
+          '<div class="phase-step-head"><span>' + p.label + '</span><span>' + startPct + '%〜' + endPct + '%</span></div>' +
+          '<div style="font-size:12px; color:#4A5568;">' + p.desc + '</div>';
+        div.onclick = () => {
+          const targetLocal = Math.min(0.98, p.range[0] + (p.range[1] - p.range[0]) * 0.65);
+          globalProgress = mIdx * 1000 + targetLocal * 1000;
+          updateScrubUI();
+        };
+        container.appendChild(div);
+      });
+    }
+
+    function renderSceneCustomControls(mIdx) {
+      const box = document.getElementById('sceneCustomControls');
+      box.innerHTML = '';
+
+      if (mIdx === 0) {
+        box.innerHTML =
+          '<span style="font-weight:700; color:#4A5568;">クイック移動：</span>' +
+          '<button class="ctrl-chip" onclick="setLocalT(0.15)">第1・2段階 (8,149名)</button>' +
+          '<button class="ctrl-chip" onclick="setLocalT(0.50)">第3段階 DX未理解 (-3,927名)</button>' +
+          '<button class="ctrl-chip" onclick="setLocalT(0.95)">最終6セル標本 (N=2,035)</button>';
+      } else if (mIdx === 1) {
+        box.innerHTML =
+          '<span style="font-weight:700; color:#4A5568;">表示切替：</span>' +
+          '<button class="ctrl-chip ' + (sceneState.m1ShowCI ? 'active' : '') + '" onclick="toggleM1CI()">95%信頼区間エラーバー</button>' +
+          '<button class="ctrl-chip ' + (sceneState.m1ShowSC18_8 ? 'active' : '') + '" onclick="toggleM1SC18()">SC18-8 経営層リーダーシップ比較</button>';
+      } else if (mIdx === 2) {
+        box.innerHTML =
+          '<span style="font-weight:700; color:#4A5568;">分析モデル切替：</span>' +
+          '<button class="ctrl-chip ' + (sceneState.m2ModelMode === 'main' ? 'active' : '') + '" onclick="setM2Mode(\'main\')">主分析 (5項目版: OR = 3.951)</button>' +
+          '<button class="ctrl-chip ' + (sceneState.m2ModelMode === 'sens' ? 'active' : '') + '" onclick="setM2Mode(\'sens\')">感度分析 (重複除外3項目版: OR = 2.409)</button>';
+      } else if (mIdx === 3) {
+        box.innerHTML =
+          '<span style="font-weight:700; color:#4A5568;">手続的公正の水準を直接操作：</span>' +
+          '<button class="ctrl-chip" onclick="setLocalT(0.05)">低水準 (-1SD: B = -0.0692*)</button>' +
+          '<button class="ctrl-chip" onclick="setLocalT(0.50)">平均水準 (Mean: B = -0.0089 ns)</button>' +
+          '<button class="ctrl-chip" onclick="setLocalT(0.95)">高水準 (+1SD: B = +0.0515*)</button>';
+      } else if (mIdx === 4) {
+        box.innerHTML =
+          '<span style="font-weight:700; color:#4A5568;">図版切替：</span>' +
+          '<button class="ctrl-chip" onclick="setLocalT(0.35)">図 4-4: 9項目能力ギャップ (Q8 - Q9)</button>' +
+          '<button class="ctrl-chip" onclick="setLocalT(0.92)">図 4-5: 重回帰分析 標準化係数 β</button>';
+      } else if (mIdx === 5) {
+        box.innerHTML =
+          '<span style="font-weight:700; color:#4A5568;">注目ポイント：</span>' +
+          '<button class="ctrl-chip" onclick="setLocalT(0.25)">成果実感 Q4 比較</button>' +
+          '<button class="ctrl-chip" onclick="setLocalT(0.95)">SMO中間管理職の乖離 (+1.446点 / 54.0%)</button>';
+      } else if (mIdx === 6) {
+        box.innerHTML =
+          '<span style="font-weight:700; color:#4A5568;">検証ステージ：</span>' +
+          '<button class="ctrl-chip" onclick="setLocalT(0.35)">図 5-1: 8大感度分析モデル F値</button>' +
+          '<button class="ctrl-chip" onclick="setLocalT(0.92)">図 5-2: SC18個別9項目 (Holm補正)</button>';
+      }
+    }
+
+    function setLocalT(t) {
+      const mIdx = getCurrentMomentIndex();
+      globalProgress = mIdx * 1000 + t * 1000;
+      updateScrubUI();
+    }
+
+    function toggleM1CI() {
+      sceneState.m1ShowCI = !sceneState.m1ShowCI;
+      renderSceneCustomControls(1);
+      updateScrubUI();
+    }
+
+    function toggleM1SC18() {
+      sceneState.m1ShowSC18_8 = !sceneState.m1ShowSC18_8;
+      if (sceneState.m1ShowSC18_8 && getLocalT() < 0.7) {
+        globalProgress = 1000 + 850;
+      }
+      renderSceneCustomControls(1);
+      updateScrubUI();
+    }
+
+    function setM2Mode(mode) {
+      sceneState.m2ModelMode = mode;
+      if (getLocalT() < 0.65) globalProgress = 2000 + 800;
+      renderSceneCustomControls(2);
+      updateScrubUI();
+    }
+
+    function setKPI(idx, label, val, sub) {
+      document.getElementById('kpi' + idx + 'Label').textContent = label;
+      document.getElementById('kpi' + idx + 'Val').textContent = val;
+      document.getElementById('kpi' + idx + 'Sub').textContent = sub;
+    }
+
+    function updateLiveKPIs(mIdx, t) {
+      if (mIdx === 0) {
+        let rem = 8608;
+        if (t < 0.2) rem = Math.round(lerp(8608, 8149, t / 0.2));
+        else if (t < 0.5) rem = Math.round(lerp(8149, 4222, (t - 0.2) / 0.3));
+        else if (t < 0.75) rem = Math.round(lerp(4222, 2845, (t - 0.5) / 0.25));
+        else rem = Math.round(lerp(2845, 2035, (t - 0.75) / 0.25));
+        const exc = 8608 - rem;
+        setKPI(1, "残存モニター数", rem.toLocaleString() + "名", "初期 8,608名からの推移");
+        setKPI(2, "累積除外モニター数", exc.toLocaleString() + "名", "4段階基準＋割付上限管理");
+        setKPI(3, "大企業 (1,000人以上)", "745名 (36.6%)", "経営31 / 管理295 / 一般419");
+        setKPI(4, "SMO (1,000人未満)", "1,290名 (63.4%)", "経営298 / 管理511 / 一般481");
+      } else if (mIdx === 1) {
+        const splitP = subProgress(t, 0.3, 0.75);
+        const lMid = lerp(3.323, 3.400, splitP).toFixed(3);
+        const sMid = lerp(3.323, 3.306, splitP).toFixed(3);
+        const diff = (sMid - lMid).toFixed(3);
+        setKPI(1, "二元配置交互作用 F値", "F = 4.619*", "p = 0.0100, partial η² = 0.0045");
+        setKPI(2, "中間管理職 規模間差", diff + " 点", "t = 2.075, p = 0.0384*, d = 0.154");
+        setKPI(3, "大企業 中間管理職 (n=295)", "M = " + lMid, "95% CI [3.328, 3.472]");
+        setKPI(4, "SMO 中間管理職 (n=511)", "M = " + sMid, "95% CI [3.255, 3.358]");
+      } else if (mIdx === 2) {
+        const isSens = sceneState.m2ModelMode === 'sens';
+        const orVal = isSens ? "2.409***" : "3.951***";
+        const ciTxt = isSens ? "95% CI [2.092, 2.774]" : "95% CI [3.26, 4.79]";
+        const c3Pct = isSens ? "32.4% (659名)" : "45.8% (933名)";
+        setKPI(1, "クラスタ3 (低当事者意識・高摩擦)", c3Pct, isSens ? "重複除外3項目版 k=3" : "主分析5項目版 k=3");
+        setKPI(2, "分配的公正 低認知オッズ比", "OR = " + orVal, ciTxt + " (p < 0.001)");
+        setKPI(3, "クラスタ1 (変革牽引層)", "17.3% (352名)", "当事者意識 4.160 / 成果 5.812");
+        setKPI(4, "クラスタ2 (受動的追随層)", "36.9% (750名)", "当事者意識 3.465 / 成果 5.215");
+      } else if (mIdx === 3) {
+        const wSD = lerp(-1.0, 1.0, t);
+        const wCentered = wSD * 0.730;
+        const slopeB = -0.0089 + 0.0826 * wCentered;
+        const slopeSign = slopeB >= 0 ? "+" : "";
+        setKPI(1, "手続的公正の水準 (W)", (wSD >= 0 ? "+" : "") + wSD.toFixed(2) + " SD", "実スコア換算: " + (3.095 + wCentered).toFixed(2) + "点");
+        setKPI(2, "摩擦→当事者意識 条件付き傾き B", slopeSign + slopeB.toFixed(4), wSD < -0.4 ? "有意な負の関連 (p = 0.015*)" : (wSD > 0.4 ? "有意な正の関連 (p = 0.035*)" : "非有意・緩衝域 (ns)"));
+        setKPI(3, "交互作用項 (摩擦 × 手続的公正)", "B = +0.0826***", "t = 3.66, p < 0.001");
+        setKPI(4, "調整重回帰 モデル適合度", "R² = 0.4675", "決定係数増分 ΔR² = 0.0035");
+      } else if (mIdx === 4) {
+        setKPI(1, "最大能力ギャップ (Q8 - Q9)", "+1.083 点***", "現場の声を聞き取り課題発見 (dz=0.849)");
+        setKPI(2, "第2位 能力ギャップ", "+1.003 点***", "業務プロセス導入デザイン (dz=0.852)");
+        setKPI(3, "PMO機能 (8項目合成) 規定力", "β = 0.4388***", "B = 0.9255, t = 15.33, p < 0.001");
+        setKPI(4, "デジタル技術知識 (単一項目)", "β = 0.0473 (ns)", "B = 0.0819, t = 1.65, p = 0.098");
+      } else if (mIdx === 5) {
+        const pGap = subProgress(t, 0.3, 0.85);
+        const allGap = lerp(0, 1.254, pGap).toFixed(3);
+        const smoGap = lerp(0, 1.446, pGap).toFixed(3);
+        setKPI(1, "全社 継続意向(Q6) − 成果(Q4)", "+" + allGap + " 点", "t(2034) = 25.30, p < 0.001, dz = 0.561");
+        setKPI(2, "SMO 中間管理職 平均乖離幅", "+" + smoGap + " 点", "Q6(6.339) − Q4(4.892) [n = 511]");
+        setKPI(3, "SMO 中間管理職 正比率 (Δ > 0)", "54.0% (最高)", "全6セル中で継続意向＞成果が最多");
+        setKPI(4, "大企業 中間管理職 平均乖離幅", "+1.078 点", "正比率 45.1% (規模間差 d = 0.168)");
+      } else if (mIdx === 6) {
+        setKPI(1, "感度分析 有意維持モデル数", "7 / 8 仕様で5%有意", "順序ロジットも p = 0.0655 (10%傾向)");
+        setKPI(2, "HC3 不均一分散頑健モデル", "F = 4.705**", "p = 0.0092, partial η² = 0.0046");
+        setKPI(3, "SC18-8 経営層リーダーシップ", "F = 5.57**", "Holm補正後 p = 0.0342* (唯一有意)");
+        setKPI(4, "SC18-8 管理職スコア比較", "3.25 vs 2.87", "大企業管理職 3.25 / SMO管理職 2.87");
+      }
+    }
+
+    function drawCurrentMomentCanvas(mIdx, localT) {
+      const canvas = document.getElementById('scrubCanvas');
+      if (!canvas) return;
+      const rect = canvas.parentElement.getBoundingClientRect();
+      const dpr = window.devicePixelRatio || 1;
+      const W = rect.width;
+      const H = rect.height;
+      if (canvas.width !== Math.round(W * dpr) || canvas.height !== Math.round(H * dpr)) {
+        canvas.width = Math.round(W * dpr);
+        canvas.height = Math.round(H * dpr);
+      }
+      const ctx = canvas.getContext('2d');
+      ctx.save();
+      ctx.scale(dpr, dpr);
+      ctx.clearRect(0, 0, W, H);
+
+      ctx.strokeStyle = '#EDF2F7';
+      ctx.lineWidth = 1;
+      for (let x = 40; x < W; x += 40) {
+        ctx.beginPath(); ctx.moveTo(x, 0); ctx.lineTo(x, H); ctx.stroke();
+      }
+      for (let y = 40; y < H; y += 40) {
+        ctx.beginPath(); ctx.moveTo(0, y); ctx.lineTo(W, y); ctx.stroke();
+      }
+
+      if (mIdx === 0) drawMoment0(ctx, W, H, localT);
+      else if (mIdx === 1) drawMoment1(ctx, W, H, localT);
+      else if (mIdx === 2) drawMoment2(ctx, W, H, localT);
+      else if (mIdx === 3) drawMoment3(ctx, W, H, localT);
+      else if (mIdx === 4) drawMoment4(ctx, W, H, localT);
+      else if (mIdx === 5) drawMoment5(ctx, W, H, localT);
+      else if (mIdx === 6) drawMoment6(ctx, W, H, localT);
+
+      ctx.restore();
+    }
+
+    function drawRoundRect(ctx, x, y, w, h, r) {
+      const radius = Math.min(r, w / 2, h / 2);
+      ctx.beginPath();
+      ctx.moveTo(x + radius, y);
+      ctx.lineTo(x + w - radius, y);
+      ctx.quadraticCurveTo(x + w, y, x + w, y + radius);
+      ctx.lineTo(x + w, y + h - radius);
+      ctx.quadraticCurveTo(x + w, y + h, x + w - radius, y + h);
+      ctx.lineTo(x + radius, y + h);
+      ctx.quadraticCurveTo(x, y + h, x, y + h - radius);
+      ctx.lineTo(x, y + radius);
+      ctx.quadraticCurveTo(x, y, x + radius, y);
+      ctx.closePath();
+    }
+
+    function drawMoment0(ctx, W, H, t) {
+      const stages = [
+        { label: "初期回収: SC調査モニター総数", rem: 8608, drop: 0, note: "100.0%", thresh: 0.0 },
+        { label: "第1段階 (SC1): 非就業者を除外", rem: 8274, drop: -334, note: "96.1%", thresh: 0.12 },
+        { label: "第2段階 (SC7): 役職不明を除外", rem: 8149, drop: -125, note: "94.7%", thresh: 0.25 },
+        { label: "第3段階 (SC17): DX未認知者を除外", rem: 4222, drop: -3927, note: "49.0%", thresh: 0.45 },
+        { label: "第4段階-A (SC19): DX未取組企業除外", rem: 2845, drop: -1377, note: "33.1%", thresh: 0.65 },
+        { label: "第4段階-B: 確定有効本調査標本", rem: 2035, drop: -810, note: "23.6% (確定)", thresh: 0.82 }
+      ];
+
+      ctx.fillStyle = '#003E78';
+      ctx.font = "800 13.5px 'Noto Sans JP', sans-serif";
+      ctx.fillText("▼ スクリーニング4段階除外プロセス（横棒ファネル比較：N = 8,608 → 2,035）", 18, 26);
+
+      const leftPad = Math.min(240, W * 0.36);
+      const maxBarW = W - leftPad - 95;
+      const startY = 42;
+      const rowH = t > 0.72 ? 32 : 46;
+
+      stages.forEach((st, idx) => {
+        const y = startY + idx * rowH;
+        const activeP = easeInOutCubic(subProgress(t, st.thresh, st.thresh + 0.16));
+        const barW = Math.max(4, (st.rem / 8608) * maxBarW * (idx === 0 ? 1 : activeP));
+
+        ctx.fillStyle = idx === 5 ? '#003E78' : '#2D3748';
+        ctx.font = (idx === 5 ? "800 " : "700 ") + "12px 'Noto Sans JP', sans-serif";
+        ctx.fillText(st.label, 18, y + 16);
+
+        ctx.fillStyle = '#E2E8F0';
+        drawRoundRect(ctx, leftPad, y + 3, maxBarW, 18, 4);
+        ctx.fill();
+
+        ctx.fillStyle = idx === 5 ? '#228543' : (idx === 3 ? '#D32F2F' : '#005BAC');
+        drawRoundRect(ctx, leftPad, y + 3, barW, 18, 4);
+        ctx.fill();
+
+        if (activeP > 0.1 || idx === 0) {
+          ctx.fillStyle = '#1A1A1A';
+          ctx.font = "800 11.5px 'Noto Sans JP', sans-serif";
+          const dropTxt = st.drop < 0 ? " (" + st.drop.toLocaleString() + "名)" : "";
+          ctx.fillText(st.rem.toLocaleString() + "名" + dropTxt, leftPad + barW + 6, y + 16);
+        }
+      });
+
+      const cellAlpha = easeInOutCubic(subProgress(t, 0.68, 0.95));
+      if (cellAlpha > 0.01) {
+        ctx.save();
+        ctx.globalAlpha = cellAlpha;
+        const baseY = 244;
+        ctx.fillStyle = '#003E78';
+        ctx.font = "800 13px 'Noto Sans JP', sans-serif";
+        ctx.fillText("▼ 確定標本 N = 2,035名の「企業規模 × 組織階層」6セル内訳（水平バー比較）", 18, baseY);
+
+        const cells = [
+          { name: "大企業 (1,000人以上: 745名 / 36.6%)", exec: 31, mid: 295, staff: 419, total: 745, c1: '#003E78', c2: '#005BAC', c3: '#63B3ED' },
+          { name: "SMO (1,000人未満: 1,290名 / 63.4%)", exec: 298, mid: 511, staff: 481, total: 1290, c1: '#9B2C2C', c2: '#D32F2F', c3: '#FC8181' }
+        ];
+
+        cells.forEach((c, cIdx) => {
+          const cy = baseY + 16 + cIdx * 64;
+          ctx.fillStyle = '#1A1A1A';
+          ctx.font = "800 12px 'Noto Sans JP', sans-serif";
+          ctx.fillText(c.name, 18, cy + 12);
+
+          const scaleW = (W - 40) * (c.total / 1400) * cellAlpha;
+          const wExec = scaleW * (c.exec / c.total);
+          const wMid = scaleW * (c.mid / c.total);
+          const wStaff = scaleW * (c.staff / c.total);
+
+          let curX = 18;
+          const barY = cy + 18;
+          ctx.fillStyle = c.c1;
+          ctx.fillRect(curX, barY, wExec, 24);
+          curX += wExec;
+          ctx.fillStyle = c.c2;
+          ctx.fillRect(curX, barY, wMid, 24);
+          curX += wMid;
+          ctx.fillStyle = c.c3;
+          ctx.fillRect(curX, barY, wStaff, 24);
+
+          ctx.fillStyle = '#2D3748';
+          ctx.font = "700 11px 'Noto Sans JP', sans-serif";
+          ctx.fillText("経営層: " + c.exec + "名 | 中間管理職: " + c.mid + "名 | 一般社員: " + c.staff + "名", 18, barY + 38);
+        });
+        ctx.restore();
+      }
+    }
+
+    function drawMoment1(ctx, W, H, t) {
+      if (sceneState.m1ShowSC18_8) {
+        drawM1SC18Comparison(ctx, W, H, t);
+        return;
+      }
+
+      const padL = 62, padR = 36, padT = 46, padB = 56;
+      const plotW = W - padL - padR;
+      const plotH = H - padT - padB;
+
+      ctx.fillStyle = '#003E78';
+      ctx.font = "800 13.5px 'Noto Sans JP', sans-serif";
+      ctx.fillText("図 4-1: 企業規模（大企業 vs SMO）× 組織階層別 変革当事者意識の交互作用プロット", 18, 26);
+
+      const yMin = 3.05, yMax = 4.10;
+      const yToPx = val => padT + plotH - ((val - yMin) / (yMax - yMin)) * plotH;
+      const xPositions = [padL + plotW * 0.15, padL + plotW * 0.50, padL + plotW * 0.85];
+      const xLabels = ["1. 役員・経営層 (n=329)", "2. 中間管理職 (n=806)", "3. 一般社員・非管理職 (n=900)"];
+
+      ctx.strokeStyle = '#DDE2E5';
+      ctx.lineWidth = 1;
+      [3.1, 3.3, 3.5, 3.7, 3.9, 4.1].forEach(v => {
+        const py = yToPx(v);
+        ctx.beginPath(); ctx.moveTo(padL, py); ctx.lineTo(W - padR, py); ctx.stroke();
+        ctx.fillStyle = '#4A5568';
+        ctx.font = "700 11px 'Noto Sans JP', sans-serif";
+        ctx.fillText(v.toFixed(2), 18, py + 4);
+      });
+
+      xPositions.forEach((px, i) => {
+        ctx.fillStyle = '#1A1A1A';
+        ctx.font = "800 12px 'Noto Sans JP', sans-serif";
+        ctx.textAlign = 'center';
+        ctx.fillText(xLabels[i], px, H - 18);
+      });
+      ctx.textAlign = 'left';
+
+      const p1 = easeInOutCubic(subProgress(t, 0.0, 0.35));
+      const p2 = easeInOutCubic(subProgress(t, 0.35, 0.78));
+      const p3 = easeInOutCubic(subProgress(t, 0.75, 1.0));
+
+      const hierMeans = [3.550, 3.341, 3.236];
+      const largeTarget = [3.852, 3.400, 3.227];
+      const largeCI = [[3.642, 4.061], [3.328, 3.472], [3.165, 3.288]];
+      const smoTarget = [3.519, 3.306, 3.243];
+      const smoCI = [[3.444, 3.595], [3.255, 3.358], [3.189, 3.296]];
+
+      const curLarge = [0, 1, 2].map(i => {
+        const hVal = lerp(3.323, hierMeans[i], p1);
+        return lerp(hVal, largeTarget[i], p2);
+      });
+      const curSmo = [0, 1, 2].map(i => {
+        const hVal = lerp(3.323, hierMeans[i], p1);
+        return lerp(hVal, smoTarget[i], p2);
+      });
+
+      if (sceneState.m1ShowCI && p2 > 0.1) {
+        ctx.save();
+        ctx.globalAlpha = p2 * 0.75;
+        for (let i = 0; i < 3; i++) {
+          const lx = xPositions[i] - 8;
+          ctx.strokeStyle = '#005BAC';
+          ctx.lineWidth = 2;
+          ctx.beginPath();
+          ctx.moveTo(lx, yToPx(largeCI[i][0]));
+          ctx.lineTo(lx, yToPx(largeCI[i][1]));
+          ctx.stroke();
+          const sx = xPositions[i] + 8;
+          ctx.strokeStyle = '#D32F2F';
+          ctx.beginPath();
+          ctx.moveTo(sx, yToPx(smoCI[i][0]));
+          ctx.lineTo(sx, yToPx(smoCI[i][1]));
+          ctx.stroke();
+        }
+        ctx.restore();
+      }
+
+      ctx.strokeStyle = '#005BAC';
+      ctx.lineWidth = 3.5;
+      ctx.beginPath();
+      curLarge.forEach((v, i) => {
+        const px = xPositions[i], py = yToPx(v);
+        if (i === 0) ctx.moveTo(px, py); else ctx.lineTo(px, py);
+      });
+      ctx.stroke();
+
+      ctx.strokeStyle = '#D32F2F';
+      ctx.lineWidth = 3.5;
+      ctx.beginPath();
+      curSmo.forEach((v, i) => {
+        const px = xPositions[i], py = yToPx(v);
+        if (i === 0) ctx.moveTo(px, py); else ctx.lineTo(px, py);
+      });
+      ctx.stroke();
+
+      curLarge.forEach((v, i) => {
+        const px = xPositions[i], py = yToPx(v);
+        ctx.fillStyle = '#005BAC';
+        ctx.beginPath(); ctx.arc(px, py, 6.5, 0, Math.PI * 2); ctx.fill();
+        ctx.fillStyle = '#003E78';
+        ctx.font = "800 12px 'Noto Sans JP', sans-serif";
+        ctx.fillText("大企業: " + v.toFixed(3), px - 38, py - 12);
+      });
+
+      curSmo.forEach((v, i) => {
+        const px = xPositions[i], py = yToPx(v);
+        ctx.fillStyle = '#D32F2F';
+        ctx.beginPath();
+        ctx.moveTo(px, py - 7); ctx.lineTo(px + 7, py + 6); ctx.lineTo(px - 7, py + 6); ctx.closePath();
+        ctx.fill();
+        if (p2 > 0.15) {
+          ctx.fillStyle = '#9B2C2C';
+          ctx.font = "800 12px 'Noto Sans JP', sans-serif";
+          ctx.fillText("SMO: " + v.toFixed(3), px - 32, py + 22);
+        }
+      });
+
+      if (p3 > 0.05) {
+        ctx.save();
+        ctx.globalAlpha = p3;
+        const mx = xPositions[1];
+        const yTop = yToPx(3.400), yBot = yToPx(3.306);
+        ctx.fillStyle = 'rgba(211, 47, 47, 0.12)';
+        drawRoundRect(ctx, mx - 85, yTop - 32, 170, (yBot - yTop) + 66, 8);
+        ctx.fill();
+        ctx.strokeStyle = '#D32F2F';
+        ctx.setLineDash([4, 3]);
+        ctx.stroke();
+        ctx.setLineDash([]);
+
+        ctx.fillStyle = '#D32F2F';
+        ctx.font = "800 11.5px 'Noto Sans JP', sans-serif";
+        ctx.textAlign = 'center';
+        ctx.fillText("中間管理職 差 -0.094点*", mx, yBot + 42);
+        ctx.fillText("(t = 2.075, p = 0.038, d = 0.154)", mx, yBot + 57);
+
+        const gx = xPositions[2];
+        const gy = yToPx(3.235);
+        ctx.fillStyle = '#228543';
+        ctx.fillText("一般社員は有意差なし (p = 0.699)", gx, gy + 42);
+        ctx.restore();
+      }
+    }
+
+    function drawM1SC18Comparison(ctx, W, H, t) {
+      ctx.fillStyle = '#003E78';
+      ctx.font = "800 13.5px 'Noto Sans JP', sans-serif";
+      ctx.fillText("▼ 中間管理職 (n=806) における大企業 vs SMO 項目別比較（横棒グラフ）", 18, 26);
+
+      const items = [
+        { name: "SC18-8 経営層のリーダーシップ発揮 (Holm p=0.034*)", l: 3.25, s: 2.87 },
+        { name: "SC18-7 経営層の学習姿勢 (未補正 p=0.070)", l: 3.27, s: 2.99 },
+        { name: "SC18-5 自身の市場価値向上期待", l: 3.47, s: 3.29 },
+        { name: "SC18-1 給与増加への期待 (未補正 p=0.027*)", l: 3.01, s: 2.87 },
+        { name: "SC18-4 適正な社内評価への期待", l: 3.45, s: 3.31 },
+        { name: "変革当事者意識 5項目合成 (p=0.038*, d=0.154)", l: 3.400, s: 3.306 }
+      ];
+
+      const leftPad = Math.min(290, W * 0.44);
+      const maxBarW = W - leftPad - 70;
+      items.forEach((it, idx) => {
+        const y = 48 + idx * 56;
+        ctx.fillStyle = idx === 0 ? '#D32F2F' : '#1A1A1A';
+        ctx.font = (idx === 0 ? "800 " : "700 ") + "12px 'Noto Sans JP', sans-serif";
+        ctx.fillText(it.name, 18, y + 18);
+
+        const wL = ((it.l - 2.0) / 2.0) * maxBarW;
+        const wS = ((it.s - 2.0) / 2.0) * maxBarW;
+
+        ctx.fillStyle = '#005BAC';
+        drawRoundRect(ctx, leftPad, y + 2, wL, 14, 3); ctx.fill();
+        ctx.fillStyle = '#003E78';
+        ctx.font = "700 11px 'Noto Sans JP', sans-serif";
+        ctx.fillText("大企業 " + it.l.toFixed(2), leftPad + wL + 6, y + 13);
+
+        ctx.fillStyle = '#D32F2F';
+        drawRoundRect(ctx, leftPad, y + 19, wS, 14, 3); ctx.fill();
+        ctx.fillStyle = '#9B2C2C';
+        ctx.fillText("SMO " + it.s.toFixed(2), leftPad + wS + 6, y + 30);
+      });
+    }
+
+    function drawMoment2(ctx, W, H, t) {
+      const pCluster = easeInOutCubic(subProgress(t, 0.0, 0.45));
+      const pOdds = easeInOutCubic(subProgress(t, 0.40, 0.90));
+      const isSens = sceneState.m2ModelMode === 'sens';
+
+      const splitX = W * 0.52;
+
+      ctx.fillStyle = '#003E78';
+      ctx.font = "800 13px 'Noto Sans JP', sans-serif";
+      ctx.fillText("図 4-2: k-means 3類型クラスタ分布 (N = 2,035)", 16, 24);
+
+      const padL = 44, padT = 40, plotW = splitX - 60, plotH = H - 82;
+      const xToPx = v => padL + ((v - 1.0) / 4.0) * plotW;
+      const yToPx = v => padT + plotH - ((v - 1.0) / 4.0) * plotH;
+
+      ctx.strokeStyle = '#CBD5E0';
+      ctx.strokeRect(padL, padT, plotW, plotH);
+
+      ctx.fillStyle = '#4A5568';
+      ctx.font = "700 11px 'Noto Sans JP', sans-serif";
+      ctx.fillText("横軸: 変革当事者意識 (SC18: 1〜5)", padL + 20, H - 16);
+      ctx.save();
+      ctx.translate(16, padT + plotH / 2 + 50);
+      ctx.rotate(-Math.PI / 2);
+      ctx.fillText("縦軸: 組織内摩擦認知 (SC15)", 0, 0);
+      ctx.restore();
+
+      CLUSTER_POINTS.forEach(pt => {
+        const cx = lerp(pt.ix, pt.tx, pCluster);
+        const cy = lerp(pt.iy, pt.ty, pCluster);
+        ctx.fillStyle = pCluster < 0.1 ? '#718096' : pt.color;
+        ctx.globalAlpha = 0.65;
+        ctx.beginPath();
+        ctx.arc(xToPx(cx), yToPx(cy), 3.5, 0, Math.PI * 2);
+        ctx.fill();
+      });
+      ctx.globalAlpha = 1.0;
+
+      if (pCluster > 0.25) {
+        const centroids = [
+          { label: "C1: 牽引層 (17.3%)", x: 4.160, y: 3.059, color: '#228543' },
+          { label: "C2: 追随層 (36.9%)", x: 3.465, y: 2.728, color: '#005BAC' },
+          { label: "C3: 離反層 (45.8%)", x: 2.790, y: 3.374, color: '#D32F2F' }
+        ];
+        centroids.forEach(c => {
+          const px = xToPx(c.x), py = yToPx(c.y);
+          ctx.fillStyle = c.color;
+          ctx.strokeStyle = '#FFFFFF';
+          ctx.lineWidth = 2.5;
+          ctx.beginPath(); ctx.arc(px, py, 9 * pCluster, 0, Math.PI * 2); ctx.fill(); ctx.stroke();
+          ctx.fillStyle = '#1A1A1A';
+          ctx.font = "800 11px 'Noto Sans JP', sans-serif";
+          ctx.fillText(c.label, px - 36, py - 13);
+        });
+      }
+
+      const rx = splitX + 10;
+      const rw = W - rx - 20;
+      ctx.fillStyle = '#003E78';
+      ctx.font = "800 13px 'Noto Sans JP', sans-serif";
+      ctx.fillText("▼ 分配的公正の低認知によるクラスタ3所属オッズ比", rx, 24);
+
+      const bars = [
+        { label: "基準: 経営層 / 適正還元期待 (OR = 1.00)", val: 1.00, color: '#718096' },
+        { label: "組織階層: 中間管理職 (OR = 1.867***)", val: lerp(1.0, 1.867, pOdds), color: '#00838F' },
+        { label: "組織階層: 一般社員 (OR = 2.736***)", val: lerp(1.0, 2.736, pOdds), color: '#005BAC' },
+        { label: "感度分析: 重複除外3項目版 (OR = 2.409***)", val: lerp(1.0, 2.409, pOdds), color: isSens ? '#D32F2F' : '#ED8936' },
+        { label: "主分析: 分配的公正の低認知 +1点 (OR = 3.951***)", val: lerp(1.0, 3.951, pOdds), color: '#D32F2F' }
+      ];
+
+      bars.forEach((b, i) => {
+        const y = 48 + i * 64;
+        ctx.fillStyle = (i === 4 && !isSens) || (i === 3 && isSens) ? '#D32F2F' : '#1A1A1A';
+        ctx.font = "800 11.5px 'Noto Sans JP', sans-serif";
+        ctx.fillText(b.label, rx, y + 14);
+
+        ctx.fillStyle = '#EDF2F7';
+        drawRoundRect(ctx, rx, y + 20, rw - 55, 20, 4); ctx.fill();
+
+        const bw = Math.max(8, (b.val / 4.5) * (rw - 55));
+        ctx.fillStyle = b.color;
+        drawRoundRect(ctx, rx, y + 20, bw, 20, 4); ctx.fill();
+
+        ctx.fillStyle = '#1A1A1A';
+        ctx.font = "800 12px 'Noto Sans JP', sans-serif";
+        ctx.fillText(b.val.toFixed(2) + "倍", rx + bw + 6, y + 35);
+      });
+    }
+
+    function drawMoment3(ctx, W, H, t) {
+      const padL = 64, padR = 36, padT = 48, padB = 56;
+      const plotW = W - padL - padR;
+      const plotH = H - padT - padB;
+
+      ctx.fillStyle = '#003E78';
+      ctx.font = "800 13.5px 'Noto Sans JP', sans-serif";
+      ctx.fillText("図 4-3: 手続的公正の水準別 単純傾斜プロット（スクラブで水準 -1SD → +1SD を連続走査）", 18, 26);
+
+      const yMin = 3.24, yMax = 3.44;
+      const yToPx = v => padT + plotH - ((v - yMin) / (yMax - yMin)) * plotH;
+      const xLeft = padL + plotW * 0.12;
+      const xMid  = padL + plotW * 0.50;
+      const xRight = padL + plotW * 0.88;
+
+      ctx.strokeStyle = '#DDE2E5';
+      ctx.lineWidth = 1;
+      [3.25, 3.30, 3.35, 3.40].forEach(v => {
+        const py = yToPx(v);
+        ctx.beginPath(); ctx.moveTo(padL, py); ctx.lineTo(W - padR, py); ctx.stroke();
+        ctx.fillStyle = '#4A5568';
+        ctx.font = "700 11px 'Noto Sans JP', sans-serif";
+        ctx.fillText(v.toFixed(2), 18, py + 4);
+      });
+
+      const xLabels = ["低摩擦 (-1SD: 2.45)", "平均摩擦 (3.08)", "高摩擦 (+1SD: 3.71)"];
+      [xLeft, xMid, xRight].forEach((px, i) => {
+        ctx.fillStyle = '#1A1A1A';
+        ctx.font = "800 12px 'Noto Sans JP', sans-serif";
+        ctx.textAlign = 'center';
+        ctx.fillText(xLabels[i], px, H - 18);
+      });
+      ctx.textAlign = 'left';
+
+      ctx.save();
+      ctx.setLineDash([5, 4]);
+      ctx.lineWidth = 2;
+      ctx.strokeStyle = 'rgba(211, 47, 47, 0.35)';
+      ctx.beginPath();
+      ctx.moveTo(xLeft, yToPx(3.385)); ctx.lineTo(xMid, yToPx(3.341)); ctx.lineTo(xRight, yToPx(3.298));
+      ctx.stroke();
+      ctx.fillStyle = 'rgba(211, 47, 47, 0.65)';
+      ctx.font = "700 11px 'Noto Sans JP', sans-serif";
+      ctx.fillText("低手続的公正 (-1SD): B = -0.0692*", xRight - 175, yToPx(3.298) + 18);
+
+      ctx.strokeStyle = 'rgba(0, 91, 172, 0.35)';
+      ctx.beginPath();
+      ctx.moveTo(xLeft, yToPx(3.310)); ctx.lineTo(xMid, yToPx(3.342)); ctx.lineTo(xRight, yToPx(3.375));
+      ctx.stroke();
+      ctx.fillStyle = 'rgba(0, 91, 172, 0.65)';
+      ctx.fillText("高手続的公正 (+1SD): B = +0.0515*", xRight - 175, yToPx(3.375) - 10);
+      ctx.restore();
+
+      const yL = lerp(3.385, 3.310, t);
+      const yM = lerp(3.341, 3.342, t);
+      const yR = lerp(3.298, 3.375, t);
+      const wSD = lerp(-1.0, 1.0, t);
+      const slopeB = -0.0089 + 0.0826 * (wSD * 0.730);
+
+      const activeColor = wSD < -0.25 ? '#D32F2F' : (wSD > 0.25 ? '#005BAC' : '#00838F');
+      ctx.strokeStyle = activeColor;
+      ctx.lineWidth = 4.5;
+      ctx.beginPath();
+      ctx.moveTo(xLeft, yToPx(yL));
+      ctx.lineTo(xMid, yToPx(yM));
+      ctx.lineTo(xRight, yToPx(yR));
+      ctx.stroke();
+
+      [[xLeft, yL], [xMid, yM], [xRight, yR]].forEach(pt => {
+        ctx.fillStyle = activeColor;
+        ctx.beginPath(); ctx.arc(pt[0], yToPx(pt[1]), 7, 0, Math.PI * 2); ctx.fill();
+        ctx.fillStyle = '#1A1A1A';
+        ctx.font = "800 12px 'Noto Sans JP', sans-serif";
+        ctx.fillText(pt[1].toFixed(3), pt[0] - 18, yToPx(pt[1]) - 12);
+      });
+
+      ctx.fillStyle = '#FFFFFF';
+      ctx.strokeStyle = activeColor;
+      ctx.lineWidth = 2;
+      drawRoundRect(ctx, padL + 16, padT + 8, 320, 52, 8);
+      ctx.fill(); ctx.stroke();
+      ctx.fillStyle = activeColor;
+      ctx.font = "800 12.5px 'Noto Sans JP', sans-serif";
+      ctx.fillText("現在の手続的公正水準: " + (wSD >= 0 ? "+" : "") + wSD.toFixed(2) + " SD", padL + 28, padT + 28);
+      ctx.fillStyle = '#1A1A1A';
+      ctx.font = "700 12px 'Noto Sans JP', sans-serif";
+      ctx.fillText("条件付き単純傾斜 B = " + (slopeB >= 0 ? "+" : "") + slopeB.toFixed(4) + " (交互作用 B = +0.0826***)", padL + 28, padT + 48);
+    }
+
+    function drawMoment4(ctx, W, H, t) {
+      if (t < 0.52) {
+        const p = easeInOutCubic(subProgress(t, 0.0, 0.45));
+        ctx.fillStyle = '#003E78';
+        ctx.font = "800 13px 'Noto Sans JP', sans-serif";
+        ctx.fillText("図 4-4: DX人材能力9項目の充足度(Q9)と重要度(Q8)のギャップ比較 (N = 2,035)", 18, 24);
+
+        const caps = [
+          { name: "1位: 3. 現場の声を聞き取り課題発見", q8: 4.094, q9: 3.011, gap: 1.083 },
+          { name: "2位: 4. 業務プロセス導入デザイン", q8: 4.067, q9: 3.064, gap: 1.003 },
+          { name: "3位: 6. 要件定義・外注活用能力", q8: 4.041, q9: 3.048, gap: 0.993 },
+          { name: "4位: 7. 現場の抵抗を乗り越える推進力", q8: 4.020, q9: 3.029, gap: 0.991 },
+          { name: "5位: 5. 課題に適したシステム選定力", q8: 4.026, q9: 3.044, gap: 0.982 },
+          { name: "6位: 8. 複数部署・利害調整能力", q8: 3.993, q9: 3.013, gap: 0.980 },
+          { name: "7位: 9. 経営戦略に基づく企画力", q8: 3.987, q9: 3.033, gap: 0.954 },
+          { name: "8位: 2. 経営層への説明・予算獲得力", q8: 3.987, q9: 3.090, gap: 0.897 },
+          { name: "9位: 1. デジタル技術知識・スキル", q8: 4.102, q9: 3.303, gap: 0.799 }
+        ];
+
+        const leftPad = Math.min(245, W * 0.38);
+        const maxBarW = W - leftPad - 95;
+        caps.forEach((c, i) => {
+          const y = 40 + i * 38;
+          ctx.fillStyle = i < 2 ? '#D32F2F' : (i === 8 ? '#4A5568' : '#1A1A1A');
+          ctx.font = (i < 2 ? "800 " : "700 ") + "11.5px 'Noto Sans JP', sans-serif";
+          ctx.fillText(c.name, 16, y + 15);
+
+          const w9 = ((c.q9 - 2.0) / 2.5) * maxBarW;
+          const wGap = (c.gap / 2.5) * maxBarW * p;
+
+          ctx.fillStyle = '#90A4AE';
+          drawRoundRect(ctx, leftPad, y + 3, w9, 16, 3); ctx.fill();
+
+          ctx.fillStyle = i < 2 ? '#D32F2F' : '#005BAC';
+          drawRoundRect(ctx, leftPad + w9, y + 3, Math.max(2, wGap), 16, 3); ctx.fill();
+
+          ctx.fillStyle = '#1A1A1A';
+          ctx.font = "800 11px 'Noto Sans JP', sans-serif";
+          ctx.fillText("GAP +" + (c.gap * p).toFixed(3) + " (Q8:" + c.q8.toFixed(2) + ")", leftPad + w9 + wGap + 6, y + 15);
+        });
+      } else {
+        const p = easeInOutCubic(subProgress(t, 0.52, 0.92));
+        ctx.fillStyle = '#003E78';
+        ctx.font = "800 13.5px 'Noto Sans JP', sans-serif";
+        ctx.fillText("図 4-5: DX総合成果実感 (Q4) に対する重回帰分析 標準化係数 β 比較 (R² = 0.2391)", 18, 26);
+
+        const vars = [
+          { name: "PMO機能 (Q9-2〜9: 8項目平均) ***", beta: 0.4388, pTxt: "t = 15.33, p < 0.001 (支配的規定因)", color: '#005BAC' },
+          { name: "企業規模: 大企業 (基準: SMO) ***", beta: 0.0794, pTxt: "t = 3.92, p < 0.001", color: '#00838F' },
+          { name: "デジタル技術知識 (Q9-1: 単一項目) ns", beta: 0.0473, pTxt: "t = 1.65, p = 0.098 (5%水準非有意)", color: '#90A4AE' },
+          { name: "性別: 女性 (基準: 男性) ns", beta: 0.0114, pTxt: "t = 0.54, p = 0.586", color: '#CBD5E0' },
+          { name: "組織階層: 中間管理職 (基準: 経営層) ns", beta: 0.0013, pTxt: "t = 0.05, p = 0.963", color: '#CBD5E0' },
+          { name: "組織階層: 一般社員 (基準: 経営層) ns", beta: -0.0180, pTxt: "t = -0.57, p = 0.570", color: '#CBD5E0' },
+          { name: "実年齢 (連続変数) ns", beta: -0.0225, pTxt: "t = -1.03, p = 0.304", color: '#CBD5E0' }
+        ];
+
+        const zeroX = Math.min(285, W * 0.42);
+        const maxPosW = W - zeroX - 165;
+
+        ctx.strokeStyle = '#4A5568';
+        ctx.lineWidth = 1.5;
+        ctx.beginPath(); ctx.moveTo(zeroX, 42); ctx.lineTo(zeroX, H - 20); ctx.stroke();
+
+        vars.forEach((v, i) => {
+          const y = 50 + i * 48;
+          ctx.fillStyle = i === 0 ? '#003E78' : '#1A1A1A';
+          ctx.font = (i === 0 ? "800 " : "700 ") + "12px 'Noto Sans JP', sans-serif";
+          ctx.fillText(v.name, 16, y + 18);
+
+          const curBeta = v.beta * p;
+          const bw = (Math.abs(curBeta) / 0.46) * maxPosW;
+          const bx = curBeta >= 0 ? zeroX : zeroX - bw;
+
+          ctx.fillStyle = v.color;
+          drawRoundRect(ctx, bx, y + 4, Math.max(3, bw), 22, 4); ctx.fill();
+
+          ctx.fillStyle = '#1A1A1A';
+          ctx.font = "800 11.5px 'Noto Sans JP', sans-serif";
+          ctx.fillText("β = " + curBeta.toFixed(4) + " (" + v.pTxt + ")", zeroX + (curBeta >= 0 ? bw + 8 : 8), y + 19);
+        });
+      }
+    }
+
+    function drawMoment5(ctx, W, H, t) {
+      const pExtend = easeInOutCubic(subProgress(t, 0.25, 0.85));
+      ctx.fillStyle = '#003E78';
+      ctx.font = "800 13.5px 'Noto Sans JP', sans-serif";
+      ctx.fillText("図 4-6: 企業規模 × 組織階層別 成果実感(Q4)と推進継続意向(Q6)の乖離幅 Δ = Q6 − Q4", 18, 26);
+
+      const rows = [
+        { label: "全社平均 (N = 2,035)", q4: 5.097, q6: 6.351, gap: 1.254, pos: "48.6%", hi: false },
+        { label: "大企業・経営層 (n = 31)", q4: 5.516, q6: 7.194, gap: 1.677, pos: "51.6%", hi: false },
+        { label: "大企業・中間管理職 (n = 295)", q4: 5.519, q6: 6.597, gap: 1.078, pos: "45.1%", hi: false },
+        { label: "大企業・一般社員 (n = 419)", q4: 5.236, q6: 6.403, gap: 1.167, pos: "45.1%", hi: false },
+        { label: "SMO・経営層 (n = 298)", q4: 5.017, q6: 6.356, gap: 1.339, pos: "53.0%", hi: false },
+        { label: "★ SMO・中間管理職 (n = 511)", q4: 4.892, q6: 6.339, gap: 1.446, pos: "54.0% [最高]", hi: true },
+        { label: "SMO・一般社員 (n = 481)", q4: 4.956, q6: 6.110, gap: 1.154, pos: "45.1%", hi: false }
+      ];
+
+      const leftPad = Math.min(220, W * 0.35);
+      const plotW = W - leftPad - 150;
+      const valToX = v => leftPad + ((v - 4.0) / 3.6) * plotW;
+
+      rows.forEach((r, i) => {
+        const y = 46 + i * 48;
+        if (r.hi) {
+          ctx.fillStyle = 'rgba(211, 47, 47, 0.08)';
+          drawRoundRect(ctx, 10, y - 4, W - 20, 40, 6); ctx.fill();
+        }
+
+        ctx.fillStyle = r.hi ? '#D32F2F' : '#1A1A1A';
+        ctx.font = (r.hi ? "800 " : "700 ") + "12px 'Noto Sans JP', sans-serif";
+        ctx.fillText(r.label, 16, y + 18);
+
+        const x4 = valToX(r.q4);
+        const curQ6 = lerp(r.q4, r.q6, pExtend);
+        const x6 = valToX(curQ6);
+
+        ctx.fillStyle = '#005BAC';
+        drawRoundRect(ctx, leftPad, y + 5, Math.max(6, x4 - leftPad), 18, 4); ctx.fill();
+
+        if (pExtend > 0.02) {
+          ctx.fillStyle = r.hi ? '#D32F2F' : '#E65100';
+          drawRoundRect(ctx, x4, y + 5, Math.max(2, x6 - x4), 18, 4); ctx.fill();
+        }
+
+        ctx.fillStyle = '#1A1A1A';
+        ctx.font = "800 11px 'Noto Sans JP', sans-serif";
+        const curGap = (curQ6 - r.q4).toFixed(3);
+        ctx.fillText("Q4:" + r.q4.toFixed(2) + " → Q6:" + curQ6.toFixed(2) + " (Δ+" + curGap + " / " + r.pos + ")", x6 + 8, y + 18);
+      });
+    }
+
+    function drawMoment6(ctx, W, H, t) {
+      if (t < 0.52) {
+        const p = easeInOutCubic(subProgress(t, 0.0, 0.45));
+        ctx.fillStyle = '#003E78';
+        ctx.font = "800 13.5px 'Noto Sans JP', sans-serif";
+        ctx.fillText("図 5-1: 8通りの感度分析モデルにおける交互作用の有意性比較 (N = 2,035)", 18, 26);
+
+        const models = [
+          { name: "モデル7: HC3 不均一分散頑健標準誤差", f: 4.705, pTxt: "p = 0.0092**, η² = 0.0046" },
+          { name: "モデル1: 主分析 (5項目尺度・Type II)", f: 4.619, pTxt: "p = 0.0100*, η² = 0.0045" },
+          { name: "モデル2: Type III 平方和モデル", f: 4.619, pTxt: "p = 0.0100*, η² = 0.0045" },
+          { name: "モデル3: 共変量統制 ANCOVA (年齢・性別・勤続)", f: 4.370, pTxt: "p = 0.0128*, η² = 0.0043" },
+          { name: "モデル4: SC18 全9項目平均尺度", f: 4.320, pTxt: "p = 0.0134*, η² = 0.0042" },
+          { name: "モデル5: 探索的因子分析 第1因子得点", f: 4.237, pTxt: "p = 0.0146*, η² = 0.0042" },
+          { name: "モデル6: 職階定義B (監督職361名を管理職編入)", f: 3.275, pTxt: "p = 0.0380*, η² = 0.0032" }
+        ];
+
+        const leftPad = Math.min(280, W * 0.43);
+        const maxW = W - leftPad - 155;
+        const critX = leftPad + (3.00 / 5.2) * maxW;
+
+        models.forEach((m, i) => {
+          const y = 48 + i * 46;
+          ctx.fillStyle = '#1A1A1A';
+          ctx.font = "700 11.5px 'Noto Sans JP', sans-serif";
+          ctx.fillText(m.name, 16, y + 18);
+
+          const bw = (m.f * p / 5.2) * maxW;
+          ctx.fillStyle = '#005BAC';
+          drawRoundRect(ctx, leftPad, y + 4, Math.max(4, bw), 20, 4); ctx.fill();
+
+          ctx.fillStyle = '#003E78';
+          ctx.font = "800 11px 'Noto Sans JP', sans-serif";
+          ctx.fillText("F = " + (m.f * p).toFixed(3) + " (" + m.pTxt + ")", leftPad + bw + 8, y + 18);
+        });
+
+        ctx.save();
+        ctx.strokeStyle = '#D32F2F';
+        ctx.lineWidth = 2;
+        ctx.setLineDash([5, 4]);
+        ctx.beginPath(); ctx.moveTo(critX, 40); ctx.lineTo(critX, H - 30); ctx.stroke();
+        ctx.fillStyle = '#D32F2F';
+        ctx.font = "800 11px 'Noto Sans JP', sans-serif";
+        ctx.fillText("5%有意臨界値 F = 3.00 (モデル8順序ロジットは LR χ² = 5.45, p = 0.0655†)", critX - 60, H - 12);
+        ctx.restore();
+      } else {
+        const pHolm = easeInOutCubic(subProgress(t, 0.55, 0.92));
+        ctx.fillStyle = '#003E78';
+        ctx.font = "800 13.5px 'Noto Sans JP', sans-serif";
+        ctx.fillText("図 5-2: SC18個別9項目における二元配置交互作用 F値とHolm多重比較補正", 18, 26);
+
+        const items = [
+          { name: "SC18-8 経営層のリーダーシップ発揮 [手続的公正]", f: 5.57, pRaw: "0.0038**", pHolm: "0.0342* (有意維持)", sigHolm: true },
+          { name: "SC18-6 会社の将来のためにDXは必要", f: 3.73, pRaw: "0.0242*", pHolm: "0.1936 (ns)", sigHolm: false },
+          { name: "SC18-1 給料が増える [当事者意識・分配的公正]", f: 3.62, pRaw: "0.0270*", pHolm: "0.1890 (ns)", sigHolm: false },
+          { name: "SC18-7 経営層はDXについてよく学んでいる", f: 2.66, pRaw: "0.0704†", pHolm: "0.4224 (ns)", sigHolm: false },
+          { name: "SC18-3 仕事が楽になる [当事者意識]", f: 2.58, pRaw: "0.0758†", pHolm: "0.3790 (ns)", sigHolm: false },
+          { name: "SC18-2 残業時間が減る [当事者意識]", f: 2.38, pRaw: "0.0928†", pHolm: "0.3712 (ns)", sigHolm: false },
+          { name: "SC18-5 自身の市場価値が高まる [当事者意識]", f: 1.93, pRaw: "0.1450", pHolm: "0.4350 (ns)", sigHolm: false },
+          { name: "SC18-9 経営層は現場の声をよく聞く [手続的公正]", f: 1.52, pRaw: "0.2195", pHolm: "0.4390 (ns)", sigHolm: false },
+          { name: "SC18-4 会社から適正に評価される [分配的公正]", f: 1.46, pRaw: "0.2329", pHolm: "0.4390 (ns)", sigHolm: false }
+        ];
+
+        const leftPad = Math.min(285, W * 0.44);
+        const maxW = W - leftPad - 170;
+
+        items.forEach((it, i) => {
+          const y = 42 + i * 38;
+          ctx.fillStyle = it.sigHolm ? '#D32F2F' : '#2D3748';
+          ctx.font = (it.sigHolm ? "800 " : "700 ") + "11.5px 'Noto Sans JP', sans-serif";
+          ctx.fillText(it.name, 16, y + 15);
+
+          const bw = (it.f / 6.0) * maxW;
+          ctx.fillStyle = it.sigHolm ? '#D32F2F' : (pHolm > 0.5 ? '#CBD5E0' : '#005BAC');
+          drawRoundRect(ctx, leftPad, y + 3, bw, 16, 3); ctx.fill();
+
+          ctx.fillStyle = it.sigHolm ? '#D32F2F' : '#4A5568';
+          ctx.font = "800 11px 'Noto Sans JP', sans-serif";
+          const pLabel = pHolm > 0.4 ? "Holm p=" + it.pHolm : "未補正 p=" + it.pRaw;
+          ctx.fillText("F=" + it.f.toFixed(2) + " (" + pLabel + ")", leftPad + bw + 8, y + 15);
+        });
+      }
+    }
+
+    function onMasterScrub(val) {
+      if (isPlaying) stopPlay();
+      globalProgress = parseFloat(val);
+      updateScrubUI();
+    }
+
+    function onLocalScrub(val) {
+      if (isPlaying) stopPlay();
+      const mIdx = getCurrentMomentIndex();
+      globalProgress = mIdx * 1000 + Math.min(999, parseFloat(val));
+      updateScrubUI();
+    }
+
+    function jumpToMoment(mIdx) {
+      globalProgress = mIdx * 1000;
+      updateScrubUI();
+    }
+
+    function jumpToMomentAndSwitch(mIdx) {
+      switchView('scrub');
+      globalProgress = mIdx * 1000 + 850;
+      updateScrubUI();
+    }
+
+    function stepMoment(delta) {
+      if (isPlaying) stopPlay();
+      const nextM = Math.max(0, Math.min(6, getCurrentMomentIndex() + delta));
+      globalProgress = nextM * 1000;
+      updateScrubUI();
+    }
+
+    function togglePlay() {
+      if (isPlaying) {
+        stopPlay();
+      } else {
+        if (globalProgress >= 6995) globalProgress = 0;
+        isPlaying = true;
+        lastFrameTime = performance.now();
+        document.getElementById('btnPlayPause').textContent = '⏸ 一時停止';
+        requestAnimationFrame(tickPlayback);
+      }
+    }
+
+    function stopPlay() {
+      isPlaying = false;
+      document.getElementById('btnPlayPause').textContent = '▶ 自動再生';
+    }
+
+    function setPlaySpeed(spd) {
+      playSpeed = parseFloat(spd);
+    }
+
+    function tickPlayback(now) {
+      if (!isPlaying) return;
+      const dt = (now - lastFrameTime) / 1000;
+      lastFrameTime = now;
+      globalProgress += dt * 200 * playSpeed;
+      if (globalProgress >= 7000) {
+        globalProgress = 7000;
+        updateScrubUI();
+        stopPlay();
+        return;
+      }
+      updateScrubUI();
+      requestAnimationFrame(tickPlayback);
+    }
+
+    let simScale = 'S';
+    let simHier = 1;
+
+    const CELL_STATS = {
+      'L0': { label: '大企業 × 役員・経営層 (n=31)', m: 3.852, ci: '[3.642, 4.061]', gap: 1.677, pos: '51.6%' },
+      'L1': { label: '大企業 × 中間管理職 (n=295)', m: 3.400, ci: '[3.328, 3.472]', gap: 1.078, pos: '45.1%' },
+      'L2': { label: '大企業 × 一般社員 (n=419)', m: 3.227, ci: '[3.165, 3.288]', gap: 1.167, pos: '45.1%' },
+      'S0': { label: 'SMO × 役員・経営層 (n=298)', m: 3.519, ci: '[3.444, 3.595]', gap: 1.339, pos: '53.0%' },
+      'S1': { label: 'SMO × 中間管理職 (n=511)', m: 3.306, ci: '[3.255, 3.358]', gap: 1.446, pos: '54.0% (最高)' },
+      'S2': { label: 'SMO × 一般社員 (n=481)', m: 3.243, ci: '[3.189, 3.296]', gap: 1.154, pos: '45.1%' }
+    };
+
+    function setSimCell(scale, hier) {
+      simScale = scale;
+      simHier = hier;
+      ['L0','L1','L2','S0','S1','S2'].forEach(k => {
+        const el = document.getElementById('simCell-' + k);
+        if (el) el.classList.toggle('active', k === scale + hier);
+      });
+      updateSimulator();
+    }
+
+    function updateSimulator() {
+      const key = simScale + simHier;
+      const cell = CELL_STATS[key];
+      document.getElementById('simCellLabel').textContent = cell.label;
+
+      const dist = parseFloat(document.getElementById('simDistSlider').value) / 100;
+      const proc = parseFloat(document.getElementById('simProcSlider').value) / 100;
+      const fric = parseFloat(document.getElementById('simFricSlider').value) / 100;
+      const pmo  = parseFloat(document.getElementById('simPmoSlider').value) / 100;
+      const tech = parseFloat(document.getElementById('simTechSlider').value) / 100;
+
+      document.getElementById('simDistVal').textContent = dist.toFixed(2) + " 点";
+      document.getElementById('simProcVal').textContent = proc.toFixed(2) + " 点";
+      document.getElementById('simFricVal').textContent = fric.toFixed(2) + " 点";
+      document.getElementById('simPmoVal').textContent  = "PMO " + pmo.toFixed(2) + " / 技術 " + tech.toFixed(2);
+
+      document.getElementById('simOutH1').textContent = cell.m.toFixed(3) + " " + cell.ci;
+      document.getElementById('simBarH1').style.width = ((cell.m / 5.0) * 100).toFixed(1) + '%';
+
+      const lowDist = 5.0 - dist;
+      const bScale = simScale === 'L' ? -0.129 : 0;
+      const bHier = simHier === 1 ? 0.625 : (simHier === 2 ? 1.007 : 0);
+      const logit = -3.287 + bScale + bHier + 1.373 * lowDist;
+      const probC3 = 1 / (1 + Math.exp(-logit));
+      const pctC3 = (probC3 * 100).toFixed(1);
+      document.getElementById('simOutH2').textContent = pctC3 + "% (OR = 3.951 / 感度分析 OR = 2.409)";
+      document.getElementById('simBarH2').style.width = pctC3 + '%';
+
+      const fricC = fric - 3.081;
+      const procC = proc - 3.095;
+      const condSlope = -0.0089 + 0.0826 * procC;
+      const yHatH3 = Math.max(1.0, Math.min(5.0, 3.341 - 0.0089 * fricC + 0.5649 * procC + 0.0826 * fricC * procC));
+      document.getElementById('simOutH3').textContent = yHatH3.toFixed(3) + " 点 (条件付き傾き B = " + (condSlope >= 0 ? "+" : "") + condSlope.toFixed(4) + ")";
+      document.getElementById('simBarH3').style.width = ((yHatH3 / 5.0) * 100).toFixed(1) + '%';
+
+      const bLargeQ4 = simScale === 'L' ? 0.2695 : 0;
+      const bHierQ4 = simHier === 1 ? 0.0045 : (simHier === 2 ? -0.0591 : 0);
+      const q4Pred = Math.max(0, Math.min(10, 2.2590 - 0.0040 * 53.4 + bLargeQ4 + bHierQ4 + 0.0819 * tech + 0.9255 * pmo));
+      document.getElementById('simOutH4').textContent = q4Pred.toFixed(2) + " 点 / 10点 (PMO β = 0.439***)";
+      document.getElementById('simBarH4').style.width = (q4Pred * 10).toFixed(1) + '%';
+
+      document.getElementById('simOutH5').textContent = "+" + cell.gap.toFixed(3) + " 点 (正比率 " + cell.pos + ")";
+      document.getElementById('simBarH5').style.width = Math.min(100, (cell.gap / 2.0) * 100).toFixed(1) + '%';
+
+      document.getElementById('simInterpretationBox').innerHTML =
+        '<strong>シミュレーション診断：</strong>選択中の「' + cell.label + '」において、分配的公正が <strong>' + dist.toFixed(2) + '点</strong> のとき、低当事者意識・高摩擦群（クラスタ3）への所属予測確率は <strong>' + pctC3 + '%</strong> です。また、PMO機能充足度（<strong>' + pmo.toFixed(2) + '点</strong>）はデジタル技術知識（<strong>' + tech.toFixed(2) + '点</strong>）の約9.3倍の標準化効果（β = 0.439 vs 0.047）でDX成果実感（予測値 <strong>' + q4Pred.toFixed(2) + '点</strong>）と関連しています。';
+    }
+
+    function switchView(viewId) {
+      document.querySelectorAll('.view-panel').forEach(p => p.classList.remove('active'));
+      document.querySelectorAll('.mode-btn').forEach(b => b.classList.remove('active'));
+      const target = document.getElementById('view-' + viewId);
+      if (target) target.classList.add('active');
+      const btn = document.getElementById('tabBtn-' + viewId);
+      if (btn) btn.classList.add('active');
+      if (viewId === 'scrub') {
+        setTimeout(() => updateScrubUI(), 30);
+      }
+    }
+
+    function renderLitList() {
+      const q = (document.getElementById('litSearchBox')?.value || '').toLowerCase();
+      const container = document.getElementById('litGridContainer');
+      if (!container) return;
+      container.innerHTML = '';
+      const filtered = LIT_LIST.filter(item =>
+        !q ||
+        item.author.toLowerCase().includes(q) ||
+        item.title.toLowerCase().includes(q) ||
+        item.hypo.toLowerCase().includes(q) ||
+        item.role.toLowerCase().includes(q)
+      );
+      filtered.forEach(item => {
+        const div = document.createElement('div');
+        div.className = 'lit-card';
+        div.innerHTML =
+          '<div>' +
+            '<div style="display:flex; justify-content:space-between; align-items:center; gap:6px; margin-bottom:4px;">' +
+              '<span class="lit-author">' + item.author + '</span>' +
+              '<span style="font-size:11px; font-weight:800; background:#E8F2FC; color:#005BAC; padding:2px 6px; border-radius:4px;">' + item.hypo + '</span>' +
+            '</div>' +
+            '<div style="font-size:13px; font-weight:700; color:#2D3748; margin-bottom:4px;">' + item.title + '</div>' +
+            '<div style="font-size:12px; font-style:italic; color:#718096; margin-bottom:8px;">' + item.journal + '</div>' +
+            '<div class="lit-role">' + item.role + '</div>' +
+          '</div>' +
+          '<div style="text-align:right; font-size:12px;">' +
+            (item.url ? '<a href="' + item.url + '" target="_blank" rel="noopener" style="color:#005BAC; font-weight:800; text-decoration:none;">🔗 DOI / 公式リンク</a>' : '<span style="color:#A0AEC0;">書籍 / 公的統計白書</span>') +
+          '</div>';
+        container.appendChild(div);
+      });
+    }
+
+    function toggleFullscreen() {
+      if (!document.fullscreenElement) {
+        document.documentElement.requestFullscreen().catch(() => {});
+      } else {
+        document.exitFullscreen().catch(() => {});
+      }
+    }
+
+    window.addEventListener('keydown', e => {
+      if (e.target && (e.target.tagName === 'INPUT' || e.target.tagName === 'SELECT')) return;
+      if (e.code === 'Space') {
+        e.preventDefault();
+        togglePlay();
+      } else if (e.code === 'ArrowRight') {
+        e.preventDefault();
+        if (e.shiftKey) stepMoment(1);
+        else {
+          if (isPlaying) stopPlay();
+          globalProgress = Math.min(7000, globalProgress + 140);
+          updateScrubUI();
+        }
+      } else if (e.code === 'ArrowLeft') {
+        e.preventDefault();
+        if (e.shiftKey) stepMoment(-1);
+        else {
+          if (isPlaying) stopPlay();
+          globalProgress = Math.max(0, globalProgress - 140);
+          updateScrubUI();
+        }
+      } else if (e.key === 'f' || e.key === 'F') {
+        e.preventDefault();
+        toggleFullscreen();
+      } else if (e.key >= '1' && e.key <= '7') {
+        jumpToMoment(parseInt(e.key, 10) - 1);
+      }
+    });
+
+    window.addEventListener('resize', () => {
+      updateScrubUI();
+    });
+
+    window.addEventListener('DOMContentLoaded', () => {
+      updateScrubUI();
+      updateSimulator();
+      renderLitList();
+    });
+  </script>
+</body>
+</html>

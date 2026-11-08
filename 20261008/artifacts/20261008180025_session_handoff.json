@@ -1,0 +1,59 @@
+{
+  "timestamp": "20261008180025",
+  "project": "IDM-DX Deterministic Micro-Data Analysis",
+  "dataset": "analysis_data_n2035_final.parquet",
+  "sample_size": 2035,
+  "status": "Session paused cleanly. Ready for fast resumption.",
+  "core_findings": {
+    "H1_Interaction": {
+      "f_int": 4.619,
+      "p_value": 0.01,
+      "eta_p2": 0.0045,
+      "finding": "SMO middle management sharply drops and isolates. General staff converges across firm sizes."
+    },
+    "H2_Distributive_Cluster": {
+      "alienated_pct": 45.8,
+      "odds_ratio": 3.95,
+      "p_value": 3.56e-45,
+      "finding": "Lack of incentive links increases odds of psychological alienation by 4x."
+    },
+    "H3_Procedural_Moderation": {
+      "interaction_b": 0.0826,
+      "p_value": 0.00025,
+      "simple_slope_low": -0.0692,
+      "simple_slope_high": 0.0515,
+      "finding": "Emotional balancing (Huy 2002) confirmed: high justice turns friction into commitment."
+    },
+    "H4_Capability_PMO": {
+      "max_gap": "Field Listening & Problem Discovery (+1.083)",
+      "tech_beta": 0.0473,
+      "tech_p": 0.0982,
+      "pmo_beta": 0.4388,
+      "pmo_p": 2.9e-50,
+      "finding": "Tech alone is non-significant; PMO transformation capabilities dominate DX outcomes."
+    },
+    "H5_Cognitive_Dissonance": {
+      "overall_gap": 1.254,
+      "smo_manager_gap": 1.446,
+      "finding": "SMO managers suffer maximum unrewarded promotion urgency."
+    },
+    "Robustness_Master": {
+      "models_tested": 8,
+      "all_significant": true,
+      "sc18_8_leadership_f": 5.57,
+      "sc18_8_leadership_p": 0.0038
+    }
+  },
+  "key_files": {
+    "direction_draft_md": "G:\\マイドライブ\\antigravity\\IDM\\20261008\\reports\\20261008175453_論文執筆方針確認用ドラフト_指導教員相談版.md",
+    "direction_draft_html": "G:\\マイドライブ\\antigravity\\IDM\\20261008\\reports\\20261008175453_論文執筆方針確認用ドラフト_指導教員相談版.html",
+    "full_ch4_ch5_md": "G:\\マイドライブ\\antigravity\\IDM\\20261008\\reports\\20261008_学術論文ドラフト_第4章_第5章_完全統合版.md",
+    "slides_html": "G:\\マイドライブ\\antigravity\\IDM\\20261008\\発表資料作成\\index.html",
+    "robustness_json": "G:\\マイドライブ\\antigravity\\IDM\\20261008\\artifacts\\robustness_checks_master.json"
+  },
+  "next_steps": [
+    "Consult with academic advisor using direction draft (20261008175453)",
+    "Refine draft with new timestamp based on feedback",
+    "Draft remaining chapters (Ch1 Introduction, Ch2 Theory, Ch3 Methodology)"
+  ]
+}

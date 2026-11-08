@@ -1,0 +1,2896 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>企業規模と組織階層がDX推進意識および組織摩擦認知に及ぼす影響 | 学会発表スライド</title>
+  <style>
+    /* ==========================================================================
+       1. デジタル庁デザインシステム（DADS）準拠 カラーパレット & プロジェクター設定
+       ========================================================================== */
+    :root {
+      /* DADS プライマリカラー */
+      --dads-primary-dark: #002B66;    /* ネイビー・ダーク */
+      --dads-primary: #004EA2;         /* デジタル庁ブルー（メイン） */
+      --dads-primary-hover: #003875;
+      --dads-primary-tint: #E8F1FA;    /* ペールブルー（ハイライト背景） */
+      --dads-accent-cyan: #0077A3;
+      
+      /* DADS テキスト & ニュートラル（プロジェクター高視認性） */
+      --dads-text-main: #111827;       /* 最深漆黒（投影時でも白飛びしない） */
+      --dads-text-sub: #374151;        /* 濃いグレー */
+      --dads-text-muted: #4B5563;      /* 注記テキスト（視認性確保のため濃淡強化） */
+      --dads-text-white: #FFFFFF;
+      
+      /* 背景 & ボーダー */
+      --dads-bg-app: #0B1120;          /* プレゼン外枠ダーク */
+      --dads-bg-slide: #FFFFFF;        /* スライド用紙（純白） */
+      --dads-bg-alt: #F1F5F9;          /* カード・パネル背景 */
+      --dads-border-light: #CBD5E1;    /* 視認性の高い明確な境界線 */
+      --dads-border-main: #94A3B8;
+      --dads-border-focus: #004EA2;
+      
+      /* DADS セマンティック */
+      --dads-color-large: #0F3260;     /* 大企業：深紺 */
+      --dads-color-smo: #B91C1C;       /* 中小企業：明瞭な深紅 */
+      --dads-success: #065F46;
+      --dads-warning: #9A3412;
+      --dads-danger: #B91C1C;
+      
+      /* フォント & 16:9 アスペクト比ベースサイズ */
+      --font-base: "BIZ UDPGothic", "Meiryo", "Yu Gothic", "Segoe UI", sans-serif;
+      --font-mono: "Consolas", "Courier New", monospace;
+      --slide-width: 1333px;
+      --slide-height: 750px;           /* 16:9 アスペクト比 */
+
+      /* プロジェクター用スケーリング倍率 */
+      --font-scale: 1.0;
+    }
+
+    /* 文字拡大クラス */
+    body.font-large {
+      --font-scale: 1.12;
+    }
+    body.font-xlarge {
+      --font-scale: 1.22;
+    }
+
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    html, body {
+      width: 100%;
+      height: 100%;
+      background-color: var(--dads-bg-app);
+      color: var(--dads-text-main);
+      font-family: var(--font-base);
+      line-height: 1.55;
+      overflow: hidden;
+      user-select: none;
+    }
+
+    /* アプリ全体レイアウト */
+    #app-container {
+      width: 100%;
+      height: 100%;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      position: relative;
+    }
+
+    /* ==========================================================================
+       2. トップコントロールバー & プレゼンタイマー（12分管理）
+       ========================================================================== */
+    #top-bar {
+      width: 100%;
+      max-width: var(--slide-width);
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 8px 16px;
+      background: #1E293B;
+      color: #F8FAFC;
+      border-radius: 8px 8px 0 0;
+      font-size: 13px;
+      box-shadow: 0 4px 12px rgba(0,0,0,0.25);
+      z-index: 100;
+      flex-shrink: 0;
+      transition: all 0.25s ease;
+    }
+
+    .bar-left, .bar-center, .bar-right {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+    }
+
+    .tag-conf {
+      background: var(--dads-primary);
+      color: #fff;
+      padding: 3px 8px;
+      border-radius: 4px;
+      font-weight: 700;
+      font-size: 11.5px;
+      letter-spacing: 0.05em;
+    }
+
+    /* タイマー表示 */
+    .timer-container {
+      display: flex;
+      align-items: center;
+      background: #0F172A;
+      padding: 4px 12px;
+      border-radius: 20px;
+      border: 1px solid #334155;
+      font-family: var(--font-mono);
+      font-size: 13.5px;
+      gap: 8px;
+      cursor: pointer;
+    }
+
+    .timer-dot {
+      width: 8px;
+      height: 8px;
+      border-radius: 50%;
+      background: #10B981;
+      animation: pulse 1.5s infinite;
+    }
+
+    @keyframes pulse {
+      0%, 100% { opacity: 1; transform: scale(1); }
+      50% { opacity: 0.4; transform: scale(0.85); }
+    }
+
+    .btn-ctrl {
+      background: #334155;
+      color: #fff;
+      border: 1px solid #475569;
+      padding: 5px 10px;
+      border-radius: 4px;
+      cursor: pointer;
+      font-size: 12px;
+      font-weight: 600;
+      transition: all 0.15s ease;
+      display: inline-flex;
+      align-items: center;
+      gap: 4px;
+    }
+
+    .btn-ctrl:hover {
+      background: var(--dads-primary);
+      border-color: var(--dads-primary);
+    }
+
+    .btn-ctrl.active {
+      background: var(--dads-primary);
+      border-color: #60A5FA;
+    }
+
+    /* ==========================================================================
+       3. ステージコンテナ & 全画面自動スケーリングエンジン
+       ========================================================================== */
+    #stage-container {
+      flex: 1;
+      width: 100%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      position: relative;
+      overflow: hidden;
+      padding: 0;
+    }
+
+    #slide-viewport {
+      width: var(--slide-width);
+      height: var(--slide-height);
+      background: var(--dads-bg-slide);
+      position: absolute;
+      box-shadow: 0 10px 40px rgba(0,0,0,0.6);
+      border-radius: 0 0 8px 8px;
+      overflow: hidden;
+      transform-origin: center center;
+      transition: transform 0.08s ease-out;
+    }
+
+    /* 全画面モード時の挙動（画面いっぱいにスケーリング） */
+    body.is-fullscreen {
+      background-color: #000000;
+    }
+
+    body.is-fullscreen #top-bar {
+      position: fixed;
+      top: 0;
+      left: 50%;
+      transform: translateX(-50%) translateY(-85%);
+      opacity: 0.15;
+      z-index: 9999;
+      border-radius: 0 0 10px 10px;
+      box-shadow: 0 4px 20px rgba(0,0,0,0.8);
+      max-width: 900px;
+    }
+
+    body.is-fullscreen #top-bar:hover {
+      transform: translateX(-50%) translateY(0);
+      opacity: 1;
+    }
+
+    body.is-fullscreen #slide-viewport {
+      border-radius: 0;
+      box-shadow: none;
+    }
+
+    /* 全画面時の浮動ナビゲーションヒント */
+    #fs-nav-hint {
+      display: none;
+      position: fixed;
+      bottom: 16px;
+      right: 20px;
+      background: rgba(15, 23, 42, 0.75);
+      color: #E2E8F0;
+      padding: 6px 14px;
+      border-radius: 20px;
+      font-size: 12px;
+      font-weight: 700;
+      z-index: 500;
+      pointer-events: none;
+      backdrop-filter: blur(4px);
+      border: 1px solid rgba(255,255,255,0.15);
+      transition: opacity 0.3s ease;
+    }
+
+    body.is-fullscreen #fs-nav-hint {
+      display: block;
+    }
+
+    /* ==========================================================================
+       4. スライド各シート（16:9 レイアウト）
+       ========================================================================== */
+    .slide {
+      width: 100%;
+      height: 100%;
+      position: absolute;
+      top: 0;
+      left: 0;
+      display: none;
+      flex-direction: column;
+      padding: 26px 40px 18px 40px;
+      background: #FFFFFF;
+      overflow: hidden;
+    }
+
+    .slide.active {
+      display: flex;
+    }
+
+    /* スライド共通ヘッダー（コンサルティング様式・拡大） */
+    .slide-header {
+      border-bottom: 2.5px solid var(--dads-border-light);
+      padding-bottom: 10px;
+      margin-bottom: 14px;
+      display: flex;
+      justify-content: space-between;
+      align-items: flex-start;
+    }
+
+    .header-main {
+      flex: 1;
+    }
+
+    .slide-tracker {
+      font-size: calc(13px * var(--font-scale));
+      font-weight: 800;
+      color: var(--dads-primary);
+      text-transform: uppercase;
+      letter-spacing: 0.08em;
+      margin-bottom: 3px;
+      display: flex;
+      align-items: center;
+      gap: 6px;
+    }
+
+    .slide-tracker::before {
+      content: "";
+      display: inline-block;
+      width: 5px;
+      height: 14px;
+      background: var(--dads-primary);
+      border-radius: 2px;
+    }
+
+    .slide-action-title {
+      font-size: calc(24px * var(--font-scale));
+      font-weight: 900;
+      color: var(--dads-primary-dark);
+      letter-spacing: -0.01em;
+      line-height: 1.3;
+      margin-bottom: 4px;
+    }
+
+    .slide-lead-bar {
+      font-size: calc(15px * var(--font-scale));
+      color: var(--dads-text-sub);
+      background: var(--dads-bg-alt);
+      padding: 5px 12px;
+      border-left: 4px solid var(--dads-primary);
+      border-radius: 0 4px 4px 0;
+      font-weight: 600;
+      margin-top: 3px;
+    }
+
+    .slide-timing-badge {
+      font-size: 12px;
+      font-family: var(--font-mono);
+      background: #F1F5F9;
+      color: #334155;
+      padding: 5px 10px;
+      border-radius: 4px;
+      border: 1px solid #CBD5E1;
+      font-weight: 700;
+      white-space: nowrap;
+      margin-left: 14px;
+    }
+
+    /* スライドボディ（コンテンツ領域） */
+    .slide-body {
+      flex: 1;
+      display: flex;
+      gap: 20px;
+      overflow: hidden;
+    }
+
+    /* 左右2カラムレイアウト */
+    .col-half {
+      flex: 1;
+      display: flex;
+      flex-direction: column;
+      gap: 12px;
+    }
+
+    .col-40 {
+      flex: 0 0 40%;
+      display: flex;
+      flex-direction: column;
+      gap: 12px;
+    }
+
+    .col-60 {
+      flex: 0 0 58%;
+      display: flex;
+      flex-direction: column;
+      gap: 10px;
+      min-width: 0;
+    }
+
+    .col-40 {
+      flex: 1;
+      display: flex;
+      flex-direction: column;
+      gap: 10px;
+      min-width: 0;
+    }
+
+    /* スライドフッター */
+    .slide-footer {
+      border-top: 1.5px solid var(--dads-border-light);
+      padding-top: 6px;
+      margin-top: auto;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      font-size: calc(12px * var(--font-scale));
+      color: var(--dads-text-muted);
+    }
+
+    .footnote {
+      flex: 1;
+      white-space: nowrap;
+      overflow: hidden;
+      text-overflow: ellipsis;
+      font-weight: 500;
+    }
+
+    .slide-page-num {
+      font-weight: 800;
+      color: var(--dads-primary);
+      font-size: 13.5px;
+      font-family: var(--font-mono);
+    }
+
+    /* ==========================================================================
+       5. 一流ファーム型コンポーネント（プロジェクター視認性強化）
+       ========================================================================== */
+    .card-panel {
+      background: #FFFFFF;
+      border: 1.5px solid var(--dads-border-light);
+      border-radius: 8px;
+      padding: 12px 16px;
+      box-shadow: 0 2px 5px rgba(0,0,0,0.03);
+      display: flex;
+      flex-direction: column;
+      gap: 6px;
+    }
+
+    .card-panel.highlight {
+      background: var(--dads-primary-tint);
+      border-color: #93C5FD;
+    }
+
+    .card-panel.danger-tint {
+      background: #FEF2F2;
+      border-color: #FCA5A5;
+    }
+
+    .card-title {
+      font-size: calc(16.5px * var(--font-scale));
+      font-weight: 800;
+      color: var(--dads-primary-dark);
+      display: flex;
+      align-items: center;
+      gap: 6px;
+      border-bottom: 1.5px dashed var(--dads-border-main);
+      padding-bottom: 4px;
+      margin-bottom: 2px;
+    }
+
+    /* ビッグメトリクス */
+    .metrics-row {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 10px;
+    }
+
+    .metric-box {
+      background: var(--dads-bg-alt);
+      border: 1.5px solid var(--dads-border-light);
+      border-radius: 6px;
+      padding: 8px 10px;
+      text-align: center;
+    }
+
+    .metric-value {
+      font-size: calc(30px * var(--font-scale));
+      font-weight: 900;
+      color: var(--dads-primary);
+      font-family: var(--font-mono);
+      line-height: 1.1;
+    }
+
+    .metric-label {
+      font-size: calc(13px * var(--font-scale));
+      font-weight: 800;
+      color: var(--dads-text-sub);
+      margin-top: 3px;
+    }
+
+    .metric-sub {
+      font-size: calc(11px * var(--font-scale));
+      color: var(--dads-text-muted);
+      font-weight: 600;
+    }
+
+    /* 標準テキスト段落（プロジェクター対応） */
+    .body-p {
+      font-size: calc(15.5px * var(--font-scale));
+      line-height: 1.55;
+      color: var(--dads-text-main);
+      font-weight: 500;
+    }
+
+    /* 箇条書きリスト（コンサルティング様式・拡大） */
+    .bullet-list {
+      list-style: none;
+      display: flex;
+      flex-direction: column;
+      gap: 7px;
+      font-size: calc(15px * var(--font-scale));
+      color: var(--dads-text-main);
+    }
+
+    .bullet-list li {
+      position: relative;
+      padding-left: 20px;
+      line-height: 1.48;
+      font-weight: 500;
+    }
+
+    .bullet-list li::before {
+      content: "■";
+      position: absolute;
+      left: 0;
+      top: 2px;
+      font-size: 11px;
+      color: var(--dads-primary);
+    }
+
+    .bullet-list.danger li::before {
+      color: var(--dads-danger);
+    }
+
+    .bullet-list strong {
+      color: var(--dads-primary-dark);
+      font-weight: 800;
+    }
+
+    /* データテーブル（プロジェクター視認性基準） */
+    .data-table {
+      width: 100%;
+      border-collapse: collapse;
+      font-size: calc(14px * var(--font-scale));
+      margin-top: 2px;
+    }
+
+    .data-table th, .data-table td {
+      padding: 6px 10px;
+      border: 1.5px solid var(--dads-border-light);
+      text-align: left;
+    }
+
+    .data-table th {
+      background: #E2E8F0;
+      color: var(--dads-primary-dark);
+      font-weight: 800;
+      font-size: calc(13.5px * var(--font-scale));
+    }
+
+    .data-table tr:nth-child(even) {
+      background: #F8FAFC;
+    }
+
+    .data-table .num {
+      text-align: right;
+      font-family: var(--font-mono);
+      font-weight: 600;
+    }
+
+    .data-table .highlight-cell {
+      background: #FEF3C7;
+      font-weight: 800;
+    }
+
+    /* 画像コンテナ */
+    .img-box {
+      width: 100%;
+      height: 100%;
+      max-height: 480px;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      background: #FAFAFA;
+      border: 1.5px solid var(--dads-border-light);
+      border-radius: 6px;
+      overflow: hidden;
+      padding: 4px;
+    }
+
+    .img-box img {
+      width: 100%;
+      height: 100%;
+      object-fit: contain;
+    }
+
+    /* 比較ブロック */
+    .versus-container {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 14px;
+      height: 100%;
+    }
+
+    .versus-card {
+      border-radius: 8px;
+      padding: 14px;
+      display: flex;
+      flex-direction: column;
+      gap: 8px;
+    }
+
+    .versus-card.large {
+      background: #F0F5FA;
+      border: 2px solid var(--dads-color-large);
+    }
+
+    .versus-card.smo {
+      background: #FDF4F4;
+      border: 2px solid var(--dads-color-smo);
+    }
+
+    /* ==========================================================================
+       6. タイトルスライド（表紙専用デザイン）
+       ========================================================================== */
+    .slide-title-wrapper {
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      height: 100%;
+      padding: 20px 30px;
+      position: relative;
+    }
+
+    .title-accent-bar {
+      width: 70px;
+      height: 7px;
+      background: var(--dads-primary);
+      margin-bottom: 16px;
+      border-radius: 4px;
+    }
+
+    .conf-name {
+      font-size: calc(15px * var(--font-scale));
+      font-weight: 800;
+      color: var(--dads-primary);
+      letter-spacing: 0.1em;
+      margin-bottom: 10px;
+      text-transform: uppercase;
+    }
+
+    .main-title {
+      font-size: calc(34px * var(--font-scale));
+      font-weight: 900;
+      color: var(--dads-primary-dark);
+      line-height: 1.28;
+      margin-bottom: 14px;
+      letter-spacing: -0.02em;
+    }
+
+    .main-subtitle {
+      font-size: calc(18px * var(--font-scale));
+      font-weight: 700;
+      color: var(--dads-text-sub);
+      line-height: 1.45;
+      margin-bottom: 28px;
+      border-left: 5px solid var(--dads-color-smo);
+      padding-left: 14px;
+    }
+
+    .title-meta-grid {
+      display: grid;
+      grid-template-columns: 2fr 1fr;
+      gap: 20px;
+      border-top: 2.5px solid var(--dads-border-light);
+      padding-top: 18px;
+      font-size: calc(15px * var(--font-scale));
+    }
+
+    .meta-item strong {
+      color: var(--dads-primary-dark);
+      font-weight: 800;
+    }
+
+    /* ==========================================================================
+       7. 発表者ノート（プレゼンターペイン）
+       ========================================================================== */
+    #notes-drawer {
+      width: 100%;
+      max-width: var(--slide-width);
+      background: #0F172A;
+      color: #E2E8F0;
+      border-top: 2px solid #334155;
+      padding: 12px 18px;
+      font-size: 13.5px;
+      line-height: 1.6;
+      display: none;
+      border-radius: 0 0 8px 8px;
+      max-height: 170px;
+      overflow-y: auto;
+    }
+
+    #notes-drawer.open {
+      display: block;
+    }
+
+    .notes-header {
+      font-size: 12px;
+      font-weight: 800;
+      color: #38BDF8;
+      text-transform: uppercase;
+      letter-spacing: 0.08em;
+      margin-bottom: 4px;
+      display: flex;
+      justify-content: space-between;
+    }
+
+    /* サムネイル一覧モーダル */
+    #overview-modal {
+      display: none;
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100vw;
+      height: 100vh;
+      background: rgba(15, 23, 42, 0.95);
+      z-index: 1000;
+      padding: 40px;
+      overflow-y: auto;
+    }
+
+    #overview-modal.open {
+      display: block;
+    }
+
+    .grid-container {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 18px;
+      max-width: 1400px;
+      margin: 0 auto;
+    }
+
+    .thumb-item {
+      background: #FFFFFF;
+      border-radius: 6px;
+      padding: 14px;
+      cursor: pointer;
+      border: 2px solid transparent;
+      transition: all 0.2s ease;
+      color: #1A1A1A;
+    }
+
+    .thumb-item:hover, .thumb-item.current {
+      border-color: #38BDF8;
+      transform: translateY(-2px);
+    }
+
+    .thumb-num {
+      font-size: 12px;
+      font-weight: 800;
+      color: var(--dads-primary);
+    }
+
+    .thumb-title {
+      font-size: 13px;
+      font-weight: 700;
+      margin-top: 4px;
+      line-height: 1.35;
+    }
+
+    /* 印刷スタイル */
+    @media print {
+      body {
+        background: #fff;
+      }
+      #top-bar, #notes-drawer, #fs-nav-hint {
+        display: none !important;
+      }
+      #stage-container {
+        display: block !important;
+        height: auto !important;
+      }
+      #slide-viewport {
+        box-shadow: none;
+        max-width: none;
+        height: auto;
+        transform: none !important;
+        position: relative !important;
+      }
+      .slide {
+        display: flex !important;
+        position: relative !important;
+        page-break-after: always;
+        height: 100vh;
+      }
+    }
+  
+    /* ==========================================================================
+       Chart.js インタラクティブチャート専用カードスタイル
+       ========================================================================== */
+    .chart-card-wrapper {
+      flex: 1;
+      height: 100%;
+      min-height: 470px;
+      max-height: 495px;
+      background: #FFFFFF;
+      border: 1.5px solid var(--dads-border-light);
+      border-radius: 8px;
+      padding: 10px 14px 12px 14px;
+      display: flex;
+      flex-direction: column;
+      box-shadow: 0 2px 6px rgba(0, 0, 0, 0.04);
+      position: relative;
+    }
+
+    .chart-header-row {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-bottom: 6px;
+      padding-bottom: 6px;
+      border-bottom: 1.5px solid #F1F5F9;
+      flex-shrink: 0;
+    }
+
+    .chart-title-text {
+      font-size: calc(14px * var(--font-scale));
+      font-weight: 800;
+      color: var(--dads-primary-dark);
+      display: flex;
+      align-items: center;
+      gap: 6px;
+    }
+
+    .chart-badge {
+      font-size: calc(11px * var(--font-scale));
+      font-weight: 700;
+      padding: 2px 7px;
+      border-radius: 4px;
+      background: #E8F1FA;
+      color: #004EA2;
+      border: 1px solid #BFDBFE;
+    }
+
+    .chart-btn-group {
+      display: flex;
+      gap: 4px;
+    }
+
+    .chart-tab-btn {
+      padding: 3px 8px;
+      font-size: calc(11px * var(--font-scale));
+      font-weight: 700;
+      font-family: var(--font-base);
+      border: 1px solid var(--dads-border-main);
+      background: #F8FAFC;
+      color: var(--dads-text-sub);
+      border-radius: 4px;
+      cursor: pointer;
+      white-space: nowrap;
+      transition: all 0.15s ease;
+    }
+
+    .chart-tab-btn:hover {
+      background: var(--dads-primary-tint);
+      color: var(--dads-primary);
+      border-color: var(--dads-primary);
+    }
+
+    .chart-tab-btn.active {
+      background: var(--dads-primary);
+      color: #FFFFFF;
+      border-color: var(--dads-primary-dark);
+    }
+
+    .chart-canvas-area {
+      position: relative;
+      flex: 1;
+      width: 100%;
+      height: 100%;
+      min-height: 400px;
+    }
+
+</style>
+  <!-- Chart.js v4.4.4 (Offline-ready with CDN fallback) -->
+  <script src="assets/chart.umd.min.js"></script>
+  <script>
+    if (typeof Chart === 'undefined') {
+      document.write('<script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.4/dist/chart.umd.min.js"><\/script>');
+    }
+  </script>
+
+</head>
+<body>
+
+  <div id="app-container">
+
+    <!-- ==========================================================================
+         コントロールバー（発表用タイマー・文字サイズ変更・ナビゲーション）
+         ========================================================================== -->
+    <div id="top-bar">
+      <div class="bar-left">
+        <span class="tag-conf">学会口頭発表 (12分)</span>
+        <span style="font-weight: 700; font-size: 13px; color: #CBD5E1;">IDM デジタル変革実証研究</span>
+      </div>
+
+      <div class="bar-center">
+        <!-- 12分タイマー -->
+        <div class="timer-container" title="クリックでタイマー一時停止/再開">
+          <div class="timer-dot" id="timer-dot"></div>
+          <span>経過: </span>
+          <strong id="timer-display" style="color: #38BDF8; font-size: 15px;">00:00</strong>
+          <span style="color: #64748B;">/ 12:00</span>
+        </div>
+        <button class="btn-ctrl" onclick="resetTimer()" title="タイマーをリセット">↺</button>
+
+        <!-- プロジェクター文字サイズ変更ボタン -->
+        <div style="display: flex; gap: 4px; margin-left: 8px;">
+          <button class="btn-ctrl" onclick="setFontSize('normal')" id="btn-font-normal" title="標準文字サイズ">文字: 標準</button>
+          <button class="btn-ctrl" onclick="setFontSize('large')" id="btn-font-large" title="大文字 (プロジェクター推奨)">拡大 [+12%]</button>
+          <button class="btn-ctrl" onclick="setFontSize('xlarge')" id="btn-font-xlarge" title="特大文字 (大会場用)">特大 [+22%]</button>
+        </div>
+      </div>
+
+      <div class="bar-right">
+        <button class="btn-ctrl" onclick="prevSlide()" title="前へ (← / PageUp)">◀ 前へ</button>
+        <span style="font-family: var(--font-mono); font-weight: 800; font-size: 13px;">
+          <span id="cur-slide-num">1</span> / <span id="total-slide-num">14</span>
+        </span>
+        <button class="btn-ctrl" onclick="nextSlide()" title="次へ (→ / Space / Enter)">次へ ▶</button>
+        <button class="btn-ctrl" id="btn-notes" onclick="toggleNotes()" title="発表者原稿（トークスクリプト）表示 [N]">原稿 [N]</button>
+        <button class="btn-ctrl" onclick="toggleOverview()" title="スライド一覧 [O]">一覧 [O]</button>
+        <button class="btn-ctrl" id="btn-fs" onclick="toggleFullscreen()" title="全画面表示 [F]">全画面 [F]</button>
+      </div>
+    </div>
+
+    <!-- ==========================================================================
+         スライドステージ（全画面オートスケーリング配置）
+         ========================================================================== -->
+    <div id="stage-container">
+      <div id="slide-viewport">
+
+        <!-- ----------------------------------------------------------------------
+             SLIDE 1: タイトル（表紙） [00:00 - 00:30]
+             ---------------------------------------------------------------------- -->
+        <section class="slide active" data-time="00:30" data-notes="【開始〜0:30】皆様、こんにちは。本日は『企業規模と組織階層がDX推進意識および組織摩擦認知に及ぼす影響』と題し、国内就業者2,035名の全量データに基づく二元配置分散分析と階層乖離の実証研究を発表いたします。">
+          <div class="slide-title-wrapper">
+            <div class="title-accent-bar"></div>
+            <div class="conf-name">経営情報学会 / 情報経営学会 2026年次学術大会 口頭発表</div>
+            <h1 class="main-title">企業規模と組織階層がDX推進意識および<br>組織摩擦認知に及ぼす影響</h1>
+            <div class="main-subtitle">就業者2,035名の決定論的マイクロデータに基づく二元配置分散分析と階層乖離ダイナミクス</div>
+            
+            <div class="title-meta-grid">
+              <div class="meta-item">
+                <div><strong>報告者・研究チーム:</strong> IDM デジタル変革調査研究グループ</div>
+                <div style="color: var(--dads-text-sub); margin-top: 4px; font-weight: 600;">共同研究プロジェクト（組織行動論・経営情報論）</div>
+              </div>
+              <div class="meta-item" style="text-align: right;">
+                <div><strong>発表時間:</strong> 12分（質疑別）</div>
+                <div style="color: var(--dads-text-sub); margin-top: 4px; font-weight: 600;">2026年10月4日</div>
+              </div>
+            </div>
+          </div>
+          <div class="slide-footer">
+            <span class="footnote">※本研究は、本調査完了有効回答 N=2,035 名の完全決定論的解析（サンプルの足切り・間引きなし）に基づきます。</span>
+            <span class="slide-page-num">01 / 14</span>
+          </div>
+        </section>
+
+        <!-- ----------------------------------------------------------------------
+             SLIDE 2: エグゼクティブサマリー [00:30 - 01:15]
+             ---------------------------------------------------------------------- -->
+        <section class="slide" data-time="01:15" data-notes="【0:30〜1:15】最初に本研究の結論です。本研究の核心は3点に集約されます。第1に『現場収束現象』です。大企業のDX推進優位は経営層と部課長に限られ、一般社員層では大企業も中小企業も3.18という全く同一の低水準に収束します。第2に『中小企業の経営層孤立』です。中小企業経営者は摩擦を全く感じていない（2.69）のに対し、現場は強い摩擦（3.18）を感じており、d=0.79という甚大な断絶があります。第3に『直交性』であり、推進意欲と摩擦懸念は別個の直交軸として併存します。">
+          <div class="slide-header">
+            <div class="header-main">
+              <div class="slide-tracker">Executive Summary</div>
+              <div class="slide-action-title">本研究の核心的発見：規模よりも「階層」がDX認識を支配し、現場と中小企業に深刻な断絶が存在する</div>
+              <div class="slide-lead-bar">就業者 N=2,035名の二元配置分散分析（Type II ANOVA）が証明した3大実証ファクト</div>
+            </div>
+            <div class="slide-timing-badge">目安: 01:15</div>
+          </div>
+          <div class="slide-body">
+            <div class="col-half">
+              <div class="card-panel highlight">
+                <div class="card-title">① 推進意識の「現場収束現象」（Frontline Convergence）</div>
+                <p class="body-p">大企業優位は上位層（経営層 g=0.44, 部課長 g=0.24）に限定される。<strong>一般社員層では企業規模による有意差が完全消失し（大企業 3.18 vs 中小 3.18, p=0.903, g=0.01）、同一の低位水準に収束</strong>する。</p>
+              </div>
+              <div class="card-panel danger-tint">
+                <div class="card-title" style="color: var(--dads-danger);">② 中小企業における「経営層の楽観と現場孤立」</div>
+                <p class="body-p">中小企業の経営層はリスク・摩擦認知が異常に低い（<strong>M = 2.69</strong>）のに対し、部課長（3.10）および一般社員（3.18）は深刻な摩擦を認知。<strong>経営層と現場の間に効果量 g=0.79（p &lt; 0.001）の認知断絶</strong>が存在する。</p>
+              </div>
+            </div>
+            <div class="col-half">
+              <div class="card-panel">
+                <div class="card-title">③ DX意欲と摩擦懸念の「2次元直交性」（Orthogonality）</div>
+                <p class="body-p">DX推進意識（SC18）と組織摩擦認知（SC15）の相関は <strong>r = -0.0901（共有分散 &lt; 1%）</strong>。意欲と摩擦は表裏一体ではなく、互いに独立した2軸ダイナミクスを形成している。</p>
+              </div>
+              <div class="card-panel" style="background: #F8FAFC;">
+                <div class="card-title">全量標本デザイン概要（N = 2,035 完全全数処理）</div>
+                <div class="metrics-row" style="margin-top: 4px;">
+                  <div class="metric-box">
+                    <div class="metric-value">745名</div>
+                    <div class="metric-label">大企業 (36.6%)</div>
+                    <div class="metric-sub">従業員 1,000人以上</div>
+                  </div>
+                  <div class="metric-box">
+                    <div class="metric-value">1,290名</div>
+                    <div class="metric-label">中小企業 (63.4%)</div>
+                    <div class="metric-sub">従業員 1,000人未満</div>
+                  </div>
+                  <div class="metric-box">
+                    <div class="metric-value">3階層</div>
+                    <div class="metric-label">経営・部課長・社員</div>
+                    <div class="metric-sub">329 / 806 / 900名</div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="slide-footer">
+            <span class="footnote">出所: IDM DX意識調査（2026年）本調査完了回答 N=2,035、Type II 平方和分散分析。</span>
+            <span class="slide-page-num">02 / 14</span>
+          </div>
+        </section>
+
+        <!-- ----------------------------------------------------------------------
+             SLIDE 3: 研究背景・問題意識 [01:15 - 02:00]
+             ---------------------------------------------------------------------- -->
+        <section class="slide" data-time="02:00" data-notes="【1:15〜2:00】研究の背景です。経産省のDXレポートが警鐘を鳴らす『2025年の崖』問題に対し、多くの企業が投資を行っていますが、現場の抵抗や組織摩擦によって頓挫するケースが後を絶ちません。先行研究は大企業と中小企業の比較、あるいは経営層のみの調査に偏っており、企業規模と組織階層が交差する実態を大規模マイクロデータで捉えた研究は皆無でした。">
+          <div class="slide-header">
+            <div class="header-main">
+              <div class="slide-tracker">1. 研究背景と問題意識</div>
+              <div class="slide-action-title">DX推進の最大の障壁は技術導入ではなく、「組織階層間の認識断絶」にある</div>
+              <div class="slide-lead-bar">「2025年の崖」克服に向け、企業規模（資源格差）× 職制（視点格差）の交差検証が急務</div>
+            </div>
+            <div class="slide-timing-badge">目安: 02:00</div>
+          </div>
+          <div class="slide-body">
+            <div class="col-half">
+              <div class="card-panel">
+                <div class="card-title">社会的・政策的背景：DX停滞の実態</div>
+                <ul class="bullet-list">
+                  <li><strong>経済産業省「DXレポート」の警鐘:</strong> ITシステムのブラックボックス化により最大12兆円の経済損失が試算される一方、9割以上の企業がDX未着手または散発的実施にとどまる（IPA 2023）。</li>
+                  <li><strong>技術決定論の限界:</strong> ツールやSaaSの導入は進むものの、業務プロセスの変革や社員の当事者意識（心理的所有感）の醸成が追いつかず、現場の疲弊と組織摩擦が激化。</li>
+                </ul>
+              </div>
+              <div class="card-panel highlight">
+                <div class="card-title">本研究の着眼点：2つの決定要因の交差検証</div>
+                <p class="body-p">「大企業 vs 中小企業」という資源格差と、「経営層 vs 管理職 vs 一般社員」という組織階層差が、推進意欲と摩擦認知にどう相互作用しているのか？</p>
+              </div>
+            </div>
+            <div class="col-half">
+              <div class="card-panel">
+                <div class="card-title">学術的リサーチ・ギャップ</div>
+                <ul class="bullet-list danger">
+                  <li><strong>先行研究の限界①（経営層バイアス）:</strong> 従来の調査はCEOやCIO等の経営幹部のみを対象とし、現場社員のリアルな認識が反映されていない。</li>
+                  <li><strong>先行研究の限界②（マクロ二元論）:</strong> 「大企業＝先進」「中小企業＝遅延」という大雑把な二元論にとどまり、組織内部の階層別浸透プロセスの解明が不十分。</li>
+                  <li><strong>先行研究の限界③（単一尺度仮定）:</strong> 推進意欲とリスク懸念を「高低の裏返し」と見なし、独立した直交次元として同時測定していない。</li>
+                </ul>
+              </div>
+            </div>
+          </div>
+          <div class="slide-footer">
+            <span class="footnote">参考文献: 経済産業省 (2018, 2020); IPA (2023, 2025); Kane et al. (2015); Vial (2019).</span>
+            <span class="slide-page-num">03 / 14</span>
+          </div>
+        </section>
+
+        <!-- ----------------------------------------------------------------------
+             SLIDE 4: 理論的背景と仮説構築 [02:00 - 02:45]
+             ---------------------------------------------------------------------- -->
+        <section class="slide" data-time="02:45" data-notes="【2:00〜2:45】理論的背景と仮説です。本研究は、Pierce et al. の心理的所有感理論、Kuhlmann et al. のDX障壁認知理論、およびWelsh & White のリソース貧困理論を統合しました。これに基づき、推進意識に関する3仮説（規模主効果・職制主効果・交互作用）と、摩擦認知に関する仮説4（中小企業の階層乖離）を設定しました。">
+          <div class="slide-header">
+            <div class="header-main">
+              <div class="slide-tracker">2. 理論的背景と仮説</div>
+              <div class="slide-action-title">心理的所有感理論と組織障壁理論に基づく4つの作業仮説の設定</div>
+              <div class="slide-lead-bar">資源依拠観点（大企業優位）と階層的アラインメント（現場の受容性）の理論的統合</div>
+            </div>
+            <div class="slide-timing-badge">目安: 02:45</div>
+          </div>
+          <div class="slide-body">
+            <div class="col-40">
+              <div class="card-panel">
+                <div class="card-title">援用する理論的支柱</div>
+                <ul class="bullet-list">
+                  <li><strong>心理的所有感理論 (Pierce et al., 2001):</strong> 変革に対するコントロール権や自己投資が当事者意識（所有感）を生む。上位層ほど高まりやすい。</li>
+                  <li><strong>リソースの貧困 (Welsh & White, 1981):</strong> 中小企業は大企業の縮小版ではなく、資金・人材・時間の極端な制約下にある。</li>
+                  <li><strong>DX障壁認知論 (Kuhlmann et al., 2023):</strong> 階層によって直面する摩擦（戦略的 vs 業務的）が構造的に分化する。</li>
+                </ul>
+              </div>
+            </div>
+            <div class="col-60">
+              <div class="card-panel highlight" style="height: 100%;">
+                <div class="card-title">検証する実証仮説（Hypotheses）</div>
+                <div style="display: flex; flex-direction: column; gap: 8px; margin-top: 2px;">
+                  <div style="background: #fff; padding: 7px 12px; border-radius: 6px; border-left: 4px solid var(--dads-primary); font-size: calc(14px * var(--font-scale)); font-weight: 600;">
+                    <strong>仮説1（推進意識の規模主効果）:</strong> 大企業は中小企業よりもDX推進意識・心理的所有感（SC18）が有意に高い。
+                  </div>
+                  <div style="background: #fff; padding: 7px 12px; border-radius: 6px; border-left: 4px solid var(--dads-primary); font-size: calc(14px * var(--font-scale)); font-weight: 600;">
+                    <strong>仮説2（推進意識の職制主効果）:</strong> 職制が下がるにつれて推進意識・心理的所有感は段階的に有意に低下する（経営層 ＞ 部課長 ＞ 一般社員）。
+                  </div>
+                  <div style="background: #fff; padding: 7px 12px; border-radius: 6px; border-left: 4px solid var(--dads-accent-cyan); font-size: calc(14px * var(--font-scale)); font-weight: 600;">
+                    <strong>仮説3（推進意識の交互作用効果）:</strong> 規模と職制に交互作用が存在し、企業規模の差は上位層ほど大きく、一般社員層では縮小・収束する。
+                  </div>
+                  <div style="background: #fff; padding: 7px 12px; border-radius: 6px; border-left: 4px solid var(--dads-danger); font-size: calc(14px * var(--font-scale)); font-weight: 600;">
+                    <strong>仮説4（摩擦認知の職制主効果と交互作用）:</strong> リスク・摩擦認知（SC15）において、中小企業では経営層と現場層（部課長・社員）の間に大企業を上回る乖離が生じる。
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="slide-footer">
+            <span class="footnote">理論的根拠: Pierce et al. (2001); Welsh & White (1981); Kuhlmann et al. (2023); Baig et al. (2022).</span>
+            <span class="slide-page-num">04 / 14</span>
+          </div>
+        </section>
+
+        <!-- ----------------------------------------------------------------------
+             SLIDE 5: 研究方法・データセット [02:45 - 03:45]
+             ---------------------------------------------------------------------- -->
+        <section class="slide" data-time="03:45" data-notes="【2:45〜3:45】データと方法です。本研究は、民間企業就業者の本調査完了者N=2,035名の完全決定論的マイクロデータを用いました。サンプルの間引きは一切行っていません。独立変数は企業規模2水準（大企業745名、中小企業1,290名）と職制3水準（経営層329名、部課長806名、一般社員900名）です。不均衡セル頻度に対応するため、Type II平方和の二元配置分散分析を採用しています。">
+          <div class="slide-header">
+            <div class="header-main">
+              <div class="slide-tracker">3. 研究方法と調査設計</div>
+              <div class="slide-action-title">就業者 2,035名の完全決定論的解析：2要因・6セルの完全直交配置</div>
+              <div class="slide-lead-bar">サンプルの間引き・足切りを一切行わない、査読監査対応の厳密な全数標本処理</div>
+            </div>
+            <div class="slide-timing-badge">目安: 03:45</div>
+          </div>
+          <div class="slide-body">
+            <div class="col-half">
+              <div class="card-panel">
+                <div class="card-title">標本設計と独立変数の定義</div>
+                <ul class="bullet-list">
+                  <li><strong>対象母集団:</strong> 日本国内民間企業に勤務する就業者（本調査完了有効回答 N=2,035 名、欠損値 0 件）。</li>
+                  <li><strong>要因A（企業規模: 2水準）:</strong> 設問SC2に基づき分類。
+                    <br>• 大企業（Large: 1,000人以上）: n = 745 名 (36.6%)
+                    <br>• 中小企業（SMO: 1,000人未満）: n = 1,290 名 (63.4%)
+                  </li>
+                  <li><strong>要因B（職制グループ: 3水準）:</strong> 設問SC7-2に基づき分類。
+                    <br>• 1. 経営層（Executives）: n = 329 名 (16.2%)
+                    <br>• 2. 部課長クラス（Managers）: n = 806 名 (39.6%)
+                    <br>• 3. 一般社員（Staff）: n = 900 名 (44.2%)
+                  </li>
+                </ul>
+              </div>
+            </div>
+            <div class="col-half">
+              <div class="card-panel">
+                <div class="card-title">2 × 3 要因セル標本サイズ一覧表</div>
+                <table class="data-table">
+                  <thead>
+                    <tr>
+                      <th>企業規模</th>
+                      <th>1. 経営層</th>
+                      <th>2. 部課長クラス</th>
+                      <th>3. 一般社員</th>
+                      <th>合計</th>
+                    </tr>
+                  </thead>
+                  <tbody>
+                    <tr>
+                      <td><strong>大企業 (Large)</strong></td>
+                      <td class="num">31名</td>
+                      <td class="num">295名</td>
+                      <td class="num">419名</td>
+                      <td class="num"><strong>745名</strong></td>
+                    </tr>
+                    <tr>
+                      <td><strong>中小企業 (SMO)</strong></td>
+                      <td class="num">298名</td>
+                      <td class="num">511名</td>
+                      <td class="num">481名</td>
+                      <td class="num"><strong>1,290名</strong></td>
+                    </tr>
+                    <tr style="background: #F1F5F9; font-weight: 800;">
+                      <td><strong>合計 (Total)</strong></td>
+                      <td class="num">329名</td>
+                      <td class="num">806名</td>
+                      <td class="num">900名</td>
+                      <td class="num"><strong>2,035名</strong></td>
+                    </tr>
+                  </tbody>
+                </table>
+                <div style="font-size: calc(13px * var(--font-scale)); color: var(--dads-text-sub); margin-top: 8px; line-height: 1.45; font-weight: 600;">
+                  ※セル頻度不均衡（Unbalanced Design）に対応し、主効果検定の頑健性を担保するため<strong>Type II 平方和（Type II SS）</strong>を採用。HC3頑健標準誤差による感度分析も併せて実施済み。
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="slide-footer">
+            <span class="footnote">データソース: G:\マイドライブ\IDM\data-cross.xlsx（確定値 N=2,035）.</span>
+            <span class="slide-page-num">05 / 14</span>
+          </div>
+        </section>
+
+        <!-- ----------------------------------------------------------------------
+             SLIDE 6: 尺度妥当性と直交性 [03:45 - 04:30]
+             ---------------------------------------------------------------------- -->
+        <section class="slide" data-time="04:30" data-notes="【3:45〜4:30】従属変数の尺度妥当性と直交性です。主従属変数SC18はDX推進意識・心理的所有感の9項目でα=0.859、副従属変数SC15は組織摩擦認知の9項目でα=0.818と極めて高い信頼性を確認しました。重要なのは両者の相関です。ピアソンr=-0.0901、共有分散は1%未満であり、意欲と摩擦が互いに独立した直交する別個の心理軸であることが実証されました。">
+          <div class="slide-header">
+            <div class="header-main">
+              <div class="slide-tracker">4. 尺度測定と構成概念妥当性</div>
+              <div class="slide-action-title">高信頼性（α &gt; 0.81）の確保と、意欲 vs 摩擦の「概念的直交性」の証明</div>
+              <div class="slide-lead-bar">SC18（DX推進意欲）とSC15（組織摩擦）は表裏一体ではなく、独立した直交2次元</div>
+            </div>
+            <div class="slide-timing-badge">目安: 04:30</div>
+          </div>
+          <div class="slide-body">
+            <div class="col-half">
+              <div class="card-panel highlight">
+                <div class="card-title">主従属変数：DX推進意識・心理的所有感（SC18）</div>
+                <div style="display: flex; justify-content: space-between; align-items: baseline; margin: 3px 0;">
+                  <span style="font-size: calc(14px * var(--font-scale)); font-weight: 800;">クロンバックの α 係数</span>
+                  <span style="font-size: calc(26px * var(--font-scale)); font-weight: 900; font-family: var(--font-mono); color: var(--dads-primary);">0.8592</span>
+                </div>
+                <ul class="bullet-list">
+                  <li><strong>構成項目 (9項目 リッカート5件法):</strong> DX推進による成果期待、業務効率化・付加価値向上、経営層のコミットメント認知、自社の将来性への自己投資。</li>
+                  <li>全体平均: <strong>M = 3.2709, SD = 0.6279</strong></li>
+                </ul>
+              </div>
+              <div class="card-panel danger-tint">
+                <div class="card-title" style="color: var(--dads-danger);">副従属変数：DXリスク懸念・組織摩擦（SC15）</div>
+                <div style="display: flex; justify-content: space-between; align-items: baseline; margin: 3px 0;">
+                  <span style="font-size: calc(14px * var(--font-scale)); font-weight: 800;">クロンバックの α 係数</span>
+                  <span style="font-size: calc(26px * var(--font-scale)); font-weight: 900; font-family: var(--font-mono); color: var(--dads-danger);">0.8183</span>
+                </div>
+                <ul class="bullet-list">
+                  <li><strong>構成項目 (9項目 リッカート5件法):</strong> 新技術導入の不安、業務負荷増大、既存業務との軋轢、現場の孤立感、形骸化への懸念。</li>
+                  <li>全体平均: <strong>M = 3.0802, SD = 0.6327</strong></li>
+                </ul>
+              </div>
+            </div>
+            <div class="col-half">
+              <div class="card-panel" style="height: 100%; justify-content: center; text-align: center;">
+                <div class="card-title" style="justify-content: center;">尺度間相関と直交性の実証</div>
+                <div style="margin: 12px 0;">
+                  <div style="font-size: calc(36px * var(--font-scale)); font-weight: 900; font-family: var(--font-mono); color: var(--dads-primary-dark);">
+                    r = -0.0901
+                  </div>
+                  <div style="font-size: calc(14px * var(--font-scale)); color: var(--dads-text-sub); margin-top: 4px; font-weight: 700;">
+                    (p = 4.66 × 10⁻⁵, N = 2,035)
+                  </div>
+                </div>
+                <div style="background: var(--dads-bg-alt); padding: 12px; border-radius: 6px; font-size: calc(14.5px * var(--font-scale)); text-align: left; line-height: 1.55; border: 1px solid var(--dads-border-light);">
+                  <strong>【理論的含意】共有分散はわずか 0.81% (r² &lt; 0.01)</strong><br>
+                  「DXを推進したい意欲」と「組織の摩擦やリスクを恐れる心理」は、単一の直線上にあるのではなく、Herzbergの動機づけ・衛生要因のように<strong>独立して併存</strong>している。
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="slide-footer">
+            <span class="footnote">修正済項目-全体相関（CITC）: SC18 (0.392〜0.651), SC15 (0.419〜0.595).</span>
+            <span class="slide-page-num">06 / 14</span>
+          </div>
+        </section>
+
+        <!-- ----------------------------------------------------------------------
+             SLIDE 7: 実証結果1：DX推進意識のANOVA [04:30 - 05:45]
+             ---------------------------------------------------------------------- -->
+        <section class="slide" data-time="05:45" data-notes="【4:30〜5:45】実証結果1、主従属変数SC18の二元配置分散分析です。ご覧の通り、規模主効果 F=8.04 (p=0.0046)、職制主効果 F=38.58 (p<0.001)、そして交互作用効果 F=4.32 (p=0.0134) のすべてが統計的に有意でした。効果量の大きさに着目してください。職制主効果（ηp²=0.0366）は規模主効果（ηp²=0.0039）の約9.3倍の説明力を持っています。つまり、大企業か中小企業かよりも、社内のどの階層にいるかが推進意欲を決定づけています。">
+          <div class="slide-header">
+            <div class="header-main">
+              <div class="slide-tracker">5. 実証分析結果 ①（DX推進意識）</div>
+              <div class="slide-action-title">DX推進意識（SC18）：規模主効果・職制主効果・交互作用がすべて有意</div>
+              <div class="slide-lead-bar">職制主効果の説明力（ηp² = 0.0366）は、企業規模主効果の約9.3倍に達する</div>
+            </div>
+            <div class="slide-timing-badge">目安: 05:45</div>
+          </div>
+          <div class="slide-body">
+            <div class="col-60">
+              <div class="chart-card-wrapper">
+                <div class="chart-header-row">
+                  <div class="chart-title-text">
+                    <span>図1: 二元配置分散分析 交互作用プロット</span>
+                    <span class="chart-badge">95% CI</span>
+                  </div>
+                  <div class="chart-btn-group">
+                    <button class="chart-tab-btn active" id="btn-fig1-sc18" onclick="setFig1Metric('SC18')">SC18: 推進意欲</button>
+                    <button class="chart-tab-btn" id="btn-fig1-sc15" onclick="setFig1Metric('SC15')">SC15: 組織摩擦</button>
+                  </div>
+                </div>
+                <div class="chart-canvas-area">
+                  <canvas id="canvas-fig1-interaction"></canvas>
+                </div>
+              </div>
+            </div>
+            <div class="col-40">
+              <div class="card-panel">
+                <div class="card-title">二元配置ANOVA結果（Type II SS）</div>
+                <table class="data-table">
+                  <thead>
+                    <tr>
+                      <th>要因</th>
+                      <th>F値 (df)</th>
+                      <th>p値</th>
+                      <th>偏効果量 (ηp²)</th>
+                    </tr>
+                  </thead>
+                  <tbody>
+                    <tr>
+                      <td>企業規模 (Size)</td>
+                      <td class="num">8.04 (1, 2029)</td>
+                      <td class="num">0.0046**</td>
+                      <td class="num">0.0039</td>
+                    </tr>
+                    <tr style="background: #EFF6FF; font-weight: 800;">
+                      <td>職制 (Position)</td>
+                      <td class="num">38.58 (2, 2029)</td>
+                      <td class="num">&lt; 0.001***</td>
+                      <td class="num">0.0366</td>
+                    </tr>
+                    <tr style="background: #FEF3C7; font-weight: 800;">
+                      <td>交互作用 (A×B)</td>
+                      <td class="num">4.32 (2, 2029)</td>
+                      <td class="num">0.0134*</td>
+                      <td class="num">0.0042</td>
+                    </tr>
+                  </tbody>
+                </table>
+              </div>
+              <div class="card-panel highlight">
+                <div class="card-title">統計的検証の要約</div>
+                <ul class="bullet-list">
+                  <li><strong>仮説1（規模効果）: 支持</strong>（大企業 3.28 ＞ 中小 3.27, p=0.0046）</li>
+                  <li><strong>仮説2（職制効果）: 強く支持</strong>（経営 3.51 ＞ 部課長 3.28 ＞ 社員 3.18）</li>
+                  <li><strong>仮説3（交互作用）: 完全支持</strong>（階層により規模差が異なる）</li>
+                </ul>
+              </div>
+            </div>
+          </div>
+          <div class="slide-footer">
+            <span class="footnote">注: *** p &lt; 0.001, ** p &lt; 0.01, * p &lt; 0.05. エラーバーは95%信頼区間（Student-t厳密解）。</span>
+            <span class="slide-page-num">07 / 14</span>
+          </div>
+        </section>
+
+        <!-- ----------------------------------------------------------------------
+             SLIDE 8: 核心的発見1：現場収束現象 [05:45 - 06:45]
+             ---------------------------------------------------------------------- -->
+        <section class="slide" data-time="06:45" data-notes="【5:45〜6:45】この交互作用の本質を解明したのが、本研究最大の発見である『現場収束現象』です。層別単純主効果検定を行いますと、経営層では大企業が+0.29高く有意（g=0.44）、部課長でも大企業が+0.15高く有意（g=0.24）です。ところが、一般社員層を見ますと、大企業3.1806、中小企業3.1756、差はわずか0.005、p=0.9032で有意差が完全に消滅します。大企業がどれほど資金を投じても、現場社員の当事者意識は中小企業と全く同じ低位水準で止まっているのです。">
+          <div class="slide-header">
+            <div class="header-main">
+              <div class="slide-tracker">6. 核心的実証ファクト ①</div>
+              <div class="slide-action-title">【現場収束現象】一般社員層において企業規模差が完全に消失（M = 3.18）</div>
+              <div class="slide-lead-bar">大企業のDX推進優位は経営層・管理職止まりであり、末端現場への心理的所有感移転に失敗している</div>
+            </div>
+            <div class="slide-timing-badge">目安: 06:45</div>
+          </div>
+          <div class="slide-body">
+            <div class="col-half">
+              <div class="card-panel">
+                <div class="card-title">職制別 単純主効果検定（大企業 vs 中小企業）</div>
+                <table class="data-table">
+                  <thead>
+                    <tr>
+                      <th>職制グループ</th>
+                      <th>大企業 (M)</th>
+                      <th>中小企業 (M)</th>
+                      <th>平均差 (t値)</th>
+                      <th>Holm調整p値</th>
+                      <th>Hedges' g</th>
+                    </tr>
+                  </thead>
+                  <tbody>
+                    <tr>
+                      <td><strong>1. 経営層</strong></td>
+                      <td class="num">3.77</td>
+                      <td class="num">3.48</td>
+                      <td class="num">+0.29 (2.43)</td>
+                      <td class="num">0.0399*</td>
+                      <td class="num">0.44 (中)</td>
+                    </tr>
+                    <tr>
+                      <td><strong>2. 部課長クラス</strong></td>
+                      <td class="num">3.37</td>
+                      <td class="num">3.22</td>
+                      <td class="num">+0.15 (3.30)</td>
+                      <td class="num">0.0031**</td>
+                      <td class="num">0.24 (小)</td>
+                    </tr>
+                    <tr class="highlight-cell">
+                      <td><strong>3. 一般社員</strong></td>
+                      <td class="num"><strong>3.18</strong></td>
+                      <td class="num"><strong>3.18</strong></td>
+                      <td class="num">+0.005 (0.12)</td>
+                      <td class="num"><strong>0.9032 (ns)</strong></td>
+                      <td class="num"><strong>0.01 (無)</strong></td>
+                    </tr>
+                  </tbody>
+                </table>
+              </div>
+              <div class="card-panel highlight">
+                <div class="card-title">漏斗状（ファンネル型）収束のメカニズム</div>
+                <p class="body-p">
+                  経営層間では約0.3ポイントあった大企業アドバンテージが、階層が下がるにつれて直線的に減衰し、一般社員層で完全に一致する。
+                </p>
+              </div>
+            </div>
+            <div class="col-half">
+              <div class="card-panel" style="height: 100%;">
+                <div class="card-title">経営コンサルティング視点の洞察（So What?）</div>
+                <ul class="bullet-list" style="gap: 12px; margin-top: 4px;">
+                  <li><strong>「大企業＝DX先進」神話の崩壊:</strong> 大企業が潤沢なIT予算や外部コンサルを投入しても、その恩恵は経営層と部課長クラスの意識向上に止まっており、現場社員には全く届いていない。</li>
+                  <li><strong>中間管理職による「意識の目詰まり」:</strong> 部課長層（3.37）から一般社員（3.18）への落差が激しく、トップダウンの経営方針が現場実務に変換されないまま空回りしている構造的課題が浮き彫りとなった。</li>
+                </ul>
+              </div>
+            </div>
+          </div>
+          <div class="slide-footer">
+            <span class="footnote">ウェルチのt検定およびHolm法多重性調整適用。大企業社員 n=419, 中小企業社員 n=481.</span>
+            <span class="slide-page-num">08 / 14</span>
+          </div>
+        </section>
+
+        <!-- ----------------------------------------------------------------------
+             SLIDE 9: 実証結果2：DX組織摩擦認知のANOVA [06:45 - 08:00]
+             ---------------------------------------------------------------------- -->
+        <section class="slide" data-time="08:00" data-notes="【6:45〜8:00】実証結果の2点目、副従属変数SC15（組織摩擦認知）です。こちらは驚くべき結果となりました。規模単独の主効果は有意ではありません（p=0.1601）。しかし、職制主効果は F=61.98 (p=7.44×10⁻²⁷)、偏イータ二乗は約6%に達し、摩擦の最大の決定因となっています。さらに交互作用も F=5.79 (p=0.0031) で極めて有意です。右のグラフ（パネルB）をご覧ください。大企業は3階層がフラットに推移するのに対し、中小企業は経営層から現場へ急激に跳ね上がっています。">
+          <div class="slide-header">
+            <div class="header-main">
+              <div class="slide-tracker">7. 実証分析結果 ②（組織摩擦認知）</div>
+              <div class="slide-action-title">組織摩擦認知（SC15）：規模主効果は非有意、職制主効果と交互作用が極めて強力</div>
+              <div class="slide-lead-bar">階層効果が分散の約6%（ηp² = 0.0576）を単独で説明し、非対称な相互作用を示す</div>
+            </div>
+            <div class="slide-timing-badge">目安: 08:00</div>
+          </div>
+          <div class="slide-body">
+            <div class="col-60">
+              <div class="chart-card-wrapper">
+                <div class="chart-header-row">
+                  <div class="chart-title-text">
+                    <span>図2: 6群別スコア比較 (推進意欲 vs 組織摩擦)</span>
+                    <span class="chart-badge">95% CI</span>
+                  </div>
+                  <div class="chart-btn-group">
+                    <button class="chart-tab-btn active" id="btn-fig2-mode-both" onclick="setFig2Mode('both')">推進 vs 摩擦</button>
+                    <button class="chart-tab-btn" id="btn-fig2-mode-sc18" onclick="setFig2Mode('sc18')">推進(SC18)</button>
+                    <button class="chart-tab-btn" id="btn-fig2-mode-sc15" onclick="setFig2Mode('sc15')">摩擦(SC15)</button>
+                  </div>
+                </div>
+                <div class="chart-canvas-area">
+                  <canvas id="canvas-fig2-distribution"></canvas>
+                </div>
+              </div>
+            </div>
+            <div class="col-40">
+              <div class="card-panel">
+                <div class="card-title">二元配置ANOVA結果（Type II SS）</div>
+                <table class="data-table">
+                  <thead>
+                    <tr>
+                      <th>要因</th>
+                      <th>F値 (df)</th>
+                      <th>p値</th>
+                      <th>偏効果量 (ηp²)</th>
+                    </tr>
+                  </thead>
+                  <tbody>
+                    <tr>
+                      <td>企業規模 (Size)</td>
+                      <td class="num">1.97 (1, 2029)</td>
+                      <td class="num">0.1601 (ns)</td>
+                      <td class="num">0.0010</td>
+                    </tr>
+                    <tr style="background: #EFF6FF; font-weight: 800;">
+                      <td>職制 (Position)</td>
+                      <td class="num">61.98 (2, 2029)</td>
+                      <td class="num">&lt; 0.001***</td>
+                      <td class="num">0.0576</td>
+                    </tr>
+                    <tr style="background: #FEF3C7; font-weight: 800;">
+                      <td>交互作用 (A×B)</td>
+                      <td class="num">5.79 (2, 2029)</td>
+                      <td class="num">0.0031**</td>
+                      <td class="num">0.0057</td>
+                    </tr>
+                  </tbody>
+                </table>
+              </div>
+              <div class="card-panel danger-tint">
+                <div class="card-title" style="color: var(--dads-danger);">非対称交互作用の発見</div>
+                <ul class="bullet-list danger">
+                  <li><strong>大企業:</strong> 経営層(3.10)・部課長(3.08)・社員(3.22)と、階層間の摩擦認知がフラット。</li>
+                  <li><strong>中小企業:</strong> 経営層(2.69)から現場層(3.10〜3.18)にかけて垂直急上昇。</li>
+                </ul>
+              </div>
+            </div>
+          </div>
+          <div class="slide-footer">
+            <span class="footnote">注: 図2のバイオリンプロットはカーネル密度推定、内部ボックスプロットは四分位範囲、赤・青線は中央値を示す。</span>
+            <span class="slide-page-num">09 / 14</span>
+          </div>
+        </section>
+
+        <!-- ----------------------------------------------------------------------
+         SLIDE 10: 核心的発見2：中小企業の階層断絶 [08:00 - 09:00]
+         ---------------------------------------------------------------------- -->
+        <section class="slide" data-time="09:00" data-notes="【8:00〜9:00】核心的発見の2点目、『中小企業における経営層の過度な楽観と現場の孤立』です。中小企業の経営層は、リスクや組織摩擦を2.69しか感じていません。大企業の経営層（3.10）と比べても有意に低いです。しかし、中小企業の現場社員は3.18、部課長は3.10の摩擦を感じています。経営者と一般社員のギャップは0.49ポイント、効果量Hedges g=0.79（巨大効果）に達します。経営者の「DXやれば儲かる」という無邪気なトップダウンが、リソースのない現場に凄まじい負荷と摩擦を押し付けている現実がここにあります。">
+          <div class="slide-header">
+            <div class="header-main">
+              <div class="slide-tracker">8. 核心的実証ファクト ②</div>
+              <div class="slide-action-title">【中小企業の構造的断絶】経営層の楽観（2.69）と現場の疲弊（3.18）の巨大ギャップ</div>
+              <div class="slide-lead-bar">中小企業経営者の認知的盲点：現場社員との間に効果量 g = 0.79（p &lt; 0.001）の深淵が存在</div>
+            </div>
+            <div class="slide-timing-badge">目安: 09:00</div>
+          </div>
+          <div class="slide-body">
+            <div class="col-half">
+              <div class="versus-container">
+                <div class="versus-card large">
+                  <div style="font-weight: 900; color: var(--dads-color-large); font-size: calc(16px * var(--font-scale));">大企業（健全なリアリズム）</div>
+                  <div style="font-size: calc(15px * var(--font-scale)); line-height: 1.5; font-weight: 600;">
+                    • 経営層: <strong>3.10</strong><br>
+                    • 部課長: <strong>3.08</strong><br>
+                    • 一般社員: <strong>3.22</strong><br>
+                    <span style="color: var(--dads-success); font-weight: 800;">階層間ギャップ: Δ 0.12 (僅小)</span>
+                  </div>
+                  <p class="body-p" style="font-size: calc(14px * var(--font-scale)); color: var(--dads-text-sub);">ガバナンスや過去のシステム刷新経験により、経営層も変革の痛みを適切に織り込んでいる。</p>
+                </div>
+                <div class="versus-card smo">
+                  <div style="font-weight: 900; color: var(--dads-color-smo); font-size: calc(16px * var(--font-scale));">中小企業（深刻な認識断絶）</div>
+                  <div style="font-size: calc(15px * var(--font-scale)); line-height: 1.5; font-weight: 600;">
+                    • 経営層: <strong style="color: var(--dads-danger); font-size: calc(18px * var(--font-scale));">2.69</strong> (異常低値)<br>
+                    • 部課長: <strong>3.10</strong> (p &lt; 0.001)<br>
+                    • 一般社員: <strong>3.18</strong> (p &lt; 0.001)<br>
+                    <span style="color: var(--dads-danger); font-weight: 900;">階層間ギャップ: Δ 0.49 (g = 0.79)</span>
+                  </div>
+                  <p class="body-p" style="font-size: calc(14px * var(--font-scale)); color: var(--dads-text-sub);">経営者がツールの果実ばかりを期待し、現場のオペレーション負荷を全く見失っている。</p>
+                </div>
+              </div>
+            </div>
+            <div class="col-half">
+              <div class="card-panel danger-tint" style="height: 100%;">
+                <div class="card-title" style="color: var(--dads-danger);">中小企業DXが現場でサボタージュされる構図</div>
+                <ul class="bullet-list danger" style="gap: 12px; margin-top: 4px;">
+                  <li><strong>「鶴の一声」トップダウンの罠:</strong> 経営者は「クラウドを入れて業務効率化しろ」と命じるが、現場には専任IT担当者も追加予算もない（リソースの貧困; Welsh & White 1981）。</li>
+                  <li><strong>板挟みになる中間管理職:</strong> 部課長クラス（3.10）は、上からの推進圧力と下からの業務過多の悲鳴の間に挟まれ、変革のバッファー機能を喪失。</li>
+                  <li><strong>結果としての変革頓挫:</strong> 現場は「使えないシステムを押し付けられた」と反発し、新システムの形骸化と既存プロセスの温存が固定化。</li>
+                </ul>
+              </div>
+            </div>
+          </div>
+          <div class="slide-footer">
+            <span class="footnote">中小企業経営層 n=298 vs 一般社員 n=481: ウェルチ t(608.13)=10.70, p &lt; 0.001, Hedges g=0.79.</span>
+            <span class="slide-page-num">10 / 14</span>
+          </div>
+        </section>
+
+        <!-- ----------------------------------------------------------------------
+             SLIDE 11: 2次元戦略ダイナミクス [09:00 - 10:00]
+             ---------------------------------------------------------------------- -->
+        <section class="slide" data-time="10:00" data-notes="【9:00〜10:00】これを2次元座標上にマッピングしたのが図3です。横軸が推進意識（SC18）、縦軸が組織摩擦（SC15）です。全体平均の十字線で4象限に分けています。大企業の軌跡（青い実線）は、経営層から部課長、一般社員へと、高推進・中摩擦の領域内でなだらかにシフトします。一方、中小企業の軌跡（赤い破線）をご覧ください。経営層は『低摩擦・高推進』という極めて都合の良い領域にいますが、部課長と一般社員は一気に北東方向、つまり『中推進・高摩擦』の摩擦直面ゾーンへとジャンプしています。経営層と現場が全く別世界に住んでいることが視覚的に一目瞭然です。">
+          <div class="slide-header">
+            <div class="header-main">
+              <div class="slide-tracker">9. 2次元戦略ダイナミクス分析</div>
+              <div class="slide-action-title">意欲 vs 摩擦の4象限マッピング：中小企業の階層ジャンプ現象</div>
+              <div class="slide-lead-bar">大企業の連続的シフトに対し、中小企業は経営層と現場が異なる象限に分断されている</div>
+            </div>
+            <div class="slide-timing-badge">目安: 10:00</div>
+          </div>
+          <div class="slide-body">
+            <div class="col-60">
+              <div class="chart-card-wrapper">
+                <div class="chart-header-row">
+                  <div class="chart-title-text">
+                    <span>図3: DX推進意欲 × 組織摩擦 2次元戦略ダイナミクス</span>
+                    <span class="chart-badge">4象限</span>
+                  </div>
+                  <div class="chart-btn-group">
+                    <button class="chart-tab-btn active" id="btn-fig3-vectors" onclick="toggleFig3Vectors()">階層ベクトル</button>
+                    <button class="chart-tab-btn" id="btn-fig3-reset" onclick="resetFig3View()">リセット</button>
+                  </div>
+                </div>
+                <div class="chart-canvas-area">
+                  <canvas id="canvas-fig3-quadrant"></canvas>
+                </div>
+              </div>
+            </div>
+            <div class="col-40">
+              <div class="card-panel">
+                <div class="card-title">4象限ダイナミクスの解釈</div>
+                <div style="font-size: calc(14px * var(--font-scale)); display: flex; flex-direction: column; gap: 8px;">
+                  <div style="background: #FEE2E2; padding: 7px 10px; border-radius: 4px; border-left: 4px solid #DC2626;">
+                    <strong>【第1象限: 高推進・高摩擦】変革推進・摩擦直面層</strong><br>
+                    大企業一般社員、中小企業部課長・一般社員が集中。変革の負荷を一身に背負う。
+                  </div>
+                  <div style="background: #D1FAE5; padding: 7px 10px; border-radius: 4px; border-left: 4px solid #059669;">
+                    <strong>【第4象限: 高推進・低摩擦】全社牽引・理想推進層</strong><br>
+                    大企業経営層(3.77, 3.10)、中小企業経営層(3.48, 2.69)が位置。
+                  </div>
+                </div>
+              </div>
+              <div class="card-panel highlight">
+                <div class="card-title">戦略的インプリケーション</div>
+                <p class="body-p" style="font-size: calc(14px * var(--font-scale)); line-height: 1.45;">
+                  DXを成功させるには、推進意欲を高める施策と、現場の摩擦を抑える施策を<strong>完全に切り離して同時並行で設計（両利きのチェンジマネジメント）</strong>しなければならない。
+                </p>
+              </div>
+            </div>
+          </div>
+          <div class="slide-footer">
+            <span class="footnote">図3プロット: 背景散布図はN=2,035の個体分布（アルファ0.08）、太線は階層間遷移ベクトルを示す。</span>
+            <span class="slide-page-num">11 / 14</span>
+          </div>
+        </section>
+
+        <!-- ----------------------------------------------------------------------
+             SLIDE 12: 理論的示唆 [10:00 - 10:50]
+             ---------------------------------------------------------------------- -->
+        <section class="slide" data-time="10:50" data-notes="【10:00〜10:50】理論的示唆です。本研究は組織論・情報システム論に3つの理論的貢献をもたらします。第1に、従来の『大企業先進・中小企業遅延』というマクロ二元論を覆し、現場レベルでは規模優位が消滅するという『現場収束定理』を実証しました。第2に、中小企業経営者の認知バイアス（過度な楽観）と現場の孤立を定量化しました。第3に、推進意欲と摩擦の直交性を証明し、Herzbergの二要因理論やHigginsの制御焦点理論がDX文脈でも成立することを実証しました。">
+          <div class="slide-header">
+            <div class="header-main">
+              <div class="slide-tracker">10. 考察：理論的インプリケーション</div>
+              <div class="slide-action-title">学術的貢献：マクロな企業規模二元論の解体と、階層規定性の確立</div>
+              <div class="slide-lead-bar">組織行動論・経営情報学における3つのパラダイムシフト</div>
+            </div>
+            <div class="slide-timing-badge">目安: 10:50</div>
+          </div>
+          <div class="slide-body">
+            <div class="col-half">
+              <div class="card-panel highlight">
+                <div class="card-title">① マクロ企業規模二元論の脱構築</div>
+                <p class="body-p">
+                  先行研究（Eller et al. 2020; Garzoni et al. 2020）は「大企業＞中小企業」をアプリオリに仮定してきたが、本研究は<strong>一般社員層における完全一致（3.18）</strong>を証明。企業規模の効果は階層下降とともに減衰し、現場では無力化することを解明。
+                </p>
+              </div>
+              <div class="card-panel">
+                <div class="card-title">② 心理的所有感の移転（Ownership Transfer）不全</div>
+                <p class="body-p">
+                  Pierce et al. (2001) の理論に基づけば、大企業はコントロール権を現場に委譲していないため、いくら資本を投じても現場社員が変革を「自分ごと化」できない構造的欠陥を露呈した。
+                </p>
+              </div>
+            </div>
+            <div class="col-half">
+              <div class="card-panel">
+                <div class="card-title">③ 二要因直交モデル（Orthogonal Two-Factor）</div>
+                <p class="body-p">
+                  相関 r = -0.0901 の事実は、Higgins (1997) の制御焦点理論（獲得を促すプロモーション焦点 vs 損失を防ぐプリベンション焦点）と整合的。推進と摩擦はトレードオフではなく、独立して機能する2つの心理回路である。
+                </p>
+              </div>
+              <div class="card-panel" style="background: #F8FAFC;">
+                <div class="card-title">④ 中小企業経営者の「認知的盲点」の定量的解明</div>
+                <p class="body-p">
+                  Welsh & White (1981) や Kuhlmann et al. (2023) が定性的に論じた中小企業の障壁について、経営層（2.69）と現場（3.18）の d=0.79 という巨大な数値断絶として初めて計量実証した。
+                </p>
+              </div>
+            </div>
+          </div>
+          <div class="slide-footer">
+            <span class="footnote">理論的統合: Pierce et al. (2001); Higgins (1997); Welsh & White (1981); Kuhlmann et al. (2023).</span>
+            <span class="slide-page-num">12 / 14</span>
+          </div>
+        </section>
+
+        <!-- ----------------------------------------------------------------------
+             SLIDE 13: 実務的提言・処方箋 [10:50 - 11:35]
+             ---------------------------------------------------------------------- -->
+        <section class="slide" data-time="11:35" data-notes="【10:50〜11:35】実務的提言です。一流コンサルタントファームの視点から、3つの処方箋を提言します。第1に中小企業経営者への警鐘です。『鶴の一声』でDXを命じるのを今すぐやめ、現場の業務プロセス可視化と省力化を先行させる必要があります。第2に大企業の処方箋です。部課長から社員への目詰まりを解消するため、現場発のボトムアップなローコード改善や権限委譲を行い、心理的所有感を現場に譲渡する必要があります。第3に、中間管理職に対するDX評価指標の再設計です。">
+          <div class="slide-header">
+            <div class="header-main">
+              <div class="slide-tracker">11. 実務的提言（Actionable Recommendations）</div>
+              <div class="slide-action-title">トップファーム視点の処方箋：企業規模別・階層別チェンジマネジメント</div>
+              <div class="slide-lead-bar">「推進アクセル」と「摩擦ブレーキ解除」を同時に実行する3大アプローチ</div>
+            </div>
+            <div class="slide-timing-badge">目安: 11:35</div>
+          </div>
+          <div class="slide-body">
+            <div class="col-half">
+              <div class="card-panel danger-tint">
+                <div class="card-title" style="color: var(--dads-danger);">中小企業経営者への処方箋：見えない摩擦の解消</div>
+                <ul class="bullet-list danger" style="gap: 9px;">
+                  <li><strong>「理想の押し付け」の停止:</strong> 経営者は現場が感じている 3.18 の摩擦を直視せよ。ツール導入の前に、既存業務の2割削減（業務の断捨離）を経営者自ら約束する。</li>
+                  <li><strong>伴走型支援とリソース確保:</strong> IT導入補助金や外部の伴走支援者を活用し、現場社員に「通常業務＋DX」という過重負荷を強いない体制を確立する。</li>
+                </ul>
+              </div>
+              <div class="card-panel highlight">
+                <div class="card-title">大企業経営陣への処方箋：現場社員の心理的所有感醸成</div>
+                <ul class="bullet-list" style="gap: 9px;">
+                  <li><strong>権限委譲型ローコード・アジャイル:</strong> 経営企画主導の巨大プロジェクトから、各現場が自らのペインポイントを解消する「現場発改善」に予算と権限を付与する。</li>
+                  <li><strong>「対象への自己投資」の設計:</strong> Pierceの理論通り、現場社員がツールの設計・選定に参画する機会を制度化し、「受動的な変更」から「能動的な創造」へ転換。</li>
+                </ul>
+              </div>
+            </div>
+            <div class="col-half">
+              <div class="card-panel" style="height: 100%;">
+                <div class="card-title">中間管理職（部課長クラス）のバッファー機能再生</div>
+                <ul class="bullet-list" style="gap: 11px; margin-top: 4px;">
+                  <li><strong>KPI評価の抜本的見直し:</strong> 部課長の評価基準を「売上成果直結」だけでなく「チーム内のDX適応度・心理的安全性スコア」にも連動させる。</li>
+                  <li><strong>チェンジリーダー育成プログラム:</strong> Huy (2002) が実証した通り、部課長が現場の不安を傾聴し感情的安定を保てるよう、組織感情マネジメント研修を全社導入する。</li>
+                  <li><strong>双方向コミュニケーション・チャネルの常設:</strong> トップの意図を現場に翻訳し、現場の軋轢をトップに直言できるエスカレーションルートの保護。</li>
+                </ul>
+              </div>
+            </div>
+          </div>
+          <div class="slide-footer">
+            <span class="footnote">実務示唆参考文献: Huy (2002); Floyd & Wooldridge (1997); Welsh & White (1981); IPA (2025).</span>
+            <span class="slide-page-num">13 / 14</span>
+          </div>
+        </section>
+
+        <!-- ----------------------------------------------------------------------
+             SLIDE 14: 結論・Q&A [11:35 - 12:00]
+             ---------------------------------------------------------------------- -->
+        <section class="slide" data-time="12:00" data-notes="【11:35〜12:00】まとめです。本研究は、国内2,035名の就業者データに基づき、DXの成否を握るのは企業規模という外形属性ではなく、組織階層間の認識統合である実態を計量的に証明しました。一般社員の現場収束、そして中小企業の経営者と現場の断絶というファクトを直視し、心理的所有感の現場移転を進めることがDX成功の鍵となります。以上で発表を終わります。ご清聴ありがとうございました。質疑応答をお願いいたします。">
+          <div class="slide-header">
+            <div class="header-main">
+              <div class="slide-tracker">12. 結論と質疑応答</div>
+              <div class="slide-action-title">結言：DXは技術導入ではなく、組織階層間の「認識統合」と「所有感移転」である</div>
+              <div class="slide-lead-bar">研究の限界と今後の展望、および質疑応答</div>
+            </div>
+            <div class="slide-timing-badge">終了目安: 12:00</div>
+          </div>
+          <div class="slide-body">
+            <div class="col-half">
+              <div class="card-panel highlight" style="height: 100%;">
+                <div class="card-title">本研究の総括結論</div>
+                <div style="font-size: calc(15px * var(--font-scale)); line-height: 1.6; display: flex; flex-direction: column; gap: 10px; margin-top: 4px;">
+                  <div>
+                    <strong>1. 現場収束の打破:</strong> 大企業であっても現場一般社員の意欲（3.18）は中小企業と変わらない。経営層のコミットメントを現場の心理的所有感へ転換せよ。
+                  </div>
+                  <div>
+                    <strong>2. 中小企業の断絶解消:</strong> 経営層の無自覚な楽観（2.69）と現場の悲鳴（3.18）の乖離を埋めることが中小企業生き残りの前提条件である。
+                  </div>
+                  <div>
+                    <strong>3. 2次元マネジメント:</strong> 推進意欲向上と組織摩擦低減を独立した両利き戦略として遂行せよ。
+                  </div>
+                </div>
+              </div>
+            </div>
+            <div class="col-half">
+              <div class="card-panel">
+                <div class="card-title">研究の限界と今後の展望</div>
+                <ul class="bullet-list" style="font-size: calc(14px * var(--font-scale));">
+                  <li><strong>横断調査の限界:</strong> 因果関係の厳密な確定に向け、縦断的パネル調査（Longitudinal Study）への拡張が望まれる。</li>
+                  <li><strong>業種別統制:</strong> 製造・IT・サービス等の業種特性を共変量とした多層モデル（HLM）分析を計画中。</li>
+                </ul>
+              </div>
+              <div class="card-panel" style="background: var(--dads-primary); color: #fff; text-align: center; justify-content: center; padding: 20px;">
+                <div style="font-size: calc(20px * var(--font-scale)); font-weight: 900; letter-spacing: 0.05em;">ご清聴ありがとうございました</div>
+                <div style="font-size: calc(14px * var(--font-scale)); margin-top: 6px; opacity: 0.95; font-weight: 600;">質疑応答（Q&amp;A）をお待ちしております</div>
+              </div>
+            </div>
+          </div>
+          <div class="slide-footer">
+            <span class="footnote">IDM デジタル変革調査研究グループ | お問い合わせ: プロジェクト連絡窓口</span>
+            <span class="slide-page-num">14 / 14</span>
+          </div>
+        </section>
+
+      </div>
+    </div>
+
+    <!-- 発表者原稿ドロワー（トークスクリプト・12分配分） -->
+    <div id="notes-drawer">
+      <div class="notes-header">
+        <span>発表者用トークスクリプト（12分配分ガイド）</span>
+        <span id="notes-timing-guide" style="color: #FCD34D;">目安時間: 00:30</span>
+      </div>
+      <div id="notes-content">
+        【開始〜0:30】皆様、こんにちは。本日は『企業規模と組織階層がDX推進意識および組織摩擦認知に及ぼす影響』と題し、国内就業者2,035名の全量データに基づく二元配置分散分析と階層乖離の実証研究を発表いたします。
+      </div>
+    </div>
+
+  </div>
+
+  <!-- 全画面ナビゲーションヒント（右下） -->
+  <div id="fs-nav-hint">
+    [F] 全画面終了 | [←/→] スライド送り | [N] 原稿 | [O] 一覧
+  </div>
+
+  <!-- スライド一覧サムネイルモーダル（Overview [O]） -->
+  <div id="overview-modal" onclick="closeOverview(event)">
+    <div class="grid-container" id="overview-grid">
+      <!-- JavaScriptで自動生成 -->
+    </div>
+  </div>
+
+  <!-- ==========================================================================
+       8. インタラクティブ JavaScript エンジン（全画面オートスケーリング対応）
+       ========================================================================== -->
+  <script>
+    const slides = document.querySelectorAll('.slide');
+    const totalSlides = slides.length;
+    let currentSlide = 0;
+    
+    // タイマー変数 (12分 = 720秒)
+    let elapsedSeconds = 0;
+    let timerInterval = null;
+    let isTimerRunning = true;
+
+    // DOM要素
+    const slideViewport = document.getElementById('slide-viewport');
+    const stageContainer = document.getElementById('stage-container');
+    const topBar = document.getElementById('top-bar');
+    const curSlideNumEl = document.getElementById('cur-slide-num');
+    const totalSlideNumEl = document.getElementById('total-slide-num');
+    const timerDisplayEl = document.getElementById('timer-display');
+    const timerDotEl = document.getElementById('timer-dot');
+    const notesDrawer = document.getElementById('notes-drawer');
+    const notesContent = document.getElementById('notes-content');
+    const notesTimingGuide = document.getElementById('notes-timing-guide');
+    const btnNotes = document.getElementById('btn-notes');
+    const btnFs = document.getElementById('btn-fs');
+    const overviewModal = document.getElementById('overview-modal');
+    const overviewGrid = document.getElementById('overview-grid');
+
+    totalSlideNumEl.textContent = totalSlides;
+
+    /* ==========================================================================
+       【超重要】全画面およびウィンドウリサイズ時のオートスケーリング計算
+       1333x750 の 16:9 スライドを画面・プロジェクターサイズに合わせて最大拡大
+       ========================================================================== */
+    function updateSlideScaling() {
+      const isFs = !!(document.fullscreenElement || document.webkitFullscreenElement || document.body.classList.contains('is-fullscreen'));
+      
+      const availWidth = isFs ? window.innerWidth : stageContainer.clientWidth;
+      const availHeight = isFs ? window.innerHeight : stageContainer.clientHeight;
+
+      if (!availWidth || !availHeight) return;
+
+      const scaleX = availWidth / 1333;
+      const scaleY = availHeight / 750;
+
+      // 16:9の比率を維持したまま、画面いっぱいに最大拡大（端が切れないようminを使用）
+      const scale = Math.min(scaleX, scaleY);
+
+      slideViewport.style.transform = `scale(${scale})`;
+
+      if (isFs) {
+        btnFs.textContent = '解除 [F]';
+        btnFs.classList.add('active');
+      } else {
+        btnFs.textContent = '全画面 [F]';
+        btnFs.classList.remove('active');
+      }
+    }
+
+    // 文字サイズコントロール関数
+    function setFontSize(size) {
+      document.body.classList.remove('font-large', 'font-xlarge');
+      document.getElementById('btn-font-normal').classList.remove('active');
+      document.getElementById('btn-font-large').classList.remove('active');
+      document.getElementById('btn-font-xlarge').classList.remove('active');
+
+      if (size === 'large') {
+        document.body.classList.add('font-large');
+        document.getElementById('btn-font-large').classList.add('active');
+      } else if (size === 'xlarge') {
+        document.body.classList.add('font-xlarge');
+        document.getElementById('btn-font-xlarge').classList.add('active');
+      } else {
+        document.getElementById('btn-font-normal').classList.add('active');
+      }
+      updateSlideScaling();
+    }
+
+    // デフォルトで「拡大 (large)」モードを有効化（プロジェクター投影対応）
+    setFontSize('large');
+
+    // スライド更新
+    
+    // ==========================================================================
+    // Chart.js インタラクティブチャート描画エンジン (超高精細・完全調整版)
+    // - デジタル庁デザインシステム (DADS) 準拠
+    // - スライドテキストフォント（BIZ UDPGothic / Meiryo）完全一致
+    // - ラベル衝突防止アルゴリズム ＆ 95% CI エラーバー描画
+    // ==========================================================================
+
+    const FONT_FAMILY = '"BIZ UDPGothic", "Meiryo", "Yu Gothic", "Segoe UI", sans-serif';
+    const COLOR_LARGE = '#0F3260';  // 大企業: 濃紺 (DADS Large)
+    const COLOR_SMO = '#B91C1C';    // 中小企業: 真紅 (DADS SMO)
+    const COLOR_TEXT = '#111827';
+    const COLOR_MUTED = '#4B5563';
+    const COLOR_GRID = '#E2E8F0';
+
+    if (typeof Chart !== 'undefined') {
+      Chart.defaults.font.family = FONT_FAMILY;
+      Chart.defaults.font.weight = 'bold';
+      Chart.defaults.color = COLOR_TEXT;
+      Chart.defaults.borderColor = COLOR_GRID;
+    }
+
+    // 角丸バッジ描画関数
+    function drawBadge(ctx, x, y, text, color, bgColor, align = 'center', fontSize = 11) {
+      ctx.save();
+      ctx.font = `bold ${fontSize}px ${FONT_FAMILY}`;
+      const textWidth = ctx.measureText(text).width;
+      const h = fontSize + 8;
+      const padX = 6;
+      let rx = x - textWidth / 2 - padX;
+      if (align === 'left') rx = x;
+      if (align === 'right') rx = x - textWidth - padX * 2;
+      const ry = y - h / 2;
+
+      ctx.fillStyle = bgColor;
+      ctx.strokeStyle = color;
+      ctx.lineWidth = 1.2;
+      ctx.beginPath();
+      if (ctx.roundRect) {
+        ctx.roundRect(rx, ry, textWidth + padX * 2, h, 4);
+      } else {
+        ctx.rect(rx, ry, textWidth + padX * 2, h);
+      }
+      ctx.fill();
+      ctx.stroke();
+
+      ctx.fillStyle = color;
+      ctx.textAlign = align === 'left' ? 'left' : (align === 'right' ? 'right' : 'center');
+      ctx.textBaseline = 'middle';
+      const tx = align === 'left' ? x + padX : (align === 'right' ? x - padX : x);
+      ctx.fillText(text, tx, y);
+      ctx.restore();
+    }
+
+    // ==========================================================================
+    // 1. 図1: 交互作用プロット (Chart 1)
+    // ==========================================================================
+    let fig1Chart = null;
+    let fig1CurrentMetric = 'SC18';
+
+    const fig1Data = {
+      SC18: {
+        title: 'DX推進意識（心理的所有感）の二元配置交互作用プロット',
+        yAxisTitle: 'DX推進意識スコア (1〜5点リッカート平均)',
+        yMin: 2.8,
+        yMax: 4.25,
+        large: {
+          means: [3.767, 3.371, 3.181],
+          ci: [[3.539, 3.995], [3.301, 3.441], [3.119, 3.242]],
+          labels: ['3.77', '3.37', '3.18']
+        },
+        smo: {
+          means: [3.481, 3.224, 3.176],
+          ci: [[3.407, 3.555], [3.172, 3.277], [3.123, 3.228]],
+          labels: ['3.48', '3.22', '3.18']
+        },
+        convergenceNote: '【現場収束】一般社員層で大企業(3.18)と中小(3.18)が完全一致（Δ=0.005, 非有意）'
+      },
+      SC15: {
+        title: '組織摩擦認知（推進リスク・組織抵抗）の二元配置交互作用プロット',
+        yAxisTitle: '組織摩擦認知スコア (1〜5点リッカート平均)',
+        yMin: 2.3,
+        yMax: 3.65,
+        large: {
+          means: [3.097, 3.079, 3.223],
+          ci: [[2.834, 3.360], [3.013, 3.145], [3.165, 3.281]],
+          labels: ['3.10', '3.08', '3.22']
+        },
+        smo: {
+          means: [2.693, 3.096, 3.180],
+          ci: [[2.617, 2.769], [3.041, 3.150], [3.128, 3.231]],
+          labels: ['2.69', '3.10', '3.18']
+        },
+        convergenceNote: '【構造的断絶】中小企業経営層(2.69)と現場(3.18)の間に深甚な認識ギャップが存在'
+      }
+    };
+
+    const fig1CustomPlugin = {
+      id: 'fig1CustomPlugin',
+      afterDatasetsDraw(chart) {
+        const { ctx, scales: { x, y } } = chart;
+        const curData = fig1Data[fig1CurrentMetric];
+
+        chart.data.datasets.forEach((dataset, datasetIdx) => {
+          const meta = chart.getDatasetMeta(datasetIdx);
+          if (meta.hidden) return;
+
+          const isLarge = datasetIdx === 0;
+          const ciList = isLarge ? curData.large.ci : curData.smo.ci;
+          const valLabels = isLarge ? curData.large.labels : curData.smo.labels;
+
+          meta.data.forEach((point, i) => {
+            const px = point.x;
+            const py = point.y;
+            const ci = ciList[i];
+
+            // 1. 95% CI エラーバーの描画
+            if (ci) {
+              const yLow = y.getPixelForValue(ci[0]);
+              const yHigh = y.getPixelForValue(ci[1]);
+              ctx.save();
+              ctx.strokeStyle = dataset.borderColor;
+              ctx.lineWidth = 2.0;
+              ctx.beginPath();
+              ctx.moveTo(px, yLow);
+              ctx.lineTo(px, yHigh);
+              const w = 6;
+              ctx.moveTo(px - w, yHigh);
+              ctx.lineTo(px + w, yHigh);
+              ctx.moveTo(px - w, yLow);
+              ctx.lineTo(px + w, yLow);
+              ctx.stroke();
+              ctx.restore();
+            }
+
+            // 2. 数値ラベル描画
+            const yHigh = ci ? y.getPixelForValue(ci[1]) : py;
+            const yLow = ci ? y.getPixelForValue(ci[0]) : py;
+
+            let labelX = px;
+            let labelY = py;
+            let align = 'center';
+
+            if (fig1CurrentMetric === 'SC18') {
+              if (isLarge) {
+                if (i === 0) { labelX = px - 8; labelY = yHigh - 12; align = 'right'; }
+                else if (i === 1) { labelX = px; labelY = yHigh - 12; align = 'center'; }
+                else if (i === 2) { labelX = px - 10; labelY = yHigh - 12; align = 'right'; }
+              } else {
+                if (i === 0) { labelX = px - 8; labelY = yLow + 12; align = 'right'; }
+                else if (i === 1) { labelX = px; labelY = yLow + 12; align = 'center'; }
+                else if (i === 2) { labelX = px - 10; labelY = yLow + 12; align = 'right'; }
+              }
+            } else {
+              // SC15
+              if (isLarge) {
+                if (i === 0) { labelX = px - 8; labelY = yHigh - 12; align = 'right'; }
+                else if (i === 1) { labelX = px; labelY = yHigh - 12; align = 'center'; }
+                else if (i === 2) { labelX = px - 10; labelY = yHigh - 12; align = 'right'; }
+              } else {
+                if (i === 0) { labelX = px - 8; labelY = yLow + 12; align = 'right'; }
+                else if (i === 1) { labelX = px; labelY = yLow + 12; align = 'center'; }
+                else if (i === 2) { labelX = px - 10; labelY = yLow + 12; align = 'right'; }
+              }
+            }
+
+            drawBadge(ctx, labelX, labelY, `M=${valLabels[i]}`, dataset.borderColor, '#FFFFFF', align, 11);
+          });
+        });
+
+        // 3. 特記事項バッジの描画（グラフ上部）
+        ctx.save();
+        const noteText = curData.convergenceNote;
+        ctx.font = `bold 12px ${FONT_FAMILY}`;
+        const tw = ctx.measureText(noteText).width;
+        const bannerX = chart.chartArea.left + 10;
+        const bannerY = chart.chartArea.top + 14;
+
+        ctx.fillStyle = '#EFF6FF';
+        ctx.strokeStyle = '#2563EB';
+        ctx.lineWidth = 1.2;
+        ctx.beginPath();
+        if (ctx.roundRect) ctx.roundRect(bannerX, bannerY - 11, tw + 18, 22, 4);
+        else ctx.rect(bannerX, bannerY - 11, tw + 18, 22);
+        ctx.fill();
+        ctx.stroke();
+
+        ctx.fillStyle = '#1D4ED8';
+        ctx.textAlign = 'left';
+        ctx.textBaseline = 'middle';
+        ctx.fillText(noteText, bannerX + 9, bannerY);
+        ctx.restore();
+      }
+    };
+
+    function initFig1Chart() {
+      const canvas = document.getElementById('canvas-fig1-interaction');
+      if (!canvas) return;
+      const ctx = canvas.getContext('2d');
+      const d = fig1Data[fig1CurrentMetric];
+
+      if (fig1Chart) {
+        fig1Chart.destroy();
+      }
+
+      fig1Chart = new Chart(ctx, {
+        type: 'line',
+        data: {
+          labels: ['1. 経営層', '2. 部課長クラス', '3. 一般社員'],
+          datasets: [
+            {
+              label: '大企業 (1000人以上, n=745)',
+              data: d.large.means,
+              borderColor: COLOR_LARGE,
+              backgroundColor: COLOR_LARGE,
+              borderWidth: 3.5,
+              pointStyle: 'circle',
+              pointRadius: 7,
+              pointHoverRadius: 9,
+              tension: 0,
+              fill: false
+            },
+            {
+              label: '中小企業 (SMO, n=1,290)',
+              data: d.smo.means,
+              borderColor: COLOR_SMO,
+              backgroundColor: COLOR_SMO,
+              borderWidth: 3.5,
+              borderDash: [7, 5],
+              pointStyle: 'rect',
+              pointRadius: 7,
+              pointHoverRadius: 9,
+              tension: 0,
+              fill: false
+            }
+          ]
+        },
+        options: {
+          responsive: true,
+          maintainAspectRatio: false,
+          layout: {
+            padding: { top: 38, bottom: 25, left: 10, right: 35 }
+          },
+          plugins: {
+            legend: {
+              position: 'top',
+              align: 'end',
+              labels: {
+                boxWidth: 26,
+                boxHeight: 12,
+                padding: 12,
+                font: { size: 12, weight: 'bold', family: FONT_FAMILY }
+              }
+            },
+            tooltip: {
+              backgroundColor: 'rgba(15, 23, 42, 0.94)',
+              titleFont: { size: 13, weight: 'bold', family: FONT_FAMILY },
+              bodyFont: { size: 12, family: FONT_FAMILY },
+              padding: 10,
+              callbacks: {
+                label(ctx) {
+                  const isLarge = ctx.datasetIndex === 0;
+                  const ci = isLarge ? d.large.ci[ctx.dataIndex] : d.smo.ci[ctx.dataIndex];
+                  return `${ctx.dataset.label}: 平均 ${ctx.parsed.y.toFixed(3)} (95% CI: [${ci[0].toFixed(2)} - ${ci[1].toFixed(2)}])`;
+                }
+              }
+            }
+          },
+          scales: {
+            x: {
+              title: {
+                display: true,
+                text: '組織階層（SC7-2 職制グループ）',
+                font: { size: 13, weight: 'bold', family: FONT_FAMILY },
+                padding: { top: 6 }
+              },
+              grid: { display: false },
+              ticks: { font: { size: 13, weight: 'bold', family: FONT_FAMILY } }
+            },
+            y: {
+              title: {
+                display: true,
+                text: d.yAxisTitle,
+                font: { size: 13, weight: 'bold', family: FONT_FAMILY }
+              },
+              min: d.yMin,
+              max: d.yMax,
+              grid: { color: COLOR_GRID },
+              ticks: {
+                stepSize: 0.2,
+                font: { size: 12, weight: 'bold', family: FONT_FAMILY }
+              }
+            }
+          }
+        },
+        plugins: [fig1CustomPlugin]
+      });
+    }
+
+    function setFig1Metric(metric) {
+      fig1CurrentMetric = metric;
+      document.getElementById('btn-fig1-sc18').classList.toggle('active', metric === 'SC18');
+      document.getElementById('btn-fig1-sc15').classList.toggle('active', metric === 'SC15');
+      initFig1Chart();
+    }
+
+    // ==========================================================================
+    // 2. 図2: 6群別スコア比較プロファイル (Chart 2)
+    // ==========================================================================
+    let fig2Chart = null;
+    let fig2CurrentMode = 'both';
+
+    const fig2GroupLabels = [
+      '大企業・経営層\n(n=31)',
+      '大企業・部課長\n(n=295)',
+      '大企業・一般社員\n(n=419)',
+      '中小・経営層\n(n=298)',
+      '中小・部課長\n(n=511)',
+      '中小・一般社員\n(n=481)'
+    ];
+
+    const fig2Data = {
+      sc18: {
+        means: [3.767, 3.371, 3.181, 3.481, 3.224, 3.176],
+        ci: [[3.539, 3.995], [3.301, 3.441], [3.119, 3.242], [3.407, 3.555], [3.172, 3.277], [3.123, 3.228]]
+      },
+      sc15: {
+        means: [3.097, 3.079, 3.223, 2.693, 3.096, 3.180],
+        ci: [[2.834, 3.360], [3.013, 3.145], [3.165, 3.281], [2.617, 2.769], [3.041, 3.150], [3.128, 3.231]]
+      }
+    };
+
+    const fig2CustomPlugin = {
+      id: 'fig2CustomPlugin',
+      afterDatasetsDraw(chart) {
+        const { ctx, scales: { x, y } } = chart;
+
+        // 1. エラーバー描画
+        chart.data.datasets.forEach((dataset, datasetIdx) => {
+          const meta = chart.getDatasetMeta(datasetIdx);
+          if (meta.hidden) return;
+
+          const isSC18 = dataset.label.includes('SC18');
+          const ciList = isSC18 ? fig2Data.sc18.ci : fig2Data.sc15.ci;
+
+          meta.data.forEach((bar, i) => {
+            const bx = bar.x;
+            const ci = ciList[i];
+            if (!ci) return;
+
+            const yLow = y.getPixelForValue(ci[0]);
+            const yHigh = y.getPixelForValue(ci[1]);
+
+            ctx.save();
+            ctx.strokeStyle = '#1F2937';
+            ctx.lineWidth = 1.8;
+            ctx.beginPath();
+            ctx.moveTo(bx, yLow);
+            ctx.lineTo(bx, yHigh);
+            const w = 5;
+            ctx.moveTo(bx - w, yHigh);
+            ctx.lineTo(bx + w, yHigh);
+            ctx.moveTo(bx - w, yLow);
+            ctx.lineTo(bx + w, yLow);
+            ctx.stroke();
+
+            // バー上部に平均値ラベル
+            const meanVal = (isSC18 ? fig2Data.sc18.means[i] : fig2Data.sc15.means[i]).toFixed(2);
+            ctx.font = `bold 11px ${FONT_FAMILY}`;
+            ctx.fillStyle = '#111827';
+            ctx.textAlign = 'center';
+            ctx.textBaseline = 'bottom';
+            ctx.fillText(meanVal, bx, yHigh - 3);
+            ctx.restore();
+          });
+        });
+
+        // 2. 中小企業経営層(インデックス 3)の乖離差ブラケット描画 (+0.79)
+        if (fig2CurrentMode === 'both') {
+          const meta0 = chart.getDatasetMeta(0);
+          const meta1 = chart.getDatasetMeta(1);
+          if (!meta0.hidden && !meta1.hidden && meta0.data[3] && meta1.data[3]) {
+            const b1 = meta0.data[3];
+            const b2 = meta1.data[3];
+            const midX = (b1.x + b2.x) / 2;
+            const yTopBar = y.getPixelForValue(3.98);
+
+            ctx.save();
+            ctx.strokeStyle = '#DC2626';
+            ctx.lineWidth = 1.5;
+            ctx.beginPath();
+            ctx.moveTo(b1.x, yTopBar + 5);
+            ctx.lineTo(b1.x, yTopBar);
+            ctx.lineTo(b2.x, yTopBar);
+            ctx.lineTo(b2.x, yTopBar + 5);
+            ctx.stroke();
+
+            drawBadge(ctx, midX, yTopBar - 10, '★乖離差 +0.79 (p<0.001)', '#DC2626', '#FEF2F2', 'center', 11);
+            ctx.restore();
+          }
+
+          // 中小企業一般社員(インデックス 5)の均衡コールアウト
+          if (!meta0.hidden && !meta1.hidden && meta0.data[5] && meta1.data[5]) {
+            const b1 = meta0.data[5];
+            const b2 = meta1.data[5];
+            const midX = (b1.x + b2.x) / 2;
+            const yPos = y.getPixelForValue(3.60);
+            drawBadge(ctx, midX, yPos, '【均衡】3.18', '#059669', '#ECFDF5', 'center', 10);
+          }
+        }
+      }
+    };
+
+    function initFig2Chart() {
+      const canvas = document.getElementById('canvas-fig2-distribution');
+      if (!canvas) return;
+      const ctx = canvas.getContext('2d');
+
+      if (fig2Chart) {
+        fig2Chart.destroy();
+      }
+
+      const datasets = [];
+      if (fig2CurrentMode === 'both' || fig2CurrentMode === 'sc18') {
+        datasets.push({
+          label: 'SC18 DX推進意識 (主従属)',
+          data: fig2Data.sc18.means,
+          backgroundColor: 'rgba(15, 50, 96, 0.88)',
+          borderColor: COLOR_LARGE,
+          borderWidth: 1.5,
+          borderRadius: 4
+        });
+      }
+      if (fig2CurrentMode === 'both' || fig2CurrentMode === 'sc15') {
+        datasets.push({
+          label: 'SC15 組織摩擦認知 (副従属)',
+          data: fig2Data.sc15.means,
+          backgroundColor: 'rgba(185, 28, 28, 0.85)',
+          borderColor: COLOR_SMO,
+          borderWidth: 1.5,
+          borderRadius: 4
+        });
+      }
+
+      fig2Chart = new Chart(ctx, {
+        type: 'bar',
+        data: {
+          labels: fig2GroupLabels.map(l => l.split('\n')),
+          datasets: datasets
+        },
+        options: {
+          responsive: true,
+          maintainAspectRatio: false,
+          layout: {
+            padding: { top: 35, bottom: 15, left: 10, right: 25 }
+          },
+          plugins: {
+            legend: {
+              position: 'top',
+              align: 'end',
+              labels: {
+                boxWidth: 16,
+                boxHeight: 12,
+                padding: 12,
+                font: { size: 12, weight: 'bold', family: FONT_FAMILY }
+              }
+            },
+            tooltip: {
+              backgroundColor: 'rgba(15, 23, 42, 0.94)',
+              titleFont: { size: 13, weight: 'bold', family: FONT_FAMILY },
+              bodyFont: { size: 12, family: FONT_FAMILY },
+              callbacks: {
+                label(ctx) {
+                  return `${ctx.dataset.label}: 平均 ${ctx.parsed.y.toFixed(3)}`;
+                }
+              }
+            }
+          },
+          scales: {
+            x: {
+              grid: { display: false },
+              ticks: { font: { size: 12, weight: 'bold', family: FONT_FAMILY } }
+            },
+            y: {
+              title: {
+                display: true,
+                text: '平均スコア (1〜5点)',
+                font: { size: 13, weight: 'bold', family: FONT_FAMILY }
+              },
+              min: 2.2,
+              max: 4.28,
+              grid: { color: COLOR_GRID },
+              ticks: { stepSize: 0.4, font: { size: 12, weight: 'bold', family: FONT_FAMILY } }
+            }
+          }
+        },
+        plugins: [fig2CustomPlugin]
+      });
+    }
+
+    function setFig2Mode(mode) {
+      fig2CurrentMode = mode;
+      document.getElementById('btn-fig2-mode-both').classList.toggle('active', mode === 'both');
+      document.getElementById('btn-fig2-mode-sc18').classList.toggle('active', mode === 'sc18');
+      document.getElementById('btn-fig2-mode-sc15').classList.toggle('active', mode === 'sc15');
+      initFig2Chart();
+    }
+
+    // ==========================================================================
+    // 3. 図3: 2次元戦略ダイナミクス・4象限プロット (Chart 3)
+    // ==========================================================================
+    let fig3Chart = null;
+    let fig3ShowVectors = true;
+
+    const fig3QuadrantPlugin = {
+      id: 'fig3QuadrantPlugin',
+      beforeDraw(chart) {
+        const { ctx, chartArea: { top, bottom, left, right }, scales: { x, y } } = chart;
+        const xGrand = 3.2709;
+        const yGrand = 3.0802;
+        const xMid = x.getPixelForValue(xGrand);
+        const yMid = y.getPixelForValue(yGrand);
+
+        ctx.save();
+
+        // 象限背景ハイライト
+        // 第1象限 (右上): 変革推進・摩擦直面層
+        ctx.fillStyle = 'rgba(254, 226, 226, 0.32)';
+        ctx.fillRect(xMid, top, right - xMid, yMid - top);
+
+        // 第4象限 (右下): 全社牽引・理想推進層
+        ctx.fillStyle = 'rgba(209, 250, 229, 0.35)';
+        ctx.fillRect(xMid, yMid, right - xMid, bottom - yMid);
+
+        // 第3象限 (左下): DX無関心・現状維持層
+        ctx.fillStyle = 'rgba(241, 245, 249, 0.30)';
+        ctx.fillRect(left, yMid, xMid - left, bottom - yMid);
+
+        // 第2象限 (左上): 推進停滞・摩擦先行層
+        ctx.fillStyle = 'rgba(254, 243, 199, 0.30)';
+        ctx.fillRect(left, top, xMid - left, yMid - top);
+
+        // 十字線
+        ctx.strokeStyle = '#94A3B8';
+        ctx.lineWidth = 1.8;
+        ctx.setLineDash([6, 5]);
+
+        ctx.beginPath();
+        ctx.moveTo(xMid, top);
+        ctx.lineTo(xMid, bottom);
+        ctx.stroke();
+
+        ctx.beginPath();
+        ctx.moveTo(left, yMid);
+        ctx.lineTo(right, yMid);
+        ctx.stroke();
+        ctx.setLineDash([]);
+
+        // 十字線ラベル（データ点と絶対に重ならない位置に配置）
+        ctx.font = `bold 11px ${FONT_FAMILY}`;
+        ctx.fillStyle = '#475569';
+        ctx.textAlign = 'left';
+        ctx.fillText(`SC15 全体平均 3.080 →`, left + 8, yMid - 6);
+        ctx.textAlign = 'left';
+        ctx.fillText(`↑ SC18 全体平均 3.271`, xMid + 6, bottom - 10);
+
+        // 象限タイトルバッジ（四隅にすっきり配置）
+        drawBadge(ctx, right - 10, top + 14, '【第1象限】高推進・高摩擦', '#B91C1C', '#FEF2F2', 'right', 10);
+        drawBadge(ctx, left + 10, top + 14, '【第2象限】低推進・高摩擦', '#D97706', '#FFFBEB', 'left', 10);
+        drawBadge(ctx, left + 10, bottom - 12, '【第3象限】低推進・低摩擦', '#475569', '#F1F5F9', 'left', 10);
+        drawBadge(ctx, right - 10, bottom - 12, '【第4象限】高推進・低摩擦', '#047857', '#ECFDF5', 'right', 10);
+
+        ctx.restore();
+      },
+      afterDatasetsDraw(chart) {
+        if (!fig3ShowVectors) return;
+        const { ctx } = chart;
+
+        const metaLarge = chart.getDatasetMeta(0);
+        const metaSMO = chart.getDatasetMeta(1);
+
+        function drawTrajectory(meta, color, isDashed) {
+          if (!meta || meta.hidden || meta.data.length < 3) return;
+          const p1 = meta.data[0]; // 経営層
+          const p2 = meta.data[1]; // 部課長
+          const p3 = meta.data[2]; // 一般社員
+
+          ctx.save();
+          ctx.strokeStyle = color;
+          ctx.lineWidth = 3.5;
+          if (isDashed) ctx.setLineDash([7, 5]);
+
+          ctx.beginPath();
+          ctx.moveTo(p1.x, p1.y);
+          ctx.lineTo(p2.x, p2.y);
+          ctx.stroke();
+
+          ctx.beginPath();
+          ctx.moveTo(p2.x, p2.y);
+          ctx.lineTo(p3.x, p3.y);
+          ctx.stroke();
+          ctx.setLineDash([]);
+
+          function drawArrowHead(fromP, toP) {
+            const angle = Math.atan2(toP.y - fromP.y, toP.x - fromP.x);
+            const headlen = 10;
+            ctx.fillStyle = color;
+            ctx.beginPath();
+            ctx.moveTo(toP.x, toP.y);
+            ctx.lineTo(toP.x - headlen * Math.cos(angle - Math.PI / 6), toP.y - headlen * Math.sin(angle - Math.PI / 6));
+            ctx.lineTo(toP.x - headlen * Math.cos(angle + Math.PI / 6), toP.y - headlen * Math.sin(angle + Math.PI / 6));
+            ctx.closePath();
+            ctx.fill();
+          }
+
+          drawArrowHead(p1, p2);
+          drawArrowHead(p2, p3);
+          ctx.restore();
+        }
+
+        drawTrajectory(metaLarge, COLOR_LARGE, false);
+        drawTrajectory(metaSMO, COLOR_SMO, true);
+
+        // ノードラベル描画（衝突ゼロ調整）
+        const largeLabels = [
+          { text: '大企業・経営層 (3.77, 3.10)', dx: 14, dy: -6, align: 'left' },
+          { text: '大企業・部課長 (3.37, 3.08)', dx: 0, dy: -22, align: 'center' },
+          { text: '大企業・一般社員 (3.18, 3.22)', dx: -14, dy: -16, align: 'right' }
+        ];
+
+        const smoLabels = [
+          { text: '中小・経営層 (3.48, 2.69) [★孤立]', dx: 0, dy: 22, align: 'center' },
+          { text: '中小・部課長 (3.22, 3.10)', dx: 14, dy: 14, align: 'left' },
+          { text: '中小・一般社員 (3.18, 3.18)', dx: -14, dy: 18, align: 'right' }
+        ];
+
+        metaLarge.data.forEach((p, idx) => {
+          const cfg = largeLabels[idx];
+          drawBadge(ctx, p.x + cfg.dx, p.y + cfg.dy, cfg.text, COLOR_LARGE, '#FFFFFF', cfg.align, 11);
+        });
+
+        metaSMO.data.forEach((p, idx) => {
+          const cfg = smoLabels[idx];
+          drawBadge(ctx, p.x + cfg.dx, p.y + cfg.dy, cfg.text, COLOR_SMO, '#FFFFFF', cfg.align, 11);
+        });
+      }
+    };
+
+    function initFig3Chart() {
+      const canvas = document.getElementById('canvas-fig3-quadrant');
+      if (!canvas) return;
+      const ctx = canvas.getContext('2d');
+
+      if (fig3Chart) {
+        fig3Chart.destroy();
+      }
+
+      fig3Chart = new Chart(ctx, {
+        type: 'scatter',
+        data: {
+          datasets: [
+            {
+              label: '大企業 (1000人以上) 階層軌跡',
+              data: [
+                { x: 3.767, y: 3.097, layer: '1. 経営層', n: 31 },
+                { x: 3.371, y: 3.079, layer: '2. 部課長クラス', n: 295 },
+                { x: 3.181, y: 3.223, layer: '3. 一般社員', n: 419 }
+              ],
+              borderColor: COLOR_LARGE,
+              backgroundColor: COLOR_LARGE,
+              pointRadius: 9,
+              pointHoverRadius: 11,
+              showLine: false
+            },
+            {
+              label: '中小企業 (SMO) 階層軌跡',
+              data: [
+                { x: 3.481, y: 2.693, layer: '1. 経営層', n: 298 },
+                { x: 3.224, y: 3.096, layer: '2. 部課長クラス', n: 511 },
+                { x: 3.176, y: 3.180, layer: '3. 一般社員', n: 481 }
+              ],
+              borderColor: COLOR_SMO,
+              backgroundColor: COLOR_SMO,
+              pointStyle: 'rect',
+              pointRadius: 9,
+              pointHoverRadius: 11,
+              showLine: false
+            },
+            {
+              label: '全体重心 (N=2,035)',
+              data: [
+                { x: 3.2709, y: 3.0802, layer: '全体平均 (グランドミーン)', n: 2035 }
+              ],
+              borderColor: '#4B5563',
+              backgroundColor: '#4B5563',
+              pointStyle: 'crossRot',
+              pointRadius: 10,
+              pointHoverRadius: 12
+            }
+          ]
+        },
+        options: {
+          responsive: true,
+          maintainAspectRatio: false,
+          layout: {
+            padding: { top: 38, bottom: 25, left: 15, right: 30 }
+          },
+          plugins: {
+            legend: {
+              position: 'top',
+              align: 'end',
+              labels: {
+                boxWidth: 18,
+                boxHeight: 12,
+                padding: 12,
+                font: { size: 12, weight: 'bold', family: FONT_FAMILY }
+              }
+            },
+            tooltip: {
+              backgroundColor: 'rgba(15, 23, 42, 0.94)',
+              titleFont: { size: 13, weight: 'bold', family: FONT_FAMILY },
+              bodyFont: { size: 12, family: FONT_FAMILY },
+              callbacks: {
+                title(items) {
+                  const it = items[0];
+                  return `${it.dataset.label} - ${it.raw.layer}`;
+                },
+                label(it) {
+                  return [
+                    `推進意識 (SC18): ${it.raw.x.toFixed(3)}`,
+                    `組織摩擦 (SC15): ${it.raw.y.toFixed(3)}`,
+                    `サンプルサイズ: n = ${it.raw.n} 名`
+                  ];
+                }
+              }
+            }
+          },
+          scales: {
+            x: {
+              title: {
+                display: true,
+                text: 'DX推進意識スコア (SC18: 心理的所有感・推進意欲) →',
+                font: { size: 13, weight: 'bold', family: FONT_FAMILY }
+              },
+              min: 2.7,
+              max: 4.15,
+              grid: { color: COLOR_GRID },
+              ticks: { stepSize: 0.2, font: { size: 12, weight: 'bold', family: FONT_FAMILY } }
+            },
+            y: {
+              title: {
+                display: true,
+                text: '組織摩擦認知スコア (SC15: 変革抵抗・負荷懸念) →',
+                font: { size: 13, weight: 'bold', family: FONT_FAMILY }
+              },
+              min: 2.45,
+              max: 3.55,
+              grid: { color: COLOR_GRID },
+              ticks: { stepSize: 0.2, font: { size: 12, weight: 'bold', family: FONT_FAMILY } }
+            }
+          }
+        },
+        plugins: [fig3QuadrantPlugin]
+      });
+    }
+
+    function toggleFig3Vectors() {
+      fig3ShowVectors = !fig3ShowVectors;
+      document.getElementById('btn-fig3-vectors').classList.toggle('active', fig3ShowVectors);
+      if (fig3Chart) fig3Chart.update();
+    }
+
+    function resetFig3View() {
+      if (fig3Chart) {
+        fig3Chart.resetZoom && fig3Chart.resetZoom();
+        fig3Chart.update();
+      }
+    }
+
+    // ==========================================================================
+    // スライド切り替え時のチャート自動初期化・リサイズフック
+    // ==========================================================================
+    function refreshChartsForSlide(index) {
+      requestAnimationFrame(() => {
+        if (index === 6) { // Slide 7 (idx 6): 図1
+          if (!fig1Chart) initFig1Chart();
+          else fig1Chart.resize();
+        } else if (index === 8) { // Slide 9 (idx 8): 図2
+          if (!fig2Chart) initFig2Chart();
+          else fig2Chart.resize();
+        } else if (index === 10) { // Slide 11 (idx 10): 図3
+          if (!fig3Chart) initFig3Chart();
+          else fig3Chart.resize();
+        }
+      });
+    }
+
+    // 全画面表示やウィンドウリサイズ時の全チャート再計算
+    window.addEventListener('resize', () => {
+      requestAnimationFrame(() => {
+        if (fig1Chart) fig1Chart.resize();
+        if (fig2Chart) fig2Chart.resize();
+        if (fig3Chart) fig3Chart.resize();
+      });
+    });
+
+    function showSlide(index) {
+      if (index < 0 || index >= totalSlides) return;
+      
+      slides[currentSlide].classList.remove('active');
+      currentSlide = index;
+      slides[currentSlide].classList.add('active');
+      
+      curSlideNumEl.textContent = currentSlide + 1;
+      
+      // 発表者原稿の更新
+      const notes = slides[currentSlide].getAttribute('data-notes') || '発表者ノートはありません。';
+      const timeGuide = slides[currentSlide].getAttribute('data-time') || '--:--';
+      notesContent.innerHTML = notes;
+      notesTimingGuide.textContent = `このスライドの目標完了時間: ${timeGuide} / 12:00`;
+      
+      updateOverviewSelection();
+      
+      // チャート初期化・リサイズ実行
+      refreshChartsForSlide(currentSlide);
+    }
+
+    function nextSlide() {
+      if (currentSlide < totalSlides - 1) {
+        showSlide(currentSlide + 1);
+      }
+    }
+
+    function prevSlide() {
+      if (currentSlide > 0) {
+        showSlide(currentSlide - 1);
+      }
+    }
+
+    // 発表者ノート開閉
+    function toggleNotes() {
+      notesDrawer.classList.toggle('open');
+      btnNotes.classList.toggle('active');
+      setTimeout(updateSlideScaling, 50);
+    }
+
+    /* ==========================================================================
+       全画面切り替え（ブラウザFullscreen API + CSSフォールバック）
+       ========================================================================== */
+    function toggleFullscreen() {
+      const isAlreadyFs = !!(document.fullscreenElement || document.webkitFullscreenElement || document.body.classList.contains('is-fullscreen'));
+
+      if (!isAlreadyFs) {
+        const el = document.documentElement;
+        if (el.requestFullscreen) {
+          el.requestFullscreen().then(() => {
+            document.body.classList.add('is-fullscreen');
+            updateSlideScaling();
+          }).catch(() => {
+            // フルスクリーンAPIが制限されている場合のCSSフルスクリーン
+            document.body.classList.add('is-fullscreen');
+            updateSlideScaling();
+          });
+        } else if (el.webkitRequestFullscreen) {
+          el.webkitRequestFullscreen();
+          document.body.classList.add('is-fullscreen');
+          updateSlideScaling();
+        } else {
+          document.body.classList.add('is-fullscreen');
+          updateSlideScaling();
+        }
+      } else {
+        if (document.exitFullscreen) {
+          document.exitFullscreen().catch(() => {});
+        } else if (document.webkitExitFullscreen) {
+          document.webkitExitFullscreen();
+        }
+        document.body.classList.remove('is-fullscreen');
+        updateSlideScaling();
+      }
+    }
+
+    // フルスクリーン変更検知
+    ['fullscreenchange', 'webkitfullscreenchange'].forEach(evt => {
+      document.addEventListener(evt, () => {
+        if (document.fullscreenElement || document.webkitFullscreenElement) {
+          document.body.classList.add('is-fullscreen');
+        } else {
+          document.body.classList.remove('is-fullscreen');
+        }
+        updateSlideScaling();
+      });
+    });
+
+    window.addEventListener('resize', updateSlideScaling);
+
+    // 一覧モーダル
+    function toggleOverview() {
+      overviewModal.classList.toggle('open');
+    }
+
+    function closeOverview(e) {
+      if (e.target === overviewModal) {
+        overviewModal.classList.remove('open');
+      }
+    }
+
+    function buildOverviewGrid() {
+      overviewGrid.innerHTML = '';
+      slides.forEach((s, idx) => {
+        const titleEl = s.querySelector('.slide-action-title') || s.querySelector('.main-title');
+        const titleText = titleEl ? titleEl.textContent : `スライド ${idx+1}`;
+        const trackerEl = s.querySelector('.slide-tracker') || s.querySelector('.conf-name');
+        const trackerText = trackerEl ? trackerEl.textContent : '';
+
+        const item = document.createElement('div');
+        item.className = `thumb-item ${idx === currentSlide ? 'current' : ''}`;
+        item.innerHTML = `
+          <div class="thumb-num">Slide ${idx+1} (${s.getAttribute('data-time')})</div>
+          <div style="font-size: 11px; color: #004EA2; font-weight: bold; margin-top: 2px;">${trackerText}</div>
+          <div class="thumb-title">${titleText.substring(0, 36)}...</div>
+        `;
+        item.onclick = () => {
+          showSlide(idx);
+          overviewModal.classList.remove('open');
+        };
+        overviewGrid.appendChild(item);
+      });
+    }
+
+    function updateOverviewSelection() {
+      const items = overviewGrid.querySelectorAll('.thumb-item');
+      items.forEach((it, idx) => {
+        if (idx === currentSlide) {
+          it.classList.add('current');
+        } else {
+          it.classList.remove('current');
+        }
+      });
+    }
+
+    // タイマー管理
+    function startTimer() {
+      if (timerInterval) clearInterval(timerInterval);
+      timerInterval = setInterval(() => {
+        if (isTimerRunning) {
+          elapsedSeconds++;
+          renderTimer();
+        }
+      }, 1000);
+    }
+
+    function renderTimer() {
+      const m = Math.floor(elapsedSeconds / 60);
+      const s = elapsedSeconds % 60;
+      const fmt = `${String(m).padStart(2, '0')}:${String(s).padStart(2, '0')}`;
+      timerDisplayEl.textContent = fmt;
+
+      // 警告色 (11分経過で黄色、12分経過で赤色)
+      if (elapsedSeconds >= 12 * 60) {
+        timerDisplayEl.style.color = '#EF4444'; // 赤
+        timerDotEl.style.background = '#EF4444';
+      } else if (elapsedSeconds >= 11 * 60) {
+        timerDisplayEl.style.color = '#F59E0B'; // オレンジ
+        timerDotEl.style.background = '#F59E0B';
+      } else {
+        timerDisplayEl.style.color = '#38BDF8';
+        timerDotEl.style.background = '#10B981';
+      }
+    }
+
+    function resetTimer() {
+      elapsedSeconds = 0;
+      renderTimer();
+    }
+
+    document.querySelector('.timer-container').onclick = () => {
+      isTimerRunning = !isTimerRunning;
+      timerDotEl.style.animationPlayState = isTimerRunning ? 'running' : 'paused';
+    };
+
+    // キーボードショートカット
+    window.addEventListener('keydown', (e) => {
+      if (['INPUT', 'TEXTAREA'].includes(document.activeElement.tagName)) return;
+
+      switch(e.key) {
+        case 'ArrowRight':
+        case 'PageDown':
+        case ' ':
+        case 'Enter':
+          e.preventDefault();
+          nextSlide();
+          break;
+        case 'ArrowLeft':
+        case 'PageUp':
+        case 'Backspace':
+          e.preventDefault();
+          prevSlide();
+          break;
+        case 'Home':
+          e.preventDefault();
+          showSlide(0);
+          break;
+        case 'End':
+          e.preventDefault();
+          showSlide(totalSlides - 1);
+          break;
+        case 'f':
+        case 'F':
+          e.preventDefault();
+          toggleFullscreen();
+          break;
+        case 'n':
+        case 'N':
+        case 'p':
+        case 'P':
+          e.preventDefault();
+          toggleNotes();
+          break;
+        case 'o':
+        case 'O':
+          e.preventDefault();
+          toggleOverview();
+          break;
+        case 'Escape':
+          if (overviewModal.classList.contains('open')) {
+            toggleOverview();
+          } else if (document.body.classList.contains('is-fullscreen')) {
+            toggleFullscreen();
+          }
+          break;
+        case '+':
+        case '=':
+          e.preventDefault();
+          setFontSize('xlarge');
+          break;
+        case '-':
+        case '_':
+          e.preventDefault();
+          setFontSize('normal');
+          break;
+        case '0':
+          e.preventDefault();
+          setFontSize('large');
+          break;
+      }
+    });
+
+    // 初期化実行
+    buildOverviewGrid();
+    showSlide(0);
+    startTimer();
+    setTimeout(updateSlideScaling, 10);
+  </script>
+</body>
+</html>

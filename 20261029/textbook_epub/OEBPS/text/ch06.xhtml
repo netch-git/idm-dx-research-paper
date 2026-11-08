@@ -1,0 +1,53 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:epub="http://www.idpf.org/2007/ops" xml:lang="ja" lang="ja">
+<head>
+  <meta charset="utf-8" />
+  <title>第6章: 共通方法バイアスとSiemsen減衰定理</title>
+  <link rel="stylesheet" type="text/css" href="../styles/stylesheet.css" />
+</head>
+<body>
+
+<div class="chapter-start">
+  <div class="chapter-number">CHAPTER 06</div>
+  <h2 class="chapter-title">調査の限界を自覚し、数理で吟味する — 共通方法バイアスとSiemsen減衰定理</h2>
+  <p class="chapter-lead">自己報告式アンケートが抱える「見かけの相関」の課題。バイアスの存在を認めつつ、数理的定理によって効果の頑健性を確かめる。</p>
+
+  <h3 class="subhead">1. アンケート調査が構造的に抱える「共通方法バイアス（CMB）」</h3>
+  <p>
+    アンケート調査（質問紙調査）には、避けて通ることのできない特性があります。それは、<strong>「同一の回答者が、同じ一時点において、自己報告形式ですべての設問に答える」</strong> という構造です。
+  </p>
+  <p>
+    回答者のその日の体調や心理状態、あるいは設問に対する個人の認知の傾向によって、本来は独立しているはずの設問同士であっても、共通の個人差（同一法分散）が混入し、<strong>見かけ上の相関が実際よりも高く算出されてしまうリスク</strong> があります。これを <strong>共通方法バイアス（Common Method Bias: CMB）</strong> と呼びます。
+  </p>
+
+  <h3 class="subhead">2. Siemsen et al. (2010) が明らかにした「交互作用項の減衰定理」</h3>
+  <p>
+    この共通方法バイアスの懸念に対して、第一線の計量研究者はどのように誠実に向き合っているのでしょうか。
+    組織行動論の権威ある学術誌 <em>Organizational Research Methods</em> に掲載された名著 <strong>Siemsen, Roth, &amp; Oliveira (2010)</strong> は、極めて重要な数学的証明を提示しました。
+  </p>
+
+  <div class="callout callout-success">
+    <div class="callout-title">💎 Siemsen の交互作用項減衰定理（The Attenuation Theorem）</div>
+    <p>
+      「共通方法バイアス（CMB）が存在する場合、単なる2変数間の主効果（線形相関）は見かけ上水増しされやすい。<br />
+      しかし、<strong>掛け算である2次交互作用項（調整効果）に対しては、CMBは逆に『推定値をゼロに向かって押し潰す（減衰させる）』方向に作用する</strong>」
+    </p>
+  </div>
+
+  <p>
+    この数理的知見が示唆することは極めて深遠です。
+    <strong>「アンケート調査において交互作用（調整効果）が統計的に有意に出たということは、CMBという『効果をゼロへ押し潰す強い逆風』が存在している状況下であっても、なお有意水準を維持できるほど確固たる本物の効果であった」</strong> という、慎重かつ堅固な裏付けとなるのです。
+  </p>
+
+  <div class="defense-box">
+    <div class="defense-role">💬 学術的対話のための討議ノート</div>
+    <p><strong>想定される問いかけ:</strong> 「同一の回答者から一度に取得した横断調査であるため、共通方法バイアス（CMB）による過大評価が生じている可能性はありませんか？」</p>
+    <p><strong>討議の視点と回答方針:</strong><br />
+    「横断的自己報告調査における共通方法バイアスの可能性は、真摯に受け止めるべき重要な論点です。まず事後診断としてHarmanの単因子検定を実施し、第1因子の分散説明率が 32.4% と基準値（50%）を大きく下回っていることを確認いたしました。<br />
+    さらに理論的な根拠として、Siemsen et al. (2010) の数理的知見を考慮しております。Siemsenらの証明によると、CMBは主効果を水増しする一方で、交互作用項に対しては『ゼロへ減衰させる保守的なバイアス』として働きます。したがって、本研究において対話の調整効果が有意水準を保っているという事実は、CMBの減衰圧力を上回る確固たる実質的効果が存在することを示唆しております。」</p>
+  </div>
+</div>
+
+</body>
+</html>

@@ -1,0 +1,271 @@
+{
+  "version": "1.0-corrected",
+  "description": "相殺（Canceling-out）および構成概念混在を完全防止した心理統計学的スコアリング辞書",
+  "scales": {
+    "SC9_WORK_STYLE": {
+      "name": "仕事スタイル・就労意識",
+      "risk_type": "内部相殺リスク（ポジティブ項目とネガティブ項目が混在）",
+      "original_coding": "1:非常に当てはまる ... 5:全く当てはまらない",
+      "subscales": {
+        "SC9_ENGAGE": {
+          "label": "組織エンゲージメント・評価信頼（ポジティブ）",
+          "items": [
+            "SC9.1",
+            "SC9.4",
+            "SC9.5",
+            "SC9.7",
+            "SC9.10"
+          ],
+          "formula": "mean(6 - SC9.1, 6 - SC9.4, 6 - SC9.5, 6 - SC9.7, 6 - SC9.10)",
+          "interpretation": "5点満点。高いほど組織へのコミットメント・評価信頼・理念共感が高い"
+        },
+        "SC9_INJUSTICE": {
+          "label": "分配的不公正・業績冷淡（ネガティブ: 不満）",
+          "items": [
+            "SC9.2",
+            "SC9.3"
+          ],
+          "formula": "mean(6 - SC9.2, 6 - SC9.3)",
+          "interpretation": "5点満点。高いほど成果還元への不満（給料が増えない）や冷淡さが強い"
+        },
+        "SC9_RESIST": {
+          "label": "現状維持・リソース逼迫（ネガティブ: 抵抗）",
+          "items": [
+            "SC9.8",
+            "SC9.9"
+          ],
+          "formula": "mean(6 - SC9.8, 6 - SC9.9)",
+          "interpretation": "5点満点。高いほど業務逼迫や慣習固執バイアスが強い"
+        },
+        "SC9_ROOM": {
+          "label": "業務効率化余地（課題認識）",
+          "items": [
+            "SC9.6"
+          ],
+          "formula": "6 - SC9.6",
+          "interpretation": "5点満点。高いほど業務の非効率・改善余地を強く認識している"
+        }
+      },
+      "unidimensional_reverse_coded": {
+        "label": "DX変革受容性（総合スコア）として単一化する場合の反転コーディング",
+        "formula": "mean(6 - SC9.1, SC9.2, SC9.3, 6 - SC9.4, 6 - SC9.5, 6 - SC9.6, 6 - SC9.7, SC9.8, SC9.9, 6 - SC9.10)",
+        "note": "ネガティブ4項目（9.2, 9.3, 9.8, 9.9）は元コードそのまま（1=不満大=1点, 5=不満なし=5点）として加算"
+      }
+    },
+    "SC11_DIGITAL_SHIFT": {
+      "name": "デジタルシフト段階",
+      "risk_type": "名義コード混入による順序尺度崩壊リスク",
+      "original_coding": "1:デジタイゼーション, 2:デジタライゼーション, 3:DX, 4:当てはまるものはない",
+      "corrected_scoring": {
+        "continuous_level": "1->1 (基礎), 2->2 (プロセス), 3->3 (変革), 4->0 (未着手/ゼロレベル)",
+        "dummy_dx": "1 if SC11 == 3 else 0 (本格DX達成フラグ)",
+        "dummy_none": "1 if SC11 == 4 else 0 (デジタル未着手フラグ)"
+      }
+    },
+    "SC14_BSJ_EXPECTATION": {
+      "name": "ブルシット・ジョブ改善意欲",
+      "risk_type": "非該当コードによる尺度歪曲リスク",
+      "original_coding": "1:非常にそう思う, 2:そう思う, 3:あまりそう思わない, 4:まったくそう思わない, 5:わからない・そのような仕事はない",
+      "corrected_scoring": {
+        "improvement_intent": "コード1->4点, 2->3点, 3->2点, 4->1点, 5->NaN (欠損値として分離)",
+        "dummy_no_bsj": "1 if SC14 == 5 else 0 (無駄業務不在/健全組織フラグ)"
+      }
+    },
+    "SC15_DIGITAL_CONCERN": {
+      "name": "デジタル化の懸念・現場の心理的抵抗",
+      "risk_type": "外部相殺リスク（他尺度と合算すると推進意欲と懸念が打ち消し合う）",
+      "original_coding": "1:非常に当てはまる ... 5:全く当てはまらない",
+      "corrected_scoring": {
+        "resistance_score": "全9項目を `6 - SC15.i` (5点満点: 高いほど強い懸念・心理的抵抗)",
+        "subscales": {
+          "SC15_TOPDOWN": {
+            "label": "トップダウン・ニーズ不一致不信",
+            "items": [
+              "SC15.1",
+              "SC15.2"
+            ]
+          },
+          "SC15_PROCESS": {
+            "label": "プロセス遅延・学習負担",
+            "items": [
+              "SC15.3",
+              "SC15.4"
+            ]
+          },
+          "SC15_RISK": {
+            "label": "トラブル・品質リスク",
+            "items": [
+              "SC15.5"
+            ]
+          },
+          "SC15_UNREWARDED": {
+            "label": "徒労感・分配的不公正（仕事増・給与据置）",
+            "items": [
+              "SC15.6",
+              "SC15.7"
+            ]
+          },
+          "SC15_THREAT": {
+            "label": "雇用・役割喪失不安",
+            "items": [
+              "SC15.8",
+              "SC15.9"
+            ]
+          }
+        }
+      }
+    },
+    "SC18_DX_BELIEFS": {
+      "name": "DXに対する考え方・動機づけ",
+      "risk_type": "異質動機（個人的見返り vs 滅私奉公 vs 経営層評価）の混在相殺",
+      "original_coding": "1:そう思う ... 5:まったくそう思わない",
+      "subscales": {
+        "SC18_INCENTIVE": {
+          "label": "個人的インセンティブ・分配的公正期待（利己的動機）",
+          "items": [
+            "SC18.1",
+            "SC18.2",
+            "SC18.3",
+            "SC18.4",
+            "SC18.5"
+          ],
+          "formula": "mean(6 - SC18.1 .. 6 - SC18.5)",
+          "note": "特に SC18.1(給料増える) は最もスコアが低く(平均2.65点)、分配的不公正の直接指標"
+        },
+        "SC18_DUTY": {
+          "label": "利他的・規範的義務感（見返りなき滅私奉公）",
+          "items": [
+            "SC18.6"
+          ],
+          "formula": "6 - SC18.6",
+          "note": "平均3.76点と極めて高い。SC18.1と合算するとインセンティブ欠如の歪みが隠蔽される"
+        },
+        "SC18_LEADERSHIP": {
+          "label": "経営層のDXリーダーシップ・信頼（手続的公正）",
+          "items": [
+            "SC18.7",
+            "SC18.8",
+            "SC18.9"
+          ],
+          "formula": "mean(6 - SC18.7 .. 6 - SC18.9)"
+        }
+      }
+    },
+    "SC20_DX_BARRIERS": {
+      "name": "DX推進の課題・阻害要因",
+      "risk_type": "課題多面性の混濁リスク",
+      "original_coding": "1:当てはまる ... 5:まったく当てはまらない",
+      "corrected_scoring": {
+        "barrier_score": "全10項目を `6 - SC20.i` (5点満点: 高いほど深刻な課題)",
+        "subscales": {
+          "SC20_PEOPLE": {
+            "label": "人材・推進体制の欠如",
+            "items": [
+              "SC20.1",
+              "SC20.2",
+              "SC20.5"
+            ]
+          },
+          "SC20_LEADERSHIP": {
+            "label": "経営戦略・企業風土の不備",
+            "items": [
+              "SC20.6",
+              "SC20.7",
+              "SC20.9"
+            ]
+          },
+          "SC20_SYSTEM_BUDGET": {
+            "label": "既存レガシー・セキュリティ・予算制約",
+            "items": [
+              "SC20.3",
+              "SC20.8",
+              "SC20.10"
+            ]
+          },
+          "SC20_ROI": {
+            "label": "費用対効果の不透明さ",
+            "items": [
+              "SC20.4"
+            ]
+          }
+        }
+      }
+    },
+    "Q8_Q9_CAPABILITY_GAP": {
+      "name": "DX推進に必要な人材能力の重要度 vs 充足度",
+      "risk_type": "重要度と充足度の合算による概念喪失（最重要分析軸）",
+      "original_coding": "Q8: 1:非常に重要..5:不要, Q9: 1:非常に充足..5:不足",
+      "corrected_scoring": {
+        "importance_scores": "Q8.i_score = 6 - Q8.i (5点満点: 高いほど重要)",
+        "sufficiency_scores": "Q9.i_score = 6 - Q9.i (5点満点: 高いほど充足)",
+        "capability_deficit_gap": "GAP_i = Q8.i_score - Q9.i_score (正の値が大きいほど決定的な人材不足ボトルネック)",
+        "subdimensions": {
+          "TECH": {
+            "label": "デジタル技術能力",
+            "items": [
+              1
+            ]
+          },
+          "PMO_PERSUASION": {
+            "label": "PMO/説得力（経営層説明・予算獲得）",
+            "items": [
+              2
+            ]
+          },
+          "PMO_DISCOVERY": {
+            "label": "PMO/発見力（現場の声聞き取り・課題発見）★最大ギャップ",
+            "items": [
+              3
+            ]
+          },
+          "PMO_DESIGN": {
+            "label": "PMO/設計力（業務プロセスデザイン）",
+            "items": [
+              4
+            ]
+          },
+          "PMO_SELECTION": {
+            "label": "PMO/選定力（システム・ツール選定）",
+            "items": [
+              5
+            ]
+          },
+          "PMO_NEGOTIATION": {
+            "label": "PMO/折衝力（要件定義・ベンダー管理）",
+            "items": [
+              6
+            ]
+          },
+          "PMO_EXECUTION": {
+            "label": "PMO/推進力（現場抵抗突破）",
+            "items": [
+              7
+            ]
+          },
+          "POWER_COORDINATION": {
+            "label": "権限・調整力（利害調整）",
+            "items": [
+              8
+            ]
+          },
+          "STRATEGY": {
+            "label": "戦略・企画力（ロードマップ策定）",
+            "items": [
+              9
+            ]
+          }
+        }
+      }
+    },
+    "Q4_Q6_OUTCOME_VS_INTENT": {
+      "name": "成果総合評価 vs 継続意向",
+      "risk_type": "認知的不協和・焦燥感の混同リスク",
+      "original_coding": "1:0(不十分/不要) .. 11:10(十分/必要)",
+      "corrected_scoring": {
+        "outcome_score": "Q4 - 1 (0点〜10点: 実際の成果実感)",
+        "intent_score": "Q6 - 1 (0点〜10点: 取組継続の必要性認識)",
+        "dilemma_pressure_gap": "GAP = intent_score - outcome_score (成果が出ていないのに継続を迫られる組織的プレッシャー指標)"
+      }
+    }
+  }
+}

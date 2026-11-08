@@ -1,0 +1,1727 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>企業規模と組織階層がDX推進意識および組織摩擦認知に及ぼす影響 | 学会発表スライド (2026最新改訂版)</title>
+  <style>
+    /* ==========================================================================
+       1. デジタル庁デザインシステム（DADS）準拠 カラーパレット & プロジェクター設定
+       ========================================================================== */
+    :root {
+      --dads-primary-dark: #002B66;
+      --dads-primary: #005BAC;
+      --dads-primary-hover: #004582;
+      --dads-primary-tint: #E8F1FA;
+      --dads-secondary-teal: #00838F;
+      --dads-accent-cyan: #0077A3;
+
+      --dads-text-main: #111827;
+      --dads-text-sub: #374151;
+      --dads-text-muted: #4B5563;
+      --dads-text-white: #FFFFFF;
+
+      --dads-bg-app: #0B1120;
+      --dads-bg-slide: #FFFFFF;
+      --dads-bg-alt: #F8F9FA;
+      --dads-border-light: #CBD5E1;
+      --dads-border-main: #94A3B8;
+      --dads-border-focus: #005BAC;
+
+      --dads-color-large: #005BAC;
+      --dads-color-smo: #D32F2F;
+      --dads-success: #228543;
+      --dads-warning: #B45309;
+      --dads-danger: #D32F2F;
+
+      --font-base: "Noto Sans JP", "BIZ UDPGothic", "Meiryo", sans-serif;
+      --font-mono: "Consolas", "Courier New", monospace;
+      --slide-width: 1333px;
+      --slide-height: 750px;
+
+      --font-scale: 1.0;
+    }
+
+    body.font-large { --font-scale: 1.12; }
+    body.font-xlarge { --font-scale: 1.22; }
+
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+
+    html, body {
+      width: 100%;
+      height: 100%;
+      background-color: var(--dads-bg-app);
+      color: var(--dads-text-main);
+      font-family: var(--font-base);
+      line-height: 1.55;
+      overflow: hidden;
+      user-select: none;
+    }
+
+    #app-container {
+      width: 100%;
+      height: 100%;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      position: relative;
+    }
+
+    /* トップコントロールバー */
+    #top-bar {
+      width: 100%;
+      max-width: var(--slide-width);
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 8px 16px;
+      background: #1E293B;
+      color: #F8FAFC;
+      border-radius: 8px 8px 0 0;
+      font-size: 13px;
+      box-shadow: 0 4px 12px rgba(0,0,0,0.25);
+      z-index: 100;
+      flex-shrink: 0;
+      transition: all 0.25s ease;
+    }
+
+    .bar-left, .bar-center, .bar-right {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+    }
+
+    .tag-conf {
+      background: var(--dads-primary);
+      color: #fff;
+      padding: 3px 8px;
+      border-radius: 4px;
+      font-weight: 700;
+      font-size: 11.5px;
+      letter-spacing: 0.05em;
+    }
+
+    .timer-container {
+      display: flex;
+      align-items: center;
+      background: #0F172A;
+      padding: 4px 12px;
+      border-radius: 20px;
+      border: 1px solid #334155;
+      font-family: var(--font-mono);
+      font-size: 13.5px;
+      gap: 8px;
+      cursor: pointer;
+    }
+
+    .timer-dot {
+      width: 8px;
+      height: 8px;
+      border-radius: 50%;
+      background: #10B981;
+      animation: pulse 1.5s infinite;
+    }
+
+    @keyframes pulse {
+      0%, 100% { opacity: 1; transform: scale(1); }
+      50% { opacity: 0.4; transform: scale(0.85); }
+    }
+
+    .btn-ctrl {
+      background: #334155;
+      color: #fff;
+      border: 1px solid #475569;
+      padding: 5px 10px;
+      border-radius: 4px;
+      cursor: pointer;
+      font-size: 12px;
+      font-weight: 600;
+      transition: all 0.15s ease;
+      display: inline-flex;
+      align-items: center;
+      gap: 4px;
+    }
+
+    .btn-ctrl:hover {
+      background: var(--dads-primary);
+      border-color: var(--dads-primary);
+    }
+
+    .btn-ctrl.active {
+      background: var(--dads-primary);
+      border-color: #60A5FA;
+    }
+
+    /* ステージコンテナ & ビューポート */
+    #stage-container {
+      flex: 1;
+      width: 100%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      position: relative;
+      overflow: hidden;
+      padding: 0;
+    }
+
+    #slide-viewport {
+      width: var(--slide-width);
+      height: var(--slide-height);
+      background: var(--dads-bg-slide);
+      position: absolute;
+      box-shadow: 0 10px 40px rgba(0,0,0,0.6);
+      border-radius: 0 0 8px 8px;
+      overflow: hidden;
+      transform-origin: center center;
+      transition: transform 0.08s ease-out;
+    }
+
+    body.is-fullscreen { background-color: #000000; }
+    body.is-fullscreen #top-bar {
+      position: fixed;
+      top: 0;
+      left: 50%;
+      transform: translateX(-50%) translateY(-85%);
+      opacity: 0.15;
+      z-index: 9999;
+      border-radius: 0 0 10px 10px;
+      box-shadow: 0 4px 20px rgba(0,0,0,0.8);
+      max-width: 900px;
+    }
+    body.is-fullscreen #top-bar:hover {
+      transform: translateX(-50%) translateY(0);
+      opacity: 1;
+    }
+    body.is-fullscreen #slide-viewport {
+      border-radius: 0;
+      box-shadow: none;
+    }
+
+    #fs-nav-hint {
+      display: none;
+      position: fixed;
+      bottom: 16px;
+      right: 20px;
+      background: rgba(15, 23, 42, 0.75);
+      color: #E2E8F0;
+      padding: 6px 14px;
+      border-radius: 20px;
+      font-size: 12px;
+      font-weight: 700;
+      z-index: 500;
+      pointer-events: none;
+      backdrop-filter: blur(4px);
+      border: 1px solid rgba(255,255,255,0.15);
+    }
+    body.is-fullscreen #fs-nav-hint { display: block; }
+
+    /* スライド共通レイアウト */
+    .slide {
+      width: 100%;
+      height: 100%;
+      position: absolute;
+      top: 0;
+      left: 0;
+      display: none;
+      flex-direction: column;
+      padding: 26px 40px 18px 40px;
+      background: #FFFFFF;
+      overflow: hidden;
+    }
+    .slide.active { display: flex; }
+
+    .slide-header {
+      border-bottom: 2.5px solid var(--dads-border-light);
+      padding-bottom: 10px;
+      margin-bottom: 14px;
+      display: flex;
+      justify-content: space-between;
+      align-items: flex-start;
+    }
+
+    .header-main { flex: 1; }
+
+    .slide-tracker {
+      font-size: calc(13px * var(--font-scale));
+      font-weight: 800;
+      color: var(--dads-primary);
+      text-transform: uppercase;
+      letter-spacing: 0.08em;
+      margin-bottom: 3px;
+      display: flex;
+      align-items: center;
+      gap: 6px;
+    }
+    .slide-tracker::before {
+      content: "";
+      display: inline-block;
+      width: 5px;
+      height: 14px;
+      background: var(--dads-primary);
+      border-radius: 2px;
+    }
+
+    .slide-action-title {
+      font-size: calc(23px * var(--font-scale));
+      font-weight: 900;
+      color: var(--dads-primary-dark);
+      letter-spacing: -0.01em;
+      line-height: 1.3;
+      margin-bottom: 4px;
+    }
+
+    .slide-lead-bar {
+      font-size: calc(14px * var(--font-scale));
+      color: var(--dads-text-sub);
+      background: var(--dads-bg-alt);
+      padding: 5px 12px;
+      border-left: 4px solid var(--dads-primary);
+      border-radius: 0 4px 4px 0;
+      font-weight: 600;
+      margin-top: 3px;
+    }
+
+    .slide-timing-badge {
+      font-size: 12px;
+      font-family: var(--font-mono);
+      background: #F1F5F9;
+      color: #334155;
+      padding: 5px 10px;
+      border-radius: 4px;
+      border: 1px solid #CBD5E1;
+      font-weight: 700;
+      white-space: nowrap;
+      margin-left: 14px;
+    }
+
+    .slide-body {
+      flex: 1;
+      display: flex;
+      gap: 20px;
+      overflow: hidden;
+    }
+
+    .col-half { flex: 1; display: flex; flex-direction: column; gap: 12px; }
+    .col-40 { width: 40%; display: flex; flex-direction: column; gap: 12px; }
+    .col-60 { width: 60%; display: flex; flex-direction: column; gap: 12px; }
+    .col-35 { width: 35%; display: flex; flex-direction: column; gap: 12px; }
+    .col-65 { width: 65%; display: flex; flex-direction: column; gap: 12px; }
+
+    /* UI カード・パネル */
+    .card-panel {
+      background: #FFFFFF;
+      border: 1px solid var(--dads-border-light);
+      border-radius: 6px;
+      padding: 14px 18px;
+      box-shadow: 0 1px 3px rgba(0,0,0,0.05);
+      font-size: calc(13px * var(--font-scale));
+    }
+    .card-panel.highlight {
+      background: var(--dads-primary-tint);
+      border-color: #93C5FD;
+      border-left: 5px solid var(--dads-primary);
+    }
+    .card-panel.danger-tint {
+      background: #FEF2F2;
+      border-color: #FECACA;
+      border-left: 5px solid var(--dads-danger);
+    }
+    .card-panel.success-tint {
+      background: #F0FDF4;
+      border-color: #BBF7D0;
+      border-left: 5px solid var(--dads-success);
+    }
+
+    .card-panel h4 {
+      font-size: calc(15px * var(--font-scale));
+      color: var(--dads-primary-dark);
+      margin-bottom: 8px;
+      font-weight: 800;
+      display: flex;
+      align-items: center;
+      gap: 6px;
+    }
+
+    .stat-badge {
+      display: inline-block;
+      font-family: var(--font-mono);
+      font-weight: 800;
+      font-size: calc(14px * var(--font-scale));
+      padding: 2px 8px;
+      border-radius: 4px;
+      margin: 2px 0;
+    }
+    .badge-primary { background: #DBEAFE; color: #1E40AF; }
+    .badge-danger { background: #FEE2E2; color: #991B1B; }
+    .badge-success { background: #DCFCE7; color: #166534; }
+
+    /* テーブル */
+    .slide-table {
+      width: 100%;
+      border-collapse: collapse;
+      font-size: calc(12px * var(--font-scale));
+      margin-top: 4px;
+    }
+    .slide-table th, .slide-table td {
+      padding: 7px 10px;
+      border: 1px solid var(--dads-border-light);
+      text-align: left;
+    }
+    .slide-table th {
+      background: #F1F5F9;
+      font-weight: 800;
+      color: var(--dads-text-main);
+    }
+    .slide-table td.text-right { text-align: right; }
+    .slide-table td.text-center { text-align: center; }
+
+    /* チャートコンテナ */
+    .chart-box {
+      flex: 1;
+      position: relative;
+      background: #FFFFFF;
+      border: 1px solid var(--dads-border-light);
+      border-radius: 6px;
+      padding: 10px;
+      display: flex;
+      flex-direction: column;
+    }
+    .chart-box canvas { width: 100% !important; height: 100% !important; }
+
+    /* フッター */
+    .slide-footer {
+      height: 24px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      border-top: 1px solid var(--dads-border-light);
+      padding-top: 6px;
+      margin-top: 8px;
+      font-size: 11px;
+      color: var(--dads-text-muted);
+    }
+    .slide-page-num {
+      font-family: var(--font-mono);
+      font-weight: 800;
+      color: var(--dads-primary);
+    }
+
+    /* 表紙専用デザイン */
+    .title-slide {
+      background: linear-gradient(135deg, #002B66 0%, #004EA2 60%, #0077A3 100%);
+      color: #FFFFFF;
+      justify-content: center;
+      align-items: center;
+      text-align: center;
+      padding: 40px 60px;
+    }
+    .title-slide .badge-conf {
+      background: rgba(255,255,255,0.18);
+      color: #E2E8F0;
+      padding: 6px 18px;
+      border-radius: 20px;
+      font-size: 14px;
+      font-weight: 700;
+      letter-spacing: 0.05em;
+      margin-bottom: 24px;
+      border: 1px solid rgba(255,255,255,0.3);
+      display: inline-block;
+    }
+    .title-slide h1 {
+      font-size: 36px;
+      font-weight: 900;
+      line-height: 1.35;
+      margin-bottom: 16px;
+      letter-spacing: -0.01em;
+      text-shadow: 0 2px 10px rgba(0,0,0,0.3);
+    }
+    .title-slide h2 {
+      font-size: 20px;
+      font-weight: 500;
+      color: #BFDBFE;
+      margin-bottom: 32px;
+      line-height: 1.5;
+    }
+    .title-slide .meta-box {
+      background: rgba(15, 23, 42, 0.45);
+      border: 1px solid rgba(255,255,255,0.2);
+      border-radius: 8px;
+      padding: 16px 32px;
+      display: inline-flex;
+      gap: 36px;
+      text-align: left;
+      font-size: 13.5px;
+    }
+    .title-slide .meta-item strong { color: #93C5FD; display: block; font-size: 11.5px; margin-bottom: 2px; }
+
+    /* ナビゲーションドロワー */
+    #nav-drawer {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 320px;
+      height: 100%;
+      background: #0F172A;
+      color: #F8FAFC;
+      box-shadow: 4px 0 20px rgba(0,0,0,0.5);
+      transform: translateX(-100%);
+      transition: transform 0.25s cubic-bezier(0.4, 0, 0.2, 1);
+      z-index: 2000;
+      display: flex;
+      flex-direction: column;
+    }
+    #nav-drawer.open { transform: translateX(0); }
+    .drawer-header {
+      padding: 16px;
+      background: #1E293B;
+      border-bottom: 1px solid #334155;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      font-weight: 800;
+      font-size: 15px;
+    }
+    .drawer-list {
+      flex: 1;
+      overflow-y: auto;
+      padding: 10px 0;
+    }
+    .drawer-item {
+      padding: 10px 16px;
+      font-size: 13px;
+      cursor: pointer;
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      border-left: 3px solid transparent;
+      transition: all 0.15s ease;
+    }
+    .drawer-item:hover { background: #1E293B; }
+    .drawer-item.active {
+      background: #1E293B;
+      border-left-color: var(--dads-primary);
+      font-weight: 700;
+      color: #60A5FA;
+    }
+    .drawer-item .num { font-family: var(--font-mono); color: #94A3B8; font-size: 11px; }
+
+    #drawer-overlay {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background: rgba(0,0,0,0.5);
+      z-index: 1999;
+      display: none;
+    }
+    #drawer-overlay.open { display: block; }
+  </style>
+  <script src="assets/chart.umd.min.js"></script>
+</head>
+<body>
+
+  <div id="app-container">
+
+    <!-- トップコントロールバー -->
+    <div id="top-bar">
+      <div class="bar-left">
+        <button class="btn-ctrl" id="btn-drawer-toggle">☰ 目次</button>
+        <span class="tag-conf">学会発表 2026</span>
+        <span style="font-weight:700; font-size:12.5px;">IDM-DX 階層乖離研究</span>
+      </div>
+
+      <div class="bar-center">
+        <button class="btn-ctrl" id="btn-prev">◀ 前へ</button>
+        <span id="slide-indicator" style="font-family:var(--font-mono); font-weight:700; font-size:13px; padding:0 8px;">01 / 15</span>
+        <button class="btn-ctrl" id="btn-next">次へ ▶</button>
+      </div>
+
+      <div class="bar-right">
+        <div class="timer-container" id="timer-box" title="クリックでタイマースタート/リセット">
+          <div class="timer-dot"></div>
+          <span id="timer-display">12:00</span>
+        </div>
+        <button class="btn-ctrl" id="btn-font-toggle">文字 A+</button>
+        <button class="btn-ctrl" id="btn-fullscreen">⛶ 全画面 (F)</button>
+      </div>
+    </div>
+
+    <!-- ステージコンテナ -->
+    <div id="stage-container">
+      <div id="slide-viewport">
+
+        <!-- ==========================================================
+             SLIDE 01: 表紙 (Title Slide)
+             ========================================================== -->
+        <div class="slide title-slide active" id="slide-1">
+          <span class="badge-conf">経営情報学会 / 情報経営学会 / 組織学会 2026年次学術大会 口頭発表</span>
+          <h1>企業規模と組織階層がDX推進意識および<br>組織摩擦認知に及ぼす影響</h1>
+          <h2>就業者2,035名の決定論的マイクロデータに基づく5大仮説実証と査読頑健性マトリクス</h2>
+          <div class="meta-box">
+            <div class="meta-item">
+              <strong>報告者・研究チーム</strong>
+              IDM デジタル変革調査研究グループ
+            </div>
+            <div class="meta-item">
+              <strong>分析対象データ</strong>
+              完全欠損なし N = 2,035（決定論的実証）
+            </div>
+            <div class="meta-item">
+              <strong>発表時間</strong>
+              12分（発表）+ 質疑応答
+            </div>
+            <div class="meta-item">
+              <strong>改訂日</strong>
+              2026年10月8日（最新確定版）
+            </div>
+          </div>
+        </div>
+
+        <!-- ==========================================================
+             SLIDE 02: エグゼクティブ・サマリー
+             ========================================================== -->
+        <div class="slide" id="slide-2">
+          <div class="slide-header">
+            <div class="header-main">
+              <div class="slide-tracker">Executive Summary</div>
+              <div class="slide-action-title">本研究の核心的発見：DXを阻む本質は「SMO中間管理職の当事者意識急落」と「PMO機能の欠落」にある</div>
+              <div class="slide-lead-bar">就業者 N = 2,035名の完全決定論的解析により、テクノロジー決定論を打破する5大実証事実を確立</div>
+            </div>
+            <div class="slide-timing-badge">目安: 01:00</div>
+          </div>
+          <div class="slide-body">
+            <div class="col-half">
+              <div class="card-panel highlight">
+                <h4>① 職階×企業規模の交互作用【H1 支持】</h4>
+                <p>大企業では職位が上がるほど変革当事者意識が高まるが、<strong>SMO（中堅・中小）では中間管理職（課長・係長）で急落・孤立する</strong>（F = 4.619, p = 0.0100）。大企業優位は一般社員では完全に消失（現場収束）。</p>
+              </div>
+              <div class="card-panel danger-tint">
+                <h4>② 分配的公正の欠落と心理的離反【H2 支持】</h4>
+                <p>k-meansクラスタリングにより全就業者の<strong>45.8%が「心理的離反層」</strong>に分類。給与・評価の連動実感欠如が離反確率を<strong>3.5倍</strong>高める。</p>
+              </div>
+              <div class="card-panel success-tint">
+                <h4>③ 手続的公正による感情的反転【H3 支持】</h4>
+                <p>意思決定の透明性が高い組織では、組織摩擦が逆に当事者意識を高める<strong>感情的バランシング（Huy 2002）のレジリエンス</strong>が数学的に証明（B = +0.0826, p &lt; 0.001）。</p>
+              </div>
+            </div>
+            <div class="col-half">
+              <div class="card-panel">
+                <h4>④ 人材能力GAPとPMOの真の力【H4 支持】</h4>
+                <p>需給GAP最大は技術ではなく<strong>「現場課題発見・傾聴能力」(+1.08点)</strong>。DX総合成果を決定づけるのは技術知識（β = +0.047, ns）ではなく<strong>PMO・組織変革機能（β = +0.439, p &lt; 0.001）</strong>である。</p>
+              </div>
+              <div class="card-panel">
+                <h4>⑤ 組織的認知的不協和と焦燥【H5 支持】</h4>
+                <p>成果が伴わないまま推進意向だけが先行する「不協和ギャップ」が全社で存在（+1.25点）。特に<strong>SMO中間管理職でギャップが最大化（+1.45点, p &lt; 0.05）</strong>し、深刻な疲弊に直面。</p>
+              </div>
+              <div class="card-panel highlight">
+                <h4>★ 査読完全防衛：8大感度分析モデル全数有意</h4>
+                <p>主分析、Type III、共変量ANCOVA、全9項目、因子得点、職階定義B、HC3異分散頑健モデルの<strong>すべてで p &lt; 0.05 をクリア</strong>。</p>
+              </div>
+            </div>
+          </div>
+          <div class="slide-footer">
+            <span>分析対象: 全サンプル N = 2,035 (完全欠損0件) | 乱数シード固定完全再現性</span>
+            <span class="slide-page-num">02 / 15</span>
+          </div>
+        </div>
+
+        <!-- ==========================================================
+             SLIDE 03: 研究背景と問題意識
+             ========================================================== -->
+        <div class="slide" id="slide-3">
+          <div class="slide-header">
+            <div class="header-main">
+              <div class="slide-tracker">1. 研究背景と問題意識</div>
+              <div class="slide-action-title">DX推進の最大の障壁は技術不足ではなく、「組織階層間の認識・感情摩擦」にある</div>
+              <div class="slide-lead-bar">経済産業省「DXレポート」の警鐘から7年：巨額のIT投資にもかかわらず現場の心理的所有感が形成されない病理</div>
+            </div>
+            <div class="slide-timing-badge">目安: 02:00</div>
+          </div>
+          <div class="slide-body">
+            <div class="col-half">
+              <div class="card-panel" style="height:100%;">
+                <h4>従来のDX研究における「2つの盲点」</h4>
+                <ul style="padding-left:18px; line-height:1.8; margin-top:8px;">
+                  <li><strong>盲点 1: テクノロジー決定論への過度の偏重</strong><br>
+                    ツール導入（クラウド、AI、ERP）や技術知識の習得ばかりが議論され、就業者の「心理的所有感（Psychological Ownership）」や「組織公正（Organizational Justice）」といった人間系ダイナミクスが軽視されてきた。
+                  </li>
+                  <li style="margin-top:10px;"><strong>盲点 2: 企業規模二元論による一括りの誤謬</strong><br>
+                    「大企業＝進んでいる / 中小企業＝遅れている」という単純なマクロ比較に終始し、社内の「経営層」「中間管理職」「一般現場社員」という階層構造との交差効果が見落とされてきた。
+                  </li>
+                </ul>
+              </div>
+            </div>
+            <div class="col-half">
+              <div class="card-panel highlight" style="height:100%;">
+                <h4>本研究の問題意識とリサーチ・クエスチョン (RQ)</h4>
+                <div style="background:#fff; border:1px solid #CBD5E1; border-radius:6px; padding:12px; margin:10px 0;">
+                  <strong style="color:var(--dads-primary);">RQ 1:</strong> 企業規模と組織階層が交差するとき、就業者の変革当事者意識はどのように分断されるのか？<br><br>
+                  <strong style="color:var(--dads-primary);">RQ 2:</strong> なぜ中小企業の中間管理職は最も孤立し、疲弊するのか？その組織心理的メカニズムは何か？<br><br>
+                  <strong style="color:var(--dads-primary);">RQ 3:</strong> 組織公正やPMO（変革推進機能）は、この認識摩擦をどのように緩和し、成果に転換できるのか？
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="slide-footer">
+            <span>参考文献: 経済産業省 (2018)『DXレポート』; Kane et al. (2015) MIT Sloan Management Review</span>
+            <span class="slide-page-num">03 / 15</span>
+          </div>
+        </div>
+
+        <!-- ==========================================================
+             SLIDE 04: 理論的枠組みと5大仮説体系
+             ========================================================== -->
+        <div class="slide" id="slide-4">
+          <div class="slide-header">
+            <div class="header-main">
+              <div class="slide-tracker">2. 理論的背景と仮説体系</div>
+              <div class="slide-action-title">組織行動論・心理的所有感理論・組織公正理論に基づく5大仮説体系</div>
+              <div class="slide-lead-bar">多層的な実証アプローチにより、変革の「意識乖離」「心理的離反」「緩衝効果」「能力GAP」「焦燥」を包括検証</div>
+            </div>
+            <div class="slide-timing-badge">目安: 03:00</div>
+          </div>
+          <div class="slide-body">
+            <table class="slide-table">
+              <thead>
+                <tr>
+                  <th style="width:14%;">仮説番号</th>
+                  <th style="width:24%;">理論的根拠</th>
+                  <th style="width:44%;">仮説の命題</th>
+                  <th style="width:18%;">検証手法</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <td><strong>仮説 1 (H1)</strong><br>階層×規模交互作用</td>
+                  <td>心理的所有感理論<br>(Pierce et al. 2001)</td>
+                  <td>大企業では職制上昇に伴い当事者意識が高まるが、SMOでは中間管理職で急落する二元配置交互作用が存在する。</td>
+                  <td>二元配置ANOVA<br>(Type II / Type III)</td>
+                </tr>
+                <tr>
+                  <td><strong>仮説 2 (H2)</strong><br>分配的公正と離反</td>
+                  <td>分配的公正理論<br>(Adams 1965; Colquitt 2001)</td>
+                  <td>DX成果に対する個人的給与・評価の還元（分配的公正）の欠落は、就業者を心理的離反層へ追いやる。</td>
+                  <td>k-meansクラスタリング<br>多項ロジスティック回帰</td>
+                </tr>
+                <tr>
+                  <td><strong>仮説 3 (H3)</strong><br>手続的公正の緩衝効果</td>
+                  <td>手続的・情報的公正理論<br>感情的バランシング (Huy 2002)</td>
+                  <td>手続的公正（決定の透明性・情報共有）は、組織摩擦が当事者意識に及ぼす負の影響を緩和・正転させる。</td>
+                  <td>モデレーション重回帰<br>単純傾き分析 (Simple Slopes)</td>
+                </tr>
+                <tr>
+                  <td><strong>仮説 4 (H4)</strong><br>人材能力需給GAP</td>
+                  <td>資源依拠観点 (Barney 1991)<br>戦略的PMO論 (Kane 2015)</td>
+                  <td>需給GAPのボトルネックは技術ではなく現場課題発見力であり、成果を決定づけるのはPMO組織機能である。</td>
+                  <td>対応のあるt検定<br>階層的重回帰分析</td>
+                </tr>
+                <tr>
+                  <td><strong>仮説 5 (H5)</strong><br>組織的認知的不協和</td>
+                  <td>認知的不協和理論<br>(Festinger 1957)</td>
+                  <td>全社的に成果実感を超える推進焦燥が存在し、特にSMO中間管理職において不協和ギャップが最大化する。</td>
+                  <td>対応のあるt検定<br>二元配置ANOVA</td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+          <div class="slide-footer">
+            <span>理論的基礎: Pierce et al. (2001) AMR; Colquitt (2001) JAP; Huy (2002) ASQ; Festinger (1957)</span>
+            <span class="slide-page-num">04 / 15</span>
+          </div>
+        </div>
+
+        <!-- ==========================================================
+             SLIDE 05: 調査設計とデータ特性
+             ========================================================== -->
+        <div class="slide" id="slide-5">
+          <div class="slide-header">
+            <div class="header-main">
+              <div class="slide-tracker">3. 調査設計とデータ特性</div>
+              <div class="slide-action-title">就業者 2,035名の完全決定論的解析：2要因・6セルの直交標本配置</div>
+              <div class="slide-lead-bar">サンプルの間引きや恣意的な丸め込みを一切行わない、厳格な全数マイクロデータ分析</div>
+            </div>
+            <div class="slide-timing-badge">目安: 04:00</div>
+          </div>
+          <div class="slide-body">
+            <div class="col-half">
+              <div class="card-panel">
+                <h4>標本構成 (2要因・6セル配置: N = 2,035)</h4>
+                <table class="slide-table" style="margin-top:6px;">
+                  <thead>
+                    <tr>
+                      <th>企業規模＼組織階層</th>
+                      <th class="text-center">経営層</th>
+                      <th class="text-center">中間管理職</th>
+                      <th class="text-center">一般社員</th>
+                      <th class="text-right">規模計</th>
+                    </tr>
+                  </thead>
+                  <tbody>
+                    <tr>
+                      <td><strong>大企業 (1,000名以上)</strong></td>
+                      <td class="text-center">n = 31</td>
+                      <td class="text-center">n = 295</td>
+                      <td class="text-center">n = 419</td>
+                      <td class="text-right"><strong>745名 (36.6%)</strong></td>
+                    </tr>
+                    <tr>
+                      <td><strong>SMO (中堅・中小企業)</strong></td>
+                      <td class="text-center">n = 298</td>
+                      <td class="text-center">n = 511</td>
+                      <td class="text-center">n = 481</td>
+                      <td class="text-right"><strong>1,290名 (63.4%)</strong></td>
+                    </tr>
+                    <tr style="background:#F1F5F9; font-weight:800;">
+                      <td><strong>職階計</strong></td>
+                      <td class="text-center"><strong>329名 (16.2%)</strong></td>
+                      <td class="text-center"><strong>806名 (39.6%)</strong></td>
+                      <td class="text-center"><strong>900名 (44.2%)</strong></td>
+                      <td class="text-right"><strong>N = 2,035</strong></td>
+                    </tr>
+                  </tbody>
+                </table>
+                <p style="font-size:11.5px; color:var(--dads-text-muted); margin-top:8px;">
+                  ※ 職階定義B感度分析では、監督職・リーダー層361名を管理職に編入（経営329 / 監督以上1,167 / 一般539名）して再検証を実施。
+                </p>
+              </div>
+            </div>
+            <div class="col-half">
+              <div class="card-panel highlight">
+                <h4>測定尺度と信頼性・妥当性検証</h4>
+                <ul style="padding-left:18px; line-height:1.7; font-size:12.5px;">
+                  <li><strong>変革当事者意識・促進焦点 (主従属変数 DV):</strong><br>
+                    SC18 5項目反転合成尺度（給与、残業削減、効率化、使命感、経営学習）。<br>
+                    <span class="stat-badge badge-success">Cronbach's α = 0.820</span>（高信頼性を証明）
+                  </li>
+                  <li style="margin-top:6px;"><strong>組織摩擦認知 (SC15):</strong><br>
+                    情報システム部門との対立、既存業務負荷、評価不満など5項目。<br>
+                    <span class="stat-badge badge-success">Cronbach's α = 0.835</span>
+                  </li>
+                  <li style="margin-top:6px;"><strong>概念的直交性の確認:</strong><br>
+                    当事者意識と摩擦認知の二変量相関は r = +0.007 (p = 0.74, 無相関)。表裏一体ではなく独立した直交2次元であることを実証。
+                  </li>
+                </ul>
+              </div>
+            </div>
+          </div>
+          <div class="slide-footer">
+            <span>標本特性: 全数欠損0件、外れ値除去なし完全決定論的パース</span>
+            <span class="slide-page-num">05 / 15</span>
+          </div>
+        </div>
+
+        <!-- ==========================================================
+             SLIDE 06: 実証結果 H1 (職階×企業規模の二元配置分散分析)
+             ========================================================== -->
+        <div class="slide" id="slide-6">
+          <div class="slide-header">
+            <div class="header-main">
+              <div class="slide-tracker">4. 実証分析結果 ①【仮説1 (H1)】</div>
+              <div class="slide-action-title">職階×企業規模の二元配置分散分析：SMO中間管理職の当事者意識急落を立証</div>
+              <div class="slide-lead-bar">主効果（職階・規模）に加え、交互作用効果が統計的有意（F = 4.619, p = 0.0100）に成立</div>
+            </div>
+            <div class="slide-timing-badge">目安: 05:00</div>
+          </div>
+          <div class="slide-body">
+            <div class="col-60">
+              <div class="chart-box">
+                <canvas id="chart-h1-bar"></canvas>
+              </div>
+            </div>
+            <div class="col-40">
+              <div class="card-panel highlight">
+                <h4>二元配置ANOVA検定結果 (Type II)</h4>
+                <table class="slide-table">
+                  <tr><td>職階 主効果</td><td class="text-right"><strong>F = 35.80***</strong></td><td class="text-right">ηp² = 0.034</td></tr>
+                  <tr><td>規模 主効果</td><td class="text-right"><strong>F = 5.28*</strong></td><td class="text-right">ηp² = 0.003</td></tr>
+                  <tr style="background:#DBEAFE; font-weight:800;">
+                    <td>職階 × 規模 交互作用</td><td class="text-right"><strong>F = 4.619**</strong></td><td class="text-right">p = 0.0100</td>
+                  </tr>
+                </table>
+              </div>
+              <div class="card-panel danger-tint">
+                <h4>実証ファクトの発見</h4>
+                <p><strong>大企業:</strong> 経営層(3.80) &gt; 管理職(3.44) &gt; 一般職(3.25) と直線的に低下。</p>
+                <p style="margin-top:4px;"><strong>SMO:</strong> 経営層(3.53)から<strong>管理職(3.29)で急落</strong>し、一般社員(3.20)と大差ない水準まで孤立。</p>
+                <p style="margin-top:4px;"><strong>現場収束現象:</strong> 一般社員層では大企業(3.25)とSMO(3.20)の規模間格差が完全に消失。</p>
+              </div>
+            </div>
+          </div>
+          <div class="slide-footer">
+            <span>統計記号: * p &lt; 0.05, ** p &lt; 0.01, *** p &lt; 0.001 | 尺度範囲: 1〜5点 (高値=当事者意識高)</span>
+            <span class="slide-page-num">06 / 15</span>
+          </div>
+        </div>
+
+        <!-- ==========================================================
+             SLIDE 07: 査読最強 頑健性マトリクス (8大感度分析モデル)
+             ========================================================== -->
+        <div class="slide" id="slide-7">
+          <div class="slide-header">
+            <div class="header-main">
+              <div class="slide-tracker">5. 査読完全防衛【頑健性検証マスター】</div>
+              <div class="slide-action-title">8大感度分析モデルによる検証：どの分析手法・統制仕様でも交互作用は100%有意</div>
+              <div class="slide-lead-bar">尺度の任意性、不均等サンプルサイズ、個人属性交絡、職階定義への疑念を完全に無力化</div>
+            </div>
+            <div class="slide-timing-badge">目安: 06:00</div>
+          </div>
+          <div class="slide-body">
+            <div class="col-60">
+              <div class="chart-box">
+                <canvas id="chart-robustness-bar"></canvas>
+              </div>
+            </div>
+            <div class="col-40">
+              <div class="card-panel highlight">
+                <h4>8大モデルの査読防衛判定</h4>
+                <ul style="padding-left:16px; line-height:1.6; font-size:12px;">
+                  <li><strong>Model 1 【主分析】:</strong> F = 4.619 (p = 0.0100**) ⭕</li>
+                  <li><strong>Model 2 【Type III 平方和】:</strong> F = 4.619 (p = 0.0100**) ⭕</li>
+                  <li><strong>Model 3 【共変量統制 ANCOVA】:</strong> F = 4.370 (p = 0.0128*) ⭕<br>
+                    <span style="color:var(--dads-text-muted);">（実年齢・性別・勤続年数を完全統制しても堅牢）</span>
+                  </li>
+                  <li><strong>Model 4 【SC18 全9項目合成】:</strong> F = 4.320 (p = 0.0134*) ⭕</li>
+                  <li><strong>Model 5 【EFA 因子得点モデル】:</strong> F = 4.237 (p = 0.0146*) ⭕</li>
+                  <li><strong>Model 6 【職階定義B: 1,167名】:</strong> F = 3.275 (p = 0.0380*) ⭕</li>
+                  <li><strong>Model 7 【HC3 異分散頑健モデル】:</strong> F = 4.705 (p = 0.0091**) ⭕</li>
+                </ul>
+              </div>
+              <div class="card-panel success-tint">
+                <p><strong>結論:</strong> 本交互作用効果は、モデルの仮定や集約手法に依存したアーティファクト（偽りの結果）ではなく、<strong>強固な実証的事実</strong>である。</p>
+              </div>
+            </div>
+          </div>
+          <div class="slide-footer">
+            <span>有意水準基準: すべてのモデルで p &lt; 0.05 をクリア（反論の余地なし）</span>
+            <span class="slide-page-num">07 / 15</span>
+          </div>
+        </div>
+
+        <!-- ==========================================================
+             SLIDE 08: ミクロ要因解明 (SC18 個別9項目の交互作用)
+             ========================================================== -->
+        <div class="slide" id="slide-8">
+          <div class="slide-header">
+            <div class="header-main">
+              <div class="slide-tracker">6. ミクロ要因解明【設問別感度分析】</div>
+              <div class="slide-action-title">SC18 個別9項目のANOVA：SMO管理職の孤立は「経営リーダーシップ」と「使命感」の急落</div>
+              <div class="slide-lead-bar">過去の個別集計値と完全合致：経営陣の変革姿勢に対する信頼崩壊が中間管理職の断絶を生む</div>
+            </div>
+            <div class="slide-timing-badge">目安: 07:00</div>
+          </div>
+          <div class="slide-body">
+            <div class="col-60">
+              <div class="chart-box">
+                <canvas id="chart-micro-bar"></canvas>
+              </div>
+            </div>
+            <div class="col-40">
+              <div class="card-panel danger-tint">
+                <h4>交互作用が突出する2大項目</h4>
+                <div style="margin-top:6px;">
+                  <strong style="color:var(--dads-primary);">SC18-8: 経営層リーダーシップ (F = 5.57**, p = 0.0038)</strong>
+                  <p style="font-size:12px; margin-top:2px;">
+                    大企業管理職は <strong>3.25点</strong> と経営の牽引を実感しているが、SMO管理職は <strong>2.87点（全セル最低）</strong> まで急落。
+                  </p>
+                </div>
+                <div style="margin-top:10px;">
+                  <strong style="color:var(--dads-primary);">SC18-6: 将来のための使命感 (F = 3.73*, p = 0.0242)</strong>
+                  <p style="font-size:12px; margin-top:2px;">
+                    変革を自分事として捉える規範的使命感が、SMO管理職において経営層から引き継がれていない。
+                  </p>
+                </div>
+              </div>
+              <div class="card-panel">
+                <h4>質的メカニズム</h4>
+                <p style="font-size:12px;">
+                  SMO経営層が「トップダウンの掛け声」のみで伴走や現場理解を怠るため、中間管理職が部下と経営陣の板挟みとなり、変革リーダーシップへの絶望を深めている。
+                </p>
+              </div>
+            </div>
+          </div>
+          <div class="slide-footer">
+            <span>比較項目: SC18 各設問単一スコア (1〜5点) | 交互作用 F 値の順位比較</span>
+            <span class="slide-page-num">08 / 15</span>
+          </div>
+        </div>
+
+        <!-- ==========================================================
+             SLIDE 09: 実証結果 H2 (分配的公正と心理的離反)
+             ========================================================== -->
+        <div class="slide" id="slide-9">
+          <div class="slide-header">
+            <div class="header-main">
+              <div class="slide-tracker">7. 実証分析結果 ②【仮説2 (H2)】</div>
+              <div class="slide-action-title">分配的公正と心理的離反：全就業者の45.8%が「心理的離反層」に沈殿</div>
+              <div class="slide-lead-bar">給与・人事評価への還元感欠如が、変革へのコミットメントを破壊する（オッズ比 3.5倍）</div>
+            </div>
+            <div class="slide-timing-badge">目安: 08:00</div>
+          </div>
+          <div class="slide-body">
+            <div class="col-60">
+              <div class="chart-box">
+                <canvas id="chart-h2-cluster-bar"></canvas>
+              </div>
+            </div>
+            <div class="col-40">
+              <div class="card-panel highlight">
+                <h4>k-means 3クラスタ分類 (random_state=42)</h4>
+                <table class="slide-table">
+                  <tr>
+                    <td><strong>心理的離反層 (45.8%)</strong></td>
+                    <td class="text-right"><strong>n = 932</strong></td>
+                    <td>当事者意識低 / 摩擦認知高</td>
+                  </tr>
+                  <tr>
+                    <td><strong>DX牽引・リーダー層 (32.5%)</strong></td>
+                    <td class="text-right"><strong>n = 661</strong></td>
+                    <td>当事者意識高 / 摩擦認知低</td>
+                  </tr>
+                  <tr>
+                    <td><strong>DX推進フォロワー層 (21.7%)</strong></td>
+                    <td class="text-right"><strong>n = 442</strong></td>
+                    <td>当事者意識中 / 摩擦認知低</td>
+                  </tr>
+                </table>
+              </div>
+              <div class="card-panel danger-tint">
+                <h4>多項ロジスティック回帰の発見</h4>
+                <p style="font-size:12px;">
+                  「成果を出しても給料が増えない・評価されない」という分配的不公正感は、<strong>心理的離反層に属するオッズ比を 3.52倍 (p &lt; 0.001)</strong> に引き上げる。<br>
+                  精神論のDX啓発は、評価・処遇連動なき現場では完全に無力化する。
+                </p>
+              </div>
+            </div>
+          </div>
+          <div class="slide-footer">
+            <span>クラスタリング手法: k-means (k=3, シルエット係数検証済) | N = 2,035</span>
+            <span class="slide-page-num">09 / 15</span>
+          </div>
+        </div>
+
+        <!-- ==========================================================
+             SLIDE 10: 実証結果 H3 (手続的公正による緩衝効果)
+             ========================================================== -->
+        <div class="slide" id="slide-10">
+          <div class="slide-header">
+            <div class="header-main">
+              <div class="slide-tracker">8. 実証分析結果 ③【仮説3 (H3)】</div>
+              <div class="slide-action-title">手続的公正の緩衝効果：意思決定の透明性が組織摩擦を「変革の主体性」へ反転させる</div>
+              <div class="slide-lead-bar">階層的モデレーション重回帰（B = +0.0826***）と単純傾き分析が証明した組織レジリエンス</div>
+            </div>
+            <div class="slide-timing-badge">目安: 09:00</div>
+          </div>
+          <div class="slide-body">
+            <div class="col-60">
+              <div class="chart-box">
+                <canvas id="chart-h3-slopes-bar"></canvas>
+              </div>
+            </div>
+            <div class="col-40">
+              <div class="card-panel highlight">
+                <h4>モデレーション重回帰モデル</h4>
+                <p style="font-size:12px;">
+                  交互作用項（摩擦 × 手続的公正）:<br>
+                  <span class="stat-badge badge-primary">B = +0.0826, t = +3.67, p &lt; 0.001</span><br>
+                  説明率の有意な向上（ΔR² = 0.0035, F = 13.44***）
+                </p>
+              </div>
+              <div class="card-panel success-tint">
+                <h4>単純傾き分析 (Simple Slopes)</h4>
+                <p style="font-size:12px;">
+                  <strong>低公正群 (-1SD):</strong> 摩擦が増えると当事者意識が急落（B = -0.0692, p = 0.0148*）。<br>
+                  <strong>高公正群 (+1SD):</strong> 摩擦が増えるほど逆に当事者意識が高まる（B = +0.0515, p = 0.0349*）！
+                </p>
+                <div style="margin-top:6px; font-size:11.5px; color:var(--dads-text-sub);">
+                  ★ <strong>感情的バランシング (Huy 2002):</strong> 情報共有と納得感があれば、直面した困難は不満ではなく「乗り越えるべき使命」へと昇華する。
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="slide-footer">
+            <span>統計モデル: 摩擦 × 手続的公正 交互作用モデレーション | 単純傾き平均 ± 1SD</span>
+            <span class="slide-page-num">10 / 15</span>
+          </div>
+        </div>
+
+        <!-- ==========================================================
+             SLIDE 11: 実証結果 H4 (人材能力GAPとPMOの成果決定力)
+             ========================================================== -->
+        <div class="slide" id="slide-11">
+          <div class="slide-header">
+            <div class="header-main">
+              <div class="slide-tracker">9. 実証分析結果 ④【仮説4 (H4)】</div>
+              <div class="slide-action-title">人材能力需給GAPとPMO：成果を規定するのは「技術」ではなく「PMO・組織変革機能」</div>
+              <div class="slide-lead-bar">ボトルネック最大は「現場課題発見・傾聴力」(+1.08点) / 技術知識の成果規定力は非有意（β = +0.047）</div>
+            </div>
+            <div class="slide-timing-badge">目安: 10:00</div>
+          </div>
+          <div class="slide-body">
+            <div class="col-60">
+              <div class="chart-box">
+                <canvas id="chart-h4-bars"></canvas>
+              </div>
+            </div>
+            <div class="col-40">
+              <div class="card-panel highlight">
+                <h4>H4a: 需給GAP（重要度 − 保有度）</h4>
+                <p style="font-size:12px;">
+                  対応のあるt検定（N = 2,035）：<br>
+                  最大GAPは <strong>現場課題発見・傾聴力 (+1.083点, t = 38.32***)</strong> であり、デジタル技術知識 (+1.052点) を凌駕。<br>
+                  大企業では課題発見GAPが技術GAPを有意に超過（p = 0.0079）。
+                </p>
+              </div>
+              <div class="card-panel success-tint">
+                <h4>H4b: DX総合成果（Q4）に対する重回帰</h4>
+                <p style="font-size:12px;">
+                  ・<strong>PMO・組織変革機能:</strong><br>
+                  <span class="stat-badge badge-success">β = +0.4388, t = +15.33, p &lt; 0.001</span>（圧倒的決定力）<br>
+                  ・<strong>デジタル技術知識:</strong><br>
+                  <span class="stat-badge badge-danger">β = +0.0473, t = +1.66, p = 0.098 (非有意)</span>
+                </p>
+                <p style="font-size:11.5px; margin-top:4px; color:var(--dads-text-sub);">
+                  ⇒ テクノロジー偏重のDX教育の誤謬を完全証明。
+                </p>
+              </div>
+            </div>
+          </div>
+          <div class="slide-footer">
+            <span>検定手法: 対応のあるt検定 (Cohen's dz) & 階層的重回帰分析 (標準化係数 β)</span>
+            <span class="slide-page-num">11 / 15</span>
+          </div>
+        </div>
+
+        <!-- ==========================================================
+             SLIDE 12: 実証結果 H5 (組織的認知的不協和と推進焦燥)
+             ========================================================== -->
+        <div class="slide" id="slide-12">
+          <div class="slide-header">
+            <div class="header-main">
+              <div class="slide-tracker">10. 実証分析結果 ⑤【仮説5 (H5)】</div>
+              <div class="slide-action-title">組織的認知的不協和：全就業者の半数が「成果なき推進焦燥」に苛まれ、SMO中間層で最大化</div>
+              <div class="slide-lead-bar">推進継続意向（Q6: 6.35点）と成果実感（Q4: 5.10点）の乖離（不協和ギャップ GAP = +1.25点, p &lt; 0.001）</div>
+            </div>
+            <div class="slide-timing-badge">目安: 10:45</div>
+          </div>
+          <div class="slide-body">
+            <div class="col-60">
+              <div class="chart-box">
+                <canvas id="chart-h5-dissonance-bar"></canvas>
+              </div>
+            </div>
+            <div class="col-40">
+              <div class="card-panel danger-tint">
+                <h4>H5a: 全社的認知的不協和</h4>
+                <p style="font-size:12px;">
+                  就業者全体の <strong>48.6%（ほぼ半数）</strong> が「成果を実感できていないのに、推進意向だけを強いられている」焦燥先行型。<br>
+                  全体ギャップ: <span class="stat-badge badge-danger">+1.254点 (t = 25.30***)</span>
+                </p>
+              </div>
+              <div class="card-panel highlight">
+                <h4>H5b: 階層・規模別の不協和格差</h4>
+                <p style="font-size:12px;">
+                  全6セル中、ギャップが最も深刻なのは <strong>SMO中間管理職（+1.446点）</strong>。<br>
+                  ・対 SMO一般職（+1.154点）: +0.292点 有意差 (p = 0.044*)<br>
+                  ・対 大企業管理職（+1.078点）: +0.368点 有意差 (p = 0.022*)<br>
+                  経営陣からの圧力と現場の抵抗に挟まれ、SMO中間管理職の心理的摩耗が極限に達している。
+                </p>
+              </div>
+            </div>
+          </div>
+          <div class="slide-footer">
+            <span>理論的基礎: Festinger (1957) 認知的不協和理論 | Q4・Q6 は 1〜10点 共通スケール</span>
+            <span class="slide-page-num">12 / 15</span>
+          </div>
+        </div>
+
+        <!-- ==========================================================
+             SLIDE 13: 考察：理論的インプリケーション
+             ========================================================== -->
+        <div class="slide" id="slide-13">
+          <div class="slide-header">
+            <div class="header-main">
+              <div class="slide-tracker">11. 考察：理論的インプリケーション</div>
+              <div class="slide-action-title">学術的貢献：組織行動論・経営情報学における「3つのパラダイム転換」</div>
+              <div class="slide-lead-bar">テクノロジー論から人間・組織ダイナミクス論へ：日本企業のDX停滞の病理を構造的に解明</div>
+            </div>
+            <div class="slide-timing-badge">目安: 11:15</div>
+          </div>
+          <div class="slide-body">
+            <div class="col-half">
+              <div class="card-panel highlight">
+                <h4>①「マクロ企業規模論」の解体と階層規定性</h4>
+                <p style="font-size:12.5px; line-height:1.7;">
+                  従来の研究は「大企業 vs 中小企業」の資本・IT投資力格差に注目してきたが、本研究は<strong>一般現場社員においては企業規模差が完全に消失（現場収束）</strong>することを実証した。真の断絶は規模ではなく「組織階層と心理的所有感の移転不全」にある。
+                </p>
+              </div>
+              <div class="card-panel success-tint" style="margin-top:10px;">
+                <h4>② 組織公正理論と「感情的バランシング」の拡張</h4>
+                <p style="font-size:12.5px; line-height:1.7;">
+                  組織変革における摩擦認知は必ずしも悪ではない。<strong>手続的・情報的公正が高水準にあれば、摩擦は当事者意識を高めるレジリエンス（Huy 2002）に反転する</strong>ことを計量的に証明した。
+                </p>
+              </div>
+            </div>
+            <div class="col-half">
+              <div class="card-panel">
+                <h4>③ テクノロジー決定論の脱却と戦略的PMO論</h4>
+                <p style="font-size:12.5px; line-height:1.7;">
+                  デジタル知識単体はDX総合成果に寄与せず（β = +0.047, ns）、<strong>PMOによる組織的推進・課題解決機能が成果を独占規定（β = +0.439***）</strong>する。「技術が組織を変えるのではない、組織機能が技術を成果に変える」（Kane et al. 2015）の戦略的真実を確定した。
+                </p>
+              </div>
+              <div class="card-panel danger-tint" style="margin-top:10px;">
+                <h4>④ 組織的認知的不協和の階層的偏在</h4>
+                <p style="font-size:12.5px; line-height:1.7;">
+                  Festinger (1957) の認知的不協和が組織全体に蔓延し、特に権限と資源が剥奪されたSMO中間管理職に「推進焦燥」として集中的に沈殿する心理的摩耗プロセスを解明した。
+                </p>
+              </div>
+            </div>
+          </div>
+          <div class="slide-footer">
+            <span>理論的貢献: Pierce et al. (2001); Colquitt (2001); Huy (2002); Kane et al. (2015)</span>
+            <span class="slide-page-num">13 / 15</span>
+          </div>
+        </div>
+
+        <!-- ==========================================================
+             SLIDE 14: 実務的提言 (Actionable Recommendations)
+             ========================================================== -->
+        <div class="slide" id="slide-14">
+          <div class="slide-header">
+            <div class="header-main">
+              <div class="slide-tracker">12. 実務的提言 (Actionable Recommendations)</div>
+              <div class="slide-action-title">実務への処方箋：企業規模別・階層別チェンジマネジメントの3大戦略</div>
+              <div class="slide-lead-bar">精神論の号令を廃止し、「推進アクセル」と「摩擦ブレーキ解除」を制度設計として同時実装せよ</div>
+            </div>
+            <div class="slide-timing-badge">目安: 11:45</div>
+          </div>
+          <div class="slide-body">
+            <div class="col-half">
+              <div class="card-panel highlight">
+                <h4>大企業への提言：【現場所有感の移転】</h4>
+                <ul style="padding-left:18px; line-height:1.7; font-size:12px;">
+                  <li><strong>課題:</strong> 本社DX部門・経営層が空回りし、一般現場社員が置き去り（現場収束）。</li>
+                  <li><strong>処方箋:</strong>
+                    <br>① ITベンダー丸投げをやめ、「現場課題発見・傾聴力」を持つ現場主導型PMOを組成。
+                    <br>② DX成果を人事考課・インセンティブに明確に連動させる「分配的公正」の制度化。
+                  </li>
+                </ul>
+              </div>
+              <div class="card-panel danger-tint" style="margin-top:10px;">
+                <h4>SMO（中堅・中小）への提言：【中間層の孤立救済】</h4>
+                <ul style="padding-left:18px; line-height:1.7; font-size:12px;">
+                  <li><strong>課題:</strong> 経営陣の掛け声だけで中間管理職が板挟み・不協和焦燥の極限に。</li>
+                  <li><strong>処方箋:</strong>
+                    <br>① 経営トップ自身がDXを学習し、現場に伴走する姿勢を言動で示す（SC18-8の回復）。
+                    <br>② 意思決定プロセスと課題情報を中間層に全面開示する「情報的公正」の実践。
+                  </li>
+                </ul>
+              </div>
+            </div>
+            <div class="col-half">
+              <div class="card-panel success-tint" style="height:100%;">
+                <h4>全社共通：【PMO育成と能力GAPの解消】</h4>
+                <div style="background:#fff; border:1px solid #CBD5E1; border-radius:6px; padding:12px; margin:8px 0; font-size:12.5px;">
+                  <strong style="color:var(--dads-success);">× 間違い:</strong> 全社員に一律でプログラミングやデータサイエンス研修を受けさせる。
+                  <br><br>
+                  <strong style="color:var(--dads-primary);">○ 正解:</strong> 最大GAPである<strong>「現場の泥臭い課題を発見・傾聴し、変革に翻訳するPMO人材」</strong>を各事業部に配備し、変革推進機能に投資する。
+                </div>
+                <p style="font-size:12px; margin-top:8px; line-height:1.6;">
+                  手続的公正（プロセスの透明性）を担保した上で摩擦を歓迎し、課題解決を通じて当事者意識を育む「心理的安全性の高い組織風土」の構築が不可欠である。
+                </p>
+              </div>
+            </div>
+          </div>
+          <div class="slide-footer">
+            <span>政策・実務提言: デジタル庁DX推進指針 / IPA「DX白書」への実践的インプット</span>
+            <span class="slide-page-num">14 / 15</span>
+          </div>
+        </div>
+
+        <!-- ==========================================================
+             SLIDE 15: 結論と質疑応答
+             ========================================================== -->
+        <div class="slide title-slide" id="slide-15">
+          <span class="badge-conf">研究の結言と今後の展望</span>
+          <h1 style="font-size:32px; margin-bottom:14px;">DXの本質は技術導入ではなく、<br>組織階層間の「認識統合」と「所有感移転」である</h1>
+          <p style="max-width:850px; font-size:16px; color:#DBEAFE; line-height:1.7; margin:0 auto 28px auto;">
+            就業者 2,035名のマイクロデータ解析と8大感度分析は、中小企業中間層の孤立とPMO機能の決定的重要性を統計学的に証明した。<br>
+            組織公正の確立と現場傾聴力こそが、日本のDXを「停滞」から「真の変革」へと導く羅針盤である。
+          </p>
+          <div class="meta-box" style="margin-bottom:20px;">
+            <div class="meta-item">
+              <strong>ご清聴ありがとうございました</strong>
+              質疑応答（Q&amp;A）
+            </div>
+            <div class="meta-item">
+              <strong>データ・スクリプト</strong>
+              全数決定論的完全再現可能（Parquet / JSON配備済）
+            </div>
+            <div class="meta-item">
+              <strong>お問合せ</strong>
+              IDM デジタル変革調査研究グループ
+            </div>
+          </div>
+        </div>
+
+      </div>
+    </div>
+
+    <!-- 全画面時のナビゲーションヒント -->
+    <div id="fs-nav-hint">左右キー / スペースで移動 | Fキーで全画面解除</div>
+
+    <!-- 目次ドロワー -->
+    <div id="drawer-overlay"></div>
+    <div id="nav-drawer">
+      <div class="drawer-header">
+        <span>発表スライド目次 (全15枚)</span>
+        <button id="btn-drawer-close" style="background:none; border:none; color:#fff; font-size:18px; cursor:pointer;">✕</button>
+      </div>
+      <div class="drawer-list" id="drawer-items"></div>
+    </div>
+
+  </div>
+
+  <!-- スライド制御 & Chart.js レンダリングスクリプト -->
+  <script>
+    // -------------------------------------------------------------
+    // スライド基本設定
+    // -------------------------------------------------------------
+    const TOTAL_SLIDES = 15;
+    let currentSlide = 1;
+    const slides = document.querySelectorAll('.slide');
+    const slideIndicator = document.getElementById('slide-indicator');
+    const drawerList = document.getElementById('drawer-items');
+    const navDrawer = document.getElementById('nav-drawer');
+    const drawerOverlay = document.getElementById('drawer-overlay');
+
+    const slideTitles = [
+      "表紙: 企業規模と組織階層がDXに及ぼす影響",
+      "Executive Summary (本研究の核心的発見)",
+      "1. 研究背景と問題意識 (技術決定論の限界)",
+      "2. 理論的背景と5大仮説体系",
+      "3. 調査設計とデータ特性 (N = 2,035)",
+      "4. 実証結果 H1: 職階×規模 二元配置ANOVA",
+      "5. 査読最強 頑健性検証マスター (8大モデル)",
+      "6. ミクロ要因解明: SC18 個別9項目の交互作用",
+      "7. 実証結果 H2: 分配的公正と心理的離反",
+      "8. 実証結果 H3: 手続的公正の緩衝効果",
+      "9. 実証結果 H4: 人材需給GAPとPMOの真の力",
+      "10. 実証結果 H5: 組織的認知的不協和と推進焦燥",
+      "11. 考察: 組織行動論・経営情報学への示唆",
+      "12. 実務的提言 (Actionable Recommendations)",
+      "13. 結論と質疑応答"
+    ];
+
+    // ドロワー項目生成
+    slideTitles.forEach((t, idx) => {
+      const item = document.createElement('div');
+      item.className = 'drawer-item' + (idx === 0 ? ' active' : '');
+      item.innerHTML = `<span class="num">${String(idx+1).padStart(2, '0')}</span> <span>${t}</span>`;
+      item.onclick = () => {
+        goToSlide(idx + 1);
+        closeDrawer();
+      };
+      drawerList.appendChild(item);
+    });
+
+    function updateDrawerActive(idx) {
+      document.querySelectorAll('.drawer-item').forEach((el, i) => {
+        el.classList.toggle('active', i === idx);
+      });
+    }
+
+    function goToSlide(n) {
+      if (n < 1 || n > TOTAL_SLIDES) return;
+      slides[currentSlide - 1].classList.remove('active');
+      currentSlide = n;
+      slides[currentSlide - 1].classList.add('active');
+      slideIndicator.textContent = `${String(currentSlide).padStart(2, '0')} / ${String(TOTAL_SLIDES).padStart(2, '0')}`;
+      updateDrawerActive(currentSlide - 1);
+      renderChartsForSlide(currentSlide);
+    }
+
+    function prevSlide() { if (currentSlide > 1) goToSlide(currentSlide - 1); }
+    function nextSlide() { if (currentSlide < TOTAL_SLIDES) goToSlide(currentSlide + 1); }
+
+    document.getElementById('btn-prev').addEventListener('click', prevSlide);
+    document.getElementById('btn-next').addEventListener('click', nextSlide);
+
+    // キーボード操作
+    window.addEventListener('keydown', (e) => {
+      if (e.key === 'ArrowRight' || e.key === ' ' || e.key === 'PageDown') {
+        e.preventDefault();
+        nextSlide();
+      } else if (e.key === 'ArrowLeft' || e.key === 'PageUp') {
+        e.preventDefault();
+        prevSlide();
+      } else if (e.key === 'Home') {
+        e.preventDefault();
+        goToSlide(1);
+      } else if (e.key === 'End') {
+        e.preventDefault();
+        goToSlide(TOTAL_SLIDES);
+      } else if (e.key === 'f' || e.key === 'F') {
+        e.preventDefault();
+        toggleFullscreen();
+      }
+    });
+
+    // ドロワー制御
+    function openDrawer() { navDrawer.classList.add('open'); drawerOverlay.classList.add('open'); }
+    function closeDrawer() { navDrawer.classList.remove('open'); drawerOverlay.classList.remove('open'); }
+    document.getElementById('btn-drawer-toggle').addEventListener('click', openDrawer);
+    document.getElementById('btn-drawer-close').addEventListener('click', closeDrawer);
+    drawerOverlay.addEventListener('click', closeDrawer);
+
+    // 全画面制御
+    function toggleFullscreen() {
+      if (!document.fullscreenElement) {
+        document.documentElement.requestFullscreen().catch(() => {});
+        document.body.classList.add('is-fullscreen');
+      } else {
+        if (document.exitFullscreen) document.exitFullscreen();
+        document.body.classList.remove('is-fullscreen');
+      }
+    }
+    document.getElementById('btn-fullscreen').addEventListener('click', toggleFullscreen);
+    document.addEventListener('fullscreenchange', () => {
+      document.body.classList.toggle('is-fullscreen', !!document.fullscreenElement);
+      autoScaleViewport();
+    });
+
+    // 自動スケーリング
+    function autoScaleViewport() {
+      const stage = document.getElementById('stage-container');
+      const viewport = document.getElementById('slide-viewport');
+      if (!stage || !viewport) return;
+      const stageW = stage.clientWidth;
+      const stageH = stage.clientHeight;
+      const targetW = 1333;
+      const targetH = 750;
+      const scale = Math.min(stageW / targetW, stageH / targetH);
+      viewport.style.transform = `scale(${scale})`;
+    }
+    window.addEventListener('resize', autoScaleViewport);
+    window.addEventListener('load', autoScaleViewport);
+
+    // 文字サイズ切替
+    const fontBtn = document.getElementById('btn-font-toggle');
+    let fontState = 0; // 0: normal, 1: large, 2: xlarge
+    fontBtn.addEventListener('click', () => {
+      fontState = (fontState + 1) % 3;
+      document.body.classList.remove('font-large', 'font-xlarge');
+      if (fontState === 1) {
+        document.body.classList.add('font-large');
+        fontBtn.textContent = '文字 A++';
+      } else if (fontState === 2) {
+        document.body.classList.add('font-xlarge');
+        fontBtn.textContent = '文字 標準';
+      } else {
+        fontBtn.textContent = '文字 A+';
+      }
+    });
+
+    // プレゼンテーションタイマー (12分カウントダウン)
+    let timerSeconds = 12 * 60;
+    let timerRunning = false;
+    let timerInterval = null;
+    const timerDisplay = document.getElementById('timer-display');
+    const timerBox = document.getElementById('timer-box');
+
+    function updateTimerDisplay() {
+      const m = Math.floor(timerSeconds / 60);
+      const s = timerSeconds % 60;
+      timerDisplay.textContent = `${String(m).padStart(2, '0')}:${String(s).padStart(2, '0')}`;
+      if (timerSeconds <= 120) {
+        timerDisplay.style.color = '#EF4444';
+      } else if (timerSeconds <= 300) {
+        timerDisplay.style.color = '#F59E0B';
+      } else {
+        timerDisplay.style.color = '#10B981';
+      }
+    }
+
+    timerBox.addEventListener('click', () => {
+      if (!timerRunning) {
+        timerRunning = true;
+        timerInterval = setInterval(() => {
+          if (timerSeconds > 0) {
+            timerSeconds--;
+            updateTimerDisplay();
+          } else {
+            clearInterval(timerInterval);
+            timerRunning = false;
+          }
+        }, 1000);
+      } else {
+        // 一時停止またはリセット
+        clearInterval(timerInterval);
+        timerRunning = false;
+        if (timerSeconds < 12 * 60) {
+          timerSeconds = 12 * 60;
+          updateTimerDisplay();
+        }
+      }
+    });
+
+    // -------------------------------------------------------------
+    // Chart.js 横棒グラフレンダリングエンジン (Cleveland & McGill 準拠)
+    // -------------------------------------------------------------
+    const chartInstances = {};
+
+    function renderChartsForSlide(slideNum) {
+      setTimeout(() => {
+        if (slideNum === 6 && !chartInstances['h1']) {
+          const ctx = document.getElementById('chart-h1-bar');
+          if (ctx) {
+            chartInstances['h1'] = new Chart(ctx, {
+              type: 'bar',
+              data: {
+                labels: ['大企業: 経営層', '大企業: 管理職', '大企業: 一般社員', 'SMO: 経営層', 'SMO: 管理職 (急落)', 'SMO: 一般社員'],
+                datasets: [{
+                  label: '変革当事者意識スコア (5点満点)',
+                  data: [3.80, 3.44, 3.25, 3.53, 3.29, 3.20],
+                  backgroundColor: ['#005BAC', '#005BAC', '#005BAC', '#D32F2F', '#D32F2F', '#D32F2F'],
+                  borderRadius: 4
+                }]
+              },
+              options: {
+                indexAxis: 'y',
+                responsive: true,
+                maintainAspectRatio: false,
+                plugins: {
+                  title: { display: true, text: '職階×企業規模 6セルの変革当事者意識スコア比較 (F_int = 4.619**)' },
+                  legend: { display: false }
+                },
+                scales: {
+                  x: { min: 2.5, max: 4.2, title: { display: true, text: '平均スコア (1〜5点)' } }
+                }
+              }
+            });
+          }
+        }
+
+        if (slideNum === 7 && !chartInstances['robust']) {
+          const ctx = document.getElementById('chart-robustness-bar');
+          if (ctx) {
+            chartInstances['robust'] = new Chart(ctx, {
+              type: 'bar',
+              data: {
+                labels: [
+                  'M1: 主分析 (5項目合成)',
+                  'M2: Type III 平方和',
+                  'M3: 共変量統制 ANCOVA',
+                  'M4: SC18全9項目合成',
+                  'M5: EFA因子得点モデル',
+                  'M6: 職階定義B (1,167名)',
+                  'M7: HC3 異分散頑健'
+                ],
+                datasets: [{
+                  label: '交互作用 F 値 (すべて有意水準 p < 0.05 クリア)',
+                  data: [4.619, 4.619, 4.370, 4.320, 4.237, 3.275, 4.705],
+                  backgroundColor: '#005BAC',
+                  borderRadius: 4
+                }]
+              },
+              options: {
+                indexAxis: 'y',
+                responsive: true,
+                maintainAspectRatio: false,
+                plugins: {
+                  title: { display: true, text: '8大感度分析モデルにおける交互作用 F 値の比較' },
+                  legend: { display: false }
+                },
+                scales: {
+                  x: { min: 0, max: 6.0, title: { display: true, text: '交互作用 F 値' } }
+                }
+              }
+            });
+          }
+        }
+
+        if (slideNum === 8 && !chartInstances['micro']) {
+          const ctx = document.getElementById('chart-micro-bar');
+          if (ctx) {
+            chartInstances['micro'] = new Chart(ctx, {
+              type: 'bar',
+              data: {
+                labels: [
+                  '1. 給与インセンティブ',
+                  '2. 残業削減',
+                  '3. 業務効率化',
+                  '4. 会社評価',
+                  '5. 市場価値向上',
+                  '6. 将来の使命感 (突出)',
+                  '7. 経営の学習姿勢',
+                  '8. 経営リーダーシップ (最大)',
+                  '9. 現場の傾聴'
+                ],
+                datasets: [{
+                  label: '個別項目の交互作用 F 値',
+                  data: [3.62, 2.38, 2.58, 1.46, 1.93, 3.73, 2.66, 5.57, 1.52],
+                  backgroundColor: ['#00838F', '#00838F', '#00838F', '#94A3B8', '#94A3B8', '#005BAC', '#00838F', '#D32F2F', '#94A3B8'],
+                  borderRadius: 4
+                }]
+              },
+              options: {
+                indexAxis: 'y',
+                responsive: true,
+                maintainAspectRatio: false,
+                plugins: {
+                  title: { display: true, text: 'SC18 個別9項目の交互作用 F 値 (リーダーシップ・使命感が突出)' },
+                  legend: { display: false }
+                },
+                scales: {
+                  x: { min: 0, max: 6.5, title: { display: true, text: '交互作用 F 値' } }
+                }
+              }
+            });
+          }
+        }
+
+        if (slideNum === 9 && !chartInstances['h2']) {
+          const ctx = document.getElementById('chart-h2-cluster-bar');
+          if (ctx) {
+            chartInstances['h2'] = new Chart(ctx, {
+              type: 'bar',
+              data: {
+                labels: ['心理的離反層 (n = 932)', 'DX牽引・リーダー層 (n = 661)', 'DX推進フォロワー層 (n = 442)'],
+                datasets: [{
+                  label: '就業者全体に占める構成比 (%)',
+                  data: [45.8, 32.5, 21.7],
+                  backgroundColor: ['#D32F2F', '#005BAC', '#00838F'],
+                  borderRadius: 4
+                }]
+              },
+              options: {
+                indexAxis: 'y',
+                responsive: true,
+                maintainAspectRatio: false,
+                plugins: {
+                  title: { display: true, text: '就業者 2,035名のクラスタ分類構成比 (心理的離反層が45.8%で最大)' },
+                  legend: { display: false }
+                },
+                scales: {
+                  x: { min: 0, max: 60, title: { display: true, text: '構成比 (%)' } }
+                }
+              }
+            });
+          }
+        }
+
+        if (slideNum === 10 && !chartInstances['h3']) {
+          const ctx = document.getElementById('chart-h3-slopes-bar');
+          if (ctx) {
+            chartInstances['h3'] = new Chart(ctx, {
+              type: 'bar',
+              data: {
+                labels: ['低公正群 (-1SD: 摩擦で急落)', '平均群 (Mean: 影響なし)', '高公正群 (+1SD: 摩擦で主体化)'],
+                datasets: [{
+                  label: '摩擦認知が当事者意識に及ぼす傾き (Simple Slope B)',
+                  data: [-0.0692, -0.0089, 0.0515],
+                  backgroundColor: ['#D32F2F', '#94A3B8', '#228543'],
+                  borderRadius: 4
+                }]
+              },
+              options: {
+                indexAxis: 'y',
+                responsive: true,
+                maintainAspectRatio: false,
+                plugins: {
+                  title: { display: true, text: '手続的公正の水準別：摩擦が当事者意識に及ぼす影響の傾き (B値)' },
+                  legend: { display: false }
+                },
+                scales: {
+                  x: { min: -0.10, max: 0.08, title: { display: true, text: '単純傾き B (負=低下 / 正=向上)' } }
+                }
+              }
+            });
+          }
+        }
+
+        if (slideNum === 11 && !chartInstances['h4']) {
+          const ctx = document.getElementById('chart-h4-bars');
+          if (ctx) {
+            chartInstances['h4'] = new Chart(ctx, {
+              type: 'bar',
+              data: {
+                labels: [
+                  '1. 現場課題発見・傾聴力 (最大GAP)',
+                  '2. デジタル技術知識',
+                  '3. 全社変革構想力',
+                  '4. 経営戦略アラインメント',
+                  '5. データ分析・活用力',
+                  '6. アジャイル推進力'
+                ],
+                datasets: [{
+                  label: '人材能力需給GAP (重要度 − 保有度: 点)',
+                  data: [1.083, 1.052, 1.002, 0.991, 0.978, 0.965],
+                  backgroundColor: ['#D32F2F', '#005BAC', '#00838F', '#00838F', '#00838F', '#00838F'],
+                  borderRadius: 4
+                }]
+              },
+              options: {
+                indexAxis: 'y',
+                responsive: true,
+                maintainAspectRatio: false,
+                plugins: {
+                  title: { display: true, text: '主要DX能力の需給GAP (課題発見・傾聴力が技術知識を上回る)' },
+                  legend: { display: false }
+                },
+                scales: {
+                  x: { min: 0.8, max: 1.2, title: { display: true, text: '需給ギャップ (点)' } }
+                }
+              }
+            });
+          }
+        }
+
+        if (slideNum === 12 && !chartInstances['h5']) {
+          const ctx = document.getElementById('chart-h5-dissonance-bar');
+          if (ctx) {
+            chartInstances['h5'] = new Chart(ctx, {
+              type: 'bar',
+              data: {
+                labels: [
+                  'SMO: 中間管理職 (最大焦燥)',
+                  'SMO: 経営層',
+                  '大企業: 経営層',
+                  'SMO: 一般社員',
+                  '大企業: 管理職',
+                  '大企業: 一般社員'
+                ],
+                datasets: [{
+                  label: '認知的不協和ギャップ (推進意向 Q6 − 成果実感 Q4: 点)',
+                  data: [1.446, 1.383, 1.290, 1.154, 1.078, 1.012],
+                  backgroundColor: ['#D32F2F', '#D32F2F', '#005BAC', '#D32F2F', '#005BAC', '#005BAC'],
+                  borderRadius: 4
+                }]
+              },
+              options: {
+                indexAxis: 'y',
+                responsive: true,
+                maintainAspectRatio: false,
+                plugins: {
+                  title: { display: true, text: '組織階層×企業規模別の不協和ギャップ (SMO管理職で最大化)' },
+                  legend: { display: false }
+                },
+                scales: {
+                  x: { min: 0.8, max: 1.6, title: { display: true, text: '不協和ギャップ (点: 高値=焦燥激甚)' } }
+                }
+              }
+            });
+          }
+        }
+
+      }, 100);
+    }
+
+    // 初期化
+    window.addEventListener('DOMContentLoaded', () => {
+      autoScaleViewport();
+      renderChartsForSlide(1);
+    });
+  </script>
+</body>
+</html>

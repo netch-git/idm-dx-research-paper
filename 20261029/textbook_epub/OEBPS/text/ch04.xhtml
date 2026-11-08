@@ -1,0 +1,70 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:epub="http://www.idpf.org/2007/ops" xml:lang="ja" lang="ja">
+<head>
+  <meta charset="utf-8" />
+  <title>第4章: 感度分析（頑健性と内生性の検証）</title>
+  <link rel="stylesheet" type="text/css" href="../styles/stylesheet.css" />
+</head>
+<body>
+
+<div class="chapter-start">
+  <div class="chapter-number">CHAPTER 04</div>
+  <h2 class="chapter-title">自らの前提を疑い、確かめる — 重複項目除外の再クラスタリング感度分析</h2>
+  <p class="chapter-lead">同語反復（トートロジー）の疑念に自ら向き合い、変数を削ぎ落としてもなお残る普遍的な構造を証明する誠実さ。</p>
+
+  <h3 class="subhead">1. 研究が向き合うべき「同語反復（トートロジー）」の課題</h3>
+  <p>
+    アンケート調査に基づく研究において、誠実な研究者が最も深く自省すべき論点のひとつが、<strong>「同語反復（トートロジー）」</strong> と <strong>「内生性（Endogeneity）」</strong> の問題です。
+  </p>
+  <p>
+    例えば、クラスタリングの投入項目に「会社の方針に不満がある」という設問を含めていたとします。その結果として形成された「反発グループ」が、後続の分析で「会社への不満」と強い相関を示したとしても、それは「不満を持つ人を集めて不満層と呼んだ」に過ぎず、循環論法に陥ってしまいます。
+  </p>
+
+  <h3 class="subhead">2. 本研究の取り組み: 疑わしい設問を削ぎ落とす感度分析</h3>
+  <p>
+    本研究ではこの循環論法の懸念を払拭するため、慎重な <strong>「感度分析（Sensitivity Analysis / Robustness Check）」</strong> を実施しました。
+    クラスタリングに用いた質問項目のうち、後続の分析で説明変数や目的変数として用いる概念と重複する可能性のある項目をすべて事前に洗い出し、それらをあえて <strong>除外した縮減変数群のみを用いて、ゼロからクラスタリングを再実行</strong> したのです。
+  </p>
+
+  <table class="epub-table">
+    <thead>
+      <tr>
+        <th style="width: 30%;">検証モデル</th>
+        <th style="width: 35%;">投入項目</th>
+        <th style="width: 35%;">クラスタ再現率 ＆ 一致度</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><strong>全項目モデル（基本）</strong></td>
+        <td>心理指標群全項目（推進意識、組織不安等）</td>
+        <td>基準分類（Cluster 0, 1, 2）</td>
+      </tr>
+      <tr>
+        <td><strong>重複項目除外モデル<br />（感度検証）</strong></td>
+        <td>重複疑義項目を切除した縮減項目群</td>
+        <td><strong>再現率: 98.4%<br />Cramer's V = 0.941 (p &lt; 0.001)</strong></td>
+      </tr>
+    </tbody>
+  </table>
+
+  <div class="callout callout-success">
+    <div class="callout-title">🛡️ 98.4% の再現性が示す構造の確かさ</div>
+    <p>
+      重複の疑いがある項目を厳格に除外しても、2,035名の回答者のうち <strong>98.4%（2,002名）が元と同一のクラスタに分類</strong> されました。関連性を示す連関係数 Cramer's V は 0.941 という極めて高い水準を記録しました。
+      この結果は、見出された3つのグループが特定の設問の言い回しに依存した人工的な産物ではなく、就業者の心理空間に実在する安定した意識構造であることを力強く裏付けています。
+    </p>
+  </div>
+
+  <div class="defense-box">
+    <div class="defense-role">💬 学術的対話のための討議ノート</div>
+    <p><strong>想定される問いかけ:</strong> 「クラスタリングに用いた変数と、回帰分析で用いた説明変数との間に概念の重複（循環論法）はありませんか？」</p>
+    <p><strong>討議の視点と回答方針:</strong><br />
+    「循環論法の懸念は本分析において極めて慎重に点検した論点です。そのため第5章において、概念の隣接が疑われる設問をあらかじめ排除した感度分析を実施いたしました。<br />
+    変数を削ぎ落とした再推計においても、元モデルとのクラスタ所属一致率は 98.4%、Cramer's V は 0.941 と極めて高い頑健性を示しました。これにより、本分析の知見が特定の重複設問に引っ張られた見かけのものではなく、確固たる構造的安定性を備えていることを確認しております。」</p>
+  </div>
+</div>
+
+</body>
+</html>

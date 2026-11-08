@@ -1,0 +1,135 @@
+{
+  "forest_plot": [
+    {
+      "term": "sat_pmo",
+      "label": "PMO組織変革機能総合 (Q9.2-9)",
+      "color": "#005BAC",
+      "b": 0.9255,
+      "se": 0.0604,
+      "t": 15.329,
+      "p": 2.8974170113663047e-50,
+      "beta": 0.4388,
+      "ci95_low": 0.8071,
+      "ci95_high": 1.0439,
+      "beta_ci_low": 0.3827,
+      "beta_ci_high": 0.495
+    },
+    {
+      "term": "sat_tech",
+      "label": "デジタル技術知識・スキル (Q9.1)",
+      "color": "#6C757D",
+      "b": 0.0819,
+      "se": 0.0495,
+      "t": 1.654,
+      "p": 0.09821303849786193,
+      "beta": 0.0473,
+      "ci95_low": -0.0152,
+      "ci95_high": 0.1789,
+      "beta_ci_low": -0.0088,
+      "beta_ci_high": 0.1034
+    },
+    {
+      "term": "is_large_firm",
+      "label": "企業規模 (大企業ダミー)",
+      "color": "#00838F",
+      "b": 0.2695,
+      "se": 0.0688,
+      "t": 3.916,
+      "p": 9.307413180713087e-05,
+      "beta": 0.0794,
+      "ci95_low": 0.1345,
+      "ci95_high": 0.4044,
+      "beta_ci_low": 0.0396,
+      "beta_ci_high": 0.1191
+    },
+    {
+      "term": "is_manager",
+      "label": "役職: 管理職ダミー",
+      "color": "#718096",
+      "b": 0.0045,
+      "se": 0.0978,
+      "t": 0.046,
+      "p": 0.9632727254940496,
+      "beta": 0.0013,
+      "ci95_low": -0.1874,
+      "ci95_high": 0.1964,
+      "beta_ci_low": -0.056,
+      "beta_ci_high": 0.0587
+    },
+    {
+      "term": "is_staff",
+      "label": "役職: 一般職ダミー",
+      "color": "#A0AEC0",
+      "b": -0.0591,
+      "se": 0.1041,
+      "t": -0.568,
+      "p": 0.5699152754277714,
+      "beta": -0.018,
+      "ci95_low": -0.2632,
+      "ci95_high": 0.1449,
+      "beta_ci_low": -0.0799,
+      "beta_ci_high": 0.044
+    },
+    {
+      "term": "is_female",
+      "label": "性別: 女性ダミー",
+      "color": "#CBD5E0",
+      "b": 0.0613,
+      "se": 0.1127,
+      "t": 0.544,
+      "p": 0.5864301906743957,
+      "beta": 0.0114,
+      "ci95_low": -0.1597,
+      "ci95_high": 0.2823,
+      "beta_ci_low": -0.0296,
+      "beta_ci_high": 0.0524
+    },
+    {
+      "term": "age",
+      "label": "年齢",
+      "color": "#E2E8F0",
+      "b": -0.004,
+      "se": 0.0039,
+      "t": -1.029,
+      "p": 0.30382633474819365,
+      "beta": -0.0225,
+      "ci95_low": -0.0117,
+      "ci95_high": 0.0036,
+      "beta_ci_low": -0.0654,
+      "beta_ci_high": 0.0204
+    }
+  ],
+  "shapley_decomposition": {
+    "full_r2": 0.2391,
+    "results": [
+      {
+        "group": "PMO",
+        "label": "PMO組織変革機能総合 (Q9.2-9)",
+        "color": "#005BAC",
+        "r2_contrib": 0.1585,
+        "percentage": 66.32
+      },
+      {
+        "group": "Size",
+        "label": "企業規模 (大企業/SMO)",
+        "color": "#00838F",
+        "r2_contrib": 0.0093,
+        "percentage": 3.88
+      },
+      {
+        "group": "Tech",
+        "label": "デジタル技術知識・スキル (Q9.1)",
+        "color": "#718096",
+        "r2_contrib": 0.0704,
+        "percentage": 29.45
+      },
+      {
+        "group": "Controls",
+        "label": "個人属性統制変数 (年齢・性別・役職)",
+        "color": "#CBD5E0",
+        "r2_contrib": 0.0008,
+        "percentage": 0.35
+      }
+    ]
+  }
+}

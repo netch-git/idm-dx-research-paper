@@ -1,0 +1,135 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+  <meta charset="UTF-8">
+  <title>論文執筆方針確認用ドラフト (指導教員相談版) | 20261008175453</title>
+  <style>
+    :root {
+      --primary: #005BAC;
+      --primary-tint: #E8F1FA;
+      --text: #111827;
+      --text-sub: #374151;
+      --border: #CBD5E1;
+      --bg-alt: #F8F9FA;
+    }
+    body {
+      font-family: "Noto Sans JP", "BIZ UDPGothic", "Meiryo", sans-serif;
+      line-height: 1.75;
+      color: var(--text);
+      max-width: 960px;
+      margin: 0 auto;
+      padding: 40px 24px;
+      background: #FFFFFF;
+    }
+    h1 { font-size: 26px; color: var(--primary); border-bottom: 3px solid var(--primary); padding-bottom: 10px; margin-bottom: 20px; }
+    h2 { font-size: 20px; color: #002B66; border-left: 5px solid var(--primary); padding-left: 12px; margin-top: 36px; margin-bottom: 14px; background: var(--bg-alt); padding-top: 4px; padding-bottom: 4px; }
+    h3 { font-size: 16px; color: #1E293B; margin-top: 24px; margin-bottom: 8px; font-weight: 700; }
+    p, li { font-size: 14.5px; color: var(--text-sub); }
+    ul, ol { padding-left: 24px; margin-bottom: 14px; }
+    li { margin-bottom: 6px; }
+    .badge-bar {
+      background: var(--primary-tint);
+      border: 1px solid #93C5FD;
+      padding: 10px 16px;
+      border-radius: 6px;
+      font-size: 13px;
+      margin-bottom: 24px;
+    }
+    .consult-box {
+      background: #FEF3C7;
+      border: 1px solid #FCD34D;
+      border-left: 6px solid #D97706;
+      padding: 16px;
+      border-radius: 6px;
+      margin-top: 30px;
+      font-size: 14px;
+    }
+    @media print {
+      body { max-width: 100%; padding: 0; }
+      h2 { page-break-before: always; }
+    }
+  </style>
+</head>
+<body>
+  <div class="badge-bar">
+    <strong>文書ID / バージョン:</strong> 20261008175453_v1.0 | <strong>データ:</strong> 就業者マイクロデータ N = 2,035 (決定論的解析) | <strong>用途:</strong> 指導教員相談・壁打ち用ドラフト
+  </div>
+
+  <h1>企業規模と組織階層がDX推進意識および組織摩擦認知に及ぼす影響</h1>
+  <p style="font-size:16px; color:var(--primary); font-weight:700; margin-top:-10px; margin-bottom:24px;">
+    就業者2,035名のマイクロデータ分析に基づく階層乖離メカニズムと組織公正の緩衝効果
+  </p>
+
+  <h2>1. アブストラクト (Abstract)</h2>
+  <p>
+    本研究は、日本企業におけるDX推進が停滞する本質的要因を、従来の「テクノロジー決定論（ツールの有無）」や「企業規模二元論（大企業優位／中小企業遅滞）」から脱却し、<strong>「社内の組織階層間における認識・感情摩擦」および「心理的所有感（自分事化）の移転不全」</strong>という組織行動論的視点から解明することを目的とする。
+  </p>
+  <p>
+    就業者 2,035名の完全決定論的マイクロデータを用い、企業規模（大企業／SMO）× 組織階層（経営層／中間管理職／一般社員）の2要因・6セル配置に基づく多層的実証分析を実施した。
+  </p>
+  <p>
+    主要な実証結果は以下の5点である：(1) 二元配置分散分析により、SMO中間管理職において当事者意識が急落・孤立する交互作用効果（F = 4.619, p = 0.010）と、一般社員層で大企業優位が消失する「現場収束現象」（p = 0.704 ns）を検出した。(2) 就業者の45.8%が「心理的離反層」に沈殿しており、成果に対する給与・人事評価の還元（分配的公正）の欠落が離反オッズ比を約4倍に高めていた。(3) 手続的公正（プロセスの透明性）が高い組織では、摩擦認知がむしろ当事者意識を高める方向へと正転する感情的バランシング（Huy 2002）のレジリエンスが計量的に証明された（B = +0.0826, p &lt; 0.001）。(4) 最大の能力需給GAPは「現場課題発見・傾聴力」（+1.08点）であり、重回帰分析において技術知識単体は非有意（β = 0.047 ns）である一方、PMO組織変革機能がDX成果を独占規定（β = 0.439, p &lt; 0.001）していた。(5) 全社のほぼ半数が成果なき推進焦燥を抱え、特にSMO中間管理職でギャップが最大化（+1.45点）していた。
+  </p>
+
+  <h2>2. イントロダクション (Introduction)</h2>
+  <h3>2.1 研究背景と問題意識</h3>
+  <p>
+    『DXレポート』の警鐘から7年が経過し、IT投資額は増加したものの、現場の変革意識の冷え込みと組織的停滞が続く「DXパラドックス」が存在する。
+  </p>
+  <h3>2.2 従来研究の限界</h3>
+  <ul>
+    <li><strong>テクノロジー決定論への偏重:</strong> ツール導入ばかりが議論され、就業者の心理的所有感や組織公正が軽視されてきた。</li>
+    <li><strong>企業規模二元論の誤謬:</strong> 「大企業＝進んでいる／中小企業＝遅れている」という単純なマクロ比較に終始し、社内階層構造との交差効果が見落とされてきた。</li>
+  </ul>
+  <h3>2.3 リサーチ・クエスチョン (RQ)</h3>
+  <ul>
+    <li><strong>RQ 1:</strong> 企業規模と組織階層の交差は、当事者意識にどのような相互作用をもたらすのか？</li>
+    <li><strong>RQ 2:</strong> なぜ中小企業の中間管理職が最も孤立し疲弊するのか？</li>
+    <li><strong>RQ 3:</strong> 組織公正やPMO機能は、認識摩擦をいかにして当事者意識や成果に転換できるのか？</li>
+  </ul>
+
+  <h2>3. 研究材料と方法 (Materials & Methods)</h2>
+  <ul>
+    <li><strong>標本構成:</strong> 全国企業就業者 N = 2,035（欠損0件 完全決定論的解析）。大企業 745名（経営31 / 管理295 / 一般419）、SMO 1,290名（経営298 / 管理511 / 一般481）。</li>
+    <li><strong>主要尺度:</strong> 変革当事者意識（SC18 5項目反転合成: α = 0.820）、組織摩擦認知（SC15 5項目合成: α = 0.835）。両者は直交無相関（r = +0.007, p = 0.744）。</li>
+    <li><strong>共通手法バイアス:</strong> Harman単一因子検定の説明率は 28.4% であり、基準（50%）をクリア。</li>
+  </ul>
+
+  <h2>4. 結果 (Results)</h2>
+  <ul>
+    <li><strong>【発見 1 (H1)】職階×規模交互作用:</strong> 二元配置ANOVA（F = 4.619, p = 0.010）。大企業管理職（3.40点）に対し、SMO管理職（3.31点）で急落。一般職では大企業（3.23点）とSMO（3.24点）で有意差なし（現場収束）。</li>
+    <li><strong>【発見 2 (H2)】分配的公正と心理的離反:</strong> 就業者の 45.8% が心理的離反層に属し、分配的不公正により離反オッズ比が 3.95倍（約4倍）に跳ね上がる。</li>
+    <li><strong>【発見 3 (H3)】手続的公正による感情的反転:</strong> 交互作用項 B = +0.0826 (p &lt; 0.001)。低公正群では摩擦で意識が急落（B = -0.069*）するが、高公正群では正へと反転（B = +0.051*）。</li>
+    <li><strong>【発見 4 (H4)】能力需給GAPとPMO決定力:</strong> 最大GAPは「現場課題発見力」（+1.08点）。DX成果に対して技術知識単体は非有意（β = 0.047 ns）だが、PMO機能は独占決定（β = 0.439, p &lt; 0.001）。</li>
+    <li><strong>【発見 5 (H5)】組織的認知的不協和:</strong> 全社の48.6%が焦燥先行型（GAP = +1.25点）。SMO中間管理職においてギャップが最大化（+1.45点）。</li>
+    <li><strong>【頑健性】8大感度分析:</strong> Type III、共変量ANCOVA、全9項目、因子得点、職階B、HC3異分散モデルの全感度モデルで交互作用が有意（すべて p &lt; 0.05）。</li>
+  </ul>
+
+  <h2>5. 考察 (Discussion)</h2>
+  <h3>5.1 理論的インプリケーション</h3>
+  <ol>
+    <li>マクロ規模二元論の解体と「階層規定性」の確立（現場収束の実証）</li>
+    <li>組織公正理論と「感情的バランシング（Huy 2002）」の計量的拡張</li>
+    <li>テクノロジー決定論の脱却と「戦略的PMO機能」の再定義（Kane et al. 2015）</li>
+    <li>組織的認知的不協和の階層的偏在モデル</li>
+  </ol>
+  <h3>5.2 実務的・政策的示唆</h3>
+  <ul>
+    <li>大企業: 本社押し付けを廃し現場主導PMOの組成、分配的公正（処遇連動）の確立。</li>
+    <li>SMO: 経営陣自身のDX学習と伴走（SC18-8の回復）、情報的公正の実践。</li>
+    <li>政策: ツール導入補助金偏重から、PMO伴走人材派遣支援への政策シフト。</li>
+  </ul>
+
+  <h2>6. まとめ (Conclusion)</h2>
+  <p>
+    DXの本質は技術導入ではなく、組織階層間の「認識統合」と「所有感移転」である。組織公正と現場傾聴力こそが、日本のDXを停滞から真の変革へ導く羅針盤である。
+  </p>
+
+  <div class="consult-box">
+    <strong>指導教員への相談・壁打ちポイント:</strong><br>
+    1. 「技術論・規模論の限界 → 階層間摩擦と所有感 → 組織公正とPMOによる解決」という論文全体のストーリーラインの妥当性。<br>
+    2. H1（二元配置ANOVA）を主軸としつつ、H2〜H5（公正・GAP・不協和）を同一論文内で展開する構成バランス。<br>
+    3. 投稿先学術ジャーナル（経営情報学会、情報処理学会、組織学会等）の選定方針。
+  </div>
+</body>
+</html>

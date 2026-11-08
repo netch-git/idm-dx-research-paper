@@ -1,0 +1,94 @@
+# 【データパイプラインと変数定義ファイル完全カタログ】
+**文書ID**: `20261008180834`  
+**作成日時**: 2026年10月8日 18:08:34  
+**目的**: 本格論文執筆および他PC再開時に、元設問番号、変数名、スコアリング定義、反転処理、変換スクリプトを100%追跡・再現するための完全データ台帳
+
+---
+
+## 1. データパイプライン全体構造（Data Lineage Flow）
+
+```mermaid
+flowchart TD
+    Raw["【基幹生データ】<br>G:/マイドライブ/IDM/data-cross.xlsx<br>(N = 2,035, 全117カラム)"] --> S01["【変換スクリプト】<br>20261008/scripts/01_convert_to_analysis_ready.py"]
+    
+    subgraph Dictionaries["定義・辞書マスター群 (20261008/artifacts/)"]
+        D1["survey_structure.json<br>(全33設問の質問文・選択肢構造)"]
+        D2["column_short_name_map.json<br>(元設問名 ↔ 短縮変数名 117項目)"]
+        D3["corrected_scoring_dictionary_master.json<br>(反転項目・正規化・スコアリング辞書)"]
+        D4["likert_scale_dictionary_master.json<br>(選択肢テキスト ↔ 数値対応表)"]
+    end
+    
+    Dictionaries --> S01
+    
+    S01 --> FinalParquet["【確定分析データセット】<br>20261008/artifacts/analysis_data_n2035_final.parquet<br>(N = 2,035, 128変数, 欠損0件, 型厳密保持)"]
+    S01 --> FinalCSV["20261008/artifacts/analysis_data_n2035_final.csv"]
+    S01 --> Codebook["20261008/artifacts/analysis_data_n2035_codebook.json<br>(128変数の型・ラベル・統計量台帳)"]
+    
+    FinalParquet --> Scripts["【分析スクリプト群 (02〜08)】<br>03_h1, 04_h2, 05_h3, 06_h4, 07_h5, 08_robustness"]
+    Scripts --> ResultsJSON["【確定統計JSONマスター群】<br>h1〜h5_results.json, robustness_checks_master.json"]
+    ResultsJSON --> Papers["【学術論文ドラフト & スライド】<br>第4章・第5章完全統合版, 教員相談ドラフト, 発表スライド"]
+```
+
+---
+
+## 2. 入力データ・変換データファイル一覧
+
+| 区分 | ファイルパス（相対パス） | フォーマット / 規模 | 役割・内容 |
+| :--- | :--- | :--- | :--- |
+| **基幹生データ** | `G:/マイドライブ/IDM/data-cross.xlsx` | Excel / 2,035行 × 117列 | 調査会社納品の元データ。全数解析の起点。 |
+| **確定分析データ (主)** | [`./20261008/artifacts/analysis_data_n2035_final.parquet`](./20261008/artifacts/analysis_data_n2035_final.parquet) | Parquet / 2,035行 × 128列 | 型（int, float, category）が厳密に保持され、高速かつ欠損0件の主分析データ。 |
+| **確定分析データ (副)** | [`./20261008/artifacts/analysis_data_n2035_final.csv`](./20261008/artifacts/analysis_data_n2035_final.csv) | CSV / 2,035行 × 128列 | Excelや他ツールで直接閲覧可能な互換データ。 |
+| **全変数コードブック** | [`./20261008/artifacts/analysis_data_n2035_codebook.json`](./20261008/artifacts/analysis_data_n2035_codebook.json) | JSON / 128変数分 | 各変数の物理名、日本語ラベル、データ型、平均、SD、最小・最大値、欠損数（0）の台帳。 |
+
+---
+
+## 3. 変数定義・辞書・設問マッピングファイル一覧
+
+論文執筆時に「この変数は元アンケートの何番の設問か？」「どうスコアリングしたか？」を確認するための必須辞書群です：
+
+| 辞書ファイル名 | 格納場所（相対パス） | 項目数 | 詳細内容と執筆時の参照方法 |
+| :--- | :--- | :---: | :--- |
+| **調査票設問構造定義** | [`./20261008/artifacts/survey_structure.json`](./20261008/artifacts/survey_structure.json) | 33設問 | アンケートの全設問（M1〜M6, SC1〜SC26, Q1〜Q8）の質問文全文、回答形式（SA/MA/Matrix）、選択肢ラベルの完全定義。 |
+| **設問名短縮マッピング** | [`./20261008/artifacts/column_short_name_map.json`](./20261008/artifacts/column_short_name_map.json) | 117項目 | Excelの長大な元列名（例: `SC18_1. 成果で給料が増える`）とスクリプト変数名（例: `sc18_1`）の1対1対応表。 |
+| **スコアリング・反転辞書** | [`./20261008/artifacts/corrected_scoring_dictionary_master.json`](./20261008/artifacts/corrected_scoring_dictionary_master.json) | 主要尺度 | ポジティブ／ネガティブ項目の反転処理ルール（`rev = 6 - x`）、合成尺度計算式（5項目反転平均等）の定義マスター。 |
+| **リッカート尺度辞書** | [`./20261008/artifacts/likert_scale_dictionary_master.json`](./20261008/artifacts/likert_scale_dictionary_master.json) | 尺度群 | 「そう思う=5 〜 そう思わない=1」等の選択肢テキストと数値変換ルールの対応表。 |
+| **人間用リッカート辞書 (MD)** | [`./20261007/reports/IDM_DX_リッカート尺度_設問回答_数値化辞書マスター.md`](./20261007/reports/IDM_DX_リッカート尺度_設問回答_数値化辞書マスター.md) | 全設問 | 人間がMarkdown上で全設問の選択肢・反転の有無・質問意図を一覧確認できるハンドブック。 |
+| **Python変換モジュール** | [`./20261007/scripts/likert_mappings.py`](./20261007/scripts/likert_mappings.py) | Python辞書 | スクリプト内で直接 `import` して使える辞書オブジェクトモジュール。 |
+
+---
+
+## 4. 主要構成概念（変数）と元設問の対照表
+
+本格執筆の「第3章 研究方法（変数の操作化）」でそのまま記述・引用できる主要変数一覧です：
+
+| 変数名 (物理名) | 概念名 / 操作化 | 元設問コード | 測定項目・尺度仕様 / 反転 |
+| :--- | :--- | :---: | :--- |
+| `ownership_promotion` | **変革当事者意識・促進焦点 (主DV)** | SC18 (1,2,3,6,7) | 5項目反転合成平均 (1〜5点, $lpha = 0.820$)<br>給与(1), 残業減(2), 効率化(3), 使命感(6), 経営学習(7) |
+| `friction_prevention` | **組織摩擦認知 (SC15)** | SC15 (1〜9) | 5〜9項目合成平均 (1〜5点, $lpha = 0.835$)<br>部門間対立、既存業務過負荷、評価不満等 |
+| `tier_a` / `tier_b` | **組織階層 (独立変数)** | SC7-2 | 経営層 / 中間管理職 / 一般社員 (定義A: 329/806/900名, 定義B: 329/1167/539名) |
+| `is_large_firm` | **企業規模 (独立変数)** | M6 | 1: 大企業 (1,000名以上: 745名) / 0: SMO (1,000名未満: 1,290名) |
+| `distributive_justice` | **分配的公正** | SC18-1 / SC18-4 | 成果に見合う給与増・人事評価連動 (1〜5点) |
+| `procedural_justice` | **手続的・情報的公正** | SC18-9 / 関連設問 | 意思決定の透明性、現場の声の傾聴、情報開示 |
+| `outcome_q4_score` | **DX総合成果実感** | Q4 | 1〜10点 共通スケール ($M = 5.097, SD = 1.636$) |
+| `continuation_q6_score` | **DX推進継続意向** | Q6 | 1〜10点 共通スケール ($M = 6.351, SD = 2.073$) |
+| `dissonance_gap` | **組織的認知的不協和ギャップ** | Q6 − Q4 | 差分スコア (全社 $+1.254$点, SMO管理職 $+1.446$点) |
+| `gap_discovery` | **現場課題発見・傾聴力GAP** | Q2-3 (重要度−保有度) | 需給差分スコア ($+1.083$点, 全9能力中最上位) |
+| `gap_tech` | **デジタル技術知識GAP** | Q2-1 (重要度−保有度) | 需給差分スコア ($+1.052$点) |
+
+---
+
+## 5. 分析実行スクリプト・パイプライン一覧
+
+すべての分析結果は、以下のスクリプトを順次実行することで、どのPCでも 100% 決定論的（再現可能）に出力されます：
+
+| スクリプト名 | 格納場所（相対パス） | 実行コマンド | 出力生成物 |
+| :--- | :--- | :--- | :--- |
+| **01 データコンバート** | [`./20261008/scripts/01_convert_to_analysis_ready.py`](./20261008/scripts/01_convert_to_analysis_ready.py) | `python 01_convert_to_analysis_ready.py` | `analysis_data_n2035_final.parquet`, `codebook.json` |
+| **02 予備分析 (信頼性・相関)** | [`./20261008/scripts/02_preliminary_analysis.py`](./20261008/scripts/02_preliminary_analysis.py) | `python 02_preliminary_analysis.py` | `preliminary_analysis_results.json` |
+| **03 仮説1 (H1: 二元配置ANOVA)** | [`./20261008/scripts/03_test_hypothesis_h1.py`](./20261008/scripts/03_test_hypothesis_h1.py) | `python 03_test_hypothesis_h1.py` | `h1_anova_results.json`, H1レポート |
+| **04 仮説2 (H2: k-means・ロジスティック)** | [`./20261008/scripts/04_test_hypothesis_h2.py`](./20261008/scripts/04_test_hypothesis_h2.py) | `python 04_test_hypothesis_h2.py` | `h2_analysis_results.json`, H2レポート |
+| **05 仮説3 (H3: モデレーション回帰)** | [`./20261008/scripts/05_test_hypothesis_h3.py`](./20261008/scripts/05_test_hypothesis_h3.py) | `python 05_test_hypothesis_h3.py` | `h3_moderation_results.json`, H3レポート |
+| **06 仮説4 (H4: 需給GAP・重回帰)** | [`./20261008/scripts/06_test_hypothesis_h4.py`](./20261008/scripts/06_test_hypothesis_h4.py) | `python 06_test_hypothesis_h4.py` | `h4_capability_gap_results.json`, H4レポート |
+| **07 仮説5 (H5: 認知的不協和)** | [`./20261008/scripts/07_test_hypothesis_h5.py`](./20261008/scripts/07_test_hypothesis_h5.py) | `python 07_test_hypothesis_h5.py` | `h5_dissonance_results.json`, H5レポート |
+| **08 頑健性マスター (8大モデル)** | [`./20261008/scripts/08_robustness_checks_master.py`](./20261008/scripts/08_robustness_checks_master.py) | `python 08_robustness_checks_master.py` | `robustness_checks_master.json`, 頑健性レポート |
+| **スライド生成** | [`./20261008/scripts/generate_academic_presentation_slides.py`](./20261008/scripts/generate_academic_presentation_slides.py) | `python generate_academic_presentation_slides.py` | `20261008/発表資料作成/index.html` (15枚) |

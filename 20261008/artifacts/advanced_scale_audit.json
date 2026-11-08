@@ -1,0 +1,122 @@
+{
+  "sc11_counts": {
+    "1": 379,
+    "2": 906,
+    "3": 319,
+    "4": 431
+  },
+  "sc14_counts": {
+    "1": 589,
+    "2": 997,
+    "3": 256,
+    "4": 34,
+    "5": 159
+  },
+  "sc18_subscales": {
+    "incentive_mean": 3.286,
+    "leadership_mean": 3.082,
+    "duty_mean": 3.761,
+    "corr_incentive_duty": 0.42,
+    "corr_incentive_leadership": 0.566
+  },
+  "q8_q9_gap_tests": [
+    {
+      "cap_id": "Cap_1",
+      "label": "デジタル技術に関する知識・スキル",
+      "importance_mean": 3.947,
+      "sufficiency_mean": 2.971,
+      "gap_mean": 0.976,
+      "t_stat": 34.246,
+      "p_val": 2.4388959894136107e-203,
+      "cohen_d": 0.759
+    },
+    {
+      "cap_id": "Cap_2",
+      "label": "経営層への説明・予算獲得能力（PMO/説得力）",
+      "importance_mean": 3.75,
+      "sufficiency_mean": 2.998,
+      "gap_mean": 0.752,
+      "t_stat": 27.07,
+      "p_val": 4.3775160273626195e-138,
+      "cohen_d": 0.6
+    },
+    {
+      "cap_id": "Cap_3",
+      "label": "現場の声を聞き課題を見つける能力（PMO/発見力）",
+      "importance_mean": 3.962,
+      "sufficiency_mean": 2.949,
+      "gap_mean": 1.012,
+      "t_stat": 34.36,
+      "p_val": 2.0435327284932058e-204,
+      "cohen_d": 0.762
+    },
+    {
+      "cap_id": "Cap_4",
+      "label": "業務プロセスの導入部分をデザインする能力（PMO/設計力）",
+      "importance_mean": 3.832,
+      "sufficiency_mean": 2.902,
+      "gap_mean": 0.931,
+      "t_stat": 33.742,
+      "p_val": 1.3615450644385447e-198,
+      "cohen_d": 0.748
+    },
+    {
+      "cap_id": "Cap_5",
+      "label": "適したシステム・サービスを選定する能力（PMO/選定力）",
+      "importance_mean": 3.836,
+      "sufficiency_mean": 2.975,
+      "gap_mean": 0.86,
+      "t_stat": 31.429,
+      "p_val": 4.506167978370691e-177,
+      "cohen_d": 0.697
+    },
+    {
+      "cap_id": "Cap_6",
+      "label": "要件定義・外注業者折衝能力（PMO/折衝力）",
+      "importance_mean": 3.753,
+      "sufficiency_mean": 2.927,
+      "gap_mean": 0.826,
+      "t_stat": 30.3,
+      "p_val": 9.43603081867627e-167,
+      "cohen_d": 0.672
+    },
+    {
+      "cap_id": "Cap_7",
+      "label": "現場の抵抗を乗り越え推進する能力（PMO/推進力）",
+      "importance_mean": 3.757,
+      "sufficiency_mean": 2.945,
+      "gap_mean": 0.812,
+      "t_stat": 29.11,
+      "p_val": 4.859019683684729e-156,
+      "cohen_d": 0.645
+    },
+    {
+      "cap_id": "Cap_8",
+      "label": "複数部署の利害を調整する能力（権限・調整力）",
+      "importance_mean": 3.76,
+      "sufficiency_mean": 2.945,
+      "gap_mean": 0.815,
+      "t_stat": 28.911,
+      "p_val": 2.905252909621693e-154,
+      "cohen_d": 0.641
+    },
+    {
+      "cap_id": "Cap_9",
+      "label": "ロードマップを描く企画力（戦略・企画力）",
+      "importance_mean": 3.814,
+      "sufficiency_mean": 2.937,
+      "gap_mean": 0.878,
+      "t_stat": 31.435,
+      "p_val": 4.024462869423764e-177,
+      "cohen_d": 0.697
+    }
+  ],
+  "q4_q6_dilemma": {
+    "q4_outcome_mean": 5.023,
+    "q6_intent_mean": 6.351,
+    "gap_mean": 1.328,
+    "t_stat": 24.643,
+    "p_val": 1.4966371528602961e-117,
+    "cohen_d": 0.546
+  }
+}

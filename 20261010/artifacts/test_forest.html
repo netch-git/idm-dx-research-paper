@@ -1,0 +1,122 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<script src="G:/マイドライブ/antigravity/IDM/20261008/発表資料作成/assets/chart.umd.min.js"></script>
+</head>
+<body>
+<div style="width: 800px; height: 400px;">
+<canvas id="testForest"></canvas>
+</div>
+<script>
+const labels = [
+  'PMO変革機能総合 (Q9.2-9)',
+  '企業規模 (大企業ダミー)',
+  'デジタル技術知識 (Q9.1)',
+  '女性ダミー',
+  '管理職ダミー',
+  '一般社員ダミー',
+  '実年齢'
+];
+const ciData = [
+  { low: 0.3827, high: 0.4950, beta: 0.4388, color: '#005BAC', isSig: true },
+  { low: 0.0396, high: 0.1191, beta: 0.0794, color: '#00838F', isSig: true },
+  { low: -0.0088, high: 0.1034, beta: 0.0473, color: '#718096', isSig: false },
+  { low: -0.0296, high: 0.0524, beta: 0.0114, color: '#A0AEC0', isSig: false },
+  { low: -0.0560, high: 0.0587, beta: 0.0013, color: '#A0AEC0', isSig: false },
+  { low: -0.0799, high: 0.0440, beta: -0.0180, color: '#A0AEC0', isSig: false },
+  { low: -0.0654, high: 0.0204, beta: -0.0225, color: '#A0AEC0', isSig: false }
+];
+
+const forestPlugin = {
+  id: 'forestPlugin',
+  afterDatasetsDraw(chart) {
+    const { ctx, scales: { x, y } } = chart;
+    const zeroX = x.getPixelForValue(0);
+
+    // Zero Line
+    ctx.save();
+    ctx.beginPath();
+    ctx.setLineDash([4, 4]);
+    ctx.strokeStyle = '#D32F2F';
+    ctx.lineWidth = 1.8;
+    ctx.moveTo(zeroX, y.top);
+    ctx.lineTo(zeroX, y.bottom);
+    ctx.stroke();
+
+    ctx.fillStyle = '#D32F2F';
+    ctx.font = 'bold 11px sans-serif';
+    ctx.textAlign = 'center';
+    ctx.fillText('無効果線 (β = 0)', zeroX, y.top - 6);
+    ctx.restore();
+
+    // Whiskers
+    ciData.forEach((ci, idx) => {
+      const yPos = y.getPixelForTick(idx);
+      const xLow = x.getPixelForValue(ci.low);
+      const xHigh = x.getPixelForValue(ci.high);
+
+      ctx.save();
+      ctx.strokeStyle = ci.color;
+      ctx.lineWidth = 2.2;
+
+      ctx.beginPath();
+      ctx.moveTo(xLow, yPos);
+      ctx.lineTo(xHigh, yPos);
+      ctx.stroke();
+
+      const cap = 5;
+      ctx.beginPath();
+      ctx.moveTo(xLow, yPos - cap);
+      ctx.lineTo(xLow, yPos + cap);
+      ctx.moveTo(xHigh, yPos - cap);
+      ctx.lineTo(xHigh, yPos + cap);
+      ctx.stroke();
+
+      ctx.restore();
+    });
+  }
+};
+
+new Chart(document.getElementById('testForest'), {
+  type: 'scatter',
+  data: {
+    datasets: [{
+      label: '標準化偏回帰係数 β',
+      data: ciData.map((d, i) => ({ x: d.beta, y: i })),
+      backgroundColor: ciData.map(d => d.color),
+      borderColor: '#1A1A1A',
+      borderWidth: 1.5,
+      pointRadius: 6.5,
+      pointHoverRadius: 9
+    }]
+  },
+  plugins: [forestPlugin],
+  options: {
+    responsive: true,
+    maintainAspectRatio: false,
+    scales: {
+      x: {
+        min: -0.12,
+        max: 0.55,
+        title: { display: true, text: '標準化偏回帰係数 β (95% 信頼区間)' },
+        grid: { color: '#E0E0E0' }
+      },
+      y: {
+        type: 'linear',
+        min: -0.5,
+        max: 6.5,
+        ticks: {
+          stepSize: 1,
+          callback: function(val) {
+            return labels[val] || '';
+          }
+        },
+        grid: { color: '#F0F0F0' }
+      }
+    }
+  }
+});
+</script>
+</body>
+</html>

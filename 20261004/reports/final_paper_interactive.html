@@ -1,0 +1,1418 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>企業規模と組織階層がDX推進意識および組織摩擦認知に及ぼす影響 | 学術論文＆実証解析ポータル</title>
+  
+  <!-- KaTeX for LaTeX Math Rendering (Online CDN) -->
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/katex.min.css">
+  <script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/katex.min.js"></script>
+  <script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/contrib/auto-render.min.js"></script>
+
+  <style>
+    :root {
+      --primary: #005BAC;
+      --primary-dark: #004080;
+      --secondary: #00838F;
+      --accent-green: #228543;
+      --accent-red: #D32F2F;
+      --bg-main: #FFFFFF;
+      --bg-alt: #F8F9FA;
+      --bg-card: #FFFFFF;
+      --text-main: #1A1A1A;
+      --text-muted: #555555;
+      --border: #DDE2E5;
+      --base-font-size: 16px;
+    }
+
+    body.font-md { --base-font-size: 18px; }
+    body.font-lg { --base-font-size: 20px; }
+
+    .math-expr {
+      font-family: 'Cambria Math', 'Times New Roman', 'Noto Serif JP', serif;
+      font-style: normal;
+      white-space: nowrap;
+      padding: 0 2px;
+      color: #0b3d6e;
+    }
+    .math-expr em {
+      font-style: italic;
+      font-family: 'Times New Roman', 'Cambria Math', serif;
+    }
+    .math-expr sup, .math-expr sub {
+      font-size: 0.75em;
+      line-height: 0;
+      position: relative;
+      vertical-align: baseline;
+    }
+    .math-expr sup { top: -0.45em; }
+    .math-expr sub { bottom: -0.2em; }
+
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+
+    body {
+      font-family: 'Noto Sans JP', -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+      font-size: var(--base-font-size);
+      line-height: 1.75;
+      color: var(--text-main);
+      background-color: var(--bg-alt);
+    }
+
+    /* ヘッダー */
+    header {
+      background-color: var(--primary);
+      color: #FFFFFF;
+      position: sticky;
+      top: 0;
+      z-index: 1000;
+      box-shadow: 0 2px 8px rgba(0,0,0,0.15);
+    }
+    .header-inner {
+      max-width: 1300px;
+      margin: 0 auto;
+      padding: 12px 20px;
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: space-between;
+      align-items: center;
+      gap: 12px;
+    }
+    .brand-title {
+      font-size: 1.15rem;
+      font-weight: 700;
+      display: flex;
+      align-items: center;
+      gap: 8px;
+    }
+    .brand-badge {
+      background-color: rgba(255,255,255,0.2);
+      font-size: 0.75rem;
+      padding: 3px 8px;
+      border-radius: 4px;
+      font-weight: 500;
+    }
+    .header-controls {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      flex-wrap: wrap;
+    }
+    .font-btn, .action-btn {
+      background: rgba(255,255,255,0.15);
+      border: 1px solid rgba(255,255,255,0.3);
+      color: #FFFFFF;
+      padding: 4px 10px;
+      border-radius: 4px;
+      font-size: 0.85rem;
+      cursor: pointer;
+      transition: background 0.2s;
+    }
+    .font-btn:hover, .action-btn:hover { background: rgba(255,255,255,0.3); }
+    .font-btn.active { background: #FFFFFF; color: var(--primary); font-weight: 700; }
+
+    /* タブバー */
+    .tab-bar-container {
+      background-color: #004580;
+      border-bottom: 2px solid var(--secondary);
+    }
+    .tab-bar {
+      max-width: 1300px;
+      margin: 0 auto;
+      display: flex;
+      overflow-x: auto;
+      scrollbar-width: none;
+    }
+    .tab-bar::-webkit-scrollbar { display: none; }
+    .tab-btn {
+      background: none;
+      border: none;
+      color: rgba(255,255,255,0.8);
+      padding: 12px 24px;
+      font-size: 0.95rem;
+      font-weight: 600;
+      cursor: pointer;
+      white-space: nowrap;
+      transition: all 0.2s;
+      border-bottom: 3px solid transparent;
+      display: flex;
+      align-items: center;
+      gap: 8px;
+    }
+    .tab-btn:hover { color: #FFFFFF; background-color: rgba(255,255,255,0.08); }
+    .tab-btn.active { color: #FFFFFF; background-color: rgba(255,255,255,0.15); border-bottom-color: #FFD54F; }
+
+    /* メインコンテナ */
+    main {
+      max-width: 1300px;
+      margin: 24px auto;
+      padding: 0 16px;
+    }
+    .tab-pane { display: none; animation: fadeIn 0.3s ease; }
+    .tab-pane.active { display: block; }
+    @keyframes fadeIn {
+      from { opacity: 0; transform: translateY(4px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+
+    /* 論文レイアウト */
+    .paper-container {
+      background: var(--bg-card);
+      border: 1px solid var(--border);
+      border-radius: 8px;
+      padding: 36px 40px;
+      box-shadow: 0 1px 4px rgba(0,0,0,0.05);
+    }
+    @media (max-width: 768px) { .paper-container { padding: 20px 16px; } }
+
+    .paper-header {
+      border-bottom: 2px solid var(--border);
+      padding-bottom: 24px;
+      margin-bottom: 28px;
+    }
+    .paper-title {
+      font-size: 1.65rem;
+      line-height: 1.4;
+      color: #0B2545;
+      margin-bottom: 16px;
+      font-weight: 800;
+    }
+    .paper-meta {
+      font-size: 0.9rem;
+      color: var(--text-muted);
+      display: flex;
+      flex-wrap: wrap;
+      gap: 16px;
+    }
+    .meta-tag {
+      background: #E8F0FE;
+      color: var(--primary);
+      padding: 2px 10px;
+      border-radius: 12px;
+      font-weight: 600;
+    }
+
+    .abstract-box {
+      background: #F4F7FB;
+      border-left: 5px solid var(--primary);
+      padding: 20px 24px;
+      border-radius: 4px;
+      margin-bottom: 32px;
+    }
+    .abstract-title {
+      font-size: 1.1rem;
+      font-weight: 700;
+      color: var(--primary);
+      margin-bottom: 8px;
+    }
+    .keywords {
+      margin-top: 12px;
+      font-size: 0.9rem;
+      color: var(--text-muted);
+    }
+
+    h2.section-heading {
+      font-size: 1.35rem;
+      color: #0B2545;
+      border-bottom: 2px solid var(--primary);
+      padding-bottom: 8px;
+      margin: 36px 0 18px 0;
+      font-weight: 700;
+    }
+    h3.sub-heading {
+      font-size: 1.15rem;
+      color: var(--secondary);
+      margin: 24px 0 12px 0;
+      font-weight: 600;
+      border-left: 4px solid var(--secondary);
+      padding-left: 10px;
+    }
+    p { margin-bottom: 16px; text-align: justify; }
+
+    /* チャートカード */
+    .chart-card {
+      background: #FFFFFF;
+      border: 1px solid var(--border);
+      border-radius: 8px;
+      padding: 20px;
+      margin: 28px 0;
+      box-shadow: 0 2px 6px rgba(0,0,0,0.04);
+    }
+    .chart-title {
+      font-size: 1.05rem;
+      font-weight: 700;
+      color: #1A1A1A;
+      margin-bottom: 6px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      flex-wrap: wrap;
+    }
+    .chart-badge {
+      font-size: 0.8rem;
+      background: #E8F5E9;
+      color: var(--accent-green);
+      padding: 2px 8px;
+      border-radius: 4px;
+      font-weight: 600;
+    }
+    .chart-desc {
+      font-size: 0.88rem;
+      color: var(--text-muted);
+      margin-bottom: 16px;
+    }
+    .chart-wrapper {
+      position: relative;
+      width: 100%;
+      height: 380px;
+      margin: 0 auto;
+    }
+    @media (max-width: 768px) { .chart-wrapper { height: 280px; } }
+
+    /* データテーブル */
+    .table-container {
+      width: 100%;
+      overflow-x: auto;
+      margin: 24px 0;
+      border: 1px solid var(--border);
+      border-radius: 6px;
+    }
+    table.data-table {
+      width: 100%;
+      border-collapse: collapse;
+      font-size: 0.9rem;
+      background: #FFFFFF;
+    }
+    table.data-table th {
+      background: #005BAC;
+      color: #FFFFFF;
+      padding: 10px 14px;
+      text-align: left;
+      font-weight: 600;
+      white-space: nowrap;
+    }
+    table.data-table td {
+      padding: 10px 14px;
+      border-top: 1px solid var(--border);
+    }
+    table.data-table tr:nth-child(even) { background: #F8F9FA; }
+    table.data-table tr:hover { background: #EEF4FA; }
+
+    /* 参考文献リスト */
+    .ref-list {
+      list-style-type: decimal;
+      padding-left: 24px;
+      margin-top: 16px;
+    }
+    .ref-item {
+      margin-bottom: 14px;
+      font-size: 0.92rem;
+      line-height: 1.6;
+    }
+    .ref-doi {
+      color: var(--primary);
+      text-decoration: underline;
+      word-break: break-all;
+    }
+
+    /* コラム・解説スタイル */
+    .column-grid {
+      display: grid;
+      grid-template-columns: 1fr;
+      gap: 24px;
+    }
+    .column-card {
+      background: #FFFFFF;
+      border: 1px solid var(--border);
+      border-radius: 8px;
+      overflow: hidden;
+      box-shadow: 0 2px 6px rgba(0,0,0,0.05);
+    }
+    .column-header {
+      padding: 16px 24px;
+      background: linear-gradient(135deg, #005BAC, #00838F);
+      color: #FFFFFF;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      flex-wrap: wrap;
+      gap: 8px;
+    }
+    .column-tag {
+      background: rgba(255,255,255,0.25);
+      font-size: 0.78rem;
+      padding: 2px 8px;
+      border-radius: 12px;
+      font-weight: 600;
+    }
+    .column-body { padding: 24px; }
+    .metaphor-box {
+      background: #FFF9C4;
+      border-left: 4px solid #FBC02D;
+      padding: 14px 18px;
+      border-radius: 4px;
+      margin: 16px 0;
+      font-size: 0.92rem;
+    }
+    .metaphor-title {
+      font-weight: 700;
+      color: #827717;
+      margin-bottom: 4px;
+    }
+
+    /* 先行研究カード */
+    .lit-badge {
+      display: inline-block;
+      font-size: 0.75rem;
+      padding: 2px 8px;
+      border-radius: 4px;
+      margin-right: 6px;
+      font-weight: 700;
+    }
+    .badge-ssci { background: #E8F5E9; color: #2E7D32; border: 1px solid #A5D6A7; }
+    .badge-scopus { background: #E3F2FD; color: #1565C0; border: 1px solid #90CAF9; }
+    .badge-classic { background: #FFF3E0; color: #E65100; border: 1px solid #FFCC80; }
+
+    .citation-callout {
+      background: #F1F8E9;
+      border: 1px solid #C5E1A5;
+      padding: 14px 18px;
+      border-radius: 6px;
+      margin-top: 12px;
+      font-size: 0.9rem;
+    }
+
+    footer {
+      background: #0B2545;
+      color: #FFFFFF;
+      text-align: center;
+      padding: 24px 16px;
+      margin-top: 48px;
+      font-size: 0.85rem;
+    }
+  </style>
+  <script src="assets/chart.umd.min.js"></script>
+  <script>
+    if (typeof Chart === 'undefined') {
+      document.write('<script src="https://cdn.jsdelivr.net/npm/chart.js"><\/script>');
+    }
+  </script>
+</head>
+<body>
+
+  <!-- ヘッダー -->
+  <header>
+    <div class="header-inner">
+      <div class="brand-title">
+        <span>IDM-DX 論文・学術ポータル</span>
+        <span class="brand-badge">N = 2,035 完全決定論的解析</span>
+      </div>
+      <div class="header-controls">
+        <span style="font-size:0.85rem; opacity:0.9;">文字サイズ:</span>
+        <button class="font-btn active" onclick="setFontSize('sm')">標準</button>
+        <button class="font-btn" onclick="setFontSize('md')">中</button>
+        <button class="font-btn" onclick="setFontSize('lg')">大</button>
+        <button class="action-btn" onclick="toggleFullscreen()">⛶ 全画面</button>
+        <button class="action-btn" onclick="window.print()">🖨 印刷</button>
+      </div>
+    </div>
+  </header>
+
+  <!-- タブナビゲーション -->
+  <div class="tab-bar-container">
+    <div class="tab-bar">
+      <button class="tab-btn active" onclick="switchTab('tab-paper')">
+        <span>📄 論文全文 (全6章・完全学術原稿)</span>
+      </button>
+      <button class="tab-btn" onclick="switchTab('tab-stats')">
+        <span>💡 統計処理・初心者解説コラム</span>
+      </button>
+      <button class="tab-btn" onclick="switchTab('tab-literature')">
+        <span>📚 引用先行研究・理論的解題 (全19編)</span>
+      </button>
+    </div>
+  </div>
+
+  <!-- メインコンテンツ -->
+  <main>
+
+    <!-- ========================================================
+         TAB 1: 論文全文 (第1章〜第6章 完全版)
+    ======================================================== -->
+    <div id="tab-paper" class="tab-pane active">
+      <div class="paper-container">
+
+        <div class="paper-header">
+          <h1 class="paper-title">企業規模と組織階層がDX推進意識および組織摩擦認知に及ぼす影響：2,035名の就業者データに基づく二元配置分散分析と階層乖離ダイナミクス</h1>
+          <div class="paper-meta">
+            <span><strong>著者:</strong> IDM デジタル変革調査研究グループ</span>
+            <span><strong>日付:</strong> 2026年10月6日（真正完全版）</span>
+            <span class="meta-tag">査読対応完成論文 (Type II ANOVA)</span>
+            <span class="meta-tag">有効標本数 N = 2,035</span>
+          </div>
+        </div>
+
+        <!-- 要約 -->
+        <div class="abstract-box">
+          <div class="abstract-title">要約 (Abstract)</div>
+          <p>本研究は、日本国内の就業者2,035名を対象とした全量データに基づき、企業規模（大企業 <span class="math-expr"><em>n</em> = 745</span> 名 vs 中小企業 <span class="math-expr"><em>n</em> = 1,290</span> 名）および組織階層（経営層 <span class="math-expr"><em>n</em> = 329</span> 名、部課長クラス <span class="math-expr"><em>n</em> = 806</span> 名、一般社員 <span class="math-expr"><em>n</em> = 900</span> 名）が、DXに対する推進意識・心理的所有感（SC18合成スコア、9項目、<span class="math-expr">&alpha; = 0.859</span>）およびDXに伴うリスク懸念・組織摩擦認知（SC15合成スコア、9項目、<span class="math-expr">&alpha; = 0.818</span>）に及ぼす影響を二元配置分散分析（Type II ANOVA）および層別単純主効果検定により厳密に検証した。</p>
+          <p>分析の結果、DX推進意識（SC18）においては、企業規模主効果（<span class="math-expr"><em>F</em>(1, 2029) = 8.04, <em>p</em> = 0.0046, <em>&eta;</em><sub><em>p</em></sub><sup>2</sup> = 0.0039</span>）、職制主効果（<span class="math-expr"><em>F</em>(2, 2029) = 38.58, <em>p</em> = 3.60 &times; 10<sup>&minus;17</sup>, <em>&eta;</em><sub><em>p</em></sub><sup>2</sup> = 0.0366</span>）、および交互作用効果（<span class="math-expr"><em>F</em>(2, 2029) = 4.32, <em>p</em> = 0.0134, <em>&eta;</em><sub><em>p</em></sub><sup>2</sup> = 0.0042</span>）のすべてが統計的に有意であった。単純主効果分析により、経営層（大企業 <span class="math-expr"><em>M</em> = 3.77</span> vs 中小 <span class="math-expr"><em>M</em> = 3.48, <em>p</em> = 0.0200, <em>g</em> = 0.44</span>）および部課長クラス（大企業 <span class="math-expr"><em>M</em> = 3.37</span> vs 中小 <span class="math-expr"><em>M</em> = 3.22, <em>p</em> = 0.0010, <em>g</em> = 0.24</span>）では大企業が有意に高い推進意識を示す一方、一般社員層では企業規模による有意差が完全に消失し（大企業 <span class="math-expr"><em>M</em> = 3.18</span> vs 中小 <span class="math-expr"><em>M</em> = 3.18, <em>p</em> = 0.9032, <em>g</em> = 0.01</span>）、現場の意識が低位収束している実態（<strong>現場収束現象</strong>）が明らかとなった。</p>
+          <p>さらに補完的従属変数である組織摩擦認知（SC15）においては、規模主効果は有意でなかったが（<span class="math-expr"><em>F</em>(1, 2029) = 1.97, <em>p</em> = 0.1601, <em>&eta;</em><sub><em>p</em></sub><sup>2</sup> = 0.0010</span>）、職制主効果（<span class="math-expr"><em>F</em>(2, 2029) = 61.98, <em>p</em> = 7.44 &times; 10<sup>&minus;27</sup>, <em>&eta;</em><sub><em>p</em></sub><sup>2</sup> = 0.0576</span>）と交互作用効果（<span class="math-expr"><em>F</em>(2, 2029) = 5.79, <em>p</em> = 0.0031, <em>&eta;</em><sub><em>p</em></sub><sup>2</sup> = 0.0057</span>）が極めて顕著に有意であった。特筆すべきは中小企業における階層乖離であり、中小企業の経営層はリスク・摩擦認知が極端に低い（<span class="math-expr"><em>M</em> = 2.69</span>）のに対し、部課長クラス（<span class="math-expr"><em>M</em> = 3.10</span>）および一般社員（<span class="math-expr"><em>M</em> = 3.18</span>）は高い摩擦を認知しており（経営層との乖離 <span class="math-expr"><em>p</em> < 0.001, <em>g</em> = 0.79</span>）、経営層の過度な楽観主義バイアスと現場の負担感との間に深刻な構造的断絶が存在することが実証された。また、推進意識と摩擦認知の相関は <span class="math-expr"><em>r</em> = &minus;0.0901</span>（<span class="math-expr"><em>p</em> < 0.001</span>）と微弱であり、両者が心理的に独立した直交次元を形成していることが示された。</p>
+          <div class="keywords"><strong>キーワード:</strong> デジタルトランスフォーメーション (DX), 企業規模, 職制グループ, 二元配置分散分析, 心理的所有感, 組織摩擦, 現場収束現象, 直交ダイナミクス</div>
+        </div>
+
+        <!-- 1. 序論 -->
+        <h2 class="section-heading">1. 序論 (Introduction)</h2>
+        <p>デジタル技術を活用した業務プロセスの変革やビジネスモデルの再構築を目指すデジタルトランスフォーメーション（Digital Transformation: DX）は、企業の持続的競争優位性を左右する最重要経営課題となっている（Kane et al., 2015）。しかし、多くの組織においてDX推進は順調に進展しておらず、経済産業省が警鐘を鳴らす「2025年の崖」問題や組織内の抵抗に直面している。先行研究は、DXの成否を決定づける要因として、単なる技術導入の多寡にとどまらず、組織構成員の変革受容性、推進意識、および組織内摩擦のマネジメントが不可欠であることを示唆している（Papadopoulos et al., 2020）。</p>
+        <p>特に、企業規模（大企業 vs 中小企業）と組織階層（経営層、管理職層、一般社員層）がDX認識に及ぼす影響については、理論的に強い関心が寄せられている。大企業は豊富な資金・人材リソースを背景にDXを戦略的に推進する体制を整えやすい一方で、組織の階層性や官僚主義が現場への浸透を阻害する可能性がある。対照的に、中小企業（SMEs）は機動性や経営者のリーダーシップが直接的に組織を動かす力を持つ反面、デジタル投資余力や専門人材の不足という構造的制約を抱えている（Eller et al., 2020; Garzoni et al., 2020）。</p>
+        <p>さらに、組織内の「階層（職制）」による視点の相違は、DX推進における致命的な摩擦を生み出す要因となる。経営層がデジタル変革を自社の将来戦略として捉える一方で、実務の変革を直接担う部課長クラスはリソース配分や業務負荷の増大に直面し、一般社員は雇用の安定性や既存スキルの陳腐化に対する懸念を抱きやすい。</p>
+        <p>先行研究の多くは、定性的な事例分析や、特定の階層（主に経営者やIT担当役員）のみを対象としたアンケート調査に依存しており、同一組織コンテキストにおける企業規模と複数階層の「交差（交互作用）」を全量統計的に検証した実証知見は極めて乏しい。本研究では、国内2,035名の就業者から得られたマイクロデータを対象とし、企業規模（2水準）と職制（3水準）の要因配置に基づく二元配置分散分析（Two-Way ANOVA）を実行することで、以下のリサーチ・クエスチョン（RQ）を解明することを目的とする。</p>
+        <ul style="margin-left: 24px; margin-bottom: 16px;">
+          <li><strong>RQ1</strong>: DX推進意識・心理的所有感（SC18）において、企業規模および組織階層による主効果、ならびに両者の交互作用効果が存在するか。</li>
+          <li><strong>RQ2</strong>: DXに伴うリスク懸念・組織摩擦認知（SC15）において、企業規模および組織階層による差異はどのように発現し、推進意識とどのように連動しているか。</li>
+          <li><strong>RQ3</strong>: 大企業と中小企業において、階層間の認識乖離パターンにはどのような構造的特異性が見られるか。</li>
+        </ul>
+
+        <!-- 2. 文献レビュー -->
+        <h2 class="section-heading">2. 文献レビューと仮説構築 (Literature Review & Hypotheses)</h2>
+        <h3 class="sub-heading">2.1 企業規模とDX推進（大企業 vs 中小企業）</h3>
+        <p>組織能力論および資源依拠観点（RBV）において、デジタル変革は組織の吸収能力（Absorptive Capacity）と動的能力に依存する。大企業は体系的なリスキリングプログラムを展開する資源余力を有するため、全体的なDX推進意識が高まりやすい。一方で中小企業の実証研究において、Omrani et al. (2024) はEU域内15,346社の中小企業データを分析し、TOE枠組み（技術・組織・環境）に基づきITインフラや既存の革新水準がDX推進の決定的要因であることを立証している。また、AlNuaimi et al. (2022) は組織のアジリティ（敏捷性）とデジタル戦略の整合におけるリーダーシップの決定的役割を論じ、経営層のコミットメントの重要性を強調している。さらに、日本企業の実態調査として Liu et al. (2021) は、製薬企業営業部門におけるDX推進課題を分析し、現場部門が直面する特有の組織摩擦を報告している。しかし、現場レベルにおいてはデジタルツール導入に伴う初期負担や業務プロセスの混乱に対する耐性が大企業よりも低いため、組織全体としての一体感を維持することは容易ではない（Roman & Rusu, 2022）。</p>
+
+        <h3 class="sub-heading">2.2 組織階層と心理的所有感・組織摩擦</h3>
+        <p>心理的所有感理論（Psychological Ownership Theory; Pierce et al., 2001）によれば、個人が変革対象に対して「自己の目標」「我々の組織の将来」としての所有感を抱くとき、変革への積極的参画が促進される。経営層は変革の決定権を有するため最も高い心理的所有感を持つが、現場社員は受動的な業務変更を強いられるため、所有感は階層が下降するにつれて低下することが予測される。同時に、組織変革に伴うリスクや摩擦（SC15）の認知に関しても、Packmohr et al. (2023) は大企業と中小企業におけるDX推進障壁の認知差を分析し、階層や企業規模によって直面する障壁の種類（技術的、組織的、心理的）が明確に分化することを示した。また、データ駆動型DXにおいては単なる技術導入を超えた組織文化の変革が不可欠であり、文化的な受容基盤が欠如している場合、現場の心理的抵抗が激化することが指摘されている（Ghafoori et al., 2024）。</p>
+
+        <h3 class="sub-heading">2.3 仮説の設定</h3>
+        <ul style="margin-left: 24px; margin-bottom: 16px;">
+          <li><strong>仮説1（推進意識の規模主効果）</strong>: DX推進意識・心理的所有感（SC18）は、大企業が中小企業よりも有意に高い。</li>
+          <li><strong>仮説2（推進意識の職制主効果）</strong>: DX推進意識・心理的所有感（SC18）は、経営層、部課長クラス、一般社員の順に有意に低下する。</li>
+          <li><strong>仮説3（推進意識の交互作用効果）</strong>: 企業規模と職制グループの間に交互作用が存在し、大企業と中小企業の差は上位階層ほど大きく、一般社員層では収束する。</li>
+          <li><strong>仮説4（摩擦認知の職制主効果と交互作用）</strong>: DXリスク懸念・組織摩擦認知（SC15）は階層間で有意に異なり、特に中小企業において経営層と現場管理職・一般社員との間の認識乖離が大企業よりも顕著に拡大する。</li>
+        </ul>
+
+        <!-- 3. 研究方法 (完全採用版: 山根らの公式調査手法) -->
+        <h2 class="section-heading">3. 研究方法 (Methodology)</h2>
+        
+        <h3 class="sub-heading">3.1 調査設計と対象地域の選定</h3>
+        <p>本研究の実証データは、提携モニターを対象としたクローズド方式のインターネット調査（実査：株式会社サーベイリサーチセンター）により収集された。<br>
+        調査対象は、日本国内の特定地域（北海道、宮城、東京、愛知、大阪、広島、福岡、熊本の8地域）に所在する民間企業に勤務する「経営者」「管理職」「一般職」である。対象地域の選定にあたっては、IT人材の流動性や都市規模を考慮し、各地方の主要中枢都市（札幌、仙台、東京、名古屋、大阪、広島、福岡）に加えて、半導体産業の急速な集積により産業構造および就業環境の変革が著しい熊本県を抽出対象として加えた。</p>
+
+        <h3 class="sub-heading">3.2 サンプリング手続きと回収割付</h3>
+        <p>1. <strong>調査期間</strong>: 令和7年（2025年）11月20日 〜 11月25日<br>
+        2. <strong>有効回答数</strong>: スクリーニング調査有効回答 <strong>8,274サンプル</strong> &rarr; 本調査有効回答 <strong>2,035サンプル</strong><br>
+        3. <strong>抽出条件</strong>: スクリーニング調査において、勤務先が「DXに取り組んでいる」と回答した就業者層を厳格に抽出した。<br>
+        4. <strong>回収割付</strong>: 組織内の職階間における認識乖離を解明するため、「経営者（役員・取締役・社長、 <span class="math-expr"><em>n</em> = 329</span> 名、16.2%）」「管理職（部課長クラス、 <span class="math-expr"><em>n</em> = 806</span> 名、39.6%）」「一般職（一般社員、 <span class="math-expr"><em>n</em> = 900</span> 名、44.2%）」の3区分で均等割付を志向した層化抽出を実施した。さらに、厚生労働省「賃金構造基本統計調査」の基準に準拠し、常用労働者1,000人以上を「大企業（Large, <span class="math-expr"><em>n</em> = 745</span> 名、36.6%）」、1,000人未満を「SMO（Small and Medium Organization：中小組織, <span class="math-expr"><em>n</em> = 1,290</span> 名、63.4%）」と定義した。</p>
+
+        <h3 class="sub-heading">3.3 データ品質管理と研究上の配慮</h3>
+        <p>Web調査システムの論理チェックおよび必須回答制御により、本調査完了データセット（<span class="math-expr"><em>N</em> = 2,035</span>）内には項目無回答や欠損値（Missing Values）は一切存在しない（完全決定論的データセット）。調査会社のデータクレンジング段階において、全設問同一選択肢回答（Straight-lining）や異常な短時間回答者（Speeders）は事前に検知・排除された。<br>
+        本調査は人を対象とする非侵襲的な意識調査であり、調査会社（サーベイリサーチセンター）のモニター規約に基づき個人を特定可能な情報は収集されず、完全匿名化された統計データとして集計・解析された。また、回答者は調査会社の事前登録規約および調査画面における趣旨明示に基づき、自発的な意志によって回答を行った。</p>
+
+        <h3 class="sub-heading">3.4 変数定義と測定尺度</h3>
+        <p>1. <strong>DX推進意識・心理的所有感（SC18, 9項目）</strong>: 自社のDXに対する当事者意識、競争力強化への期待、推進コミットメント等を測定する9項目（1: 全くそう思わない 〜 5: 非常にそう思うの5点リッカート尺度）の算術平均値。<br>
+        2. <strong>DXリスク懸念・組織摩擦認知（SC15, 9項目）</strong>: 新技術導入に伴う業務負荷増加、既存業務との軋轢、現場の孤立感、成果還元の不透明感等を測定する9項目（同5点リッカート尺度）の算術平均値。<br>
+        3. <strong>理論的背景：組織的公正（分配的公正）</strong>: Colquitt (2001) の組織的公正理論に基づき、DXに伴う学習負荷や業務変革に対して昇給や賞与といった適切な成果還元が期待できない状況（分配的公正の欠如）が一般職の心理的離反を招く背景要因として位置付けられる。</p>
+
+        <h3 class="sub-heading">3.5 尺度信頼性と概念の直交性検証</h3>
+        <p>クロンバックの <span class="math-expr">&alpha;</span> 係数による内的整合性の検証において、**SC18（DX推進意識）** は <span class="math-expr">&alpha; = 0.8592</span>（<span class="math-expr"><em>k</em> = 9, <em>N</em> = 2,035</span>, CITC: <span class="math-expr">0.392  〜  0.651</span>）、**SC15（DX摩擦認知）** は <span class="math-expr">&alpha; = 0.8183</span>（<span class="math-expr"><em>k</em> = 9, <em>N</em> = 2,035</span>, CITC: <span class="math-expr">0.419  〜  0.595</span>）といずれも高い信頼基準を満たした。SC18とSC15の相関係数は <span class="math-expr"><em>r</em> = &minus;0.0901</span>（<span class="math-expr"><em>p</em> = 4.66 &times; 10<sup>&minus;5</sup></span>, <span class="math-expr"><em>r</em><sup>2</sup> = 0.0081</span>）と微弱であり、両尺度が直交する独立した心理動機構成概念であることが実証的に確認された。</p>
+
+        <h3 class="sub-heading">3.6 統計分析モデル</h3>
+        <p>不均等セル頻度に対応するため、Type II 平方和（Type II Sum of Squares）による二元配置分散分析（Two-Way ANOVA）を実行した。効果量として偏イータ二乗（<span class="math-expr"><em>&eta;</em><sub><em>p</em></sub><sup>2</sup></span>）を算出した。HC3異分散頑健標準誤差による感度分析およびBrown-Forsythe検定を実施し、事後検定としてテューキーのHSD検定、ならびにウェルチの <span class="math-expr"><em>t</em></span> 検定（Holm法多重性調整）による層別単純主効果検定を実施した。</p>
+
+        <!-- 4. 結果（動的チャート配備） -->
+        <h2 class="section-heading">4. 分析結果 (Results)</h2>
+
+        <!-- Table 1: 記述統計量 -->
+        <h3 class="sub-heading">4.1 記述統計量一覧</h3>
+        <div class="table-container">
+          <table class="data-table">
+            <thead>
+              <tr>
+                <th>企業規模</th>
+                <th>職制グループ</th>
+                <th>標本数 (n)</th>
+                <th>SC18 推進意識 (平均 ± SD)</th>
+                <th>SC18 95% 信頼区間</th>
+                <th>SC15 摩擦認知 (平均 ± SD)</th>
+                <th>SC15 95% 信頼区間</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td rowspan="3"><strong>大企業</strong></td>
+                <td>1. 経営層</td>
+                <td>31</td>
+                <td>3.77 ± 0.62</td>
+                <td>[3.54, 3.99]</td>
+                <td>3.10 ± 0.72</td>
+                <td>[2.83, 3.36]</td>
+              </tr>
+              <tr>
+                <td>2. 部課長クラス</td>
+                <td>295</td>
+                <td>3.37 ± 0.61</td>
+                <td>[3.30, 3.44]</td>
+                <td>3.08 ± 0.58</td>
+                <td>[3.01, 3.15]</td>
+              </tr>
+              <tr>
+                <td>3. 一般社員</td>
+                <td>419</td>
+                <td>3.18 ± 0.64</td>
+                <td>[3.12, 3.24]</td>
+                <td>3.22 ± 0.60</td>
+                <td>[3.16, 3.28]</td>
+              </tr>
+              <tr>
+                <td rowspan="3"><strong>中小企業</strong></td>
+                <td>1. 経営層</td>
+                <td>298</td>
+                <td>3.48 ± 0.65</td>
+                <td>[3.41, 3.55]</td>
+                <td>2.69 ± 0.67</td>
+                <td>[2.62, 2.77]</td>
+              </tr>
+              <tr>
+                <td>2. 部課長クラス</td>
+                <td>511</td>
+                <td>3.22 ± 0.60</td>
+                <td>[3.17, 3.28]</td>
+                <td>3.10 ± 0.63</td>
+                <td>[3.04, 3.15]</td>
+              </tr>
+              <tr>
+                <td>3. 一般社員</td>
+                <td>481</td>
+                <td>3.18 ± 0.59</td>
+                <td>[3.12, 3.23]</td>
+                <td>3.18 ± 0.58</td>
+                <td>[3.13, 3.23]</td>
+              </tr>
+              <tr>
+                <td><strong>全体</strong></td>
+                <td>-</td>
+                <td>2,035</td>
+                <td>3.27 ± 0.63</td>
+                <td>[3.24, 3.30]</td>
+                <td>3.08 ± 0.63</td>
+                <td>[3.05, 3.11]</td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+
+        <!-- Chart 1: 推進意識の交互作用プロット -->
+        <div class="chart-card">
+          <div class="chart-title">
+            <span>図1: 企業規模 × 職制グループにおけるDX推進意識（SC18）の交互作用プロット</span>
+            <span class="chart-badge">現場収束現象 (Convergence Effect)</span>
+          </div>
+          <div class="chart-desc">
+            経営層（大企業 3.77 vs 中小 3.48）および部課長クラス（大企業 3.37 vs 中小 3.22）では大企業が有意に高い推進意識を示すが、一般社員層では大企業 3.18 vs 中小企業 3.18 で完全に一致し、企業規模の優位性が完全に消滅する。
+          </div>
+          <div class="chart-wrapper">
+            <canvas id="chartInteraction"></canvas>
+          </div>
+        </div>
+
+        <!-- Table 2: 分散分析結果 -->
+        <h3 class="sub-heading">4.2 二元配置分散分析（Type II ANOVA）</h3>
+        <div class="table-container">
+          <table class="data-table">
+            <thead>
+              <tr>
+                <th>従属変数</th>
+                <th>要因 (Source)</th>
+                <th>平方和 (SS)</th>
+                <th>自由度 (df)</th>
+                <th>平均平方 (MS)</th>
+                <th>F 値</th>
+                <th>p 値</th>
+                <th>偏イータ二乗 (η²p)</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td rowspan="3"><strong>DX推進意識 (SC18)</strong></td>
+                <td>企業規模 (Company Size)</td>
+                <td>3.05</td>
+                <td>1</td>
+                <td>3.05</td>
+                <td>8.04</td>
+                <td>0.0046 **</td>
+                <td>0.0039</td>
+              </tr>
+              <tr>
+                <td>職制グループ (Job Level)</td>
+                <td>29.25</td>
+                <td>2</td>
+                <td>14.63</td>
+                <td>38.58</td>
+                <td>3.60 × 10⁻¹⁷ ***</td>
+                <td>0.0366</td>
+              </tr>
+              <tr>
+                <td>規模 × 職制 (Interaction)</td>
+                <td>3.28</td>
+                <td>2</td>
+                <td>1.64</td>
+                <td>4.32</td>
+                <td>0.0134 *</td>
+                <td>0.0042</td>
+              </tr>
+              <tr>
+                <td rowspan="3"><strong>組織摩擦認知 (SC15)</strong></td>
+                <td>企業規模 (Company Size)</td>
+                <td>0.74</td>
+                <td>1</td>
+                <td>0.74</td>
+                <td>1.97</td>
+                <td>0.1601 (n.s.)</td>
+                <td>0.0010</td>
+              </tr>
+              <tr>
+                <td>職制グループ (Job Level)</td>
+                <td>46.20</td>
+                <td>2</td>
+                <td>23.10</td>
+                <td>61.98</td>
+                <td>7.44 × 10⁻²⁷ ***</td>
+                <td>0.0576</td>
+              </tr>
+              <tr>
+                <td>規模 × 職制 (Interaction)</td>
+                <td>4.32</td>
+                <td>2</td>
+                <td>2.16</td>
+                <td>5.79</td>
+                <td>0.0031 **</td>
+                <td>0.0057</td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+
+        <!-- Chart 2: 組織摩擦認知プロット (数値完全修正) -->
+        <div class="chart-card">
+          <div class="chart-title">
+            <span>図2: 企業規模 × 職制グループにおける組織摩擦認知（SC15）の階層乖離プロット</span>
+            <span class="chart-badge">中小企業経営層の認知的盲点 (Cognitive Blindspot)</span>
+          </div>
+          <div class="chart-desc">
+            大企業は各階層でほぼ一定（経営層 3.10, 部課長 3.08, 一般社員 3.22）であるのに対し、中小企業では経営層（2.69）が異常に低い摩擦しか認識しておらず、部課長（3.10）および一般社員（3.18）との間に巨大な断絶（g = 0.79, p < 0.001）が存在する。
+          </div>
+          <div class="chart-wrapper">
+            <canvas id="chartFriction"></canvas>
+          </div>
+        </div>
+
+        <!-- Chart 3: 直交散布図 (N=2,035 実データ完全描画) -->
+        <div class="chart-card">
+          <div class="chart-title">
+            <span>図3: DX推進意欲（SC18）と組織摩擦懸念（SC15）の実データ散布図 (N = 2,035)</span>
+            <span class="chart-badge">実測決定論的データ (r = -0.0901)</span>
+          </div>
+          <div class="chart-desc">
+            全有効回答2,035名の実測スコアに基づく散布図。相関係数は r = -0.0901（p < 0.001, 決定係数 r² = 0.0081）であり、推進意欲とリスク懸念が心理的に独立した直交次元を形成していることが完全実証されている。赤線は実測回帰直線（y = -0.0908x + 3.3773）。
+          </div>
+          <div class="chart-wrapper">
+            <canvas id="chartOrthogonal"></canvas>
+          </div>
+        </div>
+
+        <!-- 5. 考察 -->
+        <h2 class="section-heading">5. 考察 (Discussion)</h2>
+        <h3 class="sub-heading">5.1 理論的示唆 (Theoretical Implications)</h3>
+        <p>第1に、<strong>「属性規定性よりも階層規定性の優位」と「現場収束現象」の立証</strong>である。効果量の比較から、企業規模単独の効果量（<span class="math-expr"><em>&eta;</em><sub><em>p</em></sub><sup>2</sup> = 0.0039</span>）よりも職制グループの効果量（<span class="math-expr"><em>&eta;</em><sub><em>p</em></sub><sup>2</sup> = 0.0366  〜  0.0576</span>）が約9〜15倍大きく、DX意識を決定づける主因は「企業規模」ではなく「組織内の階層位置」であることが実証された。さらに、大企業の優位性が現場の一般社員層においては完全に同一水準（大企業 3.18 vs 中小 3.18, <span class="math-expr"><em>g</em> = 0.01</span>）に収束した。これは、先行研究が前提としてきた「大企業先進・中小企業遅延」というマクロな二元論（Eller et al., 2020; Garzoni et al., 2020）を精緻化するものである。どれほど大企業が資金やインフラを投入しても、末端の従業員に対する心理的所有感の移転（Ownership Transfer; Pierce et al., 2001）に失敗している現実を露呈している。</p>
+        <p>第2に、<strong>中小企業における「経営層の楽観主義バイアスと現場孤立」の解明</strong>である。中小企業において、経営層の組織摩擦認知は 2.69 と異常に低く、現場社員（3.18）との間に <span class="math-expr"><em>g</em> = 0.79</span> もの巨大な認知断絶が存在した。Packmohr et al. (2023) が指摘するように、企業変革における阻害要因の認知差において、経営層はデジタル導入の戦略的果実を強調するあまり、現場が抱える既存業務の負荷や操作習熟の苦痛（Learning Curve Friction）を過小評価する「認知的盲点（Cognitive Blindspot）」に陥りやすい。中小企業の現場管理職や一般社員は、経営者直下のトップダウン圧力に晒されながらも代替リソースを与えられないため、大企業現場と同等以上の疲弊感と摩擦を抱え込んでいる。</p>
+        <p>第3に、<strong>DX意識の「二次元直交性（Orthogonal Dynamic）」の解明</strong>である。SC18とSC15の相関が <span class="math-expr"><em>r</em> = &minus;0.0901</span> と微弱であった事実は、Higgins (1997) の制御焦点理論が示すように、独立した二つの認知動機システムとして併存していることを強く示唆している。すなわち、「DXに強い意欲を持ちながらも、現場の摩擦を同時に強く懸念する」という心理状態が一般的であり、摩擦を無視した推進論は組織崩壊を招く危険性がある。</p>
+
+        <h3 class="sub-heading">5.2 実務的示唆 (Practical Implications)</h3>
+        <p>1. <strong>中小企業経営者への警鐘：現場の「見えない摩擦」の可視化と組織文化の醸成</strong><br>
+        中小企業の経営者は、自らが主導するDXに対して現場が強い摩擦（3.18）を感じている事実を直視しなければならない。Ghafoori et al. (2024) や Succurro (2026) が実証するように、DXの定着には単なるツールの導入ではなく、戦略的計画の明文化とデータ駆動型組織文化の醸成が不可欠である。</p>
+        <p>2. <strong>大企業における現場社員の「心理的所有感」の再設計とビジネスモデル変革</strong><br>
+        大企業においては、部課長から一般社員への「意識の目詰まり」が最大のボトルネックとなっている。各事業部の現場社員が小さな改善アイデアを自ら提案・実装する「ボトムアップ型ローコード開発」を奨励し、Pierce et al. (2001) の「対象への自己投資」の機会を提供する必要がある。さらに、Lamperti et al. (2024) が提示するように、現場が主体となって既存の製品・業務をサービス化するサービタイゼーションへの移行を促すことが有効である。</p>
+        <p>3. <strong>中間管理職（部課長クラス）のバッファー機能の強化</strong><br>
+        両規模ともに部課長クラスは、上層部からの推進圧力と現場からの抵抗・不満の板挟みとなっている。管理職層に対してDX評価指標（KPI）を成果直結型だけでなく「現場の変革適応度」にも配分し、心理的安全性を担保したチェンジマネジメント研修を実施すべきである。</p>
+
+        <!-- 6. 結論と研究の限界 (完全追加) -->
+        <h2 class="section-heading">6. 結論と研究の限界 (Conclusion & Limitations)</h2>
+
+        <h3 class="sub-heading">6.1 結論</h3>
+        <p>本研究は、2,035名の就業者全量データを用い、企業規模と組織階層がDX推進意識（SC18）および組織摩擦認知（SC15）に及ぼす影響を実証的に検証した。主要な知見として、(1) DX推進意識において企業規模と職制の有意な交互作用が確認され、大企業優位は上位層に限られ一般社員層では完全に低位収束すること、(2) 組織摩擦認知において中小企業の経営層（2.69）と現場層（3.10〜3.18）との間に <span class="math-expr"><em>g</em> = 0.79</span> に達する深刻な認知乖離が存在すること、を統計的に立証した。これらの知見は、DXを単なる技術導入ではなく、組織階層間の認識統合と心理的所有感の再構築プロセスとして捉え直す重要性を強く要請している。</p>
+
+        <h3 class="sub-heading">6.2 研究の限界と今後の課題 (Limitations & Future Research)</h3>
+        <p>本研究には、結果の解釈において留意すべき以下の学術的限界が存在する。<br>
+        第1に、<strong>横断的調査デザイン（Cross-Sectional Survey Design）に伴う因果推論の限界</strong>である。本研究は同一時点での観測データに基づくため、変数間の共変関係および交互作用の存在は厳密に実証されたものの、厳密な時間的先行性や直接的な因果関係（Causality）を断定することはできない。例えば、中小企業経営層の低摩擦認知が現場の孤立を招いているのか、あるいは現場の摩擦激化から経営層が無意識に目を背けているのかといった双方向的・動態的な影響関係を確定するためには、複数時点にわたる縦断的パネル調査（Longitudinal Panel Design）や介入実験による検証が不可欠である。<br>
+        第2に、<strong>自己申告式データに伴う共通方法バイアス（Common Method Bias: CMB）の検証</strong>である。本調査では設問群の物理的分離（SC15とSC18の別ブロック提示）およびアンカーの多角化により手続的統制を図っており、実証的にもSC18とSC15の相関が極めて低い（<span class="math-expr"><em>r</em> = &minus;0.0901, <em>r</em><sup>2</sup> < 1%</span>）ことから、単一の回答傾向による系統的歪み（ハロー効果や社会的望ましさバイアス）は極めて軽微であると判断される。<br>
+        第3に、大企業経営層の標本サイズ（<span class="math-expr"><em>n</em> = 31</span>）は統計的検定力を維持しているものの、中小企業経営層（<span class="math-expr"><em>n</em> = 298</span>）と比較して相対的に小さいため、大規模企業特有のトップマネジメント層の細分化（CIO, CDO, 現場役員）を考慮したさらなる標本拡充が望まれる。今後は、業種別（製造、サービス、IT等）の統制変数を含めた多層モデル（Hierarchical Linear Modeling）による精緻な検証が期待される。</p>
+
+        <!-- 参考文献 (全20編・Colquitt, AlNuaimi含む) -->
+        <h2 class="section-heading">参考文献 (References)</h2>
+        <ol class="ref-list">
+          <li class="ref-item">Al-Ghazali, B. M., Gelaidan, H. M., Shah, S. H. A., & Amjad, R. (2022). Green transformational leadership and green creativity? The mediating role of green thinking and green organizational identity in SMEs. <em>Frontiers in Psychology</em>, 13, 977998. <a class="ref-doi" href="https://doi.org/10.3389/fpsyg.2022.977998" target="_blank">https://doi.org/10.3389/fpsyg.2022.977998</a></li>
+          <li class="ref-item">AlNuaimi, B. K., Kumar Singh, S., Ren, S., Budhwar, P., & Vorobyev, D. (2022). Mastering digital transformation: The nexus between leadership, agility, and digital strategy. <em>Journal of Business Research</em>, 145, 636–648. <a class="ref-doi" href="https://doi.org/10.1016/j.jbusres.2022.03.038" target="_blank">https://doi.org/10.1016/j.jbusres.2022.03.038</a></li>
+          <li class="ref-item">Al-Swidi, A. K., Al-Hakimi, M. A., Al Koliby, I. S., Hasan, M. B., & Abdul-Talib, A.-N. (2024). The role of digital transformation in boosting CSR-driven green innovation among Yemeni manufacturing SMEs. <em>Discover Sustainability</em>, 5, 299. <a class="ref-doi" href="https://doi.org/10.1007/s43621-024-00506-w" target="_blank">https://doi.org/10.1007/s43621-024-00506-w</a></li>
+          <li class="ref-item">Colquitt, J. A. (2001). On the dimensionality of organizational justice: A construct validation of a measure. <em>Journal of Applied Psychology</em>, 86(3), 386–400. <a class="ref-doi" href="https://doi.org/10.1037/0021-9010.86.3.386" target="_blank">https://doi.org/10.1037/0021-9010.86.3.386</a></li>
+          <li class="ref-item">Eller, R., Alford, P., Kallmünzer, A., & Peters, M. (2020). Antecedents, consequences, and challenges of small and medium-sized enterprise digitalization. <em>Journal of Business Research</em>, 112, 119–127. <a class="ref-doi" href="https://doi.org/10.1016/j.jbusres.2020.03.004" target="_blank">https://doi.org/10.1016/j.jbusres.2020.03.004</a></li>
+          <li class="ref-item">Fauzi, F., Siregar, H., Barus, B., & Indraprahasta, G. S. (2023). Digital transformation for SME development at four levels of unit analysis – A literature review. <em>ABAC Journal</em>, 43(4), 276–302. <a class="ref-doi" href="https://doi.org/10.59865/abacj.2023.52" target="_blank">https://doi.org/10.59865/abacj.2023.52</a></li>
+          <li class="ref-item">Garzoni, A., De Turi, I., Secundo, G., & Del Vecchio, P. (2020). Fostering digital transformation of SMEs: A four levels approach. <em>Management Decision</em>, 58(8), 1543–1562. <a class="ref-doi" href="https://doi.org/10.1108/MD-07-2019-0939" target="_blank">https://doi.org/10.1108/MD-07-2019-0939</a></li>
+          <li class="ref-item">Ghafoori, A., Gupta, M., Merhi, M. I., Gupta, S., & Shore, A. P. (2024). Toward the role of organizational culture in data-driven digital transformation. <em>International Journal of Production Economics</em>, 271, 109205. <a class="ref-doi" href="https://doi.org/10.1016/j.ijpe.2024.109205" target="_blank">https://doi.org/10.1016/j.ijpe.2024.109205</a></li>
+          <li class="ref-item">Giang, P. X., Vi, T. T. T., & Ghi, T. N. (2026). Digital transformation, dynamic capability, and innovation performance in SMEs. <em>Journal of Organizational Behavior Research</em>, 11(1), 198–206. <a class="ref-doi" href="https://doi.org/10.51847/rkbg4kurvq" target="_blank">https://doi.org/10.51847/rkbg4kurvq</a></li>
+          <li class="ref-item">Higgins, E. T. (1997). Beyond pleasure and pain. <em>American Psychologist</em>, 52(12), 1280–1300. <a class="ref-doi" href="https://doi.org/10.1037/0003-066X.52.12.1280" target="_blank">https://doi.org/10.1037/0003-066X.52.12.1280</a></li>
+          <li class="ref-item">Hu, H., Zhao, M., & Zhang, X. (2023). Network evolution of diffusion in enterprise digitalization and intellectualization transformation: A technology—organization—environment framework perspective. <em>PLOS ONE</em>, 18(12), e0295327. <a class="ref-doi" href="https://doi.org/10.1371/journal.pone.0295327" target="_blank">https://doi.org/10.1371/journal.pone.0295327</a></li>
+          <li class="ref-item">Kane, G. C., Palmer, D., Phillips, A. N., Kiron, D., & Buckley, N. (2015). Strategy, not technology, drives digital transformation. <em>MIT Sloan Management Review</em>, 57(1), 1–25.</li>
+          <li class="ref-item">Lamperti, S., Cavallo, A., & Sassanelli, C. (2024). Digital servitization and business model innovation in SMEs: A model to escape from market disruption. <em>IEEE Transactions on Engineering Management</em>, 71, 7159–7173. <a class="ref-doi" href="https://doi.org/10.1109/TEM.2022.3233132" target="_blank">https://doi.org/10.1109/TEM.2022.3233132</a></li>
+          <li class="ref-item">Liu, Q., Zhao, Y., Kamioka, T., & Nakamura, M. (2021). Digital transformation challenges in the sales of pharmaceutical companies in Japan. <em>Asian Journal of Business Research</em>, 11(3), 72–91. <a class="ref-doi" href="https://doi.org/10.14707/ajbr.210115" target="_blank">https://doi.org/10.14707/ajbr.210115</a></li>
+          <li class="ref-item">Omrani, N., Rejeb, N., Maâlaoui, A., Dabić, M., & Kraus, S. (2024). Drivers of digital transformation in SMEs. <em>IEEE Transactions on Engineering Management</em>, 71, 5032–5045. <a class="ref-doi" href="https://doi.org/10.1109/TEM.2022.3215727" target="_blank">https://doi.org/10.1109/TEM.2022.3215727</a></li>
+          <li class="ref-item">Packmohr, S., Brink, H., & Paul, F.-H. (2023). Unraveling perceptions of barriers to digital transformation – Contrasting small and medium-sized with large enterprises. <em>IADIS International Journal on Computer Science and Information Systems</em>, 18(1), 102–119. <a class="ref-doi" href="https://doi.org/10.33965/ijcsis_2023180107" target="_blank">https://doi.org/10.33965/ijcsis_2023180107</a></li>
+          <li class="ref-item">Papadopoulos, T., Baltas, K. N., & Balta, M. E. (2020). The use of digital technologies by small and medium enterprises during COVID-19: Implications for theory and practice. <em>International Journal of Information Management</em>, 55, 102192. <a class="ref-doi" href="https://doi.org/10.1016/j.ijinfomgt.2020.102192" target="_blank">https://doi.org/10.1016/j.ijinfomgt.2020.102192</a></li>
+          <li class="ref-item">Pierce, J. L., Kostova, T., & Dirks, K. T. (2001). Toward a theory of psychological ownership in organizations. <em>Academy of Management Review</em>, 26(2), 298–310. <a class="ref-doi" href="https://doi.org/10.5465/amr.2001.4378028" target="_blank">https://doi.org/10.5465/amr.2001.4378028</a></li>
+          <li class="ref-item">Roman, A., & Rusu, V. D. (2022). Digital technologies and the performance of small and medium enterprises. <em>Studies in Business and Economics</em>, 17(3), 190–203. <a class="ref-doi" href="https://doi.org/10.2478/sbe-2022-0055" target="_blank">https://doi.org/10.2478/sbe-2022-0055</a></li>
+          <li class="ref-item">Succurro, M. (2026). Digital transformation in tourism SMEs: A strategic imperative in the evolving business landscape. <em>Journal of Industrial and Business Economics</em>, 53, 941–985. <a class="ref-doi" href="https://doi.org/10.1007/s40812-026-00395-2" target="_blank">https://doi.org/10.1007/s40812-026-00395-2</a></li>
+        </ol>
+
+      </div>
+    </div>
+
+
+    <!-- ========================================================
+         TAB 2: 統計処理・初心者解説コラム
+    ======================================================== -->
+    <div id="tab-stats" class="tab-pane">
+      <div class="column-grid">
+
+        <!-- コラム 1 -->
+        <div class="column-card">
+          <div class="column-header">
+            <h3>コラム 1: 二元配置分散分析（Two-Way ANOVA）って何？</h3>
+            <span class="column-tag">基礎概念の直感理解</span>
+          </div>
+          <div class="column-body">
+            <p><strong>「企業規模」と「役職」を別々に調べず、なぜ同時に分析しなければならないのか？</strong></p>
+            <p>統計学でよく使われる <span class="math-expr"><em>t</em></span> 検定は「大企業と中小企業」など2つのグループの平均値の差を比べる手法です。しかし、現実の組織では「大企業か中小企業か」という看板（企業規模）と、「社長か平社員か」という立場（職制）が複雑に絡み合っています。</p>
+            
+            <div class="metaphor-box">
+              <div class="metaphor-title">🍜 日常のたとえ：ラーメンの「スープ」と「麺の太さ」</div>
+              「濃厚豚骨スープ」と「あっさり醤油スープ」の美味しさを比べるとき、合わせる麺が「極太ちぢれ麺」か「極細ストレート麺」かによって、スープの評価はガラリと変わります。スープ単独（主効果1）や麺単独（主効果2）だけでなく、<strong>「スープ×麺の組み合わせ（交互作用）」</strong>を同時に見なければ、本当の味（DX推進意欲）は分かりません！
+            </div>
+
+            <p>本論文の二元配置分散分析（Type II ANOVA）は、企業規模の効果と役職の効果をきれいに分離した上で、「掛け合わせによる化学変化（交互作用）」を数学的に証明したのです。</p>
+          </div>
+        </div>
+
+        <!-- コラム 2 -->
+        <div class="column-card">
+          <div class="column-header">
+            <h3>コラム 2: なぜ「p 値」だけでは不十分なのか？ 〜効果量（η²p, Hedges' g）の歴史と威力〜</h3>
+            <span class="column-tag">科学的健全性の歴史</span>
+          </div>
+          <div class="column-body">
+            <p><strong>「p < 0.05（有意差あり）」が出たからといって、大喜びしてはいけない理由。</strong></p>
+            <p>統計検定における <span class="math-expr"><em>p</em></span> 値は、「偶然その差が生じる確率」を表します。しかし、<span class="math-expr"><em>p</em></span> 値には致命的な弱点があります。それは<strong>「サンプル数（N）が数千人規模に増えると、ほんの爪の先ほどの些細な差でも <span class="math-expr"><em>p</em> < 0.001</span> になってしまう」</strong>という「大標本の罠」です。</p>
+
+            <div class="metaphor-box">
+              <div class="metaphor-title">💊 日常のたとえ：風邪薬の効き目</div>
+              10万人に薬を飲ませたら、「熱が下がる時間が平均3秒早くなった」とします。サンプル数が巨大なので統計的には「p < 0.0001で確実に差がある（有意！）」となりますが、患者にとって3秒早く熱が下がることには何の意味もありません。本当に知りたいのは<strong>「実質的にどれくらいガツンと効いたか（効果の大きさ）」</strong>です。
+            </div>
+
+            <p>この「実質的なインパクト」を測る指標が<strong>効果量（偏イータ二乗 <span class="math-expr"><em>&eta;</em><sub><em>p</em></sub><sup>2</sup></span> や Hedges' <span class="math-expr"><em>g</em></span>）</strong>です。アメリカ心理学会（APA）は現在、論文投稿時に効果量の明記を義務付けています。本研究では、企業規模のインパクト（<span class="math-expr"><em>&eta;</em><sub><em>p</em></sub><sup>2</sup> = 0.0039</span>）に対して、組織階層のインパクト（<span class="math-expr"><em>&eta;</em><sub><em>p</em></sub><sup>2</sup> = 0.0576</span>）が約15倍も巨大であることを効果量によって科学的に暴き出しました。</p>
+          </div>
+        </div>
+
+        <!-- コラム 3 -->
+        <div class="column-card">
+          <div class="column-header">
+            <h3>コラム 3: 「現場収束現象」の衝撃 〜大企業の看板は現場でなぜ消えるのか？〜</h3>
+            <span class="column-tag">本研究の核心的発見</span>
+          </div>
+          <div class="column-body">
+            <p><strong>社長同士には圧倒的な意識の差があるのに、なぜ一般社員は3.18で完全に一致したのか？</strong></p>
+            <p>世間では「大企業はDXが進んでいて、中小企業は遅れている」と信じ込まれています。確かに経営層を見ると、大企業経営層は 3.77、中小企業経営層は 3.48 と大企業が圧勝しています。部課長クラスでも大企業が優位です。</p>
+            <p>しかし、最前線の一般社員層を見ると、<strong>大企業一般社員 3.18 vs 中小企業一般社員 3.18</strong> で小数点第二位まで完全に同一水準でした（<span class="math-expr"><em>p</em> = 0.9032, <em>g</em> = 0.01</span>、差は完全にゼロ！）。</p>
+
+            <div class="metaphor-box">
+              <div class="metaphor-title">⚾ 日常のたとえ：名門プロ球団と地方独立リーグのルーキー</div>
+              名門ジャイアンツの球団社長と、地方独立リーグの球団社長では、資金力もビジョンも桁違いです。しかし、入団したばかりの高卒新入団選手がグラウンドの隅で筋トレに励むとき、抱く不安や練習のしんどさは、名門球団だろうが地方球団だろうが全く同じです。
+            </div>
+
+            <p>どれほど大企業が莫大なIT予算やDXコンサルを投じても、末端の従業員が「これは自分たちの仕事のためのツールだ」という当事者意識（心理的所有感）を持てなければ、現場の意識は中小企業と完全に同じレベルに沈み込んでしまうのです。</p>
+          </div>
+        </div>
+
+        <!-- コラム 4 -->
+        <div class="column-card">
+          <div class="column-header">
+            <h3>コラム 4: 二次元直交性（無相関）の直感理解 〜アクセルとブレーキは別のペダル〜</h3>
+            <span class="column-tag">心理動機の二次元構造</span>
+          </div>
+          <div class="column-body">
+            <p><strong>「DXを進めたい気持ち」と「現場の摩擦を心配する気持ち」は、反対語ではない！</strong></p>
+            <p>直感的には、「DXに意欲的な人ほど、組織の摩擦なんて気にしない（負の強い相関）」と思われがちです。しかし、2,035名のデータを分析した結果、DX推進意欲（SC18）と組織摩擦懸念（SC15）の相関係数はわずか <span class="math-expr"><em>r</em> = &minus;0.0901</span>（ほぼ無相関）でした。</p>
+
+            <div class="metaphor-box">
+              <div class="metaphor-title">🚗 日常のたとえ：車の「アクセル」と「ブレーキ」</div>
+              アクセルを強く踏むこと（前に進みたい意欲）と、ブレーキペダルの効き具合を気にかけること（事故を起こしたくない危機感）は、別のメカニズムです。「目的地に早く着きたい！」と強く願いながらも、「道が凍結しているからスリップが怖い！」と同時に強く警戒することは極めて自然な人間の心理です。
+            </div>
+
+            <p>心理学者ヒギンズの「制御焦点理論（Higgins, 1997）」が示す通り、人間にはチャンスを求める動機（促進焦点）と、失敗を避ける動機（予防焦点）が独立して同居しています。現場が「摩擦が不安だ」と訴えているとき、それはDXに反対しているのではなく、「ブレーキの安全性を確認している」に過ぎないのです。</p>
+          </div>
+        </div>
+
+      </div>
+    </div>
+
+
+    <!-- ========================================================
+         TAB 3: 先行研究・引用解題コラム (全20編 完全網羅版)
+    ======================================================== -->
+    <div id="tab-literature" class="tab-pane">
+      <div class="column-grid">
+
+        <div style="background:#E3F2FD; border:1px solid #90CAF9; padding:16px 20px; border-radius:6px; margin-bottom:12px;">
+          <h3 style="color:#0D47A1; margin-bottom:6px;">📚 引用先行研究の学術的背景と本論文での理論的役割 (全20編)</h3>
+          <p style="font-size:0.92rem; color:#1A1A1A; margin:0;">
+            本論文で引用した20編の文献は、国際的学術インデックス（SSCI, SCIE, Scopus, ABSリスト等）に収載された査読付き学術研究および理論的古典です。各文献が本論文のどの論点を支えているかを客観的に解説します。
+          </p>
+        </div>
+
+        <!-- カード 1 -->
+        <div class="column-card">
+          <div class="column-header">
+            <h3>1. Al-Ghazali, Gelaidan, Shah, & Amjad (2022)</h3>
+            <span class="lit-badge badge-ssci">Frontiers in Psychology (SSCI)</span>
+          </div>
+          <div class="column-body">
+            <p><strong>【書誌情報】</strong> <em>Frontiers in Psychology</em>, 13, 977998. DOI: 10.3389/fpsyg.2022.977998</p>
+            <p><strong>【研究の要点】</strong> 中小企業（SMEs）において変革型リーダーシップが従業員の環境思考および組織アイデンティティを媒介して創造性を高めるメカニズムを実証分析。</p>
+            <div class="citation-callout">
+              <strong>💡 本研究における引用の役割:</strong><br>
+              第2章において、中小企業の変革推進においてトップのリーダーシップと組織アイデンティティの形成が従業員の行動変容にいかに直結するかを説明する根拠として採用。
+            </div>
+          </div>
+        </div>
+
+        <!-- カード 2 -->
+        <div class="column-card">
+          <div class="column-header">
+            <h3>2. AlNuaimi, Kumar Singh, Ren, Budhwar, & Vorobyev (2022)</h3>
+            <span class="lit-badge badge-ssci">Journal of Business Research (SSCI / ABS 3星)</span>
+          </div>
+          <div class="column-body">
+            <p><strong>【書誌情報】</strong> <em>Journal of Business Research</em>, 145, 636–648. DOI: 10.1016/j.jbusres.2022.03.038</p>
+            <p><strong>【研究の要点】</strong> デジタル戦略の成功には、変革型リーダーシップと組織のアジリティ（敏捷性）の結合が不可欠であることを実証的にモデル化。</p>
+            <div class="citation-callout">
+              <strong>💡 本研究における引用の役割:</strong><br>
+              第2章において、企業のDX推進において経営層の戦略的コミットメントとリーダーシップが組織全体の変革受容性に決定的な影響を及ぼす理論的根拠として採用。
+            </div>
+          </div>
+        </div>
+
+        <!-- カード 3 -->
+        <div class="column-card">
+          <div class="column-header">
+            <h3>3. Al-Swidi, Al-Hakimi, Al Koliby, Hasan, & Abdul-Talib (2024)</h3>
+            <span class="lit-badge badge-scopus">Discover Sustainability (ESCI/Scopus)</span>
+          </div>
+          <div class="column-body">
+            <p><strong>【書誌情報】</strong> <em>Discover Sustainability</em>, 5, 299. DOI: 10.1007/s43621-024-00506-w</p>
+            <p><strong>【研究の要点】</strong> 製造業中小企業におけるデジタル変革（DX）が組織のイノベーション促進に果たす役割を定量的モデルにより検証。</p>
+            <div class="citation-callout">
+              <strong>💡 本研究における引用の役割:</strong><br>
+              第2章において、新興・中小企業におけるデジタル技術導入が単なる効率化にとどまらず、組織全体の変革推進力となる動態を対比的に論じるために引用。
+            </div>
+          </div>
+        </div>
+
+        <!-- カード 4 (Colquitt) -->
+        <div class="column-card">
+          <div class="column-header">
+            <h3>4. Colquitt, J. A. (2001)</h3>
+            <span class="lit-badge badge-ssci">Journal of Applied Psychology (SSCI / FT50 / ABS 4*星)</span>
+          </div>
+          <div class="column-body">
+            <p><strong>【書誌情報】</strong> <em>Journal of Applied Psychology</em>, 86(3), 386–400. DOI: 10.1037/0021-9010.86.3.386</p>
+            <p><strong>【研究の要点】</strong> 組織的公正（Organizational Justice）の4次元（分配的公正、手続的公正、対人的公正、情報的公正）の構成概念妥当性を実証的に確立した組織行動論の金字塔的研究。</p>
+            <div class="citation-callout">
+              <strong>💡 本研究における引用の役割:</strong><br>
+              第3章および第5章において、DXに伴う学習負荷や業務変革に対して適切な成果配分（昇給・評価等）が伴わない状況（分配的公正の欠如）が、一般社員層の心理的離反および組織摩擦認知（SC15 = 3.18〜3.22）を引き起こす深層メカニズムを基礎づける理論的柱として採用。
+            </div>
+          </div>
+        </div>
+
+        <!-- カード 5 -->
+        <div class="column-card">
+          <div class="column-header">
+            <h3>5. Eller, Alford, Kallmünzer, & Peters (2020)</h3>
+            <span class="lit-badge badge-ssci">Journal of Business Research (SSCI / ABS 3星)</span>
+          </div>
+          <div class="column-body">
+            <p><strong>【書誌情報】</strong> <em>Journal of Business Research</em>, 112, 119–127. DOI: 10.1016/j.jbusres.2020.03.004</p>
+            <p><strong>【研究の要点】</strong> 中小企業のデジタル化における先行要因、企業業績への帰結、および直面するITスキル・リソース障壁を構造的に解明。</p>
+            <div class="citation-callout">
+              <strong>💡 本研究における引用の役割:</strong><br>
+              第1章および第5章において、「大企業は進展・中小企業は遅延」というマクロな二元論の代表的知見として引用し、本研究の2,035名全量データがその前提を打破（一般社員層での現場収束）したことを対比論証するための最重要文献。
+            </div>
+          </div>
+        </div>
+
+        <!-- カード 6 -->
+        <div class="column-card">
+          <div class="column-header">
+            <h3>6. Fauzi, Siregar, Barus, & Indraprahasta (2023)</h3>
+            <span class="lit-badge badge-scopus">ABAC Journal (Scopus)</span>
+          </div>
+          <div class="column-body">
+            <p><strong>【書誌情報】</strong> <em>ABAC Journal</em>, 43(4), 276–302. DOI: 10.59865/abacj.2023.52</p>
+            <p><strong>【研究の要点】</strong> 中小企業のDXプロセスを個人、組織、生態系、環境の「4つの分析レベル」から体系的に整理した網羅的文献レビュー。</p>
+            <div class="citation-callout">
+              <strong>💡 本研究における引用の役割:</strong><br>
+              第2章において、DX認識を「組織レベル（企業規模）」と「個人・役職レベル（職制）」の多層構造として捉える分析フレームワークの妥当性を支えるために引用。
+            </div>
+          </div>
+        </div>
+
+        <!-- カード 7 -->
+        <div class="column-card">
+          <div class="column-header">
+            <h3>7. Garzoni, De Turi, Secundo, & Del Vecchio (2020)</h3>
+            <span class="lit-badge badge-ssci">Management Decision (SSCI / ABS 2星)</span>
+          </div>
+          <div class="column-body">
+            <p><strong>【書誌情報】</strong> <em>Management Decision</em>, 58(8), 1543–1562. DOI: 10.1108/MD-07-2019-0939</p>
+            <p><strong>【研究の要点】</strong> 中小企業がDXを導入する際の4段階アプローチ（認識、実験、普及、変革）と階層間の役割分担を提示。</p>
+            <div class="citation-callout">
+              <strong>💡 本研究における引用の役割:</strong><br>
+              第1章および第2章において、中小企業のデジタル導入プロセスにおける経営層主導型モデルの理論的基準として採用。
+            </div>
+          </div>
+        </div>
+
+        <!-- カード 8 -->
+        <div class="column-card">
+          <div class="column-header">
+            <h3>8. Ghafoori, Gupta, Merhi, Gupta, & Shore (2024)</h3>
+            <span class="lit-badge badge-ssci">Int. J. Production Economics (SSCI / ABS 3星)</span>
+          </div>
+          <div class="column-body">
+            <p><strong>【書誌情報】</strong> <em>International Journal of Production Economics</em>, 271, 109205. DOI: 10.1016/j.ijpe.2024.109205</p>
+            <p><strong>【研究の要点】</strong> データ駆動型DXの定着において、単なるITツール導入ではなくデータ指向の「組織文化」の成熟が不可欠であることを実証。</p>
+            <div class="citation-callout">
+              <strong>💡 本研究における引用の役割:</strong><br>
+              第2章および第5章（実務的示唆）において、文化的受容基盤が欠如したままDXを強行すると現場の心理的摩擦が激化するという本論文の警告を裏付ける根拠として採用。
+            </div>
+          </div>
+        </div>
+
+        <!-- カード 9 -->
+        <div class="column-card">
+          <div class="column-header">
+            <h3>9. Giang, Vi, & Ghi (2026)</h3>
+            <span class="lit-badge badge-scopus">J. Organizational Behavior Research</span>
+          </div>
+          <div class="column-body">
+            <p><strong>【書誌情報】</strong> <em>Journal of Organizational Behavior Research</em>, 11(1), 198–206. DOI: 10.51847/rkbg4kurvq</p>
+            <p><strong>【研究の要点】</strong> 中小企業においてDX推進が動的能力（Dynamic Capabilities）を媒介してイノベーション成果に寄与する経路を解明。</p>
+            <div class="citation-callout">
+              <strong>💡 本研究における引用の役割:</strong><br>
+              第2章において、中小企業におけるDX推進が組織の柔軟な適応力とどのように結びつくかを論じる際の最新エビデンス。
+            </div>
+          </div>
+        </div>
+
+        <!-- カード 10 -->
+        <div class="column-card">
+          <div class="column-header">
+            <h3>10. Higgins, E. T. (1997)</h3>
+            <span class="lit-badge badge-classic">American Psychologist (被引用1万件超の原典)</span>
+          </div>
+          <div class="column-body">
+            <p><strong>【書誌情報】</strong> <em>American Psychologist</em>, 52(12), 1280–1300. DOI: 10.1037/0003-066X.52.12.1280</p>
+            <p><strong>【研究の要点】</strong> 人間の動機づけには、利益獲得や理想を目指す「促進焦点（Promotion Focus）」と、損失回避や安全を志向する「予防焦点（Prevention Focus）」が独立して存在することを定式化（制御焦点理論）。</p>
+            <div class="citation-callout">
+              <strong>💡 本研究における引用の役割:</strong><br>
+              第2章および第5章において、DX推進意欲（SC18）と摩擦懸念（SC15）が無相関（r = -0.0901、二次元直交性）である事実を心理学的に解明するための絶対的理論支柱。
+            </div>
+          </div>
+        </div>
+
+        <!-- カード 11 -->
+        <div class="column-card">
+          <div class="column-header">
+            <h3>11. Hu, Zhao, & Zhang (2023)</h3>
+            <span class="lit-badge badge-ssci">PLOS ONE (SCIE / Scopus)</span>
+          </div>
+          <div class="column-body">
+            <p><strong>【書誌情報】</strong> <em>PLOS ONE</em>, 18(12), e0295327. DOI: 10.1371/journal.pone.0295327</p>
+            <p><strong>【研究の要点】</strong> TOE（技術・組織・環境）フレームワークに基づき、企業DXの普及におけるネットワーク進化を分析。</p>
+            <div class="citation-callout">
+              <strong>💡 本研究における引用の役割:</strong><br>
+              第2章において、技術要因だけでなく組織的要因（階層や社内環境）がDX普及を左右する理論的背景として引用。
+            </div>
+          </div>
+        </div>
+
+        <!-- カード 12 -->
+        <div class="column-card">
+          <div class="column-header">
+            <h3>12. Kane, Palmer, Phillips, Kiron, & Buckley (2015)</h3>
+            <span class="lit-badge badge-classic">MIT Sloan Management Review</span>
+          </div>
+          <div class="column-body">
+            <p><strong>【書誌情報】</strong> <em>MIT Sloan Management Review</em>, 57(1), 1–25.</p>
+            <p><strong>【研究の要点】</strong> 「Strategy, not technology, drives digital transformation（DXを牽引するのは技術ではなく戦略である）」という命題を打ち出した世界的調査論考。</p>
+            <div class="citation-callout">
+              <strong>💡 本研究における引用の役割:</strong><br>
+              第1章の冒頭において、DXの成否が単なるITツールの導入ではなく、組織文化や戦略的リーダーシップに依存することを明示するための原点文献。
+            </div>
+          </div>
+        </div>
+
+        <!-- カード 13 -->
+        <div class="column-card">
+          <div class="column-header">
+            <h3>13. Lamperti, Cavallo, & Sassanelli (2024)</h3>
+            <span class="lit-badge badge-ssci">IEEE Trans. Eng. Manage. (SSCI / ABS 3星)</span>
+          </div>
+          <div class="column-body">
+            <p><strong>【書誌情報】</strong> <em>IEEE Transactions on Engineering Management</em>, 71, 7159–7173. DOI: 10.1109/TEM.2022.3233132</p>
+            <p><strong>【研究の要点】</strong> 中小企業が市場のディスラプションから脱却するためのデジタルサービタイゼーションとビジネスモデル変革をモデル化。</p>
+            <div class="citation-callout">
+              <strong>💡 本研究における引用の役割:</strong><br>
+              第5章の実務的示唆において、大企業・中堅企業の現場社員が受動的な変革から脱却し、自律的なサービス化変革を主導するための具体的処方箋として採用。
+            </div>
+          </div>
+        </div>
+
+        <!-- カード 14 -->
+        <div class="column-card">
+          <div class="column-header">
+            <h3>14. Liu, Zhao, Kamioka, & Nakamura (2021)</h3>
+            <span class="lit-badge badge-scopus">Asian Journal of Business Research (Scopus)</span>
+          </div>
+          <div class="column-body">
+            <p><strong>【書誌情報】</strong> <em>Asian Journal of Business Research</em>, 11(3), 72–91. DOI: 10.14707/ajbr.210115</p>
+            <p><strong>【研究の要点】</strong> 日本の製薬企業営業部門におけるDX推進課題を調査し、現場が直面する業務慣行との軋轢や組織摩擦の実態を報告。</p>
+            <div class="citation-callout">
+              <strong>💡 本研究における引用の役割:</strong><br>
+              第2章において、日本企業の現場実務においてDX推進がどのような特有の摩擦・葛藤を生み出すかを示す直接的な国内コンテクストの先行知見。
+            </div>
+          </div>
+        </div>
+
+        <!-- カード 15 -->
+        <div class="column-card">
+          <div class="column-header">
+            <h3>15. Omrani, Rejeb, Maâlaoui, Dabić, & Kraus (2024)</h3>
+            <span class="lit-badge badge-ssci">IEEE Trans. Eng. Manage. (SSCI / ABS 3星)</span>
+          </div>
+          <div class="column-body">
+            <p><strong>【書誌情報】</strong> <em>IEEE Transactions on Engineering Management</em>, 71, 5032–5045. DOI: 10.1109/TEM.2022.3215727</p>
+            <p><strong>【研究の要点】</strong> EU域内15,346社の中小企業データに基づき、TOE要因がDXの推進に及ぼす影響を分析した最大規模の実証研究。</p>
+            <div class="citation-callout">
+              <strong>💡 本研究における引用の役割:</strong><br>
+              第2章において、中小企業のDX推進要因に関する国際的ベンチマークとして引用。
+            </div>
+          </div>
+        </div>
+
+        <!-- カード 16 -->
+        <div class="column-card">
+          <div class="column-header">
+            <h3>16. Packmohr, Brink, & Paul (2023)</h3>
+            <span class="lit-badge badge-scopus">IADIS IJCSIS (査読付国際誌)</span>
+          </div>
+          <div class="column-body">
+            <p><strong>【書誌情報】</strong> <em>IADIS International Journal on Computer Science and Information Systems</em>, 18(1), 102–119. DOI: 10.33965/ijcsis_2023180107</p>
+            <p><strong>【研究の要点】</strong> 大企業と中小企業におけるDX障壁の認識差を対比し、組織規模による障壁認知の構造的相違を分析。</p>
+            <div class="citation-callout">
+              <strong>💡 本研究における引用の役割:</strong><br>
+              第2章および第5章において、中小企業経営層が現場の摩擦を見落とす「認知的盲点（Cognitive Blindspot）」を考察する際の理論的足場。
+            </div>
+          </div>
+        </div>
+
+        <!-- カード 17 -->
+        <div class="column-card">
+          <div class="column-header">
+            <h3>17. Papadopoulos, Baltas, & Balta (2020)</h3>
+            <span class="lit-badge badge-ssci">Int. J. Information Management (SSCI Q1 / IF 21)</span>
+          </div>
+          <div class="column-body">
+            <p><strong>【書誌情報】</strong> <em>International Journal of Information Management</em>, 55, 102192. DOI: 10.1016/j.ijinfomgt.2020.102192</p>
+            <p><strong>【研究の要点】</strong> 危機状況下における中小企業のデジタル技術活用と組織レジリエンス、実務への示唆を体系化。</p>
+            <div class="citation-callout">
+              <strong>💡 本研究における引用の役割:</strong><br>
+              第1章において、激変する経営環境下で中小企業が生き残るためのDX推進の不可欠性を基礎づける情報システム分野の基準文献。
+            </div>
+          </div>
+        </div>
+
+        <!-- カード 18 -->
+        <div class="column-card">
+          <div class="column-header">
+            <h3>18. Pierce, Kostova, & Dirks (2001)</h3>
+            <span class="lit-badge badge-classic">Academy of Management Review (組織論の金字塔)</span>
+          </div>
+          <div class="column-body">
+            <p><strong>【書誌情報】</strong> <em>Academy of Management Review</em>, 26(2), 298–310. DOI: 10.5465/amr.2001.4378028</p>
+            <p><strong>【研究の要点】</strong> 組織行動論における「心理的所有感（Psychological Ownership: 対象を『自分のもの』と感じる意識状態）」の発生要因と行動的帰結を定式化。</p>
+            <div class="citation-callout">
+              <strong>💡 本研究における引用の役割:</strong><br>
+              本論文の最大の発見である「現場収束現象（大企業の看板が一般社員層で消滅する）」を解明するための核心理論。心理的所有感の移転（Ownership Transfer）がDX定着の鍵であることを論証する根本支柱。
+            </div>
+          </div>
+        </div>
+
+        <!-- カード 19 -->
+        <div class="column-card">
+          <div class="column-header">
+            <h3>19. Roman & Rusu (2022)</h3>
+            <span class="lit-badge badge-scopus">Studies in Business and Economics</span>
+          </div>
+          <div class="column-body">
+            <p><strong>【書誌情報】</strong> <em>Studies in Business and Economics</em>, 17(3), 190–203. DOI: 10.2478/sbe-2022-0055</p>
+            <p><strong>【研究の要点】</strong> 中小企業におけるデジタル技術の導入が企業業績向上に及ぼす影響を実証的に検証。</p>
+            <div class="citation-callout">
+              <strong>💡 本研究における引用の役割:</strong><br>
+              第2章において、中小企業におけるデジタル投資と成果発現の関連を論じる基礎文献として引用。
+            </div>
+          </div>
+        </div>
+
+        <!-- カード 20 -->
+        <div class="column-card">
+          <div class="column-header">
+            <h3>20. Succurro, M. (2026)</h3>
+            <span class="lit-badge badge-scopus">J. Industrial and Business Economics (Springer)</span>
+          </div>
+          <div class="column-body">
+            <p><strong>【書誌情報】</strong> <em>Journal of Industrial and Business Economics</em>, 53, 941–985. DOI: 10.1007/s40812-026-00395-2</p>
+            <p><strong>【研究の要点】</strong> 観光産業中小企業におけるDX推進の戦略的要請と、市場環境の変化への適応プロセスを包括的に分析。</p>
+            <div class="citation-callout">
+              <strong>💡 本研究における引用の役割:</strong><br>
+              第5章の実務的示唆において、業界固有の制約を超えて中小企業がDXを定着させるための戦略的計画の必要性を裏付ける最新文献。
+            </div>
+          </div>
+        </div>
+
+      </div>
+    </div>
+
+  </main>
+
+  <!-- フッター -->
+  <footer>
+    <p>© 2026 IDM デジタル変革調査研究グループ | 完全決定論的マイクロデータ解析プロジェクト (N = 2,035)</p>
+    <p style="margin-top:4px; font-size:0.8rem; opacity:0.8;">
+      準拠デザイン: デジタル庁デザインシステム (DADS) | 学術規格: APA第7版準拠 | 統計解析エンジン: Python statsmodels / scipy
+    </p>
+  </footer>
+
+  <!-- スクリプト: タブ切替、フォント切替、Chart.js描画 -->
+  <script>
+    function switchTab(tabId) {
+      document.querySelectorAll('.tab-pane').forEach(el => el.classList.remove('active'));
+      document.querySelectorAll('.tab-btn').forEach(el => el.classList.remove('active'));
+      
+      const targetPane = document.getElementById(tabId);
+      if (targetPane) targetPane.classList.add('active');
+
+      const btnMap = {
+        'tab-paper': 0,
+        'tab-stats': 1,
+        'tab-literature': 2
+      };
+      const btns = document.querySelectorAll('.tab-btn');
+      if (btns[btnMap[tabId]]) btns[btnMap[tabId]].classList.add('active');
+
+      window.scrollTo({ top: 0, behavior: 'smooth' });
+    }
+
+    function setFontSize(size) {
+      document.body.classList.remove('font-md', 'font-lg');
+      document.querySelectorAll('.font-btn').forEach(btn => btn.classList.remove('active'));
+      if (size === 'md') {
+        document.body.classList.add('font-md');
+        event.target.classList.add('active');
+      } else if (size === 'lg') {
+        document.body.classList.add('font-lg');
+        event.target.classList.add('active');
+      } else {
+        event.target.classList.add('active');
+      }
+    }
+
+    function toggleFullscreen() {
+      if (!document.fullscreenElement) {
+        document.documentElement.requestFullscreen().catch(err => alert("全画面表示エラー: " + err.message));
+      } else {
+        document.exitFullscreen();
+      }
+    }
+
+    // Chart.js 描画初期化
+    document.addEventListener("DOMContentLoaded", function() {
+      Chart.defaults.font.family = "'Noto Sans JP', sans-serif";
+      Chart.defaults.color = "#1A1A1A";
+
+      // 1. 推進意識交互作用プロット (Chart 1)
+      const ctx1 = document.getElementById('chartInteraction');
+      if (ctx1) {
+        new Chart(ctx1.getContext('2d'), {
+          type: 'line',
+          data: {
+            labels: ['1. 経営層', '2. 部課長クラス', '3. 一般社員'],
+            datasets: [
+              {
+                label: '大企業 (n = 745)',
+                data: [3.77, 3.37, 3.18],
+                borderColor: '#005BAC',
+                backgroundColor: 'rgba(0, 91, 172, 0.1)',
+                borderWidth: 3,
+                pointRadius: 6,
+                pointBackgroundColor: '#005BAC',
+                tension: 0.1
+              },
+              {
+                label: '中小企業 (n = 1,290)',
+                data: [3.48, 3.22, 3.18],
+                borderColor: '#D32F2F',
+                backgroundColor: 'rgba(211, 47, 47, 0.1)',
+                borderWidth: 3,
+                borderDash: [5, 5],
+                pointRadius: 6,
+                pointBackgroundColor: '#D32F2F',
+                tension: 0.1
+              }
+            ]
+          },
+          options: {
+            responsive: true,
+            maintainAspectRatio: false,
+            scales: {
+              y: {
+                min: 3.0,
+                max: 4.0,
+                title: { display: true, text: 'DX推進意欲スコア (SC18: 1-5点)' },
+                grid: { color: '#E0E0E0' }
+              },
+              x: { grid: { display: false } }
+            },
+            plugins: {
+              legend: { position: 'top', labels: { font: { size: 13, weight: 'bold' } } },
+              tooltip: {
+                callbacks: {
+                  afterLabel: function(ctx) {
+                    if (ctx.dataIndex === 2) return "★ 現場収束: 大企業 3.18 = 中小 3.18 (差ゼロ)";
+                    if (ctx.dataIndex === 0) return "★ 経営層ギャップ: p = 0.020, g = 0.44";
+                    return "";
+                  }
+                }
+              }
+            }
+          }
+        });
+      }
+
+      // 2. 組織摩擦認知プロット (Chart 2: 表1記述統計量と完全一致修正)
+      const ctx2 = document.getElementById('chartFriction');
+      if (ctx2) {
+        new Chart(ctx2.getContext('2d'), {
+          type: 'bar',
+          data: {
+            labels: ['1. 経営層', '2. 部課長クラス', '3. 一般社員'],
+            datasets: [
+              {
+                label: '大企業 (n = 745)',
+                data: [3.10, 3.08, 3.22],
+                backgroundColor: '#005BAC',
+                borderRadius: 4
+              },
+              {
+                label: '中小企業 (n = 1,290)',
+                data: [2.69, 3.10, 3.18],
+                backgroundColor: '#00838F',
+                borderRadius: 4
+              }
+            ]
+          },
+          options: {
+            responsive: true,
+            maintainAspectRatio: false,
+            scales: {
+              y: {
+                min: 2.0,
+                max: 3.5,
+                title: { display: true, text: '組織摩擦認知スコア (SC15: 1-5点)' },
+                grid: { color: '#E0E0E0' }
+              }
+            },
+            plugins: {
+              legend: { position: 'top' },
+              tooltip: {
+                callbacks: {
+                  afterLabel: function(ctx) {
+                    if (ctx.datasetIndex === 1 && ctx.dataIndex === 0) {
+                      return "★ 中小企業経営層: 2.69 (異常に低い摩擦認知・認知的盲点)";
+                    }
+                    return "";
+                  }
+                }
+              }
+            }
+          }
+        });
+      }
+
+      // 3. 直交散布図 (Chart 3: 2,035件の実測決定論的データ完全注入)
+      const ctx3 = document.getElementById('chartOrthogonal');
+      if (ctx3) {
+        const realScatterData = [{"x": 2.67, "y": 3.11}, {"x": 3.0, "y": 3.0}, {"x": 2.44, "y": 2.56}, {"x": 3.0, "y": 2.89}, {"x": 3.78, "y": 2.89}, {"x": 3.33, "y": 3.44}, {"x": 2.89, "y": 3.22}, {"x": 3.56, "y": 3.44}, {"x": 3.89, "y": 4.0}, {"x": 3.78, "y": 4.0}, {"x": 3.0, "y": 3.0}, {"x": 3.0, "y": 3.0}, {"x": 5.0, "y": 1.0}, {"x": 3.56, "y": 3.44}, {"x": 3.56, "y": 3.33}, {"x": 4.0, "y": 4.0}, {"x": 3.22, "y": 3.11}, {"x": 3.78, "y": 4.0}, {"x": 3.22, "y": 3.11}, {"x": 3.44, "y": 3.56}, {"x": 4.11, "y": 3.0}, {"x": 3.33, "y": 3.11}, {"x": 3.56, "y": 3.78}, {"x": 3.33, "y": 3.67}, {"x": 3.44, "y": 3.22}, {"x": 3.0, "y": 3.0}, {"x": 3.22, "y": 3.11}, {"x": 4.44, "y": 4.33}, {"x": 3.44, "y": 2.67}, {"x": 3.0, "y": 3.0}, {"x": 3.0, "y": 3.0}, {"x": 2.22, "y": 3.44}, {"x": 4.33, "y": 3.11}, {"x": 3.33, "y": 3.11}, {"x": 3.0, "y": 3.0}, {"x": 4.56, "y": 4.56}, {"x": 3.89, "y": 2.89}, {"x": 3.56, "y": 2.78}, {"x": 3.78, "y": 3.11}, {"x": 3.56, "y": 2.44}, {"x": 3.11, "y": 3.11}, {"x": 5.0, "y": 5.0}, {"x": 3.56, "y": 3.0}, {"x": 2.11, "y": 3.0}, {"x": 3.0, "y": 3.22}, {"x": 4.22, "y": 2.78}, {"x": 3.78, "y": 2.78}, {"x": 4.33, "y": 4.11}, {"x": 3.89, "y": 3.22}, {"x": 2.78, "y": 3.11}, {"x": 3.56, "y": 2.22}, {"x": 2.44, "y": 2.0}, {"x": 2.89, "y": 3.22}, {"x": 2.89, "y": 4.11}, {"x": 2.22, "y": 2.44}, {"x": 3.67, "y": 3.67}, {"x": 2.89, "y": 2.56}, {"x": 2.78, "y": 2.89}, {"x": 3.56, "y": 2.89}, {"x": 2.56, "y": 4.44}, {"x": 2.67, "y": 2.89}, {"x": 3.0, "y": 3.0}, {"x": 4.67, "y": 3.56}, {"x": 3.44, "y": 2.89}, {"x": 2.89, "y": 3.0}, {"x": 3.0, "y": 2.89}, {"x": 3.0, "y": 3.22}, {"x": 2.78, "y": 2.0}, {"x": 3.33, "y": 3.11}, {"x": 3.0, "y": 3.0}, {"x": 3.89, "y": 2.33}, {"x": 3.11, "y": 2.56}, {"x": 2.67, "y": 3.33}, {"x": 4.22, "y": 1.22}, {"x": 3.44, "y": 2.33}, {"x": 2.11, "y": 3.11}, {"x": 3.0, "y": 3.56}, {"x": 3.0, "y": 3.0}, {"x": 3.0, "y": 3.0}, {"x": 3.0, "y": 3.0}, {"x": 3.56, "y": 3.56}, {"x": 4.0, "y": 4.0}, {"x": 3.11, "y": 3.89}, {"x": 3.0, "y": 3.22}, {"x": 2.56, "y": 3.56}, {"x": 3.67, "y": 3.56}, {"x": 2.22, "y": 2.56}, {"x": 3.0, "y": 3.0}, {"x": 4.22, "y": 4.11}, {"x": 4.0, "y": 4.0}, {"x": 2.89, "y": 3.33}, {"x": 3.0, "y": 3.0}, {"x": 3.11, "y": 2.89}, {"x": 3.22, "y": 4.11}, {"x": 2.78, "y": 2.22}, {"x": 4.0, "y": 3.89}, {"x": 3.0, "y": 2.78}, {"x": 2.11, "y": 3.56}, {"x": 3.33, "y": 3.33}, {"x": 3.89, "y": 3.67}, {"x": 3.22, "y": 3.22}, {"x": 3.22, "y": 4.33}, {"x": 3.0, "y": 3.0}, {"x": 3.89, "y": 3.67}, {"x": 2.78, "y": 3.22}, {"x": 3.11, "y": 3.0}, {"x": 5.0, "y": 2.0}, {"x": 3.11, "y": 3.0}, {"x": 3.33, "y": 2.89}, {"x": 3.78, "y": 2.56}, {"x": 3.78, "y": 1.89}, {"x": 3.67, "y": 2.78}, {"x": 3.11, "y": 3.0}, {"x": 3.0, "y": 3.0}, {"x": 3.0, "y": 3.44}, {"x": 3.0, "y": 3.0}, {"x": 3.0, "y": 3.0}, {"x": 3.0, "y": 3.0}, {"x": 3.0, "y": 2.67}, {"x": 3.11, "y": 2.56}, {"x": 3.56, "y": 3.56}, {"x": 4.0, "y": 2.0}, {"x": 3.33, "y": 3.0}, {"x": 3.22, "y": 3.11}, {"x": 3.11, "y": 2.89}, {"x": 3.56, "y": 2.89}, {"x": 3.44, "y": 3.11}, {"x": 3.0, "y": 4.11}, {"x": 3.22, "y": 3.0}, {"x": 3.22, "y": 3.0}, {"x": 2.67, "y": 3.11}, {"x": 3.11, "y": 3.0}, {"x": 3.78, "y": 3.0}, {"x": 3.0, "y": 3.11}, {"x": 3.0, "y": 3.0}, {"x": 3.56, "y": 2.22}, {"x": 3.56, "y": 3.89}, {"x": 4.0, "y": 3.78}, {"x": 3.33, "y": 3.33}, {"x": 2.33, "y": 4.22}, {"x": 2.78, "y": 2.89}, {"x": 3.67, "y": 1.0}, {"x": 2.44, "y": 1.89}, {"x": 3.22, "y": 3.44}, {"x": 4.0, "y": 3.11}, {"x": 3.44, "y": 2.89}, {"x": 3.11, "y": 2.89}, {"x": 3.44, "y": 3.56}, {"x": 2.67, "y": 3.0}, {"x": 3.44, "y": 2.89}, {"x": 3.78, "y": 3.11}, {"x": 2.67, "y": 3.78}, {"x": 3.22, "y": 2.78}, {"x": 4.0, "y": 3.44}, {"x": 3.0, "y": 3.0}, {"x": 4.11, "y": 3.89}, {"x": 3.56, "y": 3.44}, {"x": 3.0, "y": 4.0}, {"x": 3.44, "y": 3.67}, {"x": 3.22, "y": 3.22}, {"x": 3.67, "y": 1.89}, {"x": 4.11, "y": 3.78}, {"x": 2.33, "y": 3.22}, {"x": 2.67, "y": 3.67}, {"x": 3.0, "y": 3.0}, {"x": 4.0, "y": 3.0}, {"x": 2.22, "y": 2.0}, {"x": 2.78, "y": 3.56}, {"x": 4.56, "y": 3.33}, {"x": 3.44, "y": 3.33}, {"x": 3.44, "y": 3.11}, {"x": 2.56, "y": 3.67}, {"x": 2.78, "y": 3.33}, {"x": 3.22, "y": 3.11}, {"x": 3.78, "y": 3.33}, {"x": 2.33, "y": 2.78}, {"x": 3.33, "y": 3.67}, {"x": 3.22, "y": 3.33}, {"x": 3.44, "y": 1.89}, {"x": 2.78, "y": 3.11}, {"x": 3.11, "y": 3.11}, {"x": 4.11, "y": 4.0}, {"x": 3.89, "y": 2.89}, {"x": 3.56, "y": 3.33}, {"x": 3.89, "y": 3.44}, {"x": 3.33, "y": 3.56}, {"x": 3.56, "y": 1.67}, {"x": 2.44, "y": 3.33}, {"x": 3.67, "y": 3.44}, {"x": 2.11, "y": 2.89}, {"x": 3.0, "y": 3.0}, {"x": 2.56, "y": 3.33}, {"x": 3.44, "y": 2.67}, {"x": 3.11, "y": 3.33}, {"x": 4.33, "y": 4.44}, {"x": 2.33, "y": 3.67}, {"x": 3.0, "y": 3.56}, {"x": 2.0, "y": 2.44}, {"x": 3.0, "y": 3.0}, {"x": 2.78, "y": 3.67}, {"x": 4.33, "y": 2.22}, {"x": 4.0, "y": 2.44}, {"x": 4.0, "y": 2.89}, {"x": 2.67, "y": 2.67}, {"x": 3.89, "y": 3.11}, {"x": 3.56, "y": 2.67}, {"x": 3.78, "y": 2.33}, {"x": 3.44, "y": 1.0}, {"x": 3.44, "y": 2.56}, {"x": 3.22, "y": 2.78}, {"x": 3.89, "y": 2.56}, {"x": 3.33, "y": 2.56}, {"x": 3.56, "y": 3.33}, {"x": 3.56, "y": 2.33}, {"x": 3.0, "y": 3.0}, {"x": 3.56, "y": 2.56}, {"x": 5.0, "y": 1.22}, {"x": 3.0, "y": 3.0}, {"x": 3.11, "y": 2.78}, {"x": 4.67, "y": 4.56}, {"x": 3.22, "y": 3.22}, {"x": 3.22, "y": 2.11}, {"x": 4.22, "y": 2.89}, {"x": 3.0, "y": 3.0}, {"x": 3.0, "y": 3.22}, {"x": 2.33, "y": 3.44}, {"x": 2.22, "y": 2.78}, {"x": 4.0, "y": 2.22}, {"x": 3.56, "y": 3.0}, {"x": 2.67, "y": 1.67}, {"x": 2.56, "y": 4.11}, {"x": 3.89, "y": 4.0}, {"x": 3.22, "y": 2.56}, {"x": 2.89, "y": 3.22}, {"x": 3.0, "y": 3.22}, {"x": 3.56, "y": 3.44}, {"x": 3.0, "y": 2.67}, {"x": 4.0, "y": 2.0}, {"x": 2.89, "y": 3.11}, {"x": 3.78, "y": 3.89}, {"x": 3.89, "y": 3.44}, {"x": 3.44, "y": 3.33}, {"x": 4.33, "y": 1.44}, {"x": 2.78, "y": 3.11}, {"x": 2.33, "y": 4.11}, {"x": 4.0, "y": 2.78}, {"x": 3.33, "y": 3.11}, {"x": 4.0, "y": 2.89}, {"x": 3.44, "y": 3.56}, {"x": 3.0, "y": 3.0}, {"x": 3.0, "y": 2.67}, {"x": 3.22, "y": 3.56}, {"x": 2.0, "y": 3.33}, {"x": 3.0, "y": 2.67}, {"x": 4.22, "y": 3.67}, {"x": 3.33, "y": 3.0}, {"x": 3.44, "y": 4.0}, {"x": 4.11, "y": 3.89}, {"x": 3.44, "y": 3.44}, {"x": 4.0, "y": 3.67}, {"x": 3.22, "y": 3.67}, {"x": 2.56, "y": 2.56}, {"x": 4.0, "y": 3.33}, {"x": 3.56, "y": 3.0}, {"x": 3.0, "y": 3.44}, {"x": 4.67, "y": 4.33}, {"x": 3.11, "y": 2.44}, {"x": 2.67, "y": 3.11}, {"x": 3.56, "y": 3.0}, {"x": 3.56, "y": 3.22}, {"x": 3.67, "y": 3.11}, {"x": 2.89, "y": 2.78}, {"x": 3.56, "y": 2.78}, {"x": 3.67, "y": 2.78}, {"x": 4.11, "y": 3.11}, {"x": 2.89, "y": 4.11}, {"x": 3.0, "y": 3.0}, {"x": 3.33, "y": 3.56}, {"x": 2.67, "y": 3.0}, {"x": 4.56, "y": 2.67}, {"x": 2.22, "y": 3.22}, {"x": 2.22, "y": 3.44}, {"x": 3.33, "y": 2.89}, {"x": 3.22, "y": 3.44}, {"x": 2.22, "y": 3.67}, {"x": 3.44, "y": 3.44}, {"x": 3.22, "y": 3.33}, {"x": 2.67, "y": 3.78}, {"x": 3.0, "y": 3.22}, {"x": 1.0, "y": 4.22}, {"x": 3.0, "y": 3.0}, {"x": 3.44, "y": 2.89}, {"x": 3.22, "y": 3.22}, {"x": 3.11, "y": 3.0}, {"x": 3.0, "y": 2.44}, {"x": 3.44, "y": 2.67}, {"x": 3.33, "y": 2.89}, {"x": 2.56, "y": 2.78}, {"x": 3.11, "y": 4.11}, {"x": 3.11, "y": 3.56}, {"x": 3.0, "y": 3.0}, {"x": 3.11, "y": 3.11}, {"x": 3.0, "y": 3.11}, {"x": 3.33, "y": 2.78}, {"x": 3.67, "y": 2.44}, {"x": 3.11, "y": 2.11}, {"x": 3.78, "y": 1.89}, {"x": 3.0, "y": 3.0}, {"x": 3.44, "y": 2.78}, {"x": 5.0, "y": 5.0}, {"x": 3.0, "y": 3.67}, {"x": 3.0, "y": 3.11}, {"x": 2.78, "y": 4.0}, {"x": 3.11, "y": 2.78}, {"x": 2.67, "y": 3.78}, {"x": 3.33, "y": 1.89}, {"x": 3.0, "y": 3.56}, {"x": 3.56, "y": 3.67}, {"x": 3.56, "y": 2.22}, {"x": 3.22, "y": 3.33}, {"x": 3.67, "y": 2.44}, {"x": 3.78, "y": 3.67}, {"x": 3.0, "y": 3.67}, {"x": 2.89, "y": 2.78}, {"x": 4.11, "y": 2.33}, {"x": 4.11, "y": 2.78}, {"x": 4.0, "y": 3.0}, {"x": 3.44, "y": 2.78}, {"x": 3.0, "y": 3.0}, {"x": 3.22, "y": 1.78}, {"x": 3.11, "y": 3.11}, {"x": 3.33, "y": 3.22}, {"x": 4.0, "y": 4.0}, {"x": 2.56, "y": 4.78}, {"x": 3.44, "y": 1.0}, {"x": 2.67, "y": 3.56}, {"x": 3.67, "y": 3.11}, {"x": 3.0, "y": 2.89}, {"x": 3.0, "y": 3.33}, {"x": 3.44, "y": 3.44}, {"x": 3.56, "y": 2.67}, {"x": 4.0, "y": 1.89}, {"x": 3.0, "y": 3.11}, {"x": 3.22, "y": 3.89}, {"x": 2.78, "y": 3.33}, {"x": 4.11, "y": 2.67}, {"x": 2.78, "y": 3.11}, {"x": 5.0, "y": 3.0}, {"x": 3.0, "y": 3.33}, {"x": 1.89, "y": 3.67}, {"x": 2.89, "y": 2.89}, {"x": 3.56, "y": 2.67}, {"x": 3.78, "y": 3.33}, {"x": 2.89, "y": 3.11}, {"x": 3.11, "y": 3.56}, {"x": 3.89, "y": 3.56}, {"x": 2.11, "y": 2.56}, {"x": 4.11, "y": 3.11}, {"x": 3.78, "y": 2.33}, {"x": 3.0, "y": 1.44}, {"x": 2.89, "y": 3.11}, {"x": 3.11, "y": 3.11}, {"x": 5.0, "y": 5.0}, {"x": 3.33, "y": 2.33}, {"x": 3.22, "y": 3.44}, {"x": 2.67, "y": 3.33}, {"x": 2.0, "y": 3.78}, {"x": 3.67, "y": 3.44}, {"x": 3.0, "y": 3.0}, {"x": 3.0, "y": 2.0}, {"x": 3.0, "y": 2.44}, {"x": 2.67, "y": 4.0}, {"x": 3.33, "y": 2.22}, {"x": 3.44, "y": 2.89}, {"x": 3.78, "y": 3.0}, {"x": 3.44, "y": 3.33}, {"x": 3.33, "y": 2.56}, {"x": 3.56, "y": 2.22}, {"x": 3.44, "y": 3.11}, {"x": 3.0, "y": 3.0}, {"x": 3.22, "y": 3.33}, {"x": 2.67, "y": 2.89}, {"x": 3.0, "y": 2.78}, {"x": 2.44, "y": 4.78}, {"x": 3.44, "y": 3.56}, {"x": 2.44, "y": 3.67}, {"x": 2.89, "y": 3.44}, {"x": 3.33, "y": 2.78}, {"x": 2.89, "y": 3.89}, {"x": 2.56, "y": 2.11}, {"x": 2.33, "y": 3.44}, {"x": 4.33, "y": 3.22}, {"x": 3.89, "y": 3.89}, {"x": 3.22, "y": 2.56}, {"x": 3.33, "y": 2.67}, {"x": 3.22, "y": 3.22}, {"x": 2.89, "y": 3.56}, {"x": 3.11, "y": 3.0}, {"x": 3.22, "y": 3.67}, {"x": 3.44, "y": 3.56}, {"x": 3.0, "y": 3.67}, {"x": 3.0, "y": 3.0}, {"x": 3.89, "y": 2.89}, {"x": 4.44, "y": 4.11}, {"x": 1.56, "y": 4.89}, {"x": 3.11, "y": 3.0}, {"x": 3.67, "y": 3.22}, {"x": 2.89, "y": 3.33}, {"x": 4.0, "y": 2.0}, {"x": 4.44, "y": 2.44}, {"x": 3.0, "y": 3.0}, {"x": 3.44, "y": 2.78}, {"x": 3.0, "y": 3.0}, {"x": 3.44, "y": 2.44}, {"x": 3.11, "y": 3.56}, {"x": 3.0, "y": 3.33}, {"x": 3.44, "y": 3.22}, {"x": 4.0, "y": 3.56}, {"x": 3.44, "y": 2.78}, {"x": 3.11, "y": 3.56}, {"x": 2.11, "y": 3.56}, {"x": 3.44, "y": 3.67}, {"x": 3.11, "y": 2.67}, {"x": 3.67, "y": 3.67}, {"x": 3.0, "y": 3.67}, {"x": 2.0, "y": 2.0}, {"x": 3.44, "y": 3.56}, {"x": 3.22, "y": 3.22}, {"x": 3.44, "y": 3.33}, {"x": 3.11, "y": 2.33}, {"x": 3.33, "y": 2.89}, {"x": 3.33, "y": 2.67}, {"x": 3.0, "y": 3.0}, {"x": 4.0, "y": 2.11}, {"x": 3.67, "y": 3.44}, {"x": 2.67, "y": 2.11}, {"x": 3.78, "y": 3.33}, {"x": 3.78, "y": 3.78}, {"x": 3.89, "y": 3.22}, {"x": 2.78, "y": 2.0}, {"x": 4.11, "y": 1.67}, {"x": 3.56, "y": 2.89}, {"x": 3.56, "y": 3.22}, {"x": 3.44, "y": 3.0}, {"x": 3.22, "y": 2.44}, {"x": 3.67, "y": 3.11}, {"x": 3.22, "y": 3.78}, {"x": 3.67, "y": 3.44}, {"x": 2.78, "y": 2.89}, {"x": 2.89, "y": 2.89}, {"x": 3.67, "y": 3.0}, {"x": 3.11, "y": 3.0}, {"x": 3.22, "y": 3.44}, {"x": 3.33, "y": 2.44}, {"x": 3.0, "y": 3.0}, {"x": 2.11, "y": 3.22}, {"x": 2.56, "y": 3.56}, {"x": 3.44, "y": 2.11}, {"x": 3.0, "y": 3.0}, {"x": 3.67, "y": 2.89}, {"x": 4.44, "y": 1.89}, {"x": 3.22, "y": 3.56}, {"x": 3.89, "y": 3.33}, {"x": 3.0, "y": 3.0}, {"x": 3.67, "y": 2.22}, {"x": 2.78, "y": 3.11}, {"x": 3.89, "y": 2.78}, {"x": 2.67, "y": 2.89}, {"x": 3.11, "y": 3.56}, {"x": 3.89, "y": 2.11}, {"x": 5.0, "y": 3.89}, {"x": 3.11, "y": 3.78}, {"x": 2.0, "y": 3.0}, {"x": 3.0, "y": 2.33}, {"x": 2.33, "y": 3.89}, {"x": 2.22, "y": 2.89}, {"x": 3.33, "y": 3.89}, {"x": 3.78, "y": 4.22}, {"x": 4.11, "y": 2.89}, {"x": 3.67, "y": 2.78}, {"x": 3.89, "y": 3.0}, {"x": 3.22, "y": 3.44}, {"x": 2.89, "y": 3.89}, {"x": 3.44, "y": 2.89}, {"x": 3.44, "y": 2.78}, {"x": 2.89, "y": 3.11}, {"x": 3.0, "y": 3.0}, {"x": 2.89, "y": 3.56}, {"x": 4.11, "y": 3.22}, {"x": 3.33, "y": 3.11}, {"x": 4.11, "y": 3.33}, {"x": 2.33, "y": 3.78}, {"x": 2.67, "y": 3.0}, {"x": 2.0, "y": 2.22}, {"x": 4.0, "y": 4.0}, {"x": 2.78, "y": 5.0}, {"x": 1.89, "y": 3.0}, {"x": 2.89, "y": 3.89}, {"x": 3.78, "y": 3.67}, {"x": 2.67, "y": 2.78}, {"x": 3.44, "y": 2.78}, {"x": 3.33, "y": 2.67}, {"x": 4.33, "y": 4.11}, {"x": 4.56, "y": 2.89}, {"x": 3.56, "y": 4.0}, {"x": 2.0, "y": 2.44}, {"x": 2.78, "y": 2.56}, {"x": 3.89, "y": 2.44}, {"x": 3.78, "y": 3.44}, {"x": 2.78, "y": 4.0}, {"x": 3.89, "y": 2.56}, {"x": 2.0, "y": 2.67}, {"x": 3.0, "y": 3.0}, {"x": 3.56, "y": 3.56}, {"x": 3.67, "y": 2.33}, {"x": 3.22, "y": 3.33}, {"x": 3.33, "y": 2.67}, {"x": 3.56, "y": 2.89}, {"x": 4.22, "y": 2.22}, {"x": 4.0, "y": 4.0}, {"x": 3.56, "y": 3.56}, {"x": 2.89, "y": 3.22}, {"x": 3.89, "y": 2.33}, {"x": 2.0, "y": 3.0}, {"x": 3.22, "y": 3.0}, {"x": 3.11, "y": 2.67}, {"x": 3.33, "y": 2.33}, {"x": 3.22, "y": 2.33}, {"x": 4.11, "y": 2.22}, {"x": 3.78, "y": 3.56}, {"x": 3.0, "y": 3.0}, {"x": 3.78, "y": 2.44}, {"x": 2.67, "y": 3.22}, {"x": 3.0, "y": 3.67}, {"x": 2.0, "y": 4.0}, {"x": 4.89, "y": 5.0}, {"x": 3.33, "y": 3.22}, {"x": 3.0, "y": 3.11}, {"x": 4.56, "y": 3.11}, {"x": 3.44, "y": 2.22}, {"x": 2.0, "y": 3.33}, {"x": 3.44, "y": 3.0}, {"x": 3.89, "y": 3.78}, {"x": 2.67, "y": 3.67}, {"x": 3.0, "y": 4.0}, {"x": 3.44, "y": 3.22}, {"x": 3.89, "y": 2.78}, {"x": 2.67, "y": 3.89}, {"x": 3.11, "y": 3.22}, {"x": 4.0, "y": 3.67}, {"x": 3.44, "y": 4.0}, {"x": 3.0, "y": 2.78}, {"x": 2.22, "y": 3.33}, {"x": 3.44, "y": 3.33}, {"x": 3.89, "y": 2.67}, {"x": 4.0, "y": 1.0}, {"x": 2.89, "y": 4.0}, {"x": 3.22, "y": 2.44}, {"x": 3.33, "y": 3.33}, {"x": 3.11, "y": 3.56}, {"x": 3.67, "y": 3.22}, {"x": 3.89, "y": 3.22}, {"x": 3.33, "y": 3.44}, {"x": 2.89, "y": 2.67}, {"x": 3.0, "y": 3.0}, {"x": 3.89, "y": 3.11}, {"x": 2.89, "y": 2.67}, {"x": 3.0, "y": 2.67}, {"x": 3.56, "y": 3.11}, {"x": 2.44, "y": 2.67}, {"x": 3.0, "y": 3.33}, {"x": 3.67, "y": 3.11}, {"x": 3.89, "y": 4.0}, {"x": 2.89, "y": 3.33}, {"x": 3.56, "y": 2.78}, {"x": 2.56, "y": 3.56}, {"x": 3.0, "y": 3.11}, {"x": 3.67, "y": 2.78}, {"x": 2.44, "y": 3.89}, {"x": 3.89, "y": 3.67}, {"x": 3.0, "y": 3.0}, {"x": 3.11, "y": 3.11}, {"x": 4.11, "y": 3.0}, {"x": 2.56, "y": 3.44}, {"x": 3.0, "y": 3.0}, {"x": 4.0, "y": 1.0}, {"x": 2.89, "y": 3.0}, {"x": 1.0, "y": 1.0}, {"x": 4.0, "y": 1.0}, {"x": 3.33, "y": 3.33}, {"x": 4.0, "y": 2.44}, {"x": 3.67, "y": 3.56}, {"x": 2.33, "y": 2.67}, {"x": 3.22, "y": 3.0}, {"x": 3.0, "y": 3.11}, {"x": 4.22, "y": 2.11}, {"x": 3.11, "y": 3.78}, {"x": 3.0, "y": 3.89}, {"x": 3.11, "y": 3.11}, {"x": 4.33, "y": 2.67}, {"x": 3.56, "y": 2.33}, {"x": 3.22, "y": 3.22}, {"x": 3.56, "y": 2.67}, {"x": 3.89, "y": 3.11}, {"x": 2.33, "y": 3.33}, {"x": 3.78, "y": 3.89}, {"x": 3.0, "y": 3.11}, {"x": 3.0, "y": 3.0}, {"x": 2.89, "y": 2.89}, {"x": 3.89, "y": 2.67}, {"x": 3.67, "y": 3.56}, {"x": 3.0, "y": 3.0}, {"x": 3.11, "y": 3.22}, {"x": 3.0, "y": 2.78}, {"x": 4.67, "y": 2.33}, {"x": 3.11, "y": 3.56}, {"x": 2.78, "y": 3.56}, {"x": 3.22, "y": 2.89}, {"x": 3.0, "y": 3.11}, {"x": 3.78, "y": 2.89}, {"x": 4.11, "y": 2.56}, {"x": 3.11, "y": 3.0}, {"x": 3.44, "y": 3.89}, {"x": 3.56, "y": 2.56}, {"x": 2.44, "y": 2.33}, {"x": 3.0, "y": 2.89}, {"x": 3.0, "y": 2.78}, {"x": 3.0, "y": 3.0}, {"x": 4.0, "y": 2.0}, {"x": 3.0, "y": 3.0}, {"x": 2.89, "y": 2.56}, {"x": 3.89, "y": 2.33}, {"x": 4.22, "y": 3.78}, {"x": 4.0, "y": 1.89}, {"x": 3.33, "y": 2.78}, {"x": 4.44, "y": 4.33}, {"x": 2.56, "y": 3.22}, {"x": 3.0, "y": 3.0}, {"x": 1.67, "y": 4.11}, {"x": 3.22, "y": 2.22}, {"x": 4.11, "y": 3.0}, {"x": 3.11, "y": 3.0}, {"x": 3.78, "y": 3.89}, {"x": 3.44, "y": 3.11}, {"x": 2.89, "y": 3.11}, {"x": 3.22, "y": 2.67}, {"x": 3.0, "y": 3.0}, {"x": 2.44, "y": 3.22}, {"x": 2.56, "y": 2.44}, {"x": 2.56, "y": 3.22}, {"x": 3.22, "y": 3.33}, {"x": 3.33, "y": 2.89}, {"x": 4.33, "y": 2.89}, {"x": 4.44, "y": 1.56}, {"x": 3.0, "y": 3.78}, {"x": 2.22, "y": 4.44}, {"x": 3.78, "y": 4.11}, {"x": 3.11, "y": 3.11}, {"x": 3.0, "y": 3.11}, {"x": 4.0, "y": 4.22}, {"x": 3.78, "y": 4.0}, {"x": 3.0, "y": 3.22}, {"x": 3.0, "y": 3.0}, {"x": 3.11, "y": 2.89}, {"x": 3.44, "y": 3.22}, {"x": 3.56, "y": 3.67}, {"x": 1.89, "y": 3.44}, {"x": 2.0, "y": 3.56}, {"x": 3.67, "y": 2.33}, {"x": 3.11, "y": 1.11}, {"x": 4.11, "y": 4.22}, {"x": 3.0, "y": 3.0}, {"x": 3.44, "y": 1.78}, {"x": 3.0, "y": 2.89}, {"x": 4.22, "y": 3.22}, {"x": 2.11, "y": 3.67}, {"x": 4.0, "y": 2.56}, {"x": 3.33, "y": 2.56}, {"x": 5.0, "y": 4.78}, {"x": 3.33, "y": 3.22}, {"x": 3.0, "y": 3.0}, {"x": 3.22, "y": 2.44}, {"x": 3.78, "y": 2.56}, {"x": 2.0, "y": 3.44}, {"x": 3.56, "y": 3.78}, {"x": 3.0, "y": 3.0}, {"x": 2.56, "y": 4.33}, {"x": 3.56, "y": 3.44}, {"x": 3.0, "y": 3.56}, {"x": 3.67, "y": 2.11}, {"x": 3.56, "y": 3.78}, {"x": 4.67, "y": 1.44}, {"x": 1.89, "y": 2.0}, {"x": 2.89, "y": 4.44}, {"x": 3.44, "y": 2.44}, {"x": 2.78, "y": 3.22}, {"x": 3.22, "y": 3.22}, {"x": 3.11, "y": 2.67}, {"x": 3.78, "y": 3.67}, {"x": 4.56, "y": 3.0}, {"x": 3.44, "y": 3.22}, {"x": 4.78, "y": 2.11}, {"x": 2.22, "y": 2.78}, {"x": 2.56, "y": 2.78}, {"x": 3.0, "y": 3.56}, {"x": 3.33, "y": 3.0}, {"x": 3.67, "y": 2.33}, {"x": 2.67, "y": 3.44}, {"x": 2.44, "y": 3.11}, {"x": 2.56, "y": 3.0}, {"x": 2.56, "y": 3.67}, {"x": 3.44, "y": 1.22}, {"x": 3.33, "y": 2.22}, {"x": 3.33, "y": 2.89}, {"x": 3.22, "y": 3.22}, {"x": 4.0, "y": 3.89}, {"x": 3.0, "y": 3.11}, {"x": 2.89, "y": 3.44}, {"x": 2.89, "y": 3.11}, {"x": 3.44, "y": 3.33}, {"x": 3.0, "y": 3.0}, {"x": 2.11, "y": 2.56}, {"x": 3.0, "y": 2.67}, {"x": 3.56, "y": 3.22}, {"x": 3.0, "y": 3.22}, {"x": 3.22, "y": 3.33}, {"x": 2.44, "y": 3.22}, {"x": 5.0, "y": 1.0}, {"x": 2.89, "y": 3.0}, {"x": 3.44, "y": 3.67}, {"x": 2.67, "y": 2.89}, {"x": 1.44, "y": 3.89}, {"x": 2.78, "y": 2.67}, {"x": 3.56, "y": 2.78}, {"x": 3.89, "y": 2.11}, {"x": 3.0, "y": 3.0}, {"x": 4.22, "y": 3.67}, {"x": 3.44, "y": 2.67}, {"x": 3.33, "y": 3.44}, {"x": 3.0, "y": 3.0}, {"x": 2.44, "y": 3.22}, {"x": 3.33, "y": 3.0}, {"x": 3.11, "y": 1.0}, {"x": 4.56, "y": 4.33}, {"x": 3.89, "y": 3.0}, {"x": 4.0, "y": 3.0}, {"x": 3.0, "y": 3.0}, {"x": 3.11, "y": 2.33}, {"x": 3.44, "y": 2.44}, {"x": 2.89, "y": 3.22}, {"x": 3.33, "y": 2.22}, {"x": 2.56, "y": 3.11}, {"x": 2.78, "y": 3.56}, {"x": 3.22, "y": 3.56}, {"x": 3.44, "y": 3.33}, {"x": 3.0, "y": 3.0}, {"x": 2.78, "y": 2.78}, {"x": 3.78, "y": 3.0}, {"x": 3.11, "y": 1.0}, {"x": 3.33, "y": 3.22}, {"x": 3.22, "y": 3.33}, {"x": 3.78, "y": 3.56}, {"x": 2.78, "y": 3.33}, {"x": 3.56, "y": 2.56}, {"x": 4.0, "y": 3.11}, {"x": 3.67, "y": 2.67}, {"x": 2.78, "y": 2.33}, {"x": 1.11, "y": 3.78}, {"x": 3.11, "y": 3.11}, {"x": 2.0, "y": 4.0}, {"x": 4.0, "y": 2.44}, {"x": 3.33, "y": 3.89}, {"x": 3.33, "y": 3.22}, {"x": 3.0, "y": 3.0}, {"x": 3.89, "y": 3.78}, {"x": 3.0, "y": 3.89}, {"x": 1.0, "y": 1.67}, {"x": 3.0, "y": 2.67}, {"x": 3.11, "y": 3.11}, {"x": 3.22, "y": 2.89}, {"x": 2.44, "y": 2.89}, {"x": 3.11, "y": 2.89}, {"x": 2.89, "y": 3.33}, {"x": 4.0, "y": 3.0}, {"x": 3.0, "y": 3.0}, {"x": 2.78, "y": 2.78}, {"x": 4.56, "y": 2.22}, {"x": 2.89, "y": 4.33}, {"x": 2.89, "y": 3.11}, {"x": 3.0, "y": 2.44}, {"x": 3.44, "y": 2.89}, {"x": 5.0, "y": 2.56}, {"x": 2.22, "y": 3.11}, {"x": 2.33, "y": 4.0}, {"x": 4.22, "y": 1.33}, {"x": 3.33, "y": 3.22}, {"x": 2.78, "y": 3.44}, {"x": 4.0, "y": 3.56}, {"x": 3.0, "y": 3.0}, {"x": 3.22, "y": 2.78}, {"x": 3.0, "y": 3.0}, {"x": 1.89, "y": 3.0}, {"x": 2.11, "y": 3.22}, {"x": 4.22, "y": 2.67}, {"x": 3.89, "y": 3.67}, {"x": 4.11, "y": 2.89}, {"x": 3.0, "y": 3.0}, {"x": 3.0, "y": 3.11}, {"x": 3.78, "y": 3.44}, {"x": 2.33, "y": 3.67}, {"x": 3.0, "y": 3.11}, {"x": 2.44, "y": 4.33}, {"x": 2.0, "y": 3.78}, {"x": 3.67, "y": 3.44}, {"x": 2.78, "y": 1.67}, {"x": 3.11, "y": 3.67}, {"x": 1.78, "y": 2.78}, {"x": 2.78, "y": 3.0}, {"x": 3.56, "y": 3.44}, {"x": 2.22, "y": 4.0}, {"x": 3.22, "y": 2.67}, {"x": 4.11, "y": 2.44}, {"x": 3.33, "y": 1.78}, {"x": 3.33, "y": 3.44}, {"x": 3.0, "y": 3.22}, {"x": 3.0, "y": 3.44}, {"x": 4.0, "y": 2.78}, {"x": 4.33, "y": 2.11}, {"x": 4.33, "y": 4.33}, {"x": 4.0, "y": 3.11}, {"x": 2.56, "y": 3.78}, {"x": 4.0, "y": 2.0}, {"x": 2.56, "y": 3.56}, {"x": 2.44, "y": 3.44}, {"x": 3.89, "y": 3.56}, {"x": 4.0, "y": 1.33}, {"x": 3.11, "y": 3.11}, {"x": 3.67, "y": 3.44}, {"x": 2.67, "y": 3.56}, {"x": 3.22, "y": 2.67}, {"x": 3.0, "y": 2.33}, {"x": 2.67, "y": 3.33}, {"x": 3.0, "y": 2.0}, {"x": 2.56, "y": 2.44}, {"x": 4.11, "y": 4.22}, {"x": 2.67, "y": 3.22}, {"x": 3.11, "y": 3.22}, {"x": 3.0, "y": 3.0}, {"x": 3.22, "y": 3.0}, {"x": 3.0, "y": 3.0}, {"x": 3.67, "y": 3.11}, {"x": 4.44, "y": 4.67}, {"x": 3.11, "y": 3.44}, {"x": 3.0, "y": 2.89}, {"x": 2.89, "y": 3.0}, {"x": 3.0, "y": 3.11}, {"x": 3.89, "y": 2.89}, {"x": 3.22, "y": 3.33}, {"x": 3.89, "y": 4.0}, {"x": 3.44, "y": 3.67}, {"x": 4.0, "y": 2.78}, {"x": 3.89, "y": 3.56}, {"x": 3.0, "y": 3.0}, {"x": 3.67, "y": 3.67}, {"x": 2.89, "y": 2.56}, {"x": 3.67, "y": 3.56}, {"x": 3.56, "y": 3.11}, {"x": 3.0, "y": 3.0}, {"x": 2.44, "y": 2.78}, {"x": 2.67, "y": 3.22}, {"x": 3.33, "y": 3.22}, {"x": 3.11, "y": 2.78}, {"x": 3.33, "y": 4.11}, {"x": 2.78, "y": 3.56}, {"x": 3.0, "y": 2.67}, {"x": 2.56, "y": 4.0}, {"x": 5.0, "y": 1.0}, {"x": 3.33, "y": 3.0}, {"x": 3.22, "y": 4.33}, {"x": 3.67, "y": 2.78}, {"x": 3.0, "y": 3.0}, {"x": 4.44, "y": 3.78}, {"x": 3.44, "y": 1.0}, {"x": 4.22, "y": 2.22}, {"x": 3.44, "y": 3.22}, {"x": 3.56, "y": 3.0}, {"x": 3.0, "y": 3.0}, {"x": 3.56, "y": 2.67}, {"x": 2.56, "y": 3.0}, {"x": 4.0, "y": 2.89}, {"x": 3.67, "y": 3.56}, {"x": 2.78, "y": 3.44}, {"x": 3.67, "y": 3.22}, {"x": 3.0, "y": 3.0}, {"x": 4.11, "y": 4.0}, {"x": 3.56, "y": 3.33}, {"x": 2.56, "y": 3.78}, {"x": 2.78, "y": 3.67}, {"x": 4.33, "y": 3.89}, {"x": 3.0, "y": 3.0}, {"x": 3.0, "y": 2.78}, {"x": 4.56, "y": 1.78}, {"x": 3.11, "y": 3.44}, {"x": 3.44, "y": 3.11}, {"x": 3.78, "y": 3.44}, {"x": 3.67, "y": 3.56}, {"x": 3.44, "y": 2.78}, {"x": 2.67, "y": 3.0}, {"x": 3.0, "y": 3.0}, {"x": 3.89, "y": 2.78}, {"x": 2.89, "y": 3.11}, {"x": 3.56, "y": 3.11}, {"x": 2.78, "y": 3.11}, {"x": 3.56, "y": 2.56}, {"x": 3.67, "y": 2.56}, {"x": 3.67, "y": 2.78}, {"x": 5.0, "y": 3.33}, {"x": 3.11, "y": 3.11}, {"x": 4.11, "y": 2.78}, {"x": 3.0, "y": 3.0}, {"x": 2.44, "y": 3.78}, {"x": 3.0, "y": 3.22}, {"x": 3.22, "y": 3.22}, {"x": 4.11, "y": 2.56}, {"x": 2.67, "y": 4.22}, {"x": 4.22, "y": 4.0}, {"x": 3.78, "y": 3.89}, {"x": 3.11, "y": 4.0}, {"x": 4.11, "y": 2.11}, {"x": 3.0, "y": 3.0}, {"x": 3.22, "y": 3.89}, {"x": 2.78, "y": 3.0}, {"x": 3.11, "y": 3.0}, {"x": 2.67, "y": 3.56}, {"x": 2.78, "y": 2.67}, {"x": 3.11, "y": 2.89}, {"x": 3.89, "y": 2.67}, {"x": 4.0, "y": 4.0}, {"x": 3.67, "y": 3.56}, {"x": 3.44, "y": 2.78}, {"x": 3.33, "y": 2.44}, {"x": 2.67, "y": 2.78}, {"x": 3.0, "y": 2.78}, {"x": 4.0, "y": 2.78}, {"x": 3.11, "y": 3.22}, {"x": 4.0, "y": 2.44}, {"x": 3.33, "y": 3.0}, {"x": 3.56, "y": 3.44}, {"x": 3.0, "y": 3.0}, {"x": 3.78, "y": 2.67}, {"x": 3.33, "y": 2.56}, {"x": 3.11, "y": 3.67}, {"x": 3.11, "y": 2.89}, {"x": 3.44, "y": 3.33}, {"x": 3.89, "y": 4.0}, {"x": 4.33, "y": 3.89}, {"x": 4.33, "y": 4.33}, {"x": 3.89, "y": 2.78}, {"x": 3.56, "y": 4.22}, {"x": 2.89, "y": 3.89}, {"x": 3.44, "y": 3.56}, {"x": 3.56, "y": 3.56}, {"x": 2.44, "y": 3.0}, {"x": 3.0, "y": 3.0}, {"x": 3.0, "y": 3.0}, {"x": 3.0, "y": 3.56}, {"x": 3.0, "y": 3.0}, {"x": 3.56, "y": 3.78}, {"x": 2.56, "y": 2.44}, {"x": 3.11, "y": 3.0}, {"x": 3.44, "y": 3.11}, {"x": 3.56, "y": 2.78}, {"x": 3.22, "y": 3.56}, {"x": 2.56, "y": 2.89}, {"x": 3.56, "y": 3.33}, {"x": 3.11, "y": 3.0}, {"x": 3.0, "y": 2.56}, {"x": 3.67, "y": 3.22}, {"x": 3.33, "y": 2.78}, {"x": 4.0, "y": 2.78}, {"x": 3.33, "y": 2.33}, {"x": 2.89, "y": 3.33}, {"x": 4.0, "y": 2.67}, {"x": 3.0, "y": 3.56}, {"x": 2.56, "y": 3.11}, {"x": 2.89, "y": 2.67}, {"x": 3.11, "y": 3.56}, {"x": 3.67, "y": 2.89}, {"x": 2.89, "y": 2.0}, {"x": 4.44, "y": 4.78}, {"x": 2.78, "y": 2.67}, {"x": 4.56, "y": 2.11}, {"x": 3.33, "y": 3.78}, {"x": 3.78, "y": 3.89}, {"x": 2.56, "y": 3.56}, {"x": 4.11, "y": 2.89}, {"x": 3.0, "y": 3.44}, {"x": 2.89, "y": 2.56}, {"x": 3.89, "y": 3.44}, {"x": 4.44, "y": 3.33}, {"x": 4.0, "y": 2.67}, {"x": 2.44, "y": 2.0}, {"x": 2.67, "y": 3.22}, {"x": 3.44, "y": 3.33}, {"x": 4.22, "y": 2.67}, {"x": 3.0, "y": 3.0}, {"x": 2.56, "y": 3.11}, {"x": 4.0, "y": 4.0}, {"x": 3.0, "y": 3.0}, {"x": 4.56, "y": 4.44}, {"x": 3.78, "y": 4.89}, {"x": 3.22, "y": 3.56}, {"x": 3.78, "y": 2.78}, {"x": 3.56, "y": 2.56}, {"x": 3.11, "y": 2.67}, {"x": 3.89, "y": 3.22}, {"x": 3.22, "y": 3.0}, {"x": 2.89, "y": 2.56}, {"x": 2.78, "y": 3.22}, {"x": 3.22, "y": 2.22}, {"x": 3.56, "y": 2.0}, {"x": 3.0, "y": 3.0}, {"x": 2.67, "y": 4.0}, {"x": 2.33, "y": 2.44}, {"x": 2.89, "y": 3.33}, {"x": 3.0, "y": 2.44}, {"x": 1.56, "y": 3.11}, {"x": 2.33, "y": 3.11}, {"x": 4.56, "y": 2.22}, {"x": 3.22, "y": 3.56}, {"x": 3.33, "y": 2.56}, {"x": 3.67, "y": 2.22}, {"x": 2.67, "y": 3.11}, {"x": 4.0, "y": 3.11}, {"x": 3.67, "y": 3.11}, {"x": 2.67, "y": 3.0}, {"x": 2.67, "y": 3.67}, {"x": 3.0, "y": 3.0}, {"x": 2.33, "y": 3.0}, {"x": 2.89, "y": 3.0}, {"x": 3.0, "y": 3.0}, {"x": 3.22, "y": 2.78}, {"x": 2.22, "y": 2.33}, {"x": 2.22, "y": 3.67}, {"x": 2.56, "y": 2.56}, {"x": 3.33, "y": 3.44}, {"x": 3.89, "y": 2.56}, {"x": 3.22, "y": 2.56}, {"x": 1.67, "y": 2.56}, {"x": 4.0, "y": 3.22}, {"x": 3.33, "y": 3.0}, {"x": 3.56, "y": 2.89}, {"x": 2.22, "y": 1.89}, {"x": 2.67, "y": 3.44}, {"x": 3.0, "y": 3.33}, {"x": 3.44, "y": 3.56}, {"x": 3.22, "y": 3.56}, {"x": 3.33, "y": 3.33}, {"x": 3.89, "y": 3.67}, {"x": 2.67, "y": 4.11}, {"x": 3.33, "y": 3.56}, {"x": 3.33, "y": 1.89}, {"x": 2.11, "y": 3.89}, {"x": 3.33, "y": 3.56}, {"x": 3.11, "y": 3.78}, {"x": 3.44, "y": 2.22}, {"x": 3.33, "y": 3.89}, {"x": 3.78, "y": 2.67}, {"x": 1.89, "y": 3.44}, {"x": 2.44, "y": 3.0}, {"x": 3.0, "y": 2.78}, {"x": 2.78, "y": 3.67}, {"x": 3.0, "y": 3.0}, {"x": 3.11, "y": 2.67}, {"x": 4.0, "y": 4.0}, {"x": 3.56, "y": 3.22}, {"x": 4.56, "y": 2.78}, {"x": 4.11, "y": 3.22}, {"x": 3.22, "y": 2.89}, {"x": 2.78, "y": 3.0}, {"x": 3.33, "y": 3.11}, {"x": 3.0, "y": 3.0}, {"x": 3.56, "y": 3.44}, {"x": 2.11, "y": 3.78}, {"x": 2.89, "y": 3.11}, {"x": 3.78, "y": 3.11}, {"x": 3.44, "y": 2.0}, {"x": 3.22, "y": 2.67}, {"x": 3.11, "y": 4.0}, {"x": 4.11, "y": 4.11}, {"x": 3.11, "y": 3.0}, {"x": 2.22, "y": 3.0}, {"x": 4.0, "y": 2.0}, {"x": 2.67, "y": 2.89}, {"x": 3.67, "y": 3.0}, {"x": 4.11, "y": 2.0}, {"x": 3.44, "y": 2.89}, {"x": 3.11, "y": 2.89}, {"x": 3.22, "y": 3.11}, {"x": 2.89, "y": 3.11}, {"x": 1.56, "y": 3.33}, {"x": 3.0, "y": 2.78}, {"x": 4.11, "y": 2.44}, {"x": 3.67, "y": 2.89}, {"x": 3.78, "y": 3.11}, {"x": 3.0, "y": 1.0}, {"x": 3.44, "y": 3.56}, {"x": 3.89, "y": 3.33}, {"x": 3.56, "y": 2.44}, {"x": 4.11, "y": 3.33}, {"x": 3.0, "y": 3.0}, {"x": 4.0, "y": 2.89}, {"x": 2.89, "y": 3.89}, {"x": 3.22, "y": 3.22}, {"x": 3.78, "y": 3.11}, {"x": 3.33, "y": 2.44}, {"x": 3.0, "y": 3.33}, {"x": 3.44, "y": 4.0}, {"x": 3.11, "y": 2.67}, {"x": 2.89, "y": 2.89}, {"x": 3.33, "y": 3.11}, {"x": 2.78, "y": 3.67}, {"x": 4.11, "y": 2.22}, {"x": 2.67, "y": 3.33}, {"x": 2.22, "y": 3.33}, {"x": 3.0, "y": 3.0}, {"x": 3.67, "y": 3.22}, {"x": 3.11, "y": 3.33}, {"x": 2.0, "y": 3.44}, {"x": 3.44, "y": 3.0}, {"x": 2.33, "y": 4.0}, {"x": 3.44, "y": 3.56}, {"x": 3.44, "y": 3.11}, {"x": 2.56, "y": 3.33}, {"x": 3.0, "y": 3.0}, {"x": 3.0, "y": 1.89}, {"x": 3.0, "y": 3.0}, {"x": 2.89, "y": 3.11}, {"x": 2.22, "y": 4.11}, {"x": 3.56, "y": 3.44}, {"x": 3.11, "y": 2.44}, {"x": 3.56, "y": 2.89}, {"x": 3.22, "y": 3.0}, {"x": 3.22, "y": 2.78}, {"x": 4.22, "y": 3.11}, {"x": 3.0, "y": 1.0}, {"x": 2.78, "y": 3.33}, {"x": 2.0, "y": 2.44}, {"x": 3.0, "y": 2.22}, {"x": 3.11, "y": 2.78}, {"x": 2.56, "y": 3.44}, {"x": 3.0, "y": 2.89}, {"x": 4.0, "y": 2.78}, {"x": 3.89, "y": 3.22}, {"x": 4.33, "y": 3.78}, {"x": 3.56, "y": 2.89}, {"x": 3.44, "y": 2.67}, {"x": 3.67, "y": 3.67}, {"x": 2.44, "y": 3.11}, {"x": 3.11, "y": 2.56}, {"x": 3.56, "y": 3.22}, {"x": 3.0, "y": 3.11}, {"x": 5.0, "y": 2.78}, {"x": 4.0, "y": 3.44}, {"x": 4.67, "y": 2.0}, {"x": 3.22, "y": 2.56}, {"x": 3.22, "y": 3.33}, {"x": 3.78, "y": 3.56}, {"x": 3.78, "y": 3.0}, {"x": 1.89, "y": 3.33}, {"x": 3.11, "y": 3.22}, {"x": 3.22, "y": 3.67}, {"x": 4.0, "y": 2.22}, {"x": 2.67, "y": 3.78}, {"x": 4.33, "y": 3.22}, {"x": 3.33, "y": 3.33}, {"x": 3.22, "y": 2.89}, {"x": 3.56, "y": 2.44}, {"x": 3.89, "y": 3.67}, {"x": 2.22, "y": 3.67}, {"x": 3.44, "y": 3.44}, {"x": 3.44, "y": 2.11}, {"x": 3.0, "y": 2.78}, {"x": 4.11, "y": 2.56}, {"x": 3.0, "y": 3.0}, {"x": 3.89, "y": 2.67}, {"x": 2.89, "y": 4.33}, {"x": 3.44, "y": 2.56}, {"x": 3.0, "y": 3.0}, {"x": 3.33, "y": 2.67}, {"x": 2.11, "y": 4.11}, {"x": 3.0, "y": 3.0}, {"x": 3.89, "y": 2.44}, {"x": 3.22, "y": 2.89}, {"x": 3.78, "y": 2.22}, {"x": 3.33, "y": 3.33}, {"x": 3.44, "y": 4.22}, {"x": 2.89, "y": 2.89}, {"x": 2.89, "y": 3.22}, {"x": 2.89, "y": 2.89}, {"x": 2.33, "y": 3.56}, {"x": 3.22, "y": 2.44}, {"x": 2.44, "y": 3.67}, {"x": 2.67, "y": 3.67}, {"x": 3.33, "y": 2.67}, {"x": 3.11, "y": 3.67}, {"x": 2.89, "y": 3.33}, {"x": 3.33, "y": 3.22}, {"x": 3.11, "y": 2.33}, {"x": 3.0, "y": 2.89}, {"x": 2.78, "y": 2.78}, {"x": 1.78, "y": 3.56}, {"x": 3.33, "y": 2.22}, {"x": 3.0, "y": 1.0}, {"x": 3.44, "y": 2.67}, {"x": 2.0, "y": 3.33}, {"x": 3.44, "y": 3.67}, {"x": 2.89, "y": 3.11}, {"x": 3.67, "y": 3.22}, {"x": 3.89, "y": 2.33}, {"x": 3.11, "y": 3.22}, {"x": 4.44, "y": 2.11}, {"x": 3.11, "y": 3.89}, {"x": 2.89, "y": 3.56}, {"x": 3.33, "y": 3.22}, {"x": 3.33, "y": 3.11}, {"x": 3.0, "y": 3.78}, {"x": 3.0, "y": 2.0}, {"x": 3.0, "y": 2.56}, {"x": 3.89, "y": 3.33}, {"x": 2.11, "y": 3.56}, {"x": 3.0, "y": 3.0}, {"x": 2.89, "y": 3.44}, {"x": 3.78, "y": 3.11}, {"x": 3.22, "y": 2.78}, {"x": 2.44, "y": 3.33}, {"x": 3.0, "y": 3.0}, {"x": 2.89, "y": 3.22}, {"x": 3.22, "y": 3.56}, {"x": 3.22, "y": 3.67}, {"x": 3.44, "y": 2.78}, {"x": 3.56, "y": 3.89}, {"x": 3.0, "y": 3.56}, {"x": 2.56, "y": 3.78}, {"x": 2.11, "y": 3.78}, {"x": 3.33, "y": 3.78}, {"x": 3.0, "y": 3.0}, {"x": 3.78, "y": 3.22}, {"x": 3.78, "y": 3.67}, {"x": 3.11, "y": 3.56}, {"x": 3.0, "y": 2.78}, {"x": 3.56, "y": 2.78}, {"x": 3.0, "y": 3.33}, {"x": 2.89, "y": 2.56}, {"x": 2.33, "y": 4.0}, {"x": 1.11, "y": 3.22}, {"x": 2.78, "y": 3.11}, {"x": 3.56, "y": 3.11}, {"x": 3.11, "y": 3.11}, {"x": 3.89, "y": 4.0}, {"x": 4.0, "y": 3.33}, {"x": 3.0, "y": 2.89}, {"x": 4.0, "y": 3.67}, {"x": 2.89, "y": 2.0}, {"x": 3.89, "y": 4.11}, {"x": 3.67, "y": 3.33}, {"x": 3.78, "y": 2.89}, {"x": 3.33, "y": 2.67}, {"x": 2.89, "y": 3.11}, {"x": 1.89, "y": 2.89}, {"x": 2.89, "y": 4.11}, {"x": 4.89, "y": 4.44}, {"x": 4.0, "y": 3.89}, {"x": 2.89, "y": 2.78}, {"x": 3.0, "y": 3.0}, {"x": 3.0, "y": 3.0}, {"x": 2.78, "y": 3.78}, {"x": 3.22, "y": 2.89}, {"x": 3.78, "y": 3.0}, {"x": 4.56, "y": 2.67}, {"x": 4.11, "y": 4.11}, {"x": 3.0, "y": 3.0}, {"x": 2.78, "y": 3.67}, {"x": 3.0, "y": 3.33}, {"x": 4.0, "y": 3.56}, {"x": 2.11, "y": 3.89}, {"x": 3.0, "y": 3.0}, {"x": 4.44, "y": 4.44}, {"x": 4.33, "y": 2.67}, {"x": 1.33, "y": 4.22}, {"x": 3.0, "y": 2.89}, {"x": 3.22, "y": 3.44}, {"x": 3.22, "y": 2.89}, {"x": 5.0, "y": 5.0}, {"x": 3.78, "y": 2.33}, {"x": 2.67, "y": 3.0}, {"x": 2.56, "y": 2.78}, {"x": 2.67, "y": 2.78}, {"x": 3.56, "y": 2.44}, {"x": 4.0, "y": 4.11}, {"x": 2.56, "y": 2.11}, {"x": 3.56, "y": 2.56}, {"x": 3.0, "y": 2.22}, {"x": 3.89, "y": 2.22}, {"x": 4.0, "y": 3.56}, {"x": 3.78, "y": 2.22}, {"x": 3.89, "y": 3.44}, {"x": 4.89, "y": 3.0}, {"x": 2.33, "y": 2.89}, {"x": 3.33, "y": 3.56}, {"x": 3.56, "y": 2.67}, {"x": 1.67, "y": 3.11}, {"x": 3.56, "y": 2.89}, {"x": 2.89, "y": 2.33}, {"x": 2.56, "y": 3.44}, {"x": 4.0, "y": 2.22}, {"x": 3.67, "y": 3.78}, {"x": 4.0, "y": 3.33}, {"x": 4.0, "y": 4.0}, {"x": 3.56, "y": 3.33}, {"x": 3.0, "y": 3.0}, {"x": 3.33, "y": 3.22}, {"x": 4.0, "y": 2.89}, {"x": 4.0, "y": 1.89}, {"x": 1.89, "y": 3.22}, {"x": 3.67, "y": 2.89}, {"x": 3.22, "y": 3.67}, {"x": 3.44, "y": 2.11}, {"x": 3.33, "y": 2.89}, {"x": 2.11, "y": 4.67}, {"x": 2.44, "y": 2.0}, {"x": 3.56, "y": 3.11}, {"x": 4.22, "y": 2.44}, {"x": 4.78, "y": 2.56}, {"x": 3.67, "y": 2.67}, {"x": 3.11, "y": 2.22}, {"x": 3.56, "y": 2.56}, {"x": 3.0, "y": 3.11}, {"x": 3.0, "y": 3.0}, {"x": 4.11, "y": 3.11}, {"x": 3.44, "y": 3.0}, {"x": 3.78, "y": 2.44}, {"x": 3.56, "y": 3.44}, {"x": 3.0, "y": 3.22}, {"x": 3.0, "y": 3.0}, {"x": 3.67, "y": 3.56}, {"x": 4.67, "y": 2.89}, {"x": 4.44, "y": 2.67}, {"x": 3.22, "y": 2.0}, {"x": 2.11, "y": 3.56}, {"x": 4.11, "y": 4.22}, {"x": 2.56, "y": 3.22}, {"x": 1.89, "y": 3.67}, {"x": 3.33, "y": 3.33}, {"x": 2.78, "y": 3.56}, {"x": 3.33, "y": 3.56}, {"x": 3.0, "y": 3.0}, {"x": 3.33, "y": 2.56}, {"x": 4.44, "y": 2.44}, {"x": 3.89, "y": 1.0}, {"x": 3.0, "y": 3.78}, {"x": 3.44, "y": 3.56}, {"x": 2.67, "y": 3.11}, {"x": 2.67, "y": 2.78}, {"x": 1.89, "y": 4.0}, {"x": 2.44, "y": 3.67}, {"x": 3.89, "y": 3.22}, {"x": 3.33, "y": 3.22}, {"x": 3.33, "y": 3.44}, {"x": 3.44, "y": 3.33}, {"x": 2.89, "y": 3.0}, {"x": 2.33, "y": 3.56}, {"x": 3.33, "y": 3.56}, {"x": 2.89, "y": 3.67}, {"x": 4.56, "y": 4.56}, {"x": 5.0, "y": 3.0}, {"x": 3.44, "y": 3.11}, {"x": 2.89, "y": 2.89}, {"x": 2.78, "y": 2.56}, {"x": 2.78, "y": 3.11}, {"x": 2.33, "y": 3.67}, {"x": 3.89, "y": 2.67}, {"x": 3.22, "y": 3.67}, {"x": 4.44, "y": 3.22}, {"x": 4.11, "y": 4.22}, {"x": 4.11, "y": 3.67}, {"x": 3.11, "y": 4.0}, {"x": 3.78, "y": 2.78}, {"x": 2.44, "y": 3.11}, {"x": 3.67, "y": 3.0}, {"x": 1.22, "y": 4.44}, {"x": 3.89, "y": 2.67}, {"x": 3.78, "y": 3.33}, {"x": 4.0, "y": 4.22}, {"x": 1.67, "y": 3.56}, {"x": 4.33, "y": 3.67}, {"x": 3.0, "y": 2.33}, {"x": 3.22, "y": 3.67}, {"x": 3.11, "y": 3.0}, {"x": 3.44, "y": 2.56}, {"x": 3.11, "y": 3.44}, {"x": 3.11, "y": 3.33}, {"x": 3.22, "y": 3.78}, {"x": 3.44, "y": 2.78}, {"x": 3.0, "y": 4.0}, {"x": 2.56, "y": 3.44}, {"x": 2.67, "y": 3.67}, {"x": 3.11, "y": 2.89}, {"x": 1.44, "y": 4.44}, {"x": 1.67, "y": 3.89}, {"x": 1.44, "y": 2.89}, {"x": 2.89, "y": 2.56}, {"x": 3.78, "y": 2.89}, {"x": 3.0, "y": 3.0}, {"x": 4.11, "y": 3.0}, {"x": 3.44, "y": 2.89}, {"x": 2.33, "y": 2.78}, {"x": 2.67, "y": 3.33}, {"x": 2.22, "y": 2.78}, {"x": 3.56, "y": 3.67}, {"x": 3.0, "y": 4.0}, {"x": 2.22, "y": 3.78}, {"x": 3.33, "y": 3.11}, {"x": 3.22, "y": 3.33}, {"x": 3.78, "y": 3.56}, {"x": 1.33, "y": 1.22}, {"x": 3.33, "y": 4.33}, {"x": 2.78, "y": 4.22}, {"x": 3.11, "y": 2.67}, {"x": 3.56, "y": 3.0}, {"x": 4.0, "y": 3.11}, {"x": 2.56, "y": 3.33}, {"x": 3.11, "y": 4.11}, {"x": 3.67, "y": 1.78}, {"x": 3.89, "y": 3.78}, {"x": 3.89, "y": 1.0}, {"x": 3.0, "y": 3.11}, {"x": 3.56, "y": 3.11}, {"x": 2.56, "y": 2.78}, {"x": 2.78, "y": 2.56}, {"x": 3.89, "y": 4.22}, {"x": 3.89, "y": 2.22}, {"x": 3.78, "y": 3.44}, {"x": 4.0, "y": 3.11}, {"x": 4.33, "y": 4.11}, {"x": 3.44, "y": 2.33}, {"x": 3.44, "y": 2.44}, {"x": 2.78, "y": 1.78}, {"x": 2.78, "y": 2.89}, {"x": 3.22, "y": 4.0}, {"x": 3.78, "y": 2.11}, {"x": 3.78, "y": 3.22}, {"x": 3.11, "y": 2.33}, {"x": 4.11, "y": 2.44}, {"x": 4.0, "y": 1.44}, {"x": 4.0, "y": 3.89}, {"x": 2.56, "y": 4.0}, {"x": 2.22, "y": 3.56}, {"x": 3.67, "y": 2.56}, {"x": 3.44, "y": 3.11}, {"x": 3.78, "y": 3.56}, {"x": 3.11, "y": 3.67}, {"x": 2.89, "y": 3.56}, {"x": 3.89, "y": 3.11}, {"x": 3.67, "y": 2.67}, {"x": 3.0, "y": 3.0}, {"x": 3.56, "y": 3.33}, {"x": 2.44, "y": 4.56}, {"x": 4.89, "y": 4.33}, {"x": 3.0, "y": 3.11}, {"x": 2.78, "y": 3.56}, {"x": 3.22, "y": 3.44}, {"x": 3.0, "y": 2.67}, {"x": 2.89, "y": 2.89}, {"x": 3.11, "y": 3.0}, {"x": 4.0, "y": 3.78}, {"x": 3.11, "y": 3.56}, {"x": 3.67, "y": 2.44}, {"x": 2.22, "y": 3.22}, {"x": 3.0, "y": 3.0}, {"x": 3.44, "y": 2.44}, {"x": 2.78, "y": 3.78}, {"x": 4.0, "y": 3.0}, {"x": 2.78, "y": 3.22}, {"x": 3.22, "y": 3.11}, {"x": 4.0, "y": 2.89}, {"x": 3.56, "y": 2.56}, {"x": 3.0, "y": 3.11}, {"x": 3.44, "y": 3.78}, {"x": 3.0, "y": 3.11}, {"x": 4.0, "y": 4.0}, {"x": 3.0, "y": 3.11}, {"x": 1.22, "y": 3.78}, {"x": 2.78, "y": 3.56}, {"x": 3.0, "y": 3.0}, {"x": 4.0, "y": 3.22}, {"x": 3.22, "y": 3.11}, {"x": 4.78, "y": 3.0}, {"x": 3.0, "y": 3.0}, {"x": 3.33, "y": 3.78}, {"x": 4.22, "y": 2.33}, {"x": 3.56, "y": 3.33}, {"x": 3.0, "y": 3.0}, {"x": 3.0, "y": 3.89}, {"x": 4.22, "y": 2.89}, {"x": 3.0, "y": 3.0}, {"x": 2.22, "y": 2.44}, {"x": 3.22, "y": 3.22}, {"x": 3.67, "y": 2.22}, {"x": 3.22, "y": 3.56}, {"x": 2.56, "y": 3.78}, {"x": 3.11, "y": 2.78}, {"x": 3.67, "y": 3.11}, {"x": 3.56, "y": 3.22}, {"x": 2.22, "y": 3.56}, {"x": 3.56, "y": 3.78}, {"x": 2.44, "y": 3.22}, {"x": 3.56, "y": 2.44}, {"x": 2.89, "y": 3.22}, {"x": 3.0, "y": 3.0}, {"x": 3.22, "y": 2.56}, {"x": 4.0, "y": 3.44}, {"x": 3.56, "y": 3.33}, {"x": 2.89, "y": 3.22}, {"x": 2.33, "y": 3.33}, {"x": 4.22, "y": 3.0}, {"x": 2.56, "y": 3.11}, {"x": 3.56, "y": 3.11}, {"x": 3.67, "y": 3.89}, {"x": 2.0, "y": 3.0}, {"x": 3.22, "y": 2.78}, {"x": 3.89, "y": 2.78}, {"x": 3.11, "y": 3.56}, {"x": 3.22, "y": 3.44}, {"x": 3.11, "y": 3.78}, {"x": 3.44, "y": 3.33}, {"x": 3.11, "y": 2.89}, {"x": 2.0, "y": 4.56}, {"x": 4.0, "y": 3.0}, {"x": 3.11, "y": 2.11}, {"x": 2.44, "y": 4.44}, {"x": 3.0, "y": 2.11}, {"x": 2.78, "y": 2.33}, {"x": 4.78, "y": 2.44}, {"x": 3.33, "y": 4.33}, {"x": 3.0, "y": 3.89}, {"x": 2.0, "y": 4.11}, {"x": 2.44, "y": 3.89}, {"x": 4.0, "y": 2.67}, {"x": 2.78, "y": 2.56}, {"x": 3.33, "y": 3.67}, {"x": 3.11, "y": 3.33}, {"x": 4.0, "y": 1.0}, {"x": 3.0, "y": 4.11}, {"x": 4.89, "y": 2.67}, {"x": 3.0, "y": 3.11}, {"x": 3.44, "y": 3.44}, {"x": 3.22, "y": 3.22}, {"x": 4.11, "y": 2.78}, {"x": 4.11, "y": 1.89}, {"x": 3.11, "y": 3.67}, {"x": 2.44, "y": 3.89}, {"x": 3.33, "y": 3.22}, {"x": 2.22, "y": 2.67}, {"x": 3.11, "y": 3.33}, {"x": 3.78, "y": 2.33}, {"x": 3.56, "y": 2.67}, {"x": 4.0, "y": 3.33}, {"x": 2.89, "y": 1.89}, {"x": 3.44, "y": 2.78}, {"x": 2.78, "y": 3.22}, {"x": 2.67, "y": 3.78}, {"x": 4.33, "y": 2.0}, {"x": 1.78, "y": 3.22}, {"x": 2.33, "y": 4.22}, {"x": 2.89, "y": 3.44}, {"x": 2.78, "y": 3.56}, {"x": 3.78, "y": 4.0}, {"x": 3.33, "y": 3.11}, {"x": 2.0, "y": 4.22}, {"x": 3.67, "y": 4.78}, {"x": 2.67, "y": 2.67}, {"x": 3.89, "y": 2.44}, {"x": 3.33, "y": 3.11}, {"x": 2.67, "y": 3.78}, {"x": 3.0, "y": 3.11}, {"x": 3.67, "y": 3.56}, {"x": 3.33, "y": 3.11}, {"x": 2.89, "y": 2.56}, {"x": 3.0, "y": 3.56}, {"x": 3.0, "y": 4.11}, {"x": 3.78, "y": 2.56}, {"x": 3.56, "y": 3.44}, {"x": 3.78, "y": 3.11}, {"x": 3.0, "y": 3.0}, {"x": 3.67, "y": 3.33}, {"x": 3.22, "y": 3.33}, {"x": 3.67, "y": 2.33}, {"x": 4.11, "y": 1.22}, {"x": 3.56, "y": 3.0}, {"x": 2.89, "y": 4.33}, {"x": 2.67, "y": 3.89}, {"x": 3.44, "y": 3.78}, {"x": 3.0, "y": 3.0}, {"x": 3.22, "y": 3.56}, {"x": 3.44, "y": 3.67}, {"x": 3.11, "y": 2.89}, {"x": 3.44, "y": 2.56}, {"x": 2.67, "y": 2.78}, {"x": 4.0, "y": 2.89}, {"x": 3.56, "y": 2.44}, {"x": 2.89, "y": 2.67}, {"x": 3.11, "y": 3.22}, {"x": 3.56, "y": 2.44}, {"x": 3.78, "y": 2.56}, {"x": 3.67, "y": 3.33}, {"x": 2.22, "y": 3.78}, {"x": 4.0, "y": 2.33}, {"x": 4.56, "y": 4.56}, {"x": 2.78, "y": 2.44}, {"x": 3.0, "y": 3.0}, {"x": 3.78, "y": 3.89}, {"x": 2.33, "y": 1.89}, {"x": 3.0, "y": 3.33}, {"x": 4.44, "y": 2.78}, {"x": 3.67, "y": 3.0}, {"x": 4.0, "y": 2.89}, {"x": 2.22, "y": 3.11}, {"x": 2.89, "y": 2.44}, {"x": 4.11, "y": 2.89}, {"x": 3.56, "y": 3.11}, {"x": 3.0, "y": 3.56}, {"x": 3.33, "y": 3.67}, {"x": 3.67, "y": 4.33}, {"x": 3.78, "y": 3.11}, {"x": 3.33, "y": 3.56}, {"x": 3.0, "y": 3.0}, {"x": 2.56, "y": 3.33}, {"x": 3.67, "y": 2.44}, {"x": 3.0, "y": 2.22}, {"x": 3.11, "y": 3.56}, {"x": 2.56, "y": 3.0}, {"x": 2.56, "y": 3.67}, {"x": 3.22, "y": 4.22}, {"x": 2.78, "y": 2.56}, {"x": 3.0, "y": 3.22}, {"x": 5.0, "y": 1.22}, {"x": 2.22, "y": 2.78}, {"x": 3.89, "y": 2.33}, {"x": 3.0, "y": 3.44}, {"x": 3.0, "y": 2.44}, {"x": 3.11, "y": 2.0}, {"x": 2.78, "y": 3.0}, {"x": 3.67, "y": 3.44}, {"x": 3.67, "y": 3.0}, {"x": 4.0, "y": 1.78}, {"x": 3.33, "y": 3.0}, {"x": 3.0, "y": 3.67}, {"x": 2.67, "y": 2.56}, {"x": 3.44, "y": 2.67}, {"x": 2.67, "y": 3.33}, {"x": 3.67, "y": 2.33}, {"x": 4.11, "y": 2.22}, {"x": 3.22, "y": 2.89}, {"x": 3.56, "y": 2.33}, {"x": 3.11, "y": 3.11}, {"x": 4.33, "y": 3.0}, {"x": 3.56, "y": 3.33}, {"x": 4.11, "y": 3.11}, {"x": 4.22, "y": 3.0}, {"x": 2.78, "y": 2.89}, {"x": 3.56, "y": 2.11}, {"x": 3.78, "y": 3.56}, {"x": 3.56, "y": 2.78}, {"x": 3.44, "y": 2.44}, {"x": 3.44, "y": 3.0}, {"x": 3.33, "y": 3.22}, {"x": 2.56, "y": 4.11}, {"x": 4.0, "y": 3.22}, {"x": 3.33, "y": 3.67}, {"x": 2.89, "y": 3.11}, {"x": 4.44, "y": 2.33}, {"x": 2.89, "y": 2.89}, {"x": 4.22, "y": 3.89}, {"x": 3.78, "y": 3.0}, {"x": 3.56, "y": 2.22}, {"x": 3.0, "y": 3.0}, {"x": 3.33, "y": 3.22}, {"x": 3.0, "y": 2.89}, {"x": 3.0, "y": 3.44}, {"x": 2.44, "y": 3.56}, {"x": 2.0, "y": 3.67}, {"x": 2.56, "y": 2.89}, {"x": 3.22, "y": 3.22}, {"x": 3.78, "y": 3.11}, {"x": 3.0, "y": 3.56}, {"x": 3.0, "y": 3.67}, {"x": 3.44, "y": 3.11}, {"x": 3.78, "y": 3.11}, {"x": 3.22, "y": 3.0}, {"x": 3.33, "y": 3.44}, {"x": 3.22, "y": 2.44}, {"x": 3.11, "y": 3.0}, {"x": 2.67, "y": 4.0}, {"x": 2.89, "y": 2.44}, {"x": 3.11, "y": 2.44}, {"x": 4.56, "y": 4.44}, {"x": 2.44, "y": 3.67}, {"x": 3.0, "y": 3.56}, {"x": 3.0, "y": 3.0}, {"x": 3.67, "y": 3.11}, {"x": 4.33, "y": 3.33}, {"x": 3.56, "y": 3.78}, {"x": 4.0, "y": 1.0}, {"x": 3.0, "y": 3.22}, {"x": 2.33, "y": 3.56}, {"x": 3.22, "y": 3.33}, {"x": 3.33, "y": 2.78}, {"x": 4.0, "y": 2.44}, {"x": 3.78, "y": 3.22}, {"x": 3.89, "y": 3.44}, {"x": 1.0, "y": 1.0}, {"x": 4.44, "y": 1.0}, {"x": 4.56, "y": 1.0}, {"x": 4.0, "y": 3.11}, {"x": 3.33, "y": 2.78}, {"x": 3.89, "y": 3.0}, {"x": 2.67, "y": 3.22}, {"x": 4.0, "y": 3.0}, {"x": 3.78, "y": 3.0}, {"x": 2.89, "y": 4.0}, {"x": 3.89, "y": 2.78}, {"x": 3.0, "y": 3.56}, {"x": 3.89, "y": 3.11}, {"x": 2.67, "y": 3.78}, {"x": 2.89, "y": 3.67}, {"x": 3.11, "y": 2.44}, {"x": 3.78, "y": 2.89}, {"x": 3.89, "y": 3.67}, {"x": 3.89, "y": 3.22}, {"x": 2.67, "y": 2.44}, {"x": 4.0, "y": 3.78}, {"x": 3.33, "y": 2.78}, {"x": 3.56, "y": 1.56}, {"x": 3.22, "y": 4.0}, {"x": 3.22, "y": 2.67}, {"x": 3.33, "y": 2.89}, {"x": 3.44, "y": 2.89}, {"x": 3.44, "y": 2.89}, {"x": 3.11, "y": 2.89}, {"x": 3.22, "y": 2.56}, {"x": 3.11, "y": 3.22}, {"x": 2.89, "y": 3.44}, {"x": 3.44, "y": 3.33}, {"x": 3.0, "y": 2.67}, {"x": 3.67, "y": 2.78}, {"x": 3.22, "y": 3.78}, {"x": 2.44, "y": 2.67}, {"x": 3.89, "y": 2.56}, {"x": 4.22, "y": 1.89}, {"x": 2.89, "y": 2.56}, {"x": 2.89, "y": 1.78}, {"x": 5.0, "y": 5.0}, {"x": 3.67, "y": 3.11}, {"x": 3.56, "y": 3.11}, {"x": 3.56, "y": 1.67}, {"x": 3.44, "y": 3.33}, {"x": 3.67, "y": 3.0}, {"x": 2.44, "y": 2.22}, {"x": 2.44, "y": 2.67}, {"x": 3.78, "y": 3.0}, {"x": 4.11, "y": 1.78}, {"x": 3.0, "y": 2.78}, {"x": 4.0, "y": 2.0}, {"x": 2.78, "y": 3.11}, {"x": 3.56, "y": 3.44}, {"x": 2.89, "y": 2.89}, {"x": 2.67, "y": 3.11}, {"x": 3.0, "y": 3.78}, {"x": 2.56, "y": 3.22}, {"x": 3.22, "y": 2.67}, {"x": 3.0, "y": 3.0}, {"x": 3.33, "y": 3.56}, {"x": 3.0, "y": 2.56}, {"x": 3.56, "y": 2.22}, {"x": 2.78, "y": 2.56}, {"x": 2.89, "y": 3.89}, {"x": 3.78, "y": 2.78}, {"x": 3.0, "y": 3.56}, {"x": 2.89, "y": 3.78}, {"x": 4.0, "y": 2.56}, {"x": 2.44, "y": 3.11}, {"x": 4.89, "y": 3.22}, {"x": 3.0, "y": 3.0}, {"x": 3.0, "y": 3.0}, {"x": 3.0, "y": 3.0}, {"x": 2.78, "y": 2.11}, {"x": 3.78, "y": 3.44}, {"x": 3.33, "y": 3.56}, {"x": 3.67, "y": 3.89}, {"x": 2.11, "y": 1.78}, {"x": 3.0, "y": 3.22}, {"x": 2.78, "y": 2.0}, {"x": 2.89, "y": 3.33}, {"x": 2.89, "y": 3.33}, {"x": 3.0, "y": 3.0}, {"x": 3.0, "y": 3.22}, {"x": 2.22, "y": 4.0}, {"x": 3.33, "y": 2.89}, {"x": 2.56, "y": 2.22}, {"x": 3.44, "y": 3.11}, {"x": 3.56, "y": 4.0}, {"x": 3.44, "y": 3.33}, {"x": 4.78, "y": 2.33}, {"x": 3.89, "y": 2.89}, {"x": 3.22, "y": 3.56}, {"x": 4.33, "y": 3.0}, {"x": 2.44, "y": 3.11}, {"x": 3.0, "y": 3.33}, {"x": 2.67, "y": 3.0}, {"x": 3.78, "y": 3.0}, {"x": 4.11, "y": 2.78}, {"x": 3.56, "y": 4.22}, {"x": 4.0, "y": 3.56}, {"x": 3.89, "y": 3.0}, {"x": 3.0, "y": 2.56}, {"x": 3.22, "y": 2.67}, {"x": 3.22, "y": 3.33}, {"x": 3.89, "y": 3.22}, {"x": 3.44, "y": 3.33}, {"x": 3.11, "y": 3.56}, {"x": 2.78, "y": 2.67}, {"x": 4.0, "y": 2.44}, {"x": 3.56, "y": 1.89}, {"x": 3.67, "y": 3.89}, {"x": 3.89, "y": 2.22}, {"x": 3.67, "y": 2.78}, {"x": 3.0, "y": 3.0}, {"x": 3.0, "y": 3.33}, {"x": 3.22, "y": 2.78}, {"x": 3.56, "y": 1.56}, {"x": 4.44, "y": 2.67}, {"x": 4.0, "y": 3.67}, {"x": 4.0, "y": 3.11}, {"x": 3.0, "y": 2.33}, {"x": 3.67, "y": 2.78}, {"x": 3.0, "y": 3.0}, {"x": 3.22, "y": 2.33}, {"x": 3.0, "y": 3.0}, {"x": 2.44, "y": 3.11}, {"x": 3.33, "y": 2.78}, {"x": 3.78, "y": 2.67}, {"x": 3.78, "y": 2.33}, {"x": 3.33, "y": 3.44}, {"x": 3.22, "y": 2.0}, {"x": 3.78, "y": 3.44}, {"x": 3.56, "y": 2.11}, {"x": 3.67, "y": 2.11}, {"x": 3.11, "y": 3.0}, {"x": 3.78, "y": 1.89}, {"x": 2.44, "y": 3.56}, {"x": 3.22, "y": 3.22}, {"x": 2.33, "y": 2.11}, {"x": 2.33, "y": 3.33}, {"x": 4.0, "y": 2.0}, {"x": 3.11, "y": 3.78}, {"x": 3.22, "y": 3.89}, {"x": 4.0, "y": 2.44}, {"x": 2.78, "y": 2.11}, {"x": 1.44, "y": 4.0}, {"x": 3.89, "y": 1.78}, {"x": 2.89, "y": 2.44}, {"x": 3.22, "y": 2.78}, {"x": 3.22, "y": 3.33}, {"x": 3.22, "y": 3.67}, {"x": 2.89, "y": 3.44}, {"x": 2.67, "y": 2.89}, {"x": 4.0, "y": 3.0}, {"x": 2.33, "y": 2.44}, {"x": 3.0, "y": 3.0}, {"x": 3.78, "y": 3.78}, {"x": 3.11, "y": 3.0}, {"x": 3.22, "y": 3.11}, {"x": 2.44, "y": 2.78}, {"x": 2.0, "y": 2.0}, {"x": 2.22, "y": 2.33}, {"x": 4.0, "y": 3.11}, {"x": 2.78, "y": 3.56}, {"x": 3.0, "y": 3.0}, {"x": 2.89, "y": 2.78}, {"x": 4.56, "y": 5.0}, {"x": 2.67, "y": 3.11}, {"x": 3.0, "y": 3.0}, {"x": 2.11, "y": 3.67}, {"x": 3.44, "y": 4.11}, {"x": 2.22, "y": 2.44}, {"x": 3.56, "y": 3.67}, {"x": 2.22, "y": 2.56}, {"x": 3.67, "y": 2.44}, {"x": 3.56, "y": 3.0}, {"x": 2.22, "y": 3.44}, {"x": 3.33, "y": 2.44}, {"x": 2.33, "y": 3.67}, {"x": 3.11, "y": 3.11}, {"x": 5.0, "y": 3.67}, {"x": 3.0, "y": 3.0}, {"x": 3.78, "y": 3.44}, {"x": 3.67, "y": 3.11}, {"x": 3.67, "y": 2.67}, {"x": 3.11, "y": 2.67}, {"x": 5.0, "y": 3.22}, {"x": 2.67, "y": 2.78}, {"x": 3.33, "y": 3.89}, {"x": 3.33, "y": 3.44}, {"x": 3.11, "y": 2.67}, {"x": 3.78, "y": 2.89}, {"x": 3.11, "y": 2.89}, {"x": 4.44, "y": 2.67}, {"x": 3.44, "y": 3.56}, {"x": 3.89, "y": 3.11}, {"x": 3.0, "y": 2.67}, {"x": 3.44, "y": 2.67}, {"x": 3.0, "y": 3.11}, {"x": 3.56, "y": 3.0}, {"x": 2.11, "y": 3.11}, {"x": 4.33, "y": 3.0}, {"x": 3.33, "y": 2.89}, {"x": 3.22, "y": 4.11}, {"x": 2.22, "y": 4.0}, {"x": 2.67, "y": 3.44}, {"x": 2.89, "y": 3.33}, {"x": 3.11, "y": 2.78}, {"x": 2.78, "y": 3.44}, {"x": 3.67, "y": 2.0}, {"x": 3.44, "y": 3.22}, {"x": 5.0, "y": 3.78}, {"x": 3.44, "y": 2.89}, {"x": 3.44, "y": 2.0}, {"x": 3.22, "y": 3.33}, {"x": 3.44, "y": 3.33}, {"x": 3.67, "y": 3.22}, {"x": 2.33, "y": 3.11}, {"x": 3.89, "y": 3.44}, {"x": 2.67, "y": 4.0}, {"x": 2.56, "y": 3.33}, {"x": 3.22, "y": 3.11}, {"x": 2.78, "y": 2.44}, {"x": 4.22, "y": 2.22}, {"x": 3.0, "y": 3.33}, {"x": 2.0, "y": 1.67}, {"x": 3.33, "y": 2.22}, {"x": 3.89, "y": 2.78}, {"x": 3.44, "y": 2.67}, {"x": 3.0, "y": 4.0}, {"x": 3.11, "y": 2.89}, {"x": 3.11, "y": 3.0}, {"x": 3.22, "y": 3.0}, {"x": 4.0, "y": 2.33}, {"x": 3.11, "y": 3.89}, {"x": 1.89, "y": 3.56}, {"x": 3.67, "y": 3.11}, {"x": 3.67, "y": 3.78}, {"x": 3.0, "y": 3.0}, {"x": 3.44, "y": 3.22}, {"x": 2.56, "y": 4.0}, {"x": 3.11, "y": 2.78}, {"x": 2.89, "y": 2.89}, {"x": 3.78, "y": 3.0}, {"x": 4.0, "y": 2.67}, {"x": 3.0, "y": 3.44}, {"x": 2.56, "y": 2.78}, {"x": 4.0, "y": 2.0}, {"x": 2.78, "y": 3.33}, {"x": 3.56, "y": 3.56}, {"x": 2.33, "y": 3.33}, {"x": 4.0, "y": 2.78}, {"x": 2.67, "y": 3.44}, {"x": 3.0, "y": 3.0}, {"x": 4.11, "y": 3.33}, {"x": 3.44, "y": 2.0}, {"x": 3.56, "y": 3.56}, {"x": 3.56, "y": 2.0}, {"x": 2.22, "y": 3.22}, {"x": 2.44, "y": 4.11}, {"x": 3.67, "y": 3.11}, {"x": 3.33, "y": 3.33}, {"x": 3.22, "y": 3.33}, {"x": 3.78, "y": 2.67}, {"x": 3.67, "y": 2.78}, {"x": 3.56, "y": 2.89}, {"x": 3.0, "y": 1.89}, {"x": 3.56, "y": 2.22}, {"x": 4.11, "y": 1.33}, {"x": 2.89, "y": 3.22}, {"x": 4.67, "y": 1.33}, {"x": 3.0, "y": 3.0}, {"x": 2.78, "y": 3.0}, {"x": 3.44, "y": 2.44}, {"x": 3.11, "y": 3.33}, {"x": 1.56, "y": 2.33}, {"x": 2.44, "y": 3.44}, {"x": 3.22, "y": 3.33}, {"x": 3.33, "y": 2.78}, {"x": 4.89, "y": 4.89}, {"x": 3.33, "y": 3.89}, {"x": 3.33, "y": 3.44}, {"x": 4.67, "y": 2.44}, {"x": 3.89, "y": 2.33}, {"x": 3.22, "y": 3.0}, {"x": 4.11, "y": 2.0}, {"x": 3.33, "y": 3.33}, {"x": 4.0, "y": 2.22}, {"x": 2.33, "y": 2.22}, {"x": 3.56, "y": 3.44}, {"x": 3.0, "y": 1.0}, {"x": 3.22, "y": 3.67}, {"x": 3.44, "y": 2.89}, {"x": 3.33, "y": 3.44}, {"x": 4.0, "y": 2.33}, {"x": 3.33, "y": 2.56}, {"x": 3.89, "y": 3.22}, {"x": 3.22, "y": 2.89}, {"x": 2.33, "y": 3.56}, {"x": 3.67, "y": 2.78}, {"x": 3.44, "y": 2.89}, {"x": 3.0, "y": 3.33}, {"x": 3.44, "y": 2.33}, {"x": 3.11, "y": 3.11}, {"x": 3.0, "y": 3.33}, {"x": 3.0, "y": 3.56}, {"x": 3.0, "y": 2.89}, {"x": 4.0, "y": 2.89}, {"x": 3.56, "y": 2.89}, {"x": 2.78, "y": 2.56}, {"x": 4.67, "y": 1.78}];
+
+        new Chart(ctx3.getContext('2d'), {
+          type: 'scatter',
+          data: {
+            datasets: [
+              {
+                label: '就業者実測データ (N = 2,035)',
+                data: realScatterData,
+                backgroundColor: 'rgba(0, 91, 172, 0.25)',
+                borderColor: 'rgba(0, 91, 172, 0.4)',
+                borderWidth: 1,
+                pointRadius: 3
+              },
+              {
+                type: 'line',
+                label: '実測回帰直線 (r = -0.0901, y = -0.0908x + 3.3773)',
+                data: [{x: 1.0, y: 3.2865}, {x: 5.0, y: 2.9233}],
+                borderColor: '#D32F2F',
+                borderWidth: 2.5,
+                pointRadius: 0,
+                fill: false
+              }
+            ]
+          },
+          options: {
+            responsive: true,
+            maintainAspectRatio: false,
+            scales: {
+              x: {
+                min: 1.0,
+                max: 5.0,
+                title: { display: true, text: 'DX推進意欲スコア (SC18: 1-5点)' }
+              },
+              y: {
+                min: 1.0,
+                max: 5.0,
+                title: { display: true, text: '組織摩擦懸念スコア (SC15: 1-5点)' }
+              }
+            },
+            plugins: {
+              legend: { position: 'top' }
+            }
+          }
+        });
+      }
+    });
+  </script>
+</body>
+</html>

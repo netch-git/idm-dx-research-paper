@@ -1,0 +1,1266 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+  <title>Formal Organizations: A Comparative Approach (Blau & Scott, 1962) - Critical Edition</title>
+  <meta name="description" content="Peter M. Blau & W. Richard Scott (1962) Formal Organizations: A Comparative Approach. Classical academic reader and bilingual edition.">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@500;600;700&family=Cormorant+Garamond:ital,wght@0,400;0,600;0,700;1,400;1,600&family=EB+Garamond:ital,wght@0,400;0,500;0,600;1,400;1,500&family=Noto+Serif+JP:wght@400;500;600;700&display=swap" rel="stylesheet">
+  <style>
+    :root {
+      --font-serif-en: 'EB Garamond', 'Cormorant Garamond', Garamond, 'Times New Roman', serif;
+      --font-serif-ja: 'Noto Serif JP', 'Yu Mincho', 'Hiragino Mincho ProN', serif;
+      --font-display: 'Cinzel', 'Cormorant Garamond', serif;
+      --font-base: var(--font-serif-ja);
+
+      /* Classical Academic Palette (Parchment & Oxford Navy) */
+      --bg: #FDFBF7;
+      --bg-alt: #F4EFE6;
+      --bg-card: #FFFFFF;
+      --bg-inset: #F8F5EE;
+      --text: #24211D;
+      --text-muted: #575148;
+      --text-soft: #857D71;
+      --border: #DCD4C5;
+      --border-dark: #8C7B65;
+      --border-light: #EFE9DC;
+      --primary: #182B49; /* Oxford Navy */
+      --primary-light: #EEF2F7;
+      --accent: #782333;  /* Deep Burgundy */
+      --accent-light: #F9ECEE;
+      --gold: #967238;    /* Antique Brass */
+      --gold-light: #F7F2E7;
+
+      --shadow-subtle: 0 1px 3px rgba(36, 33, 29, 0.05);
+      --shadow-elevated: 0 4px 16px rgba(36, 33, 29, 0.08);
+
+      --content-width: 1040px;
+      --header-height: 60px;
+    }
+
+    [data-theme="dark"] {
+      /* Classical Library Night Mode */
+      --bg: #141312;
+      --bg-alt: #1C1A18;
+      --bg-card: #201E1B;
+      --bg-inset: #181715;
+      --text: #E5DFC5;
+      --text-muted: #ABA293;
+      --text-soft: #7C7467;
+      --border: #3A352F;
+      --border-dark: #6E6456;
+      --border-light: #282420;
+      --primary: #8CAAD8;
+      --primary-light: #1A2536;
+      --accent: #D26A7A;
+      --accent-light: #36171E;
+      --gold: #D1A858;
+      --gold-light: #2E2514;
+
+      --shadow-subtle: 0 1px 4px rgba(0, 0, 0, 0.4);
+      --shadow-elevated: 0 6px 20px rgba(0, 0, 0, 0.5);
+    }
+
+    * { box-sizing: border-box; margin: 0; padding: 0; -webkit-tap-highlight-color: transparent; }
+    html { scroll-behavior: smooth; font-size: 16px; }
+    body {
+      font-family: var(--font-base);
+      background-color: var(--bg);
+      color: var(--text);
+      line-height: 1.85;
+      letter-spacing: 0.02em;
+      transition: background-color 0.2s ease, color 0.2s ease;
+      overflow-x: hidden;
+      padding-top: var(--header-height);
+    }
+
+    /* Classical Header */
+    header {
+      position: fixed;
+      top: 0; left: 0; right: 0;
+      height: var(--header-height);
+      background: rgba(253, 251, 247, 0.95);
+      backdrop-filter: blur(8px);
+      -webkit-backdrop-filter: blur(8px);
+      border-bottom: 1px solid var(--border);
+      z-index: 1000;
+      transition: background 0.2s ease;
+    }
+    [data-theme="dark"] header {
+      background: rgba(20, 19, 18, 0.95);
+    }
+    .header-rule {
+      position: absolute;
+      bottom: -3px; left: 0; right: 0;
+      height: 1px;
+      background: var(--border-light);
+    }
+    .nav-container {
+      max-width: var(--content-width);
+      margin: 0 auto;
+      height: 100%;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 0 20px;
+    }
+    .brand {
+      display: flex;
+      align-items: baseline;
+      gap: 12px;
+      text-decoration: none;
+      color: var(--text);
+    }
+    .brand-title {
+      font-family: var(--font-display);
+      font-size: 1rem;
+      font-weight: 700;
+      letter-spacing: 0.1em;
+      color: var(--text);
+    }
+    .brand-subtitle {
+      font-family: var(--font-serif-en);
+      font-size: 0.85rem;
+      font-style: italic;
+      color: var(--gold);
+    }
+    .nav-actions {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+    }
+
+    /* Classical Buttons & Switches */
+    .btn-group {
+      display: flex;
+      border: 1px solid var(--border-dark);
+      background: var(--bg-alt);
+      border-radius: 2px;
+      padding: 2px;
+    }
+    .btn-text {
+      border: none;
+      background: transparent;
+      color: var(--text-muted);
+      font-family: var(--font-base);
+      font-size: 0.82rem;
+      font-weight: 600;
+      padding: 4px 12px;
+      border-radius: 1px;
+      cursor: pointer;
+      transition: all 0.15s ease;
+      letter-spacing: 0.05em;
+    }
+    .btn-text:hover { color: var(--text); }
+    .btn-text.active {
+      background: var(--primary);
+      color: #FFF;
+    }
+    [data-theme="dark"] .btn-text.active {
+      background: var(--gold);
+      color: #141312;
+    }
+
+    .btn-icon-classic {
+      height: 32px;
+      padding: 0 10px;
+      border: 1px solid var(--border);
+      background: var(--bg-card);
+      color: var(--text-muted);
+      font-family: var(--font-serif-en);
+      font-size: 0.85rem;
+      font-style: italic;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      cursor: pointer;
+      border-radius: 2px;
+      transition: all 0.15s ease;
+    }
+    .btn-icon-classic:hover {
+      border-color: var(--border-dark);
+      color: var(--text);
+      background: var(--bg-alt);
+    }
+    .menu-toggle { display: none; font-style: normal; }
+
+    /* Layout */
+    .layout-wrapper {
+      max-width: var(--content-width);
+      margin: 0 auto;
+      padding: 36px 20px 100px;
+      display: grid;
+      grid-template-columns: 240px 1fr;
+      gap: 40px;
+      align-items: start;
+    }
+
+    /* Sidebar TOC (Desktop) */
+    .sidebar {
+      position: sticky;
+      top: calc(var(--header-height) + 24px);
+      max-height: calc(100vh - var(--header-height) - 48px);
+      overflow-y: auto;
+      padding: 20px 16px;
+      background: var(--bg-card);
+      border: 1px solid var(--border);
+      border-top: 3px solid var(--border-dark);
+      font-size: 0.88rem;
+      box-shadow: var(--shadow-subtle);
+    }
+    .sidebar-header {
+      font-family: var(--font-display);
+      font-size: 0.76rem;
+      font-weight: 700;
+      letter-spacing: 0.15em;
+      color: var(--text-soft);
+      padding-bottom: 8px;
+      margin-bottom: 12px;
+      border-bottom: 1px solid var(--border-light);
+      text-transform: uppercase;
+    }
+    .toc-list { list-style: none; display: flex; flex-direction: column; gap: 6px; }
+    .toc-link {
+      display: block;
+      padding: 5px 8px;
+      color: var(--text-muted);
+      text-decoration: none;
+      line-height: 1.45;
+      border-left: 2px solid transparent;
+      transition: all 0.15s ease;
+    }
+    .toc-link:hover, .toc-link.active {
+      color: var(--accent);
+      border-left-color: var(--accent);
+      background: var(--bg-alt);
+    }
+    [data-theme="dark"] .toc-link:hover, [data-theme="dark"] .toc-link.active {
+      color: var(--gold);
+      border-left-color: var(--gold);
+    }
+
+    /* Main Column */
+    main { min-width: 0; }
+
+    /* Classical Book Header (Frontispiece Style) */
+    .book-frontispiece {
+      background: var(--bg-card);
+      border: 1px solid var(--border);
+      border-top: 4px solid var(--primary);
+      padding: 44px 36px 36px;
+      margin-bottom: 36px;
+      text-align: center;
+      position: relative;
+      box-shadow: var(--shadow-subtle);
+    }
+    .frontispiece-frame {
+      border: 1px double var(--border);
+      padding: 28px 20px;
+    }
+    .book-ornament {
+      font-family: var(--font-serif-en);
+      font-size: 1.1rem;
+      color: var(--gold);
+      letter-spacing: 0.3em;
+      margin-bottom: 12px;
+    }
+    .book-title {
+      font-family: var(--font-display);
+      font-size: 1.9rem;
+      font-weight: 700;
+      letter-spacing: 0.12em;
+      color: var(--primary);
+      margin-bottom: 8px;
+      line-height: 1.3;
+    }
+    [data-theme="dark"] .book-title { color: #FFF; }
+    .book-subtitle {
+      font-family: var(--font-serif-en);
+      font-size: 1.35rem;
+      font-style: italic;
+      color: var(--text-muted);
+      margin-bottom: 16px;
+    }
+    .book-authors {
+      font-family: var(--font-serif-en);
+      font-size: 1.05rem;
+      font-weight: 600;
+      letter-spacing: 0.05em;
+      color: var(--text);
+      margin-bottom: 6px;
+    }
+    .book-affil {
+      font-size: 0.84rem;
+      color: var(--text-soft);
+      font-style: italic;
+      margin-bottom: 16px;
+    }
+    .book-meta-bar {
+      display: inline-flex;
+      flex-wrap: wrap;
+      justify-content: center;
+      gap: 16px;
+      padding-top: 14px;
+      border-top: 1px solid var(--border-light);
+      font-size: 0.8rem;
+      color: var(--text-muted);
+      font-family: var(--font-serif-en);
+    }
+    .book-meta-item { display: flex; align-items: center; gap: 4px; }
+    .book-meta-item span.label { font-variant: small-caps; letter-spacing: 0.05em; color: var(--gold); font-weight: 600; }
+
+    /* Search Box */
+    .search-container {
+      margin-top: 24px;
+      max-width: 580px;
+      margin-left: auto;
+      margin-right: auto;
+      position: relative;
+    }
+    .search-input {
+      width: 100%;
+      padding: 10px 16px;
+      border: 1px solid var(--border);
+      background: var(--bg);
+      color: var(--text);
+      font-family: var(--font-base);
+      font-size: 0.9rem;
+      border-radius: 2px;
+      box-shadow: inset 0 1px 3px rgba(0,0,0,0.03);
+      transition: all 0.15s ease;
+      text-align: center;
+    }
+    .search-input:focus {
+      outline: none;
+      border-color: var(--gold);
+      background: var(--bg-card);
+    }
+    .search-input::placeholder {
+      font-style: italic;
+      color: var(--text-soft);
+    }
+
+    /* Sections */
+    .chapter-section {
+      background: var(--bg-card);
+      border: 1px solid var(--border);
+      padding: 36px 32px;
+      margin-bottom: 32px;
+      box-shadow: var(--shadow-subtle);
+    }
+    .chapter-header {
+      margin-bottom: 24px;
+      padding-bottom: 14px;
+      border-bottom: 1px solid var(--border);
+      position: relative;
+    }
+    .chapter-header::after {
+      content: "";
+      position: absolute;
+      bottom: -3px; left: 0; width: 60px; height: 2px;
+      background: var(--gold);
+    }
+    .chapter-num {
+      font-family: var(--font-display);
+      font-size: 0.78rem;
+      font-weight: 700;
+      letter-spacing: 0.2em;
+      color: var(--gold);
+      text-transform: uppercase;
+      margin-bottom: 4px;
+    }
+    .chapter-title {
+      font-size: 1.35rem;
+      font-weight: 700;
+      color: var(--text);
+      letter-spacing: 0.04em;
+    }
+
+    /* Paragraph Styling */
+    p.prose {
+      margin-bottom: 16px;
+      text-indent: 1em;
+      text-align: justify;
+    }
+    p.prose:last-child { margin-bottom: 0; }
+
+    /* Classical Dilemma Cards */
+    .dilemma-block {
+      border: 1px solid var(--border);
+      background: var(--bg-alt);
+      padding: 20px 24px;
+      margin: 16px 0;
+      border-left: 4px solid var(--primary);
+    }
+    .dilemma-heading {
+      font-weight: 700;
+      font-size: 1.05rem;
+      color: var(--text);
+      margin-bottom: 6px;
+      letter-spacing: 0.03em;
+    }
+    .dilemma-text {
+      font-size: 0.92rem;
+      color: var(--text-muted);
+      line-height: 1.75;
+    }
+
+    /* Cui Bono 4 Types Classical Grid */
+    .cui-container {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+      gap: 16px;
+      margin: 24px 0 12px;
+    }
+    .cui-box {
+      border: 1px solid var(--border);
+      background: var(--bg-inset);
+      padding: 20px 18px;
+      position: relative;
+    }
+    .cui-box::before {
+      content: "";
+      position: absolute;
+      top: 0; left: 0; right: 0; height: 2px;
+      background: var(--gold);
+    }
+    .cui-type-num {
+      font-family: var(--font-display);
+      font-size: 0.72rem;
+      color: var(--gold);
+      letter-spacing: 0.1em;
+      margin-bottom: 4px;
+    }
+    .cui-title-ja {
+      font-size: 1.05rem;
+      font-weight: 700;
+      color: var(--text);
+      margin-bottom: 2px;
+    }
+    .cui-title-en {
+      font-family: var(--font-serif-en);
+      font-size: 0.84rem;
+      font-style: italic;
+      color: var(--text-soft);
+      margin-bottom: 12px;
+    }
+    .cui-item {
+      font-size: 0.86rem;
+      margin-bottom: 8px;
+      line-height: 1.6;
+    }
+    .cui-k { font-weight: 700; color: var(--text-muted); }
+    .cui-v { color: var(--text); }
+
+    /* Bilingual Text Units */
+    .reading-entry {
+      margin-bottom: 36px;
+      padding-bottom: 32px;
+      border-bottom: 1px double var(--border);
+    }
+    .reading-entry:last-child {
+      border-bottom: none;
+      padding-bottom: 0;
+      margin-bottom: 0;
+    }
+    .entry-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: baseline;
+      margin-bottom: 16px;
+      flex-wrap: wrap;
+      gap: 8px;
+    }
+    .entry-title {
+      font-size: 1.15rem;
+      font-weight: 700;
+      color: var(--text);
+    }
+    .entry-page-ref {
+      font-family: var(--font-serif-en);
+      font-size: 0.85rem;
+      color: var(--gold);
+      font-style: italic;
+    }
+
+    /* Bilingual Grid Layout */
+    .bilingual-columns {
+      display: grid;
+      gap: 20px;
+    }
+    body[data-lang="both"] .bilingual-columns {
+      grid-template-columns: 1fr 1fr;
+    }
+    body[data-lang="ja"] .bilingual-columns {
+      grid-template-columns: 1fr;
+    }
+    body[data-lang="ja"] .col-en { display: none !important; }
+    body[data-lang="en"] .bilingual-columns {
+      grid-template-columns: 1fr;
+    }
+    body[data-lang="en"] .col-ja { display: none !important; }
+
+    .paper-sheet {
+      background: var(--bg-inset);
+      border: 1px solid var(--border);
+      padding: 22px 24px;
+      font-size: 0.94rem;
+      line-height: 1.85;
+      position: relative;
+    }
+    .col-ja {
+      font-family: var(--font-serif-ja);
+      border-left: 3px solid var(--primary);
+    }
+    .col-en {
+      font-family: var(--font-serif-en);
+      font-size: 0.98rem;
+      border-left: 3px solid var(--accent);
+    }
+    .sheet-label {
+      font-family: var(--font-display);
+      font-size: 0.7rem;
+      letter-spacing: 0.15em;
+      text-transform: uppercase;
+      color: var(--gold);
+      margin-bottom: 10px;
+      display: block;
+      font-weight: 600;
+    }
+    .quote-content p {
+      margin-bottom: 14px;
+      text-align: justify;
+    }
+    .quote-content p:last-child { margin-bottom: 0; }
+    strong { font-weight: 700; color: var(--text); }
+    em { font-style: italic; }
+
+    /* TOC Table */
+    .academic-table {
+      width: 100%;
+      border-collapse: collapse;
+      font-size: 0.9rem;
+      margin-top: 14px;
+    }
+    .academic-table th, .academic-table td {
+      padding: 10px 14px;
+      border-bottom: 1px solid var(--border-light);
+      text-align: left;
+    }
+    .academic-table th {
+      font-family: var(--font-display);
+      font-size: 0.74rem;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      color: var(--text-soft);
+      border-bottom: 1px solid var(--border-dark);
+      background: var(--bg-alt);
+    }
+    .academic-table td.page-col {
+      font-family: var(--font-serif-en);
+      font-style: italic;
+      color: var(--gold);
+      white-space: nowrap;
+    }
+    .academic-table tr:hover td {
+      background: var(--bg-alt);
+    }
+
+    /* Classical Footer */
+    footer {
+      border-top: 1px solid var(--border);
+      background: var(--bg-card);
+      padding: 40px 20px;
+      text-align: center;
+      font-size: 0.85rem;
+      color: var(--text-soft);
+    }
+    .footer-rule {
+      width: 80px; height: 1px;
+      background: var(--gold);
+      margin: 16px auto;
+    }
+
+    /* Mobile Sheet / Drawer */
+    .mobile-overlay {
+      display: none;
+      position: fixed;
+      top: 0; left: 0; right: 0; bottom: 0;
+      background: rgba(0,0,0,0.5);
+      z-index: 1100;
+    }
+    .mobile-drawer {
+      position: fixed;
+      bottom: 0; left: 0; right: 0;
+      max-height: 80vh;
+      background: var(--bg-card);
+      border-top: 2px solid var(--gold);
+      padding: 24px 20px 36px;
+      overflow-y: auto;
+      z-index: 1200;
+      transform: translateY(100%);
+      transition: transform 0.25s ease-out;
+      box-shadow: var(--shadow-elevated);
+    }
+    .mobile-drawer.open {
+      transform: translateY(0);
+    }
+    .drawer-top {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-bottom: 16px;
+      padding-bottom: 8px;
+      border-bottom: 1px solid var(--border-light);
+    }
+
+    /* Responsive */
+    @media (max-width: 860px) {
+      .layout-wrapper {
+        grid-template-columns: 1fr;
+        padding-top: 20px;
+      }
+      .sidebar { display: none; }
+      .menu-toggle { display: flex; }
+      body[data-lang="both"] .bilingual-columns {
+        grid-template-columns: 1fr;
+      }
+      .book-title { font-size: 1.45rem; }
+      .book-subtitle { font-size: 1.1rem; }
+      .book-frontispiece { padding: 24px 16px; }
+      .frontispiece-frame { padding: 18px 12px; }
+      .chapter-section { padding: 24px 18px; }
+      .btn-text { padding: 3px 8px; font-size: 0.78rem; }
+    }
+
+    @media print {
+      header, .sidebar, .btn-group, .btn-icon-classic, .search-container { display: none !important; }
+      body { padding-top: 0; background: #fff !important; color: #000 !important; }
+      .chapter-section, .book-frontispiece { border: 1px solid #999; box-shadow: none; break-inside: avoid; }
+      body[data-lang="both"] .bilingual-columns { grid-template-columns: 1fr 1fr; }
+    }
+  </style>
+</head>
+<body data-lang="ja" data-theme="light">
+
+  <!-- Header -->
+  <header>
+    <div class="nav-container">
+      <a href="#" class="brand">
+        <span class="brand-title">BLAU &amp; SCOTT</span>
+        <span class="brand-subtitle">1962</span>
+      </a>
+
+      <div class="nav-actions">
+        <!-- Language Group -->
+        <div class="btn-group" role="tablist">
+          <button class="btn-text active" data-setlang="ja">日本語</button>
+          <button class="btn-text" data-setlang="en">English</button>
+          <button class="btn-text" data-setlang="both">対訳</button>
+        </div>
+
+        <!-- Font Size -->
+        <button class="btn-icon-classic" id="btnFont" title="文字サイズ切替">Aa</button>
+
+        <!-- Theme Toggle -->
+        <button class="btn-icon-classic" id="btnTheme" title="明暗切替">明/暗</button>
+
+        <!-- Mobile Menu Toggle -->
+        <button class="btn-icon-classic menu-toggle" id="btnMobileMenu">目次</button>
+      </div>
+    </div>
+    <div class="header-rule"></div>
+  </header>
+
+  <!-- Layout Container -->
+  <div class="layout-wrapper">
+
+    <!-- Desktop Classical Sidebar -->
+    <aside class="sidebar">
+      <div class="sidebar-header">Contents / 目次</div>
+      <ul class="toc-list">
+        <li><a href="#overview" class="toc-link active">I. 学術的意義と背景</a></li>
+        <li><a href="#dilemmas" class="toc-link">II. 組織の3大構造的ジレンマ</a></li>
+        <li><a href="#cui-bono" class="toc-link">III. Cui Bono 4類型論</a></li>
+        <li><a href="#toc-full" class="toc-link">IV. 全章・節の目次体系</a></li>
+        <li><a href="#entry-1" class="toc-link">V. 階層関係と社会的距離 (p.159)</a></li>
+        <li><a href="#entry-2" class="toc-link">VI. 調整と情報の歪曲 (p.172)</a></li>
+        <li><a href="#entry-3" class="toc-link">VII. 規模と官僚制機構 (p.223)</a></li>
+        <li><a href="#entry-4" class="toc-link">VIII. 規模と管理比率の実証 (p.225)</a></li>
+      </ul>
+    </aside>
+
+    <!-- Main Content -->
+    <main>
+
+      <!-- Classical Frontispiece -->
+      <section class="book-frontispiece">
+        <div class="frontispiece-frame">
+          <div class="book-ornament">— MONOGRAPH IN COMPARATIVE SOCIOLOGY —</div>
+          <h1 class="book-title">FORMAL ORGANIZATIONS</h1>
+          <div class="book-subtitle">A Comparative Approach</div>
+          <div class="book-authors">PETER M. BLAU &amp; W. RICHARD SCOTT</div>
+          <div class="book-affil">The University of Chicago &amp; Stanford University</div>
+
+          <div class="book-meta-bar">
+            <div class="book-meta-item"><span class="label">Publisher:</span> Chandler Publishing Company (Scranton, PA)</div>
+            <div class="book-meta-item"><span class="label">Year:</span> 1962</div>
+            <div class="book-meta-item"><span class="label">Provenance:</span> 東京大学東洋文化研究所図書印蔵書</div>
+            <div class="book-meta-item"><span class="label">Pages:</span> 312 pp.</div>
+          </div>
+
+          <!-- Elegant Search Field -->
+          <div class="search-container">
+            <input type="search" id="searchInput" class="search-input" placeholder="文献内を検索（例: 規模、階層、社会的距離、歪曲、Cui Bono）..." autocomplete="off">
+          </div>
+        </div>
+      </section>
+
+      <!-- Chapter I: Academic Significance -->
+      <section id="overview" class="chapter-section searchable-block">
+        <div class="chapter-header">
+          <div class="chapter-num">Chapter I</div>
+          <h2 class="chapter-title">学術的意義と理論的位置づけ</h2>
+        </div>
+        <p class="prose">
+          本書『フォーマル・オーガニゼーション』（1962年）は、マックス・ウェーバー（Max Weber）の合理的・合法的官僚制論を出発点としつつ、それを実証的・比較社会学的な見地から批判的に発展させた、20世紀後半の組織社会学における不朽の古典である。
+        </p>
+        <p class="prose">
+          1950年代までの組織研究は、公式な規則や階層的権能を重視する古典的組織論（Fayol, Weber）と、現場の非公式な小集団行動や人間心理を重視する人間関係論（Mayo, Roethlisberger）の二極に対立していた。ブラウとスコットは、この二項対立を統合し、<strong>「制度的なフォーマル構造」と「現場で自律的に創発するインフォーマルな人間関係」がいかに相互作用し、組織の調整・統制・業績を規定するか</strong>を、厳密な比較研究手法（Comparative Approach）によって包括的に解明した。
+        </p>
+      </section>
+
+      <!-- Chapter II: Three Inherent Dilemmas -->
+      <section id="dilemmas" class="chapter-section searchable-block">
+        <div class="chapter-header">
+          <div class="chapter-num">Chapter II</div>
+          <h2 class="chapter-title">フォーマル組織に内在する3大構造的ジレンマ</h2>
+        </div>
+        <p class="prose" style="color: var(--text-muted); margin-bottom: 20px;">
+          ブラウとスコットは、組織の機能不全は管理者の無能や制度の不備に帰するものではなく、フォーマル組織という構造そのものに内在する不可避のジレンマ（Inherent Dilemmas）から生じると結論づけている（第9章、pp. 242–250）。
+        </p>
+
+        <div class="dilemma-block">
+          <div class="dilemma-heading">第1のジレンマ：全体調整 vs 自由なコミュニケーション（Coordination vs. Free Communication）</div>
+          <div class="dilemma-text">
+            分業化された組織を全体として方向づけるには、厳格な階層的権威構造による中央集権的調整が不可欠である。しかし、階層段数が多くなるほど、下位層から上位層へ向かう上方向の情報流通が遮断・選別・歪曲され、経営上位層には現場の実態から乖離した過度に楽観的な情報しか届かなくなる。
+          </div>
+        </div>
+
+        <div class="dilemma-block" style="border-left-color: var(--accent);">
+          <div class="dilemma-heading">第2のジレンマ：規律ある統制 vs 専門的自律性（Discipline vs. Professional Expertise）</div>
+          <div class="dilemma-text">
+            全社的な統一規程や業務の標準化は組織の秩序と公平性を保つが、高度な専門知識を有する実務者の自律的判断や現場適応力を阻害し、専門職的志向と官僚制的統制の間に根深い葛藤を生み出す。
+          </div>
+        </div>
+
+        <div class="dilemma-block" style="border-left-color: var(--gold);">
+          <div class="dilemma-heading">第3のジレンマ：官僚制化 vs 脱官僚制化（Bureaucratization vs. Debureaucratization）</div>
+          <div class="dilemma-text">
+            組織の混乱や逸脱を防ぐために規則が制定（官僚制化）されるが、規則の累積が硬直化と形式主義を招くと脱官僚制化（柔軟化）が志向されるという周期的循環が組織内で繰り返される。
+          </div>
+        </div>
+      </section>
+
+      <!-- Chapter III: Cui Bono 4 Types -->
+      <section id="cui-bono" class="chapter-section searchable-block">
+        <div class="chapter-header">
+          <div class="chapter-num">Chapter III</div>
+          <h2 class="chapter-title">首位受益者（Cui Bono）に基づく組織の4類型論</h2>
+        </div>
+        <p class="prose" style="color: var(--text-muted); margin-bottom: 20px;">
+          ラテン語の「Cui bono?（誰が最大の利益を得るのか？）」を基準とし、組織の存在によって本質的な恩恵を受けるべき主体（Prime Beneficiary）の所在に基づいてフォーマル組織を4類型に分類した（第2章、pp. 40–58）。
+        </p>
+
+        <div class="cui-container">
+          <div class="cui-box">
+            <div class="cui-type-num">Type I</div>
+            <div class="cui-title-ja">互恵組織</div>
+            <div class="cui-title-en">Mutual-Benefit Associations</div>
+            <div class="cui-item"><span class="cui-k">首位受益者:</span> <span class="cui-v">組織の一般構成員・組合員</span></div>
+            <div class="cui-item"><span class="cui-k">代表例:</span> <span class="cui-v">労働組合、職能団体、政党、親睦会</span></div>
+            <div class="cui-item"><span class="cui-k">中核的課題:</span> <span class="cui-v">内部における民主的統制の維持（寡頭制化の抑止）</span></div>
+          </div>
+
+          <div class="cui-box" style="border-top-color: var(--primary);">
+            <div class="cui-type-num">Type II</div>
+            <div class="cui-title-ja">営利企業</div>
+            <div class="cui-title-en">Business Concerns</div>
+            <div class="cui-item"><span class="cui-k">首位受益者:</span> <span class="cui-v">組織の所有者・株主</span></div>
+            <div class="cui-item"><span class="cui-k">代表例:</span> <span class="cui-v">製造企業、商業会社、金融機関</span></div>
+            <div class="cui-item"><span class="cui-k">中核的課題:</span> <span class="cui-v">市場競争下における業務効率性と利潤最大化</span></div>
+          </div>
+
+          <div class="cui-box" style="border-top-color: var(--accent);">
+            <div class="cui-type-num">Type III</div>
+            <div class="cui-title-ja">サービス組織</div>
+            <div class="cui-title-en">Service Organizations</div>
+            <div class="cui-item"><span class="cui-k">首位受益者:</span> <span class="cui-v">直接の受益者・クライエント集団</span></div>
+            <div class="cui-item"><span class="cui-k">代表例:</span> <span class="cui-v">病院、大学、社会福祉事務所、更生施設</span></div>
+            <div class="cui-item"><span class="cui-k">中核的課題:</span> <span class="cui-v">管理効率化による専門職の奉仕精神の侵食防止</span></div>
+          </div>
+
+          <div class="cui-box" style="border-top-color: var(--border-dark);">
+            <div class="cui-type-num">Type IV</div>
+            <div class="cui-title-ja">公益組織</div>
+            <div class="cui-title-en">Commonweal Organizations</div>
+            <div class="cui-item"><span class="cui-k">首位受益者:</span> <span class="cui-v">社会の一般公衆・国民全体</span></div>
+            <div class="cui-item"><span class="cui-k">代表例:</span> <span class="cui-v">軍隊、警察、消防署、徴税機関、中央省庁</span></div>
+            <div class="cui-item"><span class="cui-k">中核的課題:</span> <span class="cui-v">外部国民に対する民主的説明責任と公的統制</span></div>
+          </div>
+        </div>
+      </section>
+
+      <!-- Chapter IV: Table of Contents -->
+      <section id="toc-full" class="chapter-section searchable-block">
+        <div class="chapter-header">
+          <div class="chapter-num">Chapter IV</div>
+          <h2 class="chapter-title">全章・節の目次体系</h2>
+        </div>
+        <p class="prose" style="color: var(--text-muted); margin-bottom: 12px;">
+          底本スキャンから正確に復元した本書の全9章および主要節の構成一覧である。
+        </p>
+
+        <div style="overflow-x: auto;">
+          <table class="academic-table">
+            <thead>
+              <tr>
+                <th>章</th>
+                <th>和文標題</th>
+                <th>欧文原題 (Original Heading)</th>
+                <th style="text-align: right;">頁</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td><strong>序</strong></td>
+                <td>序文</td>
+                <td>Preface</td>
+                <td class="page-col" style="text-align: right;">p. ix</td>
+              </tr>
+              <tr>
+                <td><strong>第1章</strong></td>
+                <td>序論：フォーマル組織の概念と研究手法</td>
+                <td>Introduction: Concept, Study &amp; Methods</td>
+                <td class="page-col" style="text-align: right;">pp. 1–26</td>
+              </tr>
+              <tr>
+                <td><strong>第2章</strong></td>
+                <td>フォーマル組織の性質と類型（Cui Bono 4類型論）</td>
+                <td>The Nature and Types of Formal Organizations</td>
+                <td class="page-col" style="text-align: right;">pp. 27–58</td>
+              </tr>
+              <tr>
+                <td><strong>第3章</strong></td>
+                <td>組織とその公衆（専門職志向 vs 官僚制志向）</td>
+                <td>The Organization and Its Publics</td>
+                <td class="page-col" style="text-align: right;">pp. 59–86</td>
+              </tr>
+              <tr>
+                <td><strong>第4章</strong></td>
+                <td>作業集団の社会構造（インフォーマル組織と規範）</td>
+                <td>The Social Structure of Work Groups</td>
+                <td class="page-col" style="text-align: right;">pp. 87–115</td>
+              </tr>
+              <tr>
+                <td><strong>第5章</strong></td>
+                <td>二つの福祉事務所の実証分析（相談行動と業績）</td>
+                <td>Two Welfare Agencies: Communication &amp; Performance</td>
+                <td class="page-col" style="text-align: right;">pp. 116–139</td>
+              </tr>
+              <tr>
+                <td><strong>第6章</strong></td>
+                <td>コミュニケーションと同僚関係</td>
+                <td>Communication and Peer Relations</td>
+                <td class="page-col" style="text-align: right;">pp. 140–158</td>
+              </tr>
+              <tr>
+                <td><strong>第7章</strong></td>
+                <td>階層関係と同僚関係（社会的距離・権威・調整）</td>
+                <td>Hierarchical and Peer Relations</td>
+                <td class="page-col" style="text-align: right;">pp. 159–193</td>
+              </tr>
+              <tr>
+                <td><strong>第8章</strong></td>
+                <td>組織の動態と発展（規模・分化・管理比率の実証）</td>
+                <td>Organizational Dynamics and Development</td>
+                <td class="page-col" style="text-align: right;">pp. 194–230</td>
+              </tr>
+              <tr>
+                <td><strong>第9章</strong></td>
+                <td>結論：組織の発展と構造的ジレンマ</td>
+                <td>Conclusions: Organizational Development</td>
+                <td class="page-col" style="text-align: right;">pp. 231–254</td>
+              </tr>
+              <tr>
+                <td><strong>文献</strong></td>
+                <td>参考文献目録</td>
+                <td>Bibliography</td>
+                <td class="page-col" style="text-align: right;">pp. 255–303</td>
+              </tr>
+              <tr>
+                <td><strong>索引</strong></td>
+                <td>主題・人名索引</td>
+                <td>Index of Names and Topics</td>
+                <td class="page-col" style="text-align: right;">pp. 304–312</td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </section>
+
+      <!-- Chapter V: Selected Readings -->
+      <section class="chapter-section">
+        <div class="chapter-header">
+          <div class="chapter-num">Chapter V</div>
+          <h2 class="chapter-title">主要章の精選テキスト（日英完全対訳）</h2>
+        </div>
+        <p class="prose" style="color: var(--text-muted); margin-bottom: 28px;">
+          画面右上の「日本語」「English」「対訳」ボタンにより、読解形式を自由に切り替えることができる。
+        </p>
+
+        <!-- Entry 1 -->
+        <article id="entry-1" class="reading-entry searchable-block">
+          <div class="entry-header">
+            <h3 class="entry-title">抜粋I：階層関係と同僚関係（社会的距離のメカニズム）</h3>
+            <span class="entry-page-ref">Chapter VII, pp. 159–160</span>
+          </div>
+
+          <div class="bilingual-columns">
+            <div class="paper-sheet col-ja">
+              <span class="sheet-label">学術和訳</span>
+              <div class="quote-content">
+                <p><strong>【階層関係と同僚関係：仮説の検証】</strong></p>
+                <p>
+                  フォーマル組織の領域における先行研究の多くは、これら社会システムが有する二つの異なる側面を強調してきた。すなわち、<strong>異なる階層レベルに位置する個人および集団間の関係における非人格性（impersonality）と感情的超然さ（emotional detachment）、ならびに同一組織レベルに位置する同僚間の結束性とインフォーマルな関係性</strong>である。
+                </p>
+                <p>
+                  この差異は、同僚集団の結束性と、<strong>階層間の社会的距離（hierarchical social distance）</strong>との間に因果的連関が存在する可能性を示唆している。したがって、次の仮説を提示しうる：同僚集団内において強固な社会的統合を享受している管理者は、そうでない管理者に比べて、部下との関係においてより非人格的かつ超然的（距離を置いた態度）となる。
+                </p>
+                <p>
+                  なぜなら、同僚集団からの支持を得ている上司は、自らの部下からの支持を懇願・迎合する必要性が排除され、より超然とした態度を保つことが可能となるためである。
+                </p>
+              </div>
+            </div>
+
+            <div class="paper-sheet col-en">
+              <span class="sheet-label">Original English</span>
+              <div class="quote-content">
+                <p><strong>HIERARCHICAL AND PEER RELATIONS: Testing a Hypothesis</strong></p>
+                <p>
+                  Much of the work done in the field of formal organizations emphasizes two different facets of these social systems: <strong>the impersonality and emotional detachment of relations between individuals and groups on different hierarchical levels</strong>, and the cohesiveness and informality of relations among peers on the same organizational level.
+                </p>
+                <p>
+                  This difference suggests a possible causal link between peer-group cohesion and <strong>hierarchical social distance</strong>. The following hypothesis may thus be offered: an official who enjoys social integration among his peers will be more impersonal and detached in his relations with subordinates than one who does not.
+                </p>
+                <p>
+                  For peer-group support allows the superior to be more detached by obviating the need for courting the support of his subordinates. To test this hypothesis, we used data from both welfare agencies.
+                </p>
+              </div>
+            </div>
+          </div>
+        </article>
+
+        <!-- Entry 2 -->
+        <article id="entry-2" class="reading-entry searchable-block">
+          <div class="entry-header">
+            <h3 class="entry-title">抜粋II：階層的調整とコミュニケーションの歪曲（情報遮断の病理）</h3>
+            <span class="entry-page-ref">Chapters VII &amp; IX, pp. 172–173, 242–244</span>
+          </div>
+
+          <div class="bilingual-columns">
+            <div class="paper-sheet col-ja">
+              <span class="sheet-label">学術和訳</span>
+              <div class="quote-content">
+                <p><strong>【全体調整と自由なコミュニケーションのジレンマ】</strong></p>
+                <p>
+                  フォーマル組織における根源的なジレンマの一つは、<strong>「全体的調整（coordination）」と「自由なコミュニケーション（communication）」という相反する二つの要請</strong>から生じる。専門分化された諸活動を効果的に調整するためには、意思決定が中央集権化された階層的権威構造が不可欠となる。
+                </p>
+                <p>
+                  しかしながら、このような階層的権威構造は、コミュニケーション、とりわけ<strong>下位階層から上位階層へと向かう上方向の自由な情報流通を著しく制限し、歪曲（distort）させる傾向</strong>を持つ。部下は、自らの業務遂行に不利な影響を及ぼす情報や、上司の機嫌を損ねる恐れのある情報を上位層へ報告することを本能的に躊躇する。
+                </p>
+                <p>
+                  その結果、<strong>階層段数の多い（tall hierarchy）組織の上位層は、現場の業務実態に関して、過度に楽観的かつ都合よく選別・濾過された情報を受け取ることになる</strong>。階層構造は組織の調整課題を解決する一方で、信頼性の高い上方フィードバックに対して深刻な障壁を形成し、各階層間に社会的・認知的距離をもたらすのである。
+                </p>
+              </div>
+            </div>
+
+            <div class="paper-sheet col-en">
+              <span class="sheet-label">Original English</span>
+              <div class="quote-content">
+                <p><strong>The Dilemma of Coordination and Free Communication</strong></p>
+                <p>
+                  A fundamental dilemma in formal organizations stems from the conflicting requirements of coordination and communication. Effective coordination of differentiated activities requires a <strong>hierarchical authority structure with centralized decision making</strong>.
+                </p>
+                <p>
+                  Such an authority structure, however, tends to <strong>restrict and distort the free flow of communication, particularly upward communication from subordinates to superiors</strong>. Subordinates are naturally reluctant to communicate information that reflects unfavorably upon their own performance or that might displease their superiors.
+                </p>
+                <p>
+                  Consequently, <strong>the higher echelons of a tall hierarchy often receive an overly optimistic and filtered picture of operating reality at the bottom</strong>. While hierarchy solves the problem of coordination, it creates severe obstacles to reliable upward feedback, creating social and cognitive distance between organizational levels.
+                </p>
+              </div>
+            </div>
+          </div>
+        </article>
+
+        <!-- Entry 3 -->
+        <article id="entry-3" class="reading-entry searchable-block">
+          <div class="entry-header">
+            <h3 class="entry-title">抜粋III：組織規模、複雑性、および管理機構の形成</h3>
+            <span class="entry-page-ref">Chapter VIII, pp. 223–225</span>
+          </div>
+
+          <div class="bilingual-columns">
+            <div class="paper-sheet col-ja">
+              <span class="sheet-label">学術和訳</span>
+              <div class="quote-content">
+                <p>
+                  フォーマル組織は、その規模（size）および複雑性（complexity）において、現代の大規模軍隊から未開部族の漁撈隊に至るまで多種多様である。
+                </p>
+                <p>
+                  より大規模で複雑なフォーマル組織が現代の組織研究者にとって特別の関心の対象となるのは、<strong>組織の規模と複雑性の増大に伴って発達する傾向のある官僚制機構（bureaucratic apparatus）によって特有の諸問題が提起されるため</strong>である。
+                </p>
+                <p>
+                  マックス・ウェーバーによれば、官僚制機構の典型的特徴には以下の要素が含まれる：
+                  <br>1. 専門化された管轄範囲と権能に基づく分業（division of work）
+                  <br>2. 階層的権威構造（hierarchical authority structure）
+                  <br>3. 業務執行を規律する一般規則および規程（general rules and regulations）
+                  <br>4. 公務の決定から私的情実を排除するための非人格的超然さの重視（impersonal detachment）
+                </p>
+                <p>
+                  専門分化（Specialization）は、通常、すでに階層的分化（hierarchical differentiation）によって特徴づけられている組織においてのみ進化する。組織がその内部構造においてより複雑かつ分化（differentiated）していくにつれて、固有の組織原理を備えた比較的自律的なサブシステムを形成するのである。
+                </p>
+              </div>
+            </div>
+
+            <div class="paper-sheet col-en">
+              <span class="sheet-label">Original English</span>
+              <div class="quote-content">
+                <p>
+                  Formal organizations vary in size and complexity from a modern army at one extreme to the collectively organized recurrent fishing expeditions found in nonliterate tribes at the other.
+                </p>
+                <p>
+                  To be sure, the larger and more complex formal organizations are of special interest to students of contemporary social organization... partly because <strong>special problems are often posed by the bureaucratic apparatus that tends to develop with increasing organizational size and complexity</strong>.
+                </p>
+                <p>
+                  The typical characteristics of such bureaucratic machinery, according to Weber, include <strong>the division of work into areas of specialized jurisdiction and competence; a hierarchical authority structure; general rules and regulations that govern operations; and an emphasis on impersonal detachment</strong> designed to eliminate personal considerations from official decisions.
+                </p>
+                <p>
+                  Specialization typically evolves only in organizations already characterized by hierarchical differentiation... As organizations become more complex and differentiated in internal structure they form relatively autonomous subsystems with their own principles of organization.
+                </p>
+              </div>
+            </div>
+          </div>
+        </article>
+
+        <!-- Entry 4 -->
+        <article id="entry-4" class="reading-entry searchable-block">
+          <div class="entry-header">
+            <h3 class="entry-title">抜粋IV：組織規模と管理比率（パーキンソンの法則の実証的検証）</h3>
+            <span class="entry-page-ref">Chapter VIII, pp. 225–227</span>
+          </div>
+
+          <div class="bilingual-columns">
+            <div class="paper-sheet col-ja">
+              <span class="sheet-label">学術和訳</span>
+              <div class="quote-content">
+                <p><strong>【官僚制化と組織規模の実証データ】</strong></p>
+                <p>
+                  構造的成長は、その本質上、複雑性の増大を伴う。組織がより大規模かつ複雑になるにつれて生じる最も重要な変化の一つは、管理機構（administrative apparatus）の発展である。
+                </p>
+                <p>
+                  一般には「大規模組織は過度に官僚制化しやすい」、すなわち「組織規模の増大は管理部門比率の不均衡な増大を伴う」と広く信じられている（パーキンソンの法則）。しかしながら、<strong>実証的な証拠はこの通念を支持していない</strong>。
+                </p>
+                <p>
+                  小規模企業を除けば、<strong>規模の増大は管理職員の比率の増大とは相関しない</strong>。ベーカーとデイビス（Baker &amp; Davis）の研究では組織規模と管理職員比率に関連はなく、メルマン（Melman）やベンディクス（Bendix）のデータでは、<strong>規模と管理比率との間にむしろ負の相関（逆相関）</strong>が確認された。
+                </p>
+                <p>
+                  結論として、大規模組織は不均衡に巨大な管理機構を抱えるわけではない。組織規模は「複雑性（complexity）」と相関し、複雑性が高いほど管理比率が高くなる。したがって、<strong>複雑性を一定に統制した場合、組織規模そのものは管理スタッフの相対比率とむしろ負の相関（規模の経済性）を示す</strong>のである。
+                </p>
+              </div>
+            </div>
+
+            <div class="paper-sheet col-en">
+              <span class="sheet-label">Original English</span>
+              <div class="quote-content">
+                <p><strong>Bureaucratization, Size, and Administrative Ratio</strong></p>
+                <p>
+                  Structural growth by its very nature involves increasing complexity... One of the most important changes that occurs as organizations become larger and more complex is the development of an administrative apparatus.
+                </p>
+                <p>
+                  It is widely assumed that large organizations tend to be overbureaucratized, that is, that an increase in organizational size is accompanied by a disproportionate increase in administrative overhead; <strong>but the evidence does not support this assumption</strong>.
+                </p>
+                <p>
+                  Except for small firms, however, <strong>increases in size are not associated with increases in the proportion of administrative personnel</strong>. A study of 211 manufacturing firms by Baker &amp; Davis found no relation. Melman's and Bendix's data even reveal an <strong>inverse relation between size and proportion of administrative personnel</strong>.
+                </p>
+                <p>
+                  The conclusions that emerge are that large organizations do not typically have disproportionately large administrative machineries; that size tends to be directly related to complexity; and that <strong>the size of an organization, particularly if complexity is held constant, may actually be inversely related to the relative size of its administrative staff</strong>.
+                </p>
+              </div>
+            </div>
+          </div>
+        </article>
+
+      </section>
+
+    </main>
+  </div>
+
+  <!-- Mobile Bottom Drawer -->
+  <div class="mobile-overlay" id="mobileOverlay"></div>
+  <div class="mobile-drawer" id="mobileDrawer">
+    <div class="drawer-top">
+      <span style="font-family: var(--font-display); font-size: 0.95rem; font-weight: 700; letter-spacing: 0.1em;">INDEX / 目次</span>
+      <button class="btn-icon-classic" id="btnCloseDrawer">閉じる</button>
+    </div>
+    <ul class="toc-list">
+      <li><a href="#overview" class="toc-link drawer-item">I. 学術的意義と背景</a></li>
+      <li><a href="#dilemmas" class="toc-link drawer-item">II. 組織の3大構造的ジレンマ</a></li>
+      <li><a href="#cui-bono" class="toc-link drawer-item">III. Cui Bono 4類型論</a></li>
+      <li><a href="#toc-full" class="toc-link drawer-item">IV. 全章・節の目次体系</a></li>
+      <li><a href="#entry-1" class="toc-link drawer-item">V. 階層関係と社会的距離 (p.159)</a></li>
+      <li><a href="#entry-2" class="toc-link drawer-item">VI. 調整と情報の歪曲 (p.172)</a></li>
+      <li><a href="#entry-3" class="toc-link drawer-item">VII. 規模と官僚制機構 (p.223)</a></li>
+      <li><a href="#entry-4" class="toc-link drawer-item">VIII. 規模と管理比率の実証 (p.225)</a></li>
+    </ul>
+  </div>
+
+  <!-- Footer -->
+  <footer>
+    <div style="max-width: var(--content-width); margin: 0 auto;">
+      <p style="font-family: var(--font-display); letter-spacing: 0.1em; color: var(--text); font-weight: 700;">
+        FORMAL ORGANIZATIONS: A COMPARATIVE APPROACH
+      </p>
+      <div class="footer-rule"></div>
+      <p style="font-family: var(--font-serif-en); font-style: italic; margin-bottom: 6px;">
+        Peter M. Blau &amp; W. Richard Scott (1962) &bull; Chandler Publishing Company
+      </p>
+      <p style="font-size: 0.8rem; color: var(--text-soft);">
+        底本：東京大学東洋文化研究所図書印蔵書 &bull; 本学術サイトは研究メンバー共有を目的とした完全静的モノグラフ版です。
+      </p>
+    </div>
+  </footer>
+
+  <!-- Clean Vanilla Script -->
+  <script>
+    // 1. Language Toggle
+    const langButtons = document.querySelectorAll('[data-setlang]');
+    const rootBody = document.body;
+
+    langButtons.forEach(btn => {
+      btn.addEventListener('click', () => {
+        langButtons.forEach(b => b.classList.remove('active'));
+        btn.classList.add('active');
+        const langMode = btn.getAttribute('data-setlang');
+        rootBody.setAttribute('data-lang', langMode);
+        localStorage.setItem('blau_lang_mode', langMode);
+      });
+    });
+
+    const storedLang = localStorage.getItem('blau_lang_mode');
+    if (storedLang) {
+      const activeBtn = document.querySelector(`[data-setlang="${storedLang}"]`);
+      if (activeBtn) activeBtn.click();
+    }
+
+    // 2. Classical Theme Toggle
+    const btnTheme = document.getElementById('btnTheme');
+    btnTheme.addEventListener('click', () => {
+      const cur = rootBody.getAttribute('data-theme');
+      const nxt = cur === 'dark' ? 'light' : 'dark';
+      rootBody.setAttribute('data-theme', nxt);
+      localStorage.setItem('blau_theme_mode', nxt);
+    });
+
+    const storedTheme = localStorage.getItem('blau_theme_mode');
+    if (storedTheme) {
+      rootBody.setAttribute('data-theme', storedTheme);
+    }
+
+    // 3. Font Scale Toggle
+    const btnFont = document.getElementById('btnFont');
+    const fontScales = ['16px', '17.5px', '19px'];
+    let scaleIndex = 0;
+    btnFont.addEventListener('click', () => {
+      scaleIndex = (scaleIndex + 1) % fontScales.length;
+      document.documentElement.style.fontSize = fontScales[scaleIndex];
+    });
+
+    // 4. Mobile Drawer
+    const btnMobileMenu = document.getElementById('btnMobileMenu');
+    const mobileOverlay = document.getElementById('mobileOverlay');
+    const mobileDrawer = document.getElementById('mobileDrawer');
+    const btnCloseDrawer = document.getElementById('btnCloseDrawer');
+
+    function openMobile() {
+      mobileOverlay.style.display = 'block';
+      setTimeout(() => mobileDrawer.classList.add('open'), 10);
+    }
+    function closeMobile() {
+      mobileDrawer.classList.remove('open');
+      setTimeout(() => { mobileOverlay.style.display = 'none'; }, 250);
+    }
+
+    btnMobileMenu.addEventListener('click', openMobile);
+    btnCloseDrawer.addEventListener('click', closeMobile);
+    mobileOverlay.addEventListener('click', closeMobile);
+
+    document.querySelectorAll('.drawer-item').forEach(item => {
+      item.addEventListener('click', closeMobile);
+    });
+
+    // 5. ScrollSpy
+    const spyTargets = document.querySelectorAll('section[id], article[id]');
+    const sideLinks = document.querySelectorAll('.sidebar .toc-link');
+
+    window.addEventListener('scroll', () => {
+      let activeSectionId = '';
+      const pos = window.scrollY + 100;
+
+      spyTargets.forEach(tgt => {
+        const top = tgt.offsetTop;
+        const h = tgt.offsetHeight;
+        if (pos >= top && pos < top + h) {
+          activeSectionId = tgt.getAttribute('id');
+        }
+      });
+
+      if (activeSectionId) {
+        sideLinks.forEach(lnk => {
+          lnk.classList.remove('active');
+          if (lnk.getAttribute('href') === `#${activeSectionId}`) {
+            lnk.classList.add('active');
+          }
+        });
+      }
+    }, { passive: true });
+
+    // 6. Incremental Search Filter
+    const searchField = document.getElementById('searchInput');
+    const searchBlocks = document.querySelectorAll('.searchable-block, .dilemma-block, .cui-box');
+
+    searchField.addEventListener('input', (evt) => {
+      const term = evt.target.value.trim().toLowerCase();
+      if (!term) {
+        searchBlocks.forEach(blk => {
+          blk.style.display = '';
+          blk.style.opacity = '1';
+        });
+        return;
+      }
+
+      searchBlocks.forEach(blk => {
+        const content = blk.textContent.toLowerCase();
+        if (content.includes(term)) {
+          blk.style.display = '';
+          blk.style.opacity = '1';
+        } else {
+          blk.style.opacity = '0.2';
+        }
+      });
+    });
+  </script>
+</body>
+</html>

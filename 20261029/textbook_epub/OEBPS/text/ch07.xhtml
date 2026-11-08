@@ -1,0 +1,77 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:epub="http://www.idpf.org/2007/ops" xml:lang="ja" lang="ja">
+<head>
+  <meta charset="utf-8" />
+  <title>第7章: 共分散構造分析(SEM)と測定妥当性</title>
+  <link rel="stylesheet" type="text/css" href="../styles/stylesheet.css" />
+</head>
+<body>
+
+<div class="chapter-start">
+  <div class="chapter-number">CHAPTER 07</div>
+  <h2 class="chapter-title">目に見えない概念を測る物差しを磨く — 共分散構造分析（SEM）と確認的因子分析（CFA）</h2>
+  <p class="chapter-lead">「DX疲れ」や「納得感」に直接あてられる定規はない。測定誤差を直視し、概念の信頼性と妥当性を丁寧に積み重ねる。</p>
+
+  <h3 class="subhead">1. 潜在変数（Latent Variable）という考え方</h3>
+  <p>
+    身長や体重であれば物理的な測定器で測ることができます。しかし、「組織変革に対する心理的不安」や「手続きへの納得感」を直接測る定規は存在しません。これらは人々の内面に存在する <strong>目に見えない構成概念（潜在変数）</strong> だからです。
+  </p>
+  <p>
+    そこで研究では、関連する複数の質問項目（観測変数）を慎重に設計し、回答者たちの回答の共分散（重なり合い）から、背後にある潜在概念を間接的に推計します。この「物差しの確かさ（測定モデル）」と「概念同士の関係性（構造モデル）」を同時に解明する統計手法が <strong>共分散構造分析（SEM: Structural Equation Modeling）</strong> です。
+  </p>
+
+  <h3 class="subhead">2. 測定の信頼性と妥当性を支える「3つの関門」</h3>
+  <p>
+    どれほど精緻な因果モデルを組み立てても、使用している物差しが歪んでいては信頼できる知見は得られません。先行研究（Colquitt 2001, Herscovitch &amp; Meyer 2002 等）でも重視されている以下の3つの基準を通じて、測定の質を厳密に点検します。
+  </p>
+
+  <table class="epub-table">
+    <thead>
+      <tr>
+        <th style="width: 25%;">判定基準</th>
+        <th style="width: 40%;">意味と基準値</th>
+        <th style="width: 35%;">直感的な理解</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><strong>① 合成信頼性<br />(CR: Composite Reliability)</strong></td>
+        <td><strong>基準: CR ≥ 0.70</strong><br />同じ概念を測る複数の設問が、ブレずに整合して機能しているか（内的整合性）。</td>
+        <td>同じ対象を何度測ってもブレの少ない、安定した測定器であること。</td>
+      </tr>
+      <tr>
+        <td><strong>② 平均分散抽出量<br />(AVE: Average Variance Extracted)</strong></td>
+        <td><strong>基準: AVE ≥ 0.50</strong><br />設問の情報量のうち、半分以上が測定誤差ではなく測りたい概念そのものを捉えているか。</td>
+        <td>シグナルが測定ノイズを確実に上回っていることの確認。</td>
+      </tr>
+      <tr>
+        <td><strong>③ 弁別妥当性<br />(HTMT比 / Fornell-Larcker)</strong></td>
+        <td><strong>基準: HTMT &lt; 0.85</strong><br />「DXへの不安」と「会社への不満」という異なる2つの概念が、混同されずに独立して測定できているか。</td>
+        <td>異なる2つの概念が、混ざり合わずに区別されていること。</td>
+      </tr>
+    </tbody>
+  </table>
+
+  <h3 class="subhead">3. モデル適合度指標: データと仮説の調和を見つめる指標</h3>
+  <p>
+    SEMを実行すると、構築した仮説モデルが実際のデータとどれほど調和しているかを示す複数の適合度指標が出力されます。これらを総合的に観察することで、モデルの妥当性を評価します。
+  </p>
+  <ul>
+    <li><strong>CFI (Comparative Fit Index) ≥ 0.90 (推奨は 0.95以上)</strong> — 適合度指数。1.0に近いほど良好。</li>
+    <li><strong>TLI (Tucker-Lewis Index) ≥ 0.90</strong> — モデルの簡潔さを考慮した適合度。</li>
+    <li><strong>RMSEA (Root Mean Square Error of Approximation) ≤ 0.08 (推奨は 0.05以下)</strong> — 近似誤差の平方根。小さいほど誤差が少ない。</li>
+    <li><strong>SRMR (Standardized Root Mean Residual) ≤ 0.08</strong> — 残差の標準化平均。</li>
+  </ul>
+
+  <div class="defense-box">
+    <div class="defense-role">💬 学術的対話のための討議ノート</div>
+    <p><strong>想定される問いかけ:</strong> 「設問の合計点や単純平均を用いて回帰分析を行うのではなく、SEMやCFAを採用した理由は何ですか？」</p>
+    <p><strong>討議の視点と回答方針:</strong><br />
+    「設問の単純合計や平均値を用いて回帰分析を行うと、設問ごとに含まれる測定誤差（Measurement Error）が無視され、回帰係数が過小推定される減衰バイアスが生じる恐れがあります。<br />
+    本分析では確認的因子分析（CFA）によって合成信頼性（CR ≥ 0.70）や収束妥当性（AVE ≥ 0.50）を個別に確認し、測定誤差を明示的に分離した上で共分散構造分析（SEM）を行いました。モデル適合度も CFI = 0.952, RMSEA = 0.043 と良好であり、潜在概念間の関係性をより純度の高い形で検証しております。」</p>
+  </div>
+</div>
+
+</body>
+</html>

@@ -1,0 +1,193 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>文献保存箇所・引用箇所 完全名寄せ＆過不足監査マッピング台帳</title>
+  <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+JP:wght@400;500;700;900&family=Roboto+Mono:wght@400;600&display=swap" rel="stylesheet">
+  <style>
+    :root {
+      --dads-primary: #005BAC;
+      --dads-secondary: #00838F;
+      --dads-success: #228543;
+      --dads-warning: #E65100;
+      --dads-bg-subtle: #F8F9FA;
+      --dads-border: #DDE2E5;
+      --dads-text: #1A1A1A;
+      --radius: 8px;
+    }
+    body {
+      font-family: 'Noto Sans JP', sans-serif;
+      background: var(--dads-bg-subtle);
+      color: var(--dads-text);
+      line-height: 1.6;
+      padding-bottom: 60px;
+      margin: 0;
+    }
+    header {
+      background: linear-gradient(135deg, var(--dads-primary), #003B70);
+      color: #FFF;
+      padding: 32px 20px;
+      border-bottom: 4px solid var(--dads-secondary);
+    }
+    .container {
+      max-width: 1200px;
+      margin: 24px auto;
+      padding: 0 20px;
+    }
+    .summary-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+      gap: 16px;
+      margin-bottom: 24px;
+    }
+    .stat-card {
+      background: #FFF;
+      padding: 20px;
+      border-radius: var(--radius);
+      box-shadow: 0 2px 6px rgba(0,0,0,0.06);
+      border-left: 6px solid var(--dads-primary);
+    }
+    .stat-num {
+      font-size: 28px;
+      font-weight: 900;
+      color: var(--dads-primary);
+    }
+    .table-container {
+      background: #FFF;
+      padding: 24px;
+      border-radius: var(--radius);
+      box-shadow: 0 2px 6px rgba(0,0,0,0.06);
+      overflow-x: auto;
+    }
+    table {
+      width: 100%;
+      border-collapse: collapse;
+      font-size: 14px;
+    }
+    th, td {
+      padding: 12px 14px;
+      border-bottom: 1px solid var(--dads-border);
+      text-align: left;
+    }
+    th {
+      background: #F1F3F5;
+      font-weight: 700;
+      color: #333;
+    }
+    tr:hover {
+      background: #F8F9FA;
+    }
+    .badge {
+      display: inline-block;
+      padding: 3px 8px;
+      border-radius: 12px;
+      font-size: 12px;
+      font-weight: 700;
+    }
+    .badge-a { background: #E8F5E9; color: #1B5E20; }
+    .badge-b { background: #FFF3E0; color: #E65100; }
+    .badge-c { background: #E3F2FD; color: #0D47A1; }
+    .search-box {
+      margin-bottom: 16px;
+      padding: 12px;
+      width: 100%;
+      border: 2px solid var(--dads-border);
+      border-radius: 6px;
+      font-size: 15px;
+      box-sizing: border-box;
+    }
+  </style>
+</head>
+<body>
+  <header>
+    <div class="container" style="margin:0 auto; padding:0;">
+      <h1 style="font-size:26px; margin-bottom:8px;">文献保存箇所・引用箇所 完全名寄せ＆過不足監査マッピング台帳</h1>
+      <p style="opacity:0.9; font-size:14px;">本文確定版（24編）× 手元PDF（全70ファイル）× Excel真正台帳の完全三者突合と過不足判定</p>
+    </div>
+  </header>
+
+  <div class="container">
+    <div class="summary-grid">
+      <div class="stat-card" style="border-left-color: var(--dads-success);">
+        <div style="font-weight:700; color:#1B5E20;">🟢 グループA：完全充足群</div>
+        <div class="stat-num" style="color:#1B5E20;">8 編</div>
+        <div style="font-size:13px; color:#555;">本文引用あり ＆ 手元実体PDF完全保有（Colquitt, Vial, Huy, IPA, 経産省, Blau&Scott等）</div>
+      </div>
+      <div class="stat-card" style="border-left-color: var(--dads-warning);">
+        <div style="font-weight:700; color:#E65100;">🟡 グループB：本文引用・PDF未配置</div>
+        <div class="stat-num" style="color:#E65100;">16 編</div>
+        <div style="font-size:13px; color:#555;">本文引用あり（単行文書籍7編 ＋ 大学電子版論文9編）。要約・数理モデルはDBに完全収録。</div>
+      </div>
+      <div class="stat-card" style="border-left-color: var(--dads-primary);">
+        <div style="font-weight:700; color:var(--dads-primary);">🔵 グループC：査読迎撃エビデンス</div>
+        <div class="stat-num">18 編</div>
+        <div style="font-size:13px; color:#555;">手元実体PDFあり（SME実証14編＋メタ分析等）。本文には未直接引用だが査読防衛シールドとして機能。</div>
+      </div>
+    </div>
+
+    <input type="text" id="searchInput" class="search-box" placeholder="キーワード検索（著者名、タイトル、グループ、ファイル名...）" oninput="filterTable()">
+
+    <div class="table-container">
+      <table id="mappingTable">
+        <thead>
+          <tr>
+            <th>区分グループ</th>
+            <th>文献ID</th>
+            <th>文献キー・著者</th>
+            <th>タイトル / カテゴリ</th>
+            <th>本文引用状況</th>
+            <th>手元PDF保存場所</th>
+            <th>Excel台帳位置</th>
+          </tr>
+        </thead>
+        <tbody id="tableBody"></tbody>
+      </table>
+    </div>
+  </div>
+
+  <script>
+    const DATA = [{"id": "REF-05", "key": "Besson & Rowe (2012)", "author": "Besson, P., & Rowe, F.", "year": "2012", "title": "Strategizing information systems-enabled organizational transformation", "category": "IS組織変革論（JSIS）", "group": "A: 本文引用＆PDFあり (完全充足)", "in_draft": "✔ 引用あり（第1章、第6章、参考文献リスト）", "pdf_location": "citation/Besson, P., & Rowe, F..pdf (360.6 KB)", "excel_sheet": "【真正検証済】投稿論文引用リスト No.03 / 要約和訳DB REF-03", "note": "一次資料PDF本文確認済。IS変革における組織的慣性の理論的支柱。"}, {"id": "REF-06", "key": "Colquitt (2001)", "author": "Colquitt, J. A.", "year": "2001", "title": "On the dimensionality of organizational justice: A construct validation of a measure", "category": "組織公正4次元モデル（JAP・金字塔）", "group": "A: 本文引用＆PDFあり (完全充足)", "in_draft": "✔ 引用あり（第1章、第2章、第5章、第6章、参考文献リスト）", "pdf_location": "citation/Colquitt_Dimensionality_of_Organizational_Justice.pdf (1.6 MB) / 20261009/papers_pdf/Colquitt_2001...", "excel_sheet": "【真正検証済】投稿論文引用リスト No.04 / 要約和訳DB REF-04", "note": "一次資料PDF本文確認済。分配・手続・対人・情報の4次元尺度モデル。"}, {"id": "REF-12", "key": "Huy (2002)", "author": "Huy, Q. N.", "year": "2002", "title": "Emotional balancing of organizational continuity and radical change", "category": "ミドル感情バランシング論（ASQ）", "group": "A: 本文引用＆PDFあり (完全充足)", "in_draft": "✔ 引用あり（第2章、第5章、第6章、参考文献リスト）", "pdf_location": "citation/Huy, Q. N..pdf (3.2 MB) / 20261009/papers_pdf/Huy_2002_Emotional_Balancing.pdf", "excel_sheet": "【真正検証済】投稿論文引用リスト No.09 / 要約和訳DB REF-09", "note": "一次資料PDF本文確認済。中間管理職の変革ハブ機能と感情調整。"}, {"id": "REF-13", "key": "情報処理推進機構 (IPA) (2023)", "author": "情報処理推進機構 (IPA)", "year": "2023", "title": "DX白書2023：進む変革、進まぬ変革", "category": "公的白書・日本企業DX実態調査", "group": "A: 本文引用＆PDFあり (完全充足)", "in_draft": "✔ 引用あり（第1章、第6章、参考文献リスト）", "pdf_location": "citation/独立行政法人情報処理推進機構 (IPA)（2023）.pdf (17.8 MB) / 20261009/papers_pdf/IPA_2023...", "excel_sheet": "【真正検証済】投稿論文引用リスト No.10 / 理論基盤文献＆公的白書 PUB-01", "note": "公的PDF完全保有。日米企業比較マクロデータ。"}, {"id": "REF-14", "key": "Kane et al. (2015)", "author": "Kane, G. C., Palmer, D., et al.", "year": "2015", "title": "Strategy, not technology, drives digital transformation", "category": "DX戦略・組織文化論（MIT Sloan）", "group": "A: 本文引用＆PDFあり (完全充足)", "in_draft": "✔ 引用あり（第1章、第6章、参考文献リスト）", "pdf_location": "citation/Kane, G. C., Palmer, D., Phillips, A. N., Kiron, D., & Buckley, N..pdf (809.8 KB)", "excel_sheet": "【真正検証済】投稿論文引用リスト No.11 / 要約和訳DB REF-11", "note": "一次資料PDF本文確認済。世界4,800名調査。"}, {"id": "REF-15", "key": "経済産業省 (2018)", "author": "経済産業省", "year": "2018", "title": "DXレポート：ITシステム「2025年の崖」克服とDXの本格的な展開", "category": "公的報告書・DX定義とレガシー課題", "group": "A: 本文引用＆PDFあり (完全充足)", "in_draft": "✔ 引用あり（第1章、第6章、参考文献リスト）", "pdf_location": "citation/経済産業省(2018).pdf (2.1 MB) / 経済産業省（2020）.pdf / 経済産業省(2021).pdf", "excel_sheet": "【真正検証済】投稿論文引用リスト No.12 / 理論基盤文献＆公的白書 PUB-02", "note": "公的PDF完全保有。2025年の崖問題。"}, {"id": "REF-24", "key": "Vial (2019)", "author": "Vial, G.", "year": "2019", "title": "Understanding digital transformation: A review and a research agenda", "category": "DX包括的枠組み・構造的抵抗論（JSIS）", "group": "A: 本文引用＆PDFあり (完全充足)", "in_draft": "✔ 引用あり（第1章、第2章、第6章、参考文献リスト）", "pdf_location": "citation/Vial, G..pdf (1.3 MB)", "excel_sheet": "【真正検証済】投稿論文引用リスト No.19 / 要約和訳DB REF-19", "note": "一次資料PDF本文確認済。282編レビュー、組織的抵抗アジェンダ。"}, {"id": "REF-EXTRA-01", "key": "Blau & Scott (1962)", "author": "Blau, P. M., & Scott, W. R.", "year": "1962", "title": "Formal organizations: A comparative approach", "category": "比較組織論の古典名著", "group": "A: 本文引用＆PDFあり (完全充足)", "in_draft": "✔ 引用あり（第2章 組織構造論、防衛マスター）", "pdf_location": "20261028/papers_pdf/スキャン 2026_10_28 全14分冊 (計28.5 MB)", "excel_sheet": "理論基盤文献＆公的白書 CLS-06 / 20261028 OCR完全テキスト化済", "note": "公式組織と非公式組織の断絶。原本スキャン全章保有。"}, {"id": "REF-01", "key": "Adams (1965)", "author": "Adams, J. S.", "year": "1965", "title": "Inequity in social exchange", "category": "組織公正理論（古典・名著）", "group": "B: 本文引用あり・手元PDFなし (書籍章/未取得)", "in_draft": "✔ 引用あり（第2章、第6章、参考文献リスト）", "pdf_location": "❌ 手元PDF未配置（書籍の章: Adv Exp Soc Psychol, Vol.2）", "excel_sheet": "【教員依頼用】電子版取得リスト REQ-01 / 要約和訳DB REF-01", "note": "衡平理論。内容・主要数値はColquitt (2001)および防衛マスターに完全網羅。"}, {"id": "REF-02", "key": "Aiken & West (1991)", "author": "Aiken, L. S., & West, S. G.", "year": "1991", "title": "Multiple regression: Testing and interpreting interactions", "category": "統計解析・調整効果（方法論標準テキスト）", "group": "B: 本文引用あり・手元PDFなし (単行文書籍)", "in_draft": "✔ 引用あり（第3章、第5章、第6章、参考文献リスト）", "pdf_location": "❌ 手元PDF未配置（Sage出版 単行文書籍）", "excel_sheet": "【真正検証済】投稿論文引用リスト No.01 / 理論基盤文献 CLS-15", "note": "平均中心化と交互作用検定の数理標準。手法の手続きは本研究に完全実装済。"}, {"id": "REF-03", "key": "Armenakis et al. (1993)", "author": "Armenakis, A. A., et al.", "year": "1993", "title": "Creating readiness for organizational change", "category": "組織変革レディネス論（Human Relations）", "group": "B: 本文引用あり・手元PDFなし (未取得論文)", "in_draft": "✔ 引用あり（第2章、第6章、参考文献リスト）", "pdf_location": "❌ 手元PDF未配置（Human Relations）", "excel_sheet": "【真正検証済】投稿論文引用リスト No.02 / 要約和訳DB REF-02", "note": "レディネス5要素。Personal Valence（処遇期待）の概念的根拠。"}, {"id": "REF-04", "key": "Balogun & Johnson (2004)", "author": "Balogun, J., & Johnson, G.", "year": "2004", "title": "Organizational restructuring and middle manager sensemaking", "category": "ミドル・センスメイキング論（AMJ）", "group": "B: 本文引用あり・手元PDFなし (未取得論文)", "in_draft": "✔ 引用あり（第2章、第6章、参考文献リスト）", "pdf_location": "❌ 手元PDF未配置（Academy of Management Journal）", "excel_sheet": "【教員依頼用】電子版取得リスト REQ-04 / 要約和訳DB REF-05", "note": "日記法によるミドルの意味づけ。クラスタ2（摩擦直面層）の質的基盤。"}, {"id": "REF-07", "key": "Dean et al. (1998)", "author": "Dean, J. W., et al.", "year": "1998", "title": "Organizational cynicism", "category": "組織的シニシズム論（AMR）", "group": "B: 本文引用あり・手元PDFなし (未取得論文)", "in_draft": "✔ 引用あり（第2章、第6章、参考文献リスト）", "pdf_location": "❌ 手元PDF未配置（Academy of Management Review）", "excel_sheet": "【教員依頼用】電子版取得リスト REQ-06 / 要約和訳DB REF-06", "note": "シニシズムの3次元構造。クラスタ3（低当事者意識・高摩擦）の理論的根拠。"}, {"id": "REF-08", "key": "Festinger (1957)", "author": "Festinger, L.", "year": "1957", "title": "A theory of cognitive dissonance", "category": "認知的不協和理論（古典名著）", "group": "B: 本文引用あり・手元PDFなし (単行文書籍)", "in_draft": "✔ 引用あり（第2章、第6章、参考文献リスト）", "pdf_location": "❌ 手元PDF未配置（Stanford Univ Press 単行文書籍）", "excel_sheet": "【真正検証済】投稿論文引用リスト No.05 / 理論基盤文献 CLS-01", "note": "認知的不協和の解消行動。努力と処遇の矛盾による当事者意識放棄の根拠。"}, {"id": "REF-09", "key": "Folger (1977)", "author": "Folger, R.", "year": "1977", "title": "Distributive and procedural justice: Combined impact of voice", "category": "手続的公正・Voice理論（JPSP）", "group": "B: 本文引用あり・手元PDFなし (未取得論文)", "in_draft": "✔ 引用あり（第2章、第6章、参考文献リスト）", "pdf_location": "❌ 手元PDF未配置（JPSP論文。Colquitt et al. 2013内詳細引用照合済）", "excel_sheet": "【教員依頼用】電子版取得リスト REQ-02 / 要約和訳DB REF-07", "note": "Voice Effect（発言機会による緩衝効果）。仮説3の直接的実験根拠。"}, {"id": "REF-10", "key": "Greenberg (1990)", "author": "Greenberg, J.", "year": "1990", "title": "Organizational justice: Yesterday, today, and tomorrow", "category": "組織公正レビュー（JOM）", "group": "B: 本文引用あり・手元PDFなし (未取得論文)", "in_draft": "✔ 引用あり（第2章、第6章、参考文献リスト）", "pdf_location": "❌ 手元PDF未配置（Journal of Management）", "excel_sheet": "【真正検証済】投稿論文引用リスト No.07 / 要約和訳DB REF-08", "note": "給与カットと社内窃盗の自然実験。情報開示（情報的公正）の重要性。"}, {"id": "REF-11", "key": "Herscovitch & Meyer (2002)", "author": "Herscovitch, L., & Meyer, J. P.", "year": "2002", "title": "Commitment to organizational change: Extension of a three-component model", "category": "変革コミットメント論（JAP）", "group": "B: 本文引用あり・手元PDFなし (未取得論文)", "in_draft": "✔ 引用あり（第2章、第6章、参考文献リスト）", "pdf_location": "❌ 手元PDF未配置（Journal of Applied Psychology）", "excel_sheet": "【教員依頼用】電子版取得リスト REQ-03 / 要約和訳DB REF-10", "note": "情動的・継続的・規範的コミットメント3要素尺度。クラスタ1（牽引層）の基盤。"}, {"id": "REF-16", "key": "Kerzner (2018)", "author": "Kerzner, H.", "year": "2018", "title": "Project management best practices: Achieving global excellence", "category": "プロジェクトマネジメント論（Wiley）", "group": "B: 本文引用あり・手元PDFなし (単行文書籍)", "in_draft": "✔ 引用あり（第6章 結語・実務的提言、参考文献リスト）", "pdf_location": "❌ 手元PDF未配置（Wiley出版 単行文書籍）", "excel_sheet": "【真正検証済】投稿論文引用リスト No.13 / 理論基盤文献 CLS-14", "note": "PMO（推進機能）の組織的役割とステークホルダーマネジメント。"}, {"id": "REF-17", "key": "Leventhal (1980)", "author": "Leventhal, G. S.", "year": "1980", "title": "What should be done with equity theory? New approaches to fairness", "category": "手続的公正の6基準理論", "group": "B: 本文引用あり・手元PDFなし (書籍章/未取得)", "in_draft": "✔ 引用あり（第2章、第3章、第6章、参考文献リスト）", "pdf_location": "❌ 手元PDF未配置（Plenum Press 書籍章）", "excel_sheet": "【真正検証済】投稿論文引用リスト No.14 / 要約和訳DB REF-12", "note": "手続的公正を評価する6つの客観的ルール（一貫性、偏向排除、正確性等）。"}, {"id": "REF-18", "key": "Nonaka & Takeuchi (1995)", "author": "Nonaka, I., & Takeuchi, H.", "year": "1995", "title": "The knowledge-creating company", "category": "知識創造企業・ミドルアップダウン（古典名著）", "group": "B: 本文引用あり・手元PDFなし (単行文書籍)", "in_draft": "✔ 引用あり（第5章、第6章、参考文献リスト）", "pdf_location": "❌ 手元PDF未配置（Oxford Univ Press 単行文書籍）", "excel_sheet": "【真正検証済】投稿論文引用リスト No.15 / 理論基盤文献 CLS-07", "note": "ミドル・アップ・ダウン・マネジメント。中間管理職の知識変換と板挟み。"}, {"id": "REF-19", "key": "Pfeffer & Salancik (1978)", "author": "Pfeffer, J., & Salancik, G. R.", "year": "1978", "title": "The external control of organizations: A resource dependence perspective", "category": "資源依存理論（古典名著）", "group": "B: 本文引用あり・手元PDFなし (単行文書籍)", "in_draft": "✔ 引用あり（第2章、第6章、参考文献リスト）", "pdf_location": "❌ 手元PDF未配置（Harper & Row 単行文書籍）", "excel_sheet": "【真正検証済】投稿論文引用リスト No.16 / 理論基盤文献 CLS-08", "note": "組織内権力関係と資源交換。現場労働の動員と処遇インセンティブ。"}, {"id": "REF-20", "key": "Rizzo et al. (1970)", "author": "Rizzo, J. R., House, R. J., & Lirtzman, S. I.", "year": "1970", "title": "Role conflict and ambiguity in complex organizations", "category": "役割葛藤・曖昧性尺度（ASQ・古典）", "group": "B: 本文引用あり・手元PDFなし (未取得論文)", "in_draft": "✔ 引用あり（第2章、第6章、参考文献リスト）", "pdf_location": "❌ 手元PDF未配置（Administrative Science Quarterly）", "excel_sheet": "【真正検証済】投稿論文引用リスト No.17 / 要約和訳DB REF-15", "note": "役割葛藤尺度。SC21（組織摩擦指標）の心理測定論的基盤。"}, {"id": "REF-21", "key": "Siemsen et al. (2010)", "author": "Siemsen, E., Roth, A., & Oliveira, P.", "year": "2010", "title": "Common method bias in regression models with linear, quadratic, and interaction effects", "category": "共通方法バイアス数理証明（ORM）", "group": "B: 本文引用あり・手元PDFなし (未取得論文)", "in_draft": "✔ 引用あり（第5章、第6章、参考文献リスト）", "pdf_location": "❌ 手元PDF未配置（Organizational Research Methods）", "excel_sheet": "【真正検証済】投稿論文引用リスト No.18 / 要約和訳DB REF-17", "note": "CMB下で交互作用項が減衰する数理証明。本研究のCMB迎撃キラーシールド。"}, {"id": "REF-22", "key": "中小企業庁 (2022)", "author": "中小企業庁", "year": "2022", "title": "中小企業白書2022年版：新たな時代を切り拓く中小企業", "category": "公的白書・中小企業IT投資実態", "group": "B: 本文引用あり・手元PDFなし (公的白書/Web)", "in_draft": "✔ 引用あり（第1章、第5章、第6章、参考文献リスト）", "pdf_location": "❌ 手元PDF未配置（中小企業庁Web公開白書）", "excel_sheet": "【真正検証済】投稿論文引用リスト No.20 / 理論基盤文献＆公的白書 PUB-03", "note": "大企業・中小企業の生産性格差とDX躊躇要因。二元配置ANOVAの背景。"}, {"id": "REF-23", "key": "Thibaut & Walker (1975)", "author": "Thibaut, J. W., & Walker, L.", "year": "1975", "title": "Procedural justice: A psychological analysis", "category": "手続的公正創始（古典名著）", "group": "B: 本文引用あり・手元PDFなし (単行文書籍)", "in_draft": "✔ 引用あり（第2章、第6章、参考文献リスト）", "pdf_location": "❌ 手元PDF未配置（Erlbaum出版 単行文書籍）", "excel_sheet": "【真正検証済】投稿論文引用リスト No.21 / 理論基盤文献 CLS-02", "note": "プロセスコントロール（発言権）とデシジョンコントロール（決定権）。"}, {"id": "PDF-01", "key": "Omrani et al. (2024)", "author": "Omrani, N., Rejeb, N., et al.", "year": "2024", "title": "Drivers of digital transformation in SMEs", "category": "IEEE TEM (SSCI Q1, ABS 3星) / EU 15,346社実証", "group": "C: 手元PDFあり・本文未引用 (査読迎撃エビデンス)", "in_draft": "未直接引用（防衛マスター第1部Part Bに収録）", "pdf_location": "citation/Omrani, N., et al..pdf (453.4 KB) / 20261004/papers_pdf/01_2022...", "excel_sheet": "手元保有PDF_実体文献目録 PDF-01", "note": "欧州15,346社データ。資金より組織内合意・受容性が最大障壁と証明。"}, {"id": "PDF-02", "key": "Packmohr et al. (2023)", "author": "Packmohr, S., Brink, H., & Paul, F.-H.", "year": "2023", "title": "Unraveling perceptions of barriers to digital transformation", "category": "IADIS IJCSIS (査読国際誌) / 410社規模間比較", "group": "C: 手元PDFあり・本文未引用 (査読迎撃エビデンス)", "in_draft": "未直接引用（防衛マスター第1部Part Bに収録）", "pdf_location": "citation/Packmohr, S., et al..pdf (1.2 MB) / 20261004/papers_pdf/02_2023...", "excel_sheet": "手元保有PDF_実体文献目録 PDF-02", "note": "中小企業189社 vs 大企業221社のDX障壁対比。二元配置ANOVAの直接的防壁。"}, {"id": "PDF-03", "key": "Giang et al. (2026)", "author": "Giang, P. X., Vi, T. T. T., & Ghi, T. N.", "year": "2026", "title": "Digital transformation, dynamic capability, and innovation performance in SMEs", "category": "JOBR (国際OA誌) / 製造業SME PLS-SEM", "group": "C: 手元PDFあり・本文未引用 (査読迎撃エビデンス)", "in_draft": "未直接引用（防衛マスター第1部Part Bに収録）", "pdf_location": "citation/Giang, P. X., et al..pdf (227.1 KB) / 20261004/papers_pdf/03_2026...", "excel_sheet": "手元保有PDF_実体文献目録 PDF-03", "note": "動的能力（現場の学習適応力）の完全媒介モデル。"}, {"id": "PDF-04", "key": "Fauzi et al. (2023)", "author": "Fauzi, F., Siregar, H., et al.", "year": "2023", "title": "Digital transformation for SMEs development based at four levels of analysis", "category": "ABAC Journal (Scopus Q4) / 4レベルレビュー", "group": "C: 手元PDFあり・本文未引用 (査読迎撃エビデンス)", "in_draft": "未直接引用（防衛マスター第1部Part Bに収録）", "pdf_location": "citation/Fauzi, F., & Sheng, M. L..pdf (405.2 KB) / 20261004/papers_pdf/04_2023...", "excel_sheet": "手元保有PDF_実体文献目録 PDF-04", "note": "個人・組織・エコシステム・国家の4分析単位によるDXレビュー。"}, {"id": "PDF-05", "key": "Al-Ghazali et al. (2022)", "author": "Al-Ghazali, B. M., et al.", "year": "2022", "title": "Green transformational leadership and green creativity in SMEs", "category": "Frontiers in Psychology (SSCI Q1) / 二重媒介PLS-SEM", "group": "C: 手元PDFあり・本文未引用 (査読迎撃エビデンス)", "in_draft": "未直接引用（防衛マスター第1部Part Bに収録）", "pdf_location": "citation/Al-Ghazali, B. M., et al..pdf (453.4 KB) / 20261004/papers_pdf/05_2022...", "excel_sheet": "手元保有PDF_実体文献目録 PDF-05", "note": "リーダーシップと組織アイデンティティ（当事者意識）の媒介効果。"}, {"id": "PDF-06", "key": "Papadopoulos et al. (2020)", "author": "Papadopoulos, T., Baltas, K. N., & Balta, M. E.", "year": "2020", "title": "The use of digital technologies by SMEs during COVID-19", "category": "IJIM (SSCI Top 1%, IF 21) / オペレーショナル・レジリエンス", "group": "C: 手元PDFあり・本文未引用 (査読迎撃エビデンス)", "in_draft": "未直接引用（防衛マスター第1部Part Bに収録）", "pdf_location": "citation/Papadopoulos, T., et al..pdf (392.2 KB) / 20261004/papers_pdf/06_2020...", "excel_sheet": "手元保有PDF_実体文献目録 PDF-06", "note": "現場適応と対話を欠いた拙速なシステム導入は組織を破壊すると警告。"}, {"id": "PDF-07", "key": "Fajar et al. (2026)", "author": "Fajar, A., Supanto, F., & Arifin, S.", "year": "2026", "title": "Improving leadership, spirituality, and organizational performance on SMEs", "category": "Quality: Access to Success (Scopus Q3)", "group": "C: 手元PDFあり・本文未引用 (査読迎撃エビデンス)", "in_draft": "未直接引用（防衛マスター第1部Part Bに収録）", "pdf_location": "citation/Fajar, A., et al..pdf (666.2 KB) / 20261004/papers_pdf/07_2026...", "excel_sheet": "手元保有PDF_実体文献目録 PDF-07", "note": "中小製造業における従業員コミットメントの重要性。"}, {"id": "PDF-08", "key": "Liu et al. (2021)", "author": "Liu, Q., Zhao, Y., Kamioka, T., & Nakamura, M.", "year": "2021", "title": "Digital transformation challenges in the sales of pharmaceutical companies in Japan", "category": "AJBR (一橋大学グループ) / 日本企業営業DX実証", "group": "C: 手元PDFあり・本文未引用 (査読迎撃エビデンス)", "in_draft": "未直接引用（防衛マスター第1部Part Bに収録）", "pdf_location": "citation/Liu, Q., et al..pdf (405.3 KB) / 20261004/papers_pdf/08_2021...", "excel_sheet": "手元保有PDF_実体文献目録 PDF-08", "note": "日本企業20社で「本社方針と営業現場評価の乖離が抵抗を生む」と定性実証。"}, {"id": "PDF-09", "key": "Roman & Rusu (2022)", "author": "Roman, A., & Rusu, V. D.", "year": "2022", "title": "Digital technologies and the performance of small and medium enterprises", "category": "Studies in Bus & Econ / EU 27カ国パネル計量分析", "group": "C: 手元PDFあり・本文未引用 (査読迎撃エビデンス)", "in_draft": "未直接引用（防衛マスター第1部Part Bに収録）", "pdf_location": "citation/Roman, A., et al..pdf (433.8 KB) / 20261004/papers_pdf/09_2022...", "excel_sheet": "手元保有PDF_実体文献目録 PDF-09", "note": "人的投資・スキルトレーニングなきDX投資は効果が頭打ちになると実証。"}, {"id": "PDF-10", "key": "Succurro et al. (2026)", "author": "Succurro, M., Aragona, B., & Carvache-Franco, M.", "year": "2026", "title": "Digital transformation in tourism SMEs", "category": "JIBE (Springer, Scopus Q2) / 多変量プロビット分析", "group": "C: 手元PDFあり・本文未引用 (査読迎撃エビデンス)", "in_draft": "未直接引用（防衛マスター第1部Part Bに収録）", "pdf_location": "citation/Succurro, M., et al..pdf (1.1 MB) / 20261004/papers_pdf/10_2026...", "excel_sheet": "手元保有PDF_実体文献目録 PDF-10", "note": "戦略的計画なきツールの単発導入は付加価値を生まないと実証。"}, {"id": "PDF-11", "key": "Lamperti et al. (2024)", "author": "Lamperti, S., Cavallo, A., & Sassanelli, C.", "year": "2024", "title": "Digital servitization and business model innovation in SMEs", "category": "IEEE TEM (SSCI Q1, ABS 3星) / 深層ケーススタディ", "group": "C: 手元PDFあり・本文未引用 (査読迎撃エビデンス)", "in_draft": "未直接引用（防衛マスター第1部Part Bに収録）", "pdf_location": "citation/Lamperti, S., et al..pdf (1.4 MB) / 20261004/papers_pdf/11_2023...", "excel_sheet": "手元保有PDF_実体文献目録 PDF-11", "note": "部門間摩擦を評価基準の再設計と対話（手続的公正）が解消した事例。"}, {"id": "PDF-12", "key": "Al-Swidi et al. (2024)", "author": "Al-Swidi, A. K., et al.", "year": "2024", "title": "The role of digital transformation in boosting CSR-driven green innovation", "category": "Discover Sustainability (Springer) / 製造業SME PLS-SEM", "group": "C: 手元PDFあり・本文未引用 (査読迎撃エビデンス)", "in_draft": "未直接引用（防衛マスター第1部Part Bに収録）", "pdf_location": "citation/Al-Swidi, A. K., et al..pdf (790.5 KB) / 20261004/papers_pdf/12_2024...", "excel_sheet": "手元保有PDF_実体文献目録 PDF-12", "note": "中小製造業238社のPLS-SEMによるDX調整効果実証。"}, {"id": "PDF-14", "key": "Hu et al. (2023)", "author": "Hu, H., Zhao, M., & Zhang, X.", "year": "2023", "title": "Network evolution of diffusion in enterprise digitalization", "category": "PLOS ONE (SCIE Q1/Q2) / 複雑ネットワーク進化ゲーム", "group": "C: 手元PDFあり・本文未引用 (査読迎撃エビデンス)", "in_draft": "未直接引用（防衛マスター第1部Part Bに収録）", "pdf_location": "citation/Hu, H., et al..pdf (1.6 MB) / 20261004/papers_pdf/14_2023...", "excel_sheet": "手元保有PDF_実体文献目録 PDF-14", "note": "先駆者への報酬インセンティブがない場合、抵抗がネットワーク拡散して失敗均衡へ。"}, {"id": "PDF-15", "key": "Ghafoori et al. (2024)", "author": "Ghafoori, A., Gupta, M., et al.", "year": "2024", "title": "Toward the role of organizational culture in data-driven digital transformation", "category": "IJPE (SCIE Top 2%, IF 10+) / 組織文化SEM", "group": "C: 手元PDFあり・本文未引用 (査読迎撃エビデンス)", "in_draft": "未直接引用（防衛マスター第1部Part Bに収録）", "pdf_location": "citation/Ghafoori, A., et al..pdf (1.1 MB) / 20261004/papers_pdf/15_2024...", "excel_sheet": "手元保有PDF_実体文献目録 PDF-15", "note": "心理的安全性を欠いたデータツール導入は現場の監視感と摩擦を増幅すると実証。"}, {"id": "PDF-EXTRA-01", "key": "Colquitt et al. (2013)", "author": "Colquitt, J. A., Scott, B. A., et al.", "year": "2013", "title": "Justice at the millennium, a decade later: A meta-analytic test", "category": "JAP 組織公正25年間メタ分析", "group": "C: 手元PDFあり・本文未引用 (査読迎撃エビデンス)", "in_draft": "未直接引用（防衛マスター第1部に収録）", "pdf_location": "citation/Colquitt, J. A., et al..pdf (834.9 KB)", "excel_sheet": "要約和訳DB REF-38", "note": "数万人のメタ分析。公正知覚がコミットメントを高め抵抗を減らす普遍的法則。"}, {"id": "PDF-EXTRA-02", "key": "Floyd & Wooldridge (1992/1997)", "author": "Floyd, S. W., & Wooldridge, B.", "year": "1997", "title": "Middle management's strategic influence and organizational performance", "category": "ミドルマネジメント戦略論", "group": "C: 手元PDFあり・本文未引用 (査読迎撃エビデンス)", "in_draft": "未直接引用（防衛マスター第1部に収録）", "pdf_location": "citation/Floyd, S. W., & Wooldridge, B..pdf (1.2 MB)", "excel_sheet": "理論基盤文献 CLS-10", "note": "ミドルの戦略的影響力4分類（提案、統合、促進、実行）の実証。"}, {"id": "PDF-EXTRA-03", "key": "Eller et al. (2020)", "author": "Eller, R., Alford, P., et al.", "year": "2020", "title": "Antecedents, consequences, and challenges of small and medium-sized enterprise digitalization", "category": "Journal of Business Research (ABS 3星)", "group": "C: 手元PDFあり・本文未引用 (査読迎撃エビデンス)", "in_draft": "未直接引用（背景文献）", "pdf_location": "citation/Eller, R., Alford, P., Kallmünzer, A., & Peters, M..pdf (520.1 KB)", "excel_sheet": "要約和訳DB REF-28", "note": "中小企業のデジタル化要因とITスキル不足の実証。"}, {"id": "PDF-EXTRA-04", "key": "Teece (2014)", "author": "Teece, D. J.", "year": "2014", "title": "The foundations of enterprise performance: Dynamic and ordinary capabilities", "category": "Academy of Management Perspectives", "group": "C: 手元PDFあり・本文未引用 (査読迎撃エビデンス)", "in_draft": "未直接引用（戦略理論背景）", "pdf_location": "citation/Teece, D. J..pdf (890.3 KB)", "excel_sheet": "理論基盤文献 CLS-12", "note": "ダイナミック・ケイパビリティ（感知・捕捉・変革）の理論的基礎。"}];
+
+    function renderTable(list) {
+      const tbody = document.getElementById('tableBody');
+      tbody.innerHTML = '';
+      list.forEach(r => {
+        const tr = document.createElement('tr');
+        let badgeClass = 'badge-a';
+        if (r.group.startsWith('B')) badgeClass = 'badge-b';
+        if (r.group.startsWith('C')) badgeClass = 'badge-c';
+
+        tr.innerHTML = `
+          <td><span class="badge ${badgeClass}">${r.group.split(' ')[0]}</span></td>
+          <td><strong>${r.id}</strong></td>
+          <td><strong>${r.key}</strong><br><small style="color:#666;">${r.author} (${r.year})</small></td>
+          <td>${r.title}<br><small style="color:#005BAC; font-weight:700;">${r.category}</small></td>
+          <td>${r.in_draft}</td>
+          <td><code style="font-size:12px;">${r.pdf_location}</code></td>
+          <td><small>${r.excel_sheet}</small></td>
+        `;
+        tbody.appendChild(tr);
+      });
+    }
+
+    function filterTable() {
+      const kw = document.getElementById('searchInput').value.toLowerCase().trim();
+      const filtered = DATA.filter(r => {
+        return !kw ||
+          r.key.toLowerCase().includes(kw) ||
+          r.author.toLowerCase().includes(kw) ||
+          r.title.toLowerCase().includes(kw) ||
+          r.group.toLowerCase().includes(kw) ||
+          r.pdf_location.toLowerCase().includes(kw) ||
+          r.excel_sheet.toLowerCase().includes(kw);
+      });
+      renderTable(filtered);
+    }
+
+    window.addEventListener('DOMContentLoaded', () => {
+      renderTable(DATA);
+    });
+  </script>
+</body>
+</html>

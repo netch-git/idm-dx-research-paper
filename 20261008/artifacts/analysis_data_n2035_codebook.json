@@ -1,0 +1,1250 @@
+[
+  {
+    "column_name": "resp_id",
+    "label": "回答者固有識別ID (K_ID)",
+    "dtype": "object",
+    "missing": 0
+  },
+  {
+    "column_name": "age",
+    "label": "実年齢 (AGE: 20〜79歳)",
+    "dtype": "int64",
+    "missing": 0,
+    "mean": 53.306,
+    "std": 9.178,
+    "min": 19.0,
+    "max": 79.0
+  },
+  {
+    "column_name": "age_group",
+    "label": "年代区分 (20s〜70s+)",
+    "dtype": "category",
+    "missing": 0
+  },
+  {
+    "column_name": "gender_code",
+    "label": "性別コード (1: 男性 1,826名, 2: 女性 209名)",
+    "dtype": "int32",
+    "missing": 0,
+    "mean": 1.103,
+    "std": 0.304,
+    "min": 1.0,
+    "max": 2.0
+  },
+  {
+    "column_name": "gender_name",
+    "label": "性別名称 (Male, Female)",
+    "dtype": "category",
+    "missing": 0
+  },
+  {
+    "column_name": "tenure_code",
+    "label": "勤続年数コード (1: 1年未満 〜 6: 20年以上)",
+    "dtype": "int32",
+    "missing": 0,
+    "mean": 1.0,
+    "std": 0.0,
+    "min": 1.0,
+    "max": 1.0
+  },
+  {
+    "column_name": "industry_code",
+    "label": "業種コード (1〜23)",
+    "dtype": "int32",
+    "missing": 0,
+    "mean": 1.0,
+    "std": 0.0,
+    "min": 1.0,
+    "max": 1.0
+  },
+  {
+    "column_name": "is_it_industry",
+    "label": "IT・通信業ダミー (1: IT業, 0: 非IT業)",
+    "dtype": "int32",
+    "missing": 0,
+    "mean": 0.0,
+    "std": 0.0,
+    "min": 0.0,
+    "max": 0.0
+  },
+  {
+    "column_name": "region_code",
+    "label": "調査地域コード (1: 北海道 〜 8: 熊本)",
+    "dtype": "int32",
+    "missing": 0,
+    "mean": 1.0,
+    "std": 0.0,
+    "min": 1.0,
+    "max": 1.0
+  },
+  {
+    "column_name": "is_metro",
+    "label": "三大都市圏ダミー (1: 東京/愛知/大阪, 0: 地方都市)",
+    "dtype": "int32",
+    "missing": 0,
+    "mean": 0.0,
+    "std": 0.0,
+    "min": 0.0,
+    "max": 0.0
+  },
+  {
+    "column_name": "firm_size_scale",
+    "label": "従業員規模コード (1: 10-49人 〜 6: 1,000人以上)",
+    "dtype": "int32",
+    "missing": 0,
+    "mean": 1.0,
+    "std": 0.0,
+    "min": 1.0,
+    "max": 1.0
+  },
+  {
+    "column_name": "is_large_firm",
+    "label": "大企業ダミー (1: 1,000人以上, 0: 1,000人未満 SMO)",
+    "dtype": "int32",
+    "missing": 0,
+    "mean": 0.366,
+    "std": 0.482,
+    "min": 0.0,
+    "max": 1.0
+  },
+  {
+    "column_name": "firm_size_binary_label",
+    "label": "企業規模ラベル (大企業 969名 vs SMO 1,066名)",
+    "dtype": "category",
+    "missing": 0
+  },
+  {
+    "column_name": "firm_size_3tier",
+    "label": "企業規模3区分 (SME_<300, MID_300-999, LARGE_1000+)",
+    "dtype": "category",
+    "missing": 0
+  },
+  {
+    "column_name": "firm_size_3tier_code",
+    "label": "企業規模3区分コード (1, 2, 3)",
+    "dtype": "int32",
+    "missing": 0,
+    "mean": 1.0,
+    "std": 0.0,
+    "min": 1.0,
+    "max": 1.0
+  },
+  {
+    "column_name": "position_raw",
+    "label": "役職元回答文字列",
+    "dtype": "object",
+    "missing": 0
+  },
+  {
+    "column_name": "tier_a_code",
+    "label": "職階定義Aコード (1: 経営層, 2: 管理職, 3: 一般職)",
+    "dtype": "int64",
+    "missing": 0,
+    "mean": 2.281,
+    "std": 0.725,
+    "min": 1.0,
+    "max": 3.0
+  },
+  {
+    "column_name": "tier_a",
+    "label": "職階定義A (主分析: 経営層 329 / 管理職 806 / 一般職 900)",
+    "dtype": "category",
+    "missing": 0
+  },
+  {
+    "column_name": "tier_b_code",
+    "label": "職階定義Bコード (1: 経営層, 2: 監督職以上, 3: 一般職)",
+    "dtype": "int64",
+    "missing": 0,
+    "mean": 2.103,
+    "std": 0.645,
+    "min": 1.0,
+    "max": 3.0
+  },
+  {
+    "column_name": "tier_b",
+    "label": "職階定義B (頑健性用: 経営層 329 / 監督職以上 1167 / 一般職 539)",
+    "dtype": "category",
+    "missing": 0
+  },
+  {
+    "column_name": "is_middle_leader",
+    "label": "中間リーダー層ダミー (1: 係長・主任・リーダー 361名, 0: その他)",
+    "dtype": "int32",
+    "missing": 0,
+    "mean": 0.177,
+    "std": 0.382,
+    "min": 0.0,
+    "max": 1.0
+  },
+  {
+    "column_name": "sc9_1",
+    "label": "SC9.1 回答値 (1:非常に当てはまる〜5:全く当てはまらない)",
+    "dtype": "int64",
+    "missing": 0,
+    "mean": 2.463,
+    "std": 0.952,
+    "min": 1.0,
+    "max": 4.0
+  },
+  {
+    "column_name": "sc9_2",
+    "label": "SC9.2 回答値 (1:非常に当てはまる〜5:全く当てはまらない)",
+    "dtype": "int64",
+    "missing": 0,
+    "mean": 2.978,
+    "std": 0.887,
+    "min": 1.0,
+    "max": 4.0
+  },
+  {
+    "column_name": "sc9_3",
+    "label": "SC9.3 回答値 (1:非常に当てはまる〜5:全く当てはまらない)",
+    "dtype": "int64",
+    "missing": 0,
+    "mean": 2.506,
+    "std": 0.978,
+    "min": 1.0,
+    "max": 4.0
+  },
+  {
+    "column_name": "sc9_4",
+    "label": "SC9.4 回答値 (1:非常に当てはまる〜5:全く当てはまらない)",
+    "dtype": "int64",
+    "missing": 0,
+    "mean": 2.581,
+    "std": 0.756,
+    "min": 1.0,
+    "max": 4.0
+  },
+  {
+    "column_name": "sc9_5",
+    "label": "SC9.5 回答値 (1:非常に当てはまる〜5:全く当てはまらない)",
+    "dtype": "int64",
+    "missing": 0,
+    "mean": 2.62,
+    "std": 0.856,
+    "min": 1.0,
+    "max": 4.0
+  },
+  {
+    "column_name": "sc9_6",
+    "label": "SC9.6 回答値 (1:非常に当てはまる〜5:全く当てはまらない)",
+    "dtype": "int64",
+    "missing": 0,
+    "mean": 2.24,
+    "std": 0.784,
+    "min": 1.0,
+    "max": 4.0
+  },
+  {
+    "column_name": "sc9_7",
+    "label": "SC9.7 回答値 (1:非常に当てはまる〜5:全く当てはまらない)",
+    "dtype": "int64",
+    "missing": 0,
+    "mean": 2.529,
+    "std": 0.853,
+    "min": 1.0,
+    "max": 4.0
+  },
+  {
+    "column_name": "sc9_8",
+    "label": "SC9.8 回答値 (1:非常に当てはまる〜5:全く当てはまらない)",
+    "dtype": "int64",
+    "missing": 0,
+    "mean": 2.78,
+    "std": 0.913,
+    "min": 1.0,
+    "max": 4.0
+  },
+  {
+    "column_name": "sc9_9",
+    "label": "SC9.9 回答値 (1:非常に当てはまる〜5:全く当てはまらない)",
+    "dtype": "int64",
+    "missing": 0,
+    "mean": 3.007,
+    "std": 0.814,
+    "min": 1.0,
+    "max": 4.0
+  },
+  {
+    "column_name": "sc9_10",
+    "label": "SC9.10 回答値 (1:非常に当てはまる〜5:全く当てはまらない)",
+    "dtype": "int64",
+    "missing": 0,
+    "mean": 2.749,
+    "std": 0.806,
+    "min": 1.0,
+    "max": 4.0
+  },
+  {
+    "column_name": "sc15_1",
+    "label": "SC15.1 回答値 (1:当てはまる〜5:当てはまらない)",
+    "dtype": "int64",
+    "missing": 0,
+    "mean": 2.844,
+    "std": 0.843,
+    "min": 1.0,
+    "max": 4.0
+  },
+  {
+    "column_name": "sc15_2",
+    "label": "SC15.2 回答値 (1:当てはまる〜5:当てはまらない)",
+    "dtype": "int64",
+    "missing": 0,
+    "mean": 2.787,
+    "std": 0.824,
+    "min": 1.0,
+    "max": 4.0
+  },
+  {
+    "column_name": "sc15_3",
+    "label": "SC15.3 回答値 (1:当てはまる〜5:当てはまらない)",
+    "dtype": "int64",
+    "missing": 0,
+    "mean": 2.866,
+    "std": 0.834,
+    "min": 1.0,
+    "max": 4.0
+  },
+  {
+    "column_name": "sc15_4",
+    "label": "SC15.4 回答値 (1:当てはまる〜5:当てはまらない)",
+    "dtype": "int64",
+    "missing": 0,
+    "mean": 2.766,
+    "std": 0.883,
+    "min": 1.0,
+    "max": 4.0
+  },
+  {
+    "column_name": "sc15_5",
+    "label": "SC15.5 回答値 (1:当てはまる〜5:当てはまらない)",
+    "dtype": "int64",
+    "missing": 0,
+    "mean": 2.858,
+    "std": 0.795,
+    "min": 1.0,
+    "max": 4.0
+  },
+  {
+    "column_name": "sc15_6",
+    "label": "SC15.6 回答値 (1:当てはまる〜5:当てはまらない)",
+    "dtype": "int64",
+    "missing": 0,
+    "mean": 2.713,
+    "std": 0.883,
+    "min": 1.0,
+    "max": 4.0
+  },
+  {
+    "column_name": "sc15_7",
+    "label": "SC15.7 回答値 (1:当てはまる〜5:当てはまらない)",
+    "dtype": "int64",
+    "missing": 0,
+    "mean": 2.475,
+    "std": 0.895,
+    "min": 1.0,
+    "max": 4.0
+  },
+  {
+    "column_name": "sc15_8",
+    "label": "SC15.8 回答値 (1:当てはまる〜5:当てはまらない)",
+    "dtype": "int64",
+    "missing": 0,
+    "mean": 3.037,
+    "std": 0.796,
+    "min": 1.0,
+    "max": 4.0
+  },
+  {
+    "column_name": "sc15_9",
+    "label": "SC15.9 回答値 (1:当てはまる〜5:当てはまらない)",
+    "dtype": "int64",
+    "missing": 0,
+    "mean": 2.833,
+    "std": 0.833,
+    "min": 1.0,
+    "max": 4.0
+  },
+  {
+    "column_name": "sc16_1",
+    "label": "SC16.1 回答値 (1:当てはまる〜5:当てはまらない)",
+    "dtype": "int64",
+    "missing": 0,
+    "mean": 3.0,
+    "std": 0.0,
+    "min": 3.0,
+    "max": 3.0
+  },
+  {
+    "column_name": "sc16_2",
+    "label": "SC16.2 回答値 (1:当てはまる〜5:当てはまらない)",
+    "dtype": "int64",
+    "missing": 0,
+    "mean": 3.0,
+    "std": 0.0,
+    "min": 3.0,
+    "max": 3.0
+  },
+  {
+    "column_name": "sc16_3",
+    "label": "SC16.3 回答値 (1:当てはまる〜5:当てはまらない)",
+    "dtype": "int64",
+    "missing": 0,
+    "mean": 3.0,
+    "std": 0.0,
+    "min": 3.0,
+    "max": 3.0
+  },
+  {
+    "column_name": "sc16_4",
+    "label": "SC16.4 回答値 (1:当てはまる〜5:当てはまらない)",
+    "dtype": "int64",
+    "missing": 0,
+    "mean": 3.0,
+    "std": 0.0,
+    "min": 3.0,
+    "max": 3.0
+  },
+  {
+    "column_name": "sc16_5",
+    "label": "SC16.5 回答値 (1:当てはまる〜5:当てはまらない)",
+    "dtype": "int64",
+    "missing": 0,
+    "mean": 3.0,
+    "std": 0.0,
+    "min": 3.0,
+    "max": 3.0
+  },
+  {
+    "column_name": "sc16_6",
+    "label": "SC16.6 回答値 (1:当てはまる〜5:当てはまらない)",
+    "dtype": "int64",
+    "missing": 0,
+    "mean": 3.0,
+    "std": 0.0,
+    "min": 3.0,
+    "max": 3.0
+  },
+  {
+    "column_name": "sc16_7",
+    "label": "SC16.7 回答値 (1:当てはまる〜5:当てはまらない)",
+    "dtype": "int64",
+    "missing": 0,
+    "mean": 3.0,
+    "std": 0.0,
+    "min": 3.0,
+    "max": 3.0
+  },
+  {
+    "column_name": "sc18_1",
+    "label": "SC18.1 回答値 (1:そう思う〜5:まったくそう思わない)",
+    "dtype": "int64",
+    "missing": 0,
+    "mean": 3.077,
+    "std": 0.956,
+    "min": 1.0,
+    "max": 5.0
+  },
+  {
+    "column_name": "sc18_2",
+    "label": "SC18.2 回答値 (1:そう思う〜5:まったくそう思わない)",
+    "dtype": "int64",
+    "missing": 0,
+    "mean": 2.707,
+    "std": 0.914,
+    "min": 1.0,
+    "max": 5.0
+  },
+  {
+    "column_name": "sc18_3",
+    "label": "SC18.3 回答値 (1:そう思う〜5:まったくそう思わない)",
+    "dtype": "int64",
+    "missing": 0,
+    "mean": 2.463,
+    "std": 0.874,
+    "min": 1.0,
+    "max": 5.0
+  },
+  {
+    "column_name": "sc18_4",
+    "label": "SC18.4 回答値 (1:そう思う〜5:まったくそう思わない)",
+    "dtype": "int64",
+    "missing": 0,
+    "mean": 2.651,
+    "std": 0.891,
+    "min": 1.0,
+    "max": 5.0
+  },
+  {
+    "column_name": "sc18_5",
+    "label": "SC18.5 回答値 (1:そう思う〜5:まったくそう思わない)",
+    "dtype": "int64",
+    "missing": 0,
+    "mean": 2.671,
+    "std": 0.909,
+    "min": 1.0,
+    "max": 5.0
+  },
+  {
+    "column_name": "sc18_6",
+    "label": "SC18.6 回答値 (1:そう思う〜5:まったくそう思わない)",
+    "dtype": "int64",
+    "missing": 0,
+    "mean": 2.239,
+    "std": 0.818,
+    "min": 1.0,
+    "max": 5.0
+  },
+  {
+    "column_name": "sc18_7",
+    "label": "SC18.7 回答値 (1:そう思う〜5:まったくそう思わない)",
+    "dtype": "int64",
+    "missing": 0,
+    "mean": 2.874,
+    "std": 0.942,
+    "min": 1.0,
+    "max": 5.0
+  },
+  {
+    "column_name": "sc18_8",
+    "label": "SC18.8 回答値 (1:そう思う〜5:まったくそう思わない)",
+    "dtype": "int64",
+    "missing": 0,
+    "mean": 2.971,
+    "std": 0.978,
+    "min": 1.0,
+    "max": 5.0
+  },
+  {
+    "column_name": "sc18_9",
+    "label": "SC18.9 回答値 (1:そう思う〜5:まったくそう思わない)",
+    "dtype": "int64",
+    "missing": 0,
+    "mean": 2.91,
+    "std": 0.946,
+    "min": 1.0,
+    "max": 5.0
+  },
+  {
+    "column_name": "q8_1",
+    "label": "Q8.1 重要度回答値 (1:非常に重要〜5:不要)",
+    "dtype": "int64",
+    "missing": 0,
+    "mean": 1.978,
+    "std": 0.732,
+    "min": 1.0,
+    "max": 3.0
+  },
+  {
+    "column_name": "q8_2",
+    "label": "Q8.2 重要度回答値 (1:非常に重要〜5:不要)",
+    "dtype": "int64",
+    "missing": 0,
+    "mean": 2.133,
+    "std": 0.704,
+    "min": 1.0,
+    "max": 3.0
+  },
+  {
+    "column_name": "q8_3",
+    "label": "Q8.3 重要度回答値 (1:非常に重要〜5:不要)",
+    "dtype": "int64",
+    "missing": 0,
+    "mean": 1.968,
+    "std": 0.738,
+    "min": 1.0,
+    "max": 3.0
+  },
+  {
+    "column_name": "q8_4",
+    "label": "Q8.4 重要度回答値 (1:非常に重要〜5:不要)",
+    "dtype": "int64",
+    "missing": 0,
+    "mean": 2.087,
+    "std": 0.719,
+    "min": 1.0,
+    "max": 3.0
+  },
+  {
+    "column_name": "q8_5",
+    "label": "Q8.5 重要度回答値 (1:非常に重要〜5:不要)",
+    "dtype": "int64",
+    "missing": 0,
+    "mean": 2.084,
+    "std": 0.713,
+    "min": 1.0,
+    "max": 3.0
+  },
+  {
+    "column_name": "q8_6",
+    "label": "Q8.6 重要度回答値 (1:非常に重要〜5:不要)",
+    "dtype": "int64",
+    "missing": 0,
+    "mean": 2.133,
+    "std": 0.697,
+    "min": 1.0,
+    "max": 3.0
+  },
+  {
+    "column_name": "q8_7",
+    "label": "Q8.7 重要度回答値 (1:非常に重要〜5:不要)",
+    "dtype": "int64",
+    "missing": 0,
+    "mean": 2.142,
+    "std": 0.705,
+    "min": 1.0,
+    "max": 3.0
+  },
+  {
+    "column_name": "q8_8",
+    "label": "Q8.8 重要度回答値 (1:非常に重要〜5:不要)",
+    "dtype": "int64",
+    "missing": 0,
+    "mean": 2.13,
+    "std": 0.707,
+    "min": 1.0,
+    "max": 3.0
+  },
+  {
+    "column_name": "q8_9",
+    "label": "Q8.9 重要度回答値 (1:非常に重要〜5:不要)",
+    "dtype": "int64",
+    "missing": 0,
+    "mean": 2.111,
+    "std": 0.719,
+    "min": 1.0,
+    "max": 3.0
+  },
+  {
+    "column_name": "q8_10",
+    "label": "Q8.10 重要度回答値 (1:非常に重要〜5:不要)",
+    "dtype": "int64",
+    "missing": 0,
+    "mean": 3.0,
+    "std": 0.0,
+    "min": 3.0,
+    "max": 3.0
+  },
+  {
+    "column_name": "q9_1",
+    "label": "Q9.1 充足度回答値 (1:非常に充足〜5:不足)",
+    "dtype": "int64",
+    "missing": 0,
+    "mean": 3.029,
+    "std": 0.945,
+    "min": 1.0,
+    "max": 5.0
+  },
+  {
+    "column_name": "q9_2",
+    "label": "Q9.2 充足度回答値 (1:非常に充足〜5:不足)",
+    "dtype": "int64",
+    "missing": 0,
+    "mean": 3.002,
+    "std": 0.902,
+    "min": 1.0,
+    "max": 5.0
+  },
+  {
+    "column_name": "q9_3",
+    "label": "Q9.3 充足度回答値 (1:非常に充足〜5:不足)",
+    "dtype": "int64",
+    "missing": 0,
+    "mean": 3.051,
+    "std": 0.963,
+    "min": 1.0,
+    "max": 5.0
+  },
+  {
+    "column_name": "q9_4",
+    "label": "Q9.4 充足度回答値 (1:非常に充足〜5:不足)",
+    "dtype": "int64",
+    "missing": 0,
+    "mean": 3.098,
+    "std": 0.914,
+    "min": 1.0,
+    "max": 5.0
+  },
+  {
+    "column_name": "q9_5",
+    "label": "Q9.5 充足度回答値 (1:非常に充足〜5:不足)",
+    "dtype": "int64",
+    "missing": 0,
+    "mean": 3.025,
+    "std": 0.906,
+    "min": 1.0,
+    "max": 5.0
+  },
+  {
+    "column_name": "q9_6",
+    "label": "Q9.6 充足度回答値 (1:非常に充足〜5:不足)",
+    "dtype": "int64",
+    "missing": 0,
+    "mean": 3.073,
+    "std": 0.906,
+    "min": 1.0,
+    "max": 5.0
+  },
+  {
+    "column_name": "q9_7",
+    "label": "Q9.7 充足度回答値 (1:非常に充足〜5:不足)",
+    "dtype": "int64",
+    "missing": 0,
+    "mean": 3.055,
+    "std": 0.91,
+    "min": 1.0,
+    "max": 5.0
+  },
+  {
+    "column_name": "q9_8",
+    "label": "Q9.8 充足度回答値 (1:非常に充足〜5:不足)",
+    "dtype": "int64",
+    "missing": 0,
+    "mean": 3.055,
+    "std": 0.915,
+    "min": 1.0,
+    "max": 5.0
+  },
+  {
+    "column_name": "q9_9",
+    "label": "Q9.9 充足度回答値 (1:非常に充足〜5:不足)",
+    "dtype": "int64",
+    "missing": 0,
+    "mean": 3.063,
+    "std": 0.924,
+    "min": 1.0,
+    "max": 5.0
+  },
+  {
+    "column_name": "q9_10",
+    "label": "Q9.10 充足度回答値 (1:非常に充足〜5:不足)",
+    "dtype": "int64",
+    "missing": 0,
+    "mean": 3.0,
+    "std": 0.0,
+    "min": 3.0,
+    "max": 3.0
+  },
+  {
+    "column_name": "outcome_q4_score",
+    "label": "DX総合成果実感スコア (Q4: 0点〜10点満点)",
+    "dtype": "float64",
+    "missing": 0,
+    "mean": 5.097,
+    "std": 1.636,
+    "min": 1.0,
+    "max": 9.0
+  },
+  {
+    "column_name": "continuation_q6_score",
+    "label": "DX推進・投資継続意向スコア (Q6: 0点〜10点満点)",
+    "dtype": "float64",
+    "missing": 0,
+    "mean": 6.351,
+    "std": 2.073,
+    "min": 0.0,
+    "max": 10.0
+  },
+  {
+    "column_name": "distributive_sc9_3_rev",
+    "label": "SC9.3反転得点 (1:給料増えない不満高 〜 5:給料増える期待高)",
+    "dtype": "float64",
+    "missing": 0,
+    "mean": 3.494,
+    "std": 0.978,
+    "min": 2.0,
+    "max": 5.0
+  },
+  {
+    "column_name": "distributive_sc18_1_rev",
+    "label": "SC18.1反転得点 (DXで給料や賞与が増える期待: 1〜5点)",
+    "dtype": "float64",
+    "missing": 0,
+    "mean": 2.923,
+    "std": 0.956,
+    "min": 1.0,
+    "max": 5.0
+  },
+  {
+    "column_name": "distributive_incentive_sc18",
+    "label": "SC18個人的インセンティブ・分配期待平均 (1〜5点)",
+    "dtype": "float64",
+    "missing": 0,
+    "mean": 3.286,
+    "std": 0.691,
+    "min": 1.0,
+    "max": 5.0
+  },
+  {
+    "column_name": "distributive_justice",
+    "label": "分配的公正総合得点 (H2検証用: 1〜5点)",
+    "dtype": "float64",
+    "missing": 0,
+    "mean": 3.39,
+    "std": 0.549,
+    "min": 1.5,
+    "max": 5.0
+  },
+  {
+    "column_name": "procedural_justice",
+    "label": "手続的・情報的公正総合得点 (SC18.7-9 & SC9.10平均: 1〜5点)",
+    "dtype": "float64",
+    "missing": 0,
+    "mean": 3.124,
+    "std": 0.73,
+    "min": 1.25,
+    "max": 5.0
+  },
+  {
+    "column_name": "leadership_vision",
+    "label": "経営層ビジョン明示得点 (SC18.7, SC18.8平均)",
+    "dtype": "float64",
+    "missing": 0,
+    "mean": 3.078,
+    "std": 0.88,
+    "min": 1.0,
+    "max": 5.0
+  },
+  {
+    "column_name": "voice_listening",
+    "label": "現場意見傾聴・対話得点 (SC18.9反転: 1〜5点)",
+    "dtype": "float64",
+    "missing": 0,
+    "mean": 3.09,
+    "std": 0.946,
+    "min": 1.0,
+    "max": 5.0
+  },
+  {
+    "column_name": "ownership_promotion",
+    "label": "変革当事者意識・促進焦点得点 (SC18促進項目平均: 1〜5点)",
+    "dtype": "float64",
+    "missing": 0,
+    "mean": 3.328,
+    "std": 0.632,
+    "min": 1.0,
+    "max": 5.0
+  },
+  {
+    "column_name": "altruistic_duty",
+    "label": "規範的・利他的義務感得点 (SC18.6反転: 1〜5点)",
+    "dtype": "float64",
+    "missing": 0,
+    "mean": 3.761,
+    "std": 0.818,
+    "min": 1.0,
+    "max": 5.0
+  },
+  {
+    "column_name": "org_engagement",
+    "label": "組織エンゲージメント・評価信頼得点 (SC9ポジティブ平均: 1〜5点)",
+    "dtype": "float64",
+    "missing": 0,
+    "mean": 3.412,
+    "std": 0.558,
+    "min": 2.0,
+    "max": 5.0
+  },
+  {
+    "column_name": "friction_prevention",
+    "label": "心理的摩擦・予防焦点総合得点 (SC15全9項目平均: 1〜5点: 高いほど摩擦大)",
+    "dtype": "float64",
+    "missing": 0,
+    "mean": 3.202,
+    "std": 0.513,
+    "min": 2.0,
+    "max": 5.0
+  },
+  {
+    "column_name": "friction_topdown",
+    "label": "トップダウン現場乖離不信得点 (SC15.1, 15.2平均)",
+    "dtype": "float64",
+    "missing": 0,
+    "mean": 3.184,
+    "std": 0.7,
+    "min": 2.0,
+    "max": 5.0
+  },
+  {
+    "column_name": "friction_process",
+    "label": "プロセス遅延・学習負担得点 (SC15.3, 15.4平均)",
+    "dtype": "float64",
+    "missing": 0,
+    "mean": 3.184,
+    "std": 0.693,
+    "min": 2.0,
+    "max": 5.0
+  },
+  {
+    "column_name": "friction_unrewarded",
+    "label": "徒労感・分配的不信得点 (SC15.6, 15.7平均)",
+    "dtype": "float64",
+    "missing": 0,
+    "mean": 3.406,
+    "std": 0.762,
+    "min": 2.0,
+    "max": 5.0
+  },
+  {
+    "column_name": "workload_overload",
+    "label": "現場過負荷・余力欠如得点 (SC9.8反転: 1〜5点)",
+    "dtype": "float64",
+    "missing": 0,
+    "mean": 3.22,
+    "std": 0.913,
+    "min": 2.0,
+    "max": 5.0
+  },
+  {
+    "column_name": "status_quo_bias",
+    "label": "現状維持バイアス得点 (SC9.9反転: 1〜5点)",
+    "dtype": "float64",
+    "missing": 0,
+    "mean": 2.993,
+    "std": 0.814,
+    "min": 2.0,
+    "max": 5.0
+  },
+  {
+    "column_name": "q8_imp_1",
+    "label": "能力1[デジタル技術知識] 重要度スコア (1〜5点)",
+    "dtype": "float64",
+    "missing": 0,
+    "mean": 4.022,
+    "std": 0.732,
+    "min": 3.0,
+    "max": 5.0
+  },
+  {
+    "column_name": "q9_sat_1",
+    "label": "能力1[デジタル技術知識] 充足度スコア (1〜5点)",
+    "dtype": "float64",
+    "missing": 0,
+    "mean": 2.971,
+    "std": 0.945,
+    "min": 1.0,
+    "max": 5.0
+  },
+  {
+    "column_name": "gap_cap_1",
+    "label": "能力1[デジタル技術知識] 不足ギャップ (GAP = 重要度 - 充足度)",
+    "dtype": "float64",
+    "missing": 0,
+    "mean": 1.052,
+    "std": 1.235,
+    "min": -2.0,
+    "max": 4.0
+  },
+  {
+    "column_name": "q8_imp_2",
+    "label": "能力2[PMO説得力(予算獲得)] 重要度スコア (1〜5点)",
+    "dtype": "float64",
+    "missing": 0,
+    "mean": 3.867,
+    "std": 0.704,
+    "min": 3.0,
+    "max": 5.0
+  },
+  {
+    "column_name": "q9_sat_2",
+    "label": "能力2[PMO説得力(予算獲得)] 充足度スコア (1〜5点)",
+    "dtype": "float64",
+    "missing": 0,
+    "mean": 2.998,
+    "std": 0.902,
+    "min": 1.0,
+    "max": 5.0
+  },
+  {
+    "column_name": "gap_cap_2",
+    "label": "能力2[PMO説得力(予算獲得)] 不足ギャップ (GAP = 重要度 - 充足度)",
+    "dtype": "float64",
+    "missing": 0,
+    "mean": 0.869,
+    "std": 1.161,
+    "min": -2.0,
+    "max": 4.0
+  },
+  {
+    "column_name": "q8_imp_3",
+    "label": "能力3[PMO発見力(現場課題発見)] 重要度スコア (1〜5点)",
+    "dtype": "float64",
+    "missing": 0,
+    "mean": 4.032,
+    "std": 0.738,
+    "min": 3.0,
+    "max": 5.0
+  },
+  {
+    "column_name": "q9_sat_3",
+    "label": "能力3[PMO発見力(現場課題発見)] 充足度スコア (1〜5点)",
+    "dtype": "float64",
+    "missing": 0,
+    "mean": 2.949,
+    "std": 0.963,
+    "min": 1.0,
+    "max": 5.0
+  },
+  {
+    "column_name": "gap_cap_3",
+    "label": "能力3[PMO発見力(現場課題発見)] 不足ギャップ (GAP = 重要度 - 充足度)",
+    "dtype": "float64",
+    "missing": 0,
+    "mean": 1.083,
+    "std": 1.275,
+    "min": -2.0,
+    "max": 4.0
+  },
+  {
+    "column_name": "q8_imp_4",
+    "label": "能力4[PMO設計力(プロセス)] 重要度スコア (1〜5点)",
+    "dtype": "float64",
+    "missing": 0,
+    "mean": 3.913,
+    "std": 0.719,
+    "min": 3.0,
+    "max": 5.0
+  },
+  {
+    "column_name": "q9_sat_4",
+    "label": "能力4[PMO設計力(プロセス)] 充足度スコア (1〜5点)",
+    "dtype": "float64",
+    "missing": 0,
+    "mean": 2.902,
+    "std": 0.914,
+    "min": 1.0,
+    "max": 5.0
+  },
+  {
+    "column_name": "gap_cap_4",
+    "label": "能力4[PMO設計力(プロセス)] 不足ギャップ (GAP = 重要度 - 充足度)",
+    "dtype": "float64",
+    "missing": 0,
+    "mean": 1.011,
+    "std": 1.187,
+    "min": -2.0,
+    "max": 4.0
+  },
+  {
+    "column_name": "q8_imp_5",
+    "label": "能力5[PMO選定力(ツール選定)] 重要度スコア (1〜5点)",
+    "dtype": "float64",
+    "missing": 0,
+    "mean": 3.916,
+    "std": 0.713,
+    "min": 3.0,
+    "max": 5.0
+  },
+  {
+    "column_name": "q9_sat_5",
+    "label": "能力5[PMO選定力(ツール選定)] 充足度スコア (1〜5点)",
+    "dtype": "float64",
+    "missing": 0,
+    "mean": 2.975,
+    "std": 0.906,
+    "min": 1.0,
+    "max": 5.0
+  },
+  {
+    "column_name": "gap_cap_5",
+    "label": "能力5[PMO選定力(ツール選定)] 不足ギャップ (GAP = 重要度 - 充足度)",
+    "dtype": "float64",
+    "missing": 0,
+    "mean": 0.941,
+    "std": 1.178,
+    "min": -2.0,
+    "max": 4.0
+  },
+  {
+    "column_name": "q8_imp_6",
+    "label": "能力6[PMO折衝力(ベンダー)] 重要度スコア (1〜5点)",
+    "dtype": "float64",
+    "missing": 0,
+    "mean": 3.867,
+    "std": 0.697,
+    "min": 3.0,
+    "max": 5.0
+  },
+  {
+    "column_name": "q9_sat_6",
+    "label": "能力6[PMO折衝力(ベンダー)] 充足度スコア (1〜5点)",
+    "dtype": "float64",
+    "missing": 0,
+    "mean": 2.927,
+    "std": 0.906,
+    "min": 1.0,
+    "max": 5.0
+  },
+  {
+    "column_name": "gap_cap_6",
+    "label": "能力6[PMO折衝力(ベンダー)] 不足ギャップ (GAP = 重要度 - 充足度)",
+    "dtype": "float64",
+    "missing": 0,
+    "mean": 0.94,
+    "std": 1.164,
+    "min": -2.0,
+    "max": 4.0
+  },
+  {
+    "column_name": "q8_imp_7",
+    "label": "能力7[PMO推進力(現場抵抗突破)] 重要度スコア (1〜5点)",
+    "dtype": "float64",
+    "missing": 0,
+    "mean": 3.858,
+    "std": 0.705,
+    "min": 3.0,
+    "max": 5.0
+  },
+  {
+    "column_name": "q9_sat_7",
+    "label": "能力7[PMO推進力(現場抵抗突破)] 充足度スコア (1〜5点)",
+    "dtype": "float64",
+    "missing": 0,
+    "mean": 2.945,
+    "std": 0.91,
+    "min": 1.0,
+    "max": 5.0
+  },
+  {
+    "column_name": "gap_cap_7",
+    "label": "能力7[PMO推進力(現場抵抗突破)] 不足ギャップ (GAP = 重要度 - 充足度)",
+    "dtype": "float64",
+    "missing": 0,
+    "mean": 0.913,
+    "std": 1.191,
+    "min": -2.0,
+    "max": 4.0
+  },
+  {
+    "column_name": "q8_imp_8",
+    "label": "能力8[権限・利害調整力] 重要度スコア (1〜5点)",
+    "dtype": "float64",
+    "missing": 0,
+    "mean": 3.87,
+    "std": 0.707,
+    "min": 3.0,
+    "max": 5.0
+  },
+  {
+    "column_name": "q9_sat_8",
+    "label": "能力8[権限・利害調整力] 充足度スコア (1〜5点)",
+    "dtype": "float64",
+    "missing": 0,
+    "mean": 2.945,
+    "std": 0.915,
+    "min": 1.0,
+    "max": 5.0
+  },
+  {
+    "column_name": "gap_cap_8",
+    "label": "能力8[権限・利害調整力] 不足ギャップ (GAP = 重要度 - 充足度)",
+    "dtype": "float64",
+    "missing": 0,
+    "mean": 0.925,
+    "std": 1.19,
+    "min": -2.0,
+    "max": 4.0
+  },
+  {
+    "column_name": "q8_imp_9",
+    "label": "能力9[戦略・ロードマップ策定] 重要度スコア (1〜5点)",
+    "dtype": "float64",
+    "missing": 0,
+    "mean": 3.889,
+    "std": 0.719,
+    "min": 3.0,
+    "max": 5.0
+  },
+  {
+    "column_name": "q9_sat_9",
+    "label": "能力9[戦略・ロードマップ策定] 充足度スコア (1〜5点)",
+    "dtype": "float64",
+    "missing": 0,
+    "mean": 2.937,
+    "std": 0.924,
+    "min": 1.0,
+    "max": 5.0
+  },
+  {
+    "column_name": "gap_cap_9",
+    "label": "能力9[戦略・ロードマップ策定] 不足ギャップ (GAP = 重要度 - 充足度)",
+    "dtype": "float64",
+    "missing": 0,
+    "mean": 0.953,
+    "std": 1.218,
+    "min": -2.0,
+    "max": 4.0
+  },
+  {
+    "column_name": "q8_imp_10",
+    "label": "能力10[データ活用能力] 重要度スコア (1〜5点)",
+    "dtype": "float64",
+    "missing": 0,
+    "mean": 3.0,
+    "std": 0.0,
+    "min": 3.0,
+    "max": 3.0
+  },
+  {
+    "column_name": "q9_sat_10",
+    "label": "能力10[データ活用能力] 充足度スコア (1〜5点)",
+    "dtype": "float64",
+    "missing": 0,
+    "mean": 3.0,
+    "std": 0.0,
+    "min": 3.0,
+    "max": 3.0
+  },
+  {
+    "column_name": "gap_cap_10",
+    "label": "能力10[データ活用能力] 不足ギャップ (GAP = 重要度 - 充足度)",
+    "dtype": "float64",
+    "missing": 0,
+    "mean": 0.0,
+    "std": 0.0,
+    "min": 0.0,
+    "max": 0.0
+  },
+  {
+    "column_name": "gap_tech",
+    "label": "デジタル技術知識ギャップ (GAP_1)",
+    "dtype": "float64",
+    "missing": 0,
+    "mean": 1.052,
+    "std": 1.235,
+    "min": -2.0,
+    "max": 4.0
+  },
+  {
+    "column_name": "gap_pmo_discovery",
+    "label": "現場課題発見・傾聴能力ギャップ (GAP_3: 最大ボトルネック)",
+    "dtype": "float64",
+    "missing": 0,
+    "mean": 1.083,
+    "std": 1.275,
+    "min": -2.0,
+    "max": 4.0
+  },
+  {
+    "column_name": "gap_pmo_mean",
+    "label": "PMO機能総合不足ギャップ (能力2〜7平均)",
+    "dtype": "float64",
+    "missing": 0,
+    "mean": 0.959,
+    "std": 1.012,
+    "min": -1.0,
+    "max": 4.0
+  },
+  {
+    "column_name": "dissonance_gap",
+    "label": "認知的不協和・推進焦燥度ギャップ (継続意向 Q6 - 成果実感 Q4)",
+    "dtype": "float64",
+    "missing": 0,
+    "mean": 1.254,
+    "std": 2.236,
+    "min": -6.0,
+    "max": 9.0
+  }
+]

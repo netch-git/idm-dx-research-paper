@@ -1,0 +1,80 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:epub="http://www.idpf.org/2007/ops" xml:lang="ja">
+<head>
+  <meta charset="utf-8" />
+  <title>CHAPTER 12: 因果の伝播経路を証明する — 媒介効果分析（Mediation）とブートストラップ法</title>
+  <link rel="stylesheet" type="text/css" href="../styles/stylesheet.css" />
+</head>
+<body>
+  <div class="chapter-number">CHAPTER 12</div>
+  <h2 class="chapter-title">因果の伝播経路を証明する — 媒介効果分析（Mediation）とブートストラップ法</h2>
+  <p class="chapter-lead">AがBを起こし、BがCを引き起こすドミノ倒し。非正規な積の分布を計算機の力技（リサンプリング）で解き明かす。</p>
+
+  
+  <h3 class="subhead">1. 媒介効果（間接効果）のメカニズム</h3>
+  
+<p>
+「DX推進の旗振り（X）」が直接「現場の業務効率化（Y）」をもたらす（直接効果 c'）だけでなく、旗振りによってまず「中間管理職のリーダーシップ（媒介変数 M）」が目覚め、そのリーダーシップを通じて「業務効率化（Y）」が達成される（間接効果 a × b）という因果の伝播を解明するのが <strong>媒介効果分析</strong> です。
+</p>
+
+<div class="epub-formula-card">
+  <div class="formula-line"><strong>間接効果 (Indirect Effect) = a × b</strong> &#8195; (X →<sup>a</sup> M →<sup>b</sup> Y)</div>
+  <div class="formula-note">※ 非正規な積の分布に対し、ブートストラップ法（5,000回）で信頼区間を検証する</div>
+</div>
+
+
+
+  <h3 class="subhead">2. なぜブートストラップ法（Bootstrap）が必要なのか？</h3>
+  
+<p>
+かつて広く使われていた「ソベル検定（Sobel test）」には、重大な統計学的欠陥がありました。係数 a と係数 b がそれぞれ正規分布に従っていたとしても、それらを掛け合わせた積「a × b」の分布は、左右対称の山型にはならず、歪んだ非正規分布になってしまうのです。
+</p>
+<p>
+現代の実証研究（Hayes, 2018等）では、手元のデータから重複を許して何千回も再抽出を行う <strong>ブートストラップ法（通常 5,000回）</strong> を実行し、経験的な 95% 信頼区間を構築します。この信頼区間に「0」が含まれていなければ、間接効果が統計的に確実に存在すると結論づけます。
+</p>
+
+
+  
+<div class="foundations-box">
+  <div class="foundations-header">
+    <span class="foundations-tag">Roots &amp; Foundations</span>
+    <h4 class="foundations-title">難易度の階層を下げる基礎学習: 因果の連鎖とリサンプリングの直感へ遡る</h4>
+  </div>
+  
+  <div class="drilldown-step">
+    <div class="step-badge">1</div>
+    <div class="step-content">
+      <div class="step-title">「直接効果」と「間接効果」の違い — ドミノ倒しの連鎖</div>
+      <div class="step-desc">「DX研修（X）」が直接「業務効率化（Y）」をもたらす（直接効果）だけでなく、「DX研修（X）」によってまず「社員のデジタル自信（媒介変数 M）」が高まり、その自信が「業務効率化（Y）」をもたらす（間接効果）という因果のドミノ倒しを解明するのが媒介分析です。</div>
+    </div>
+  </div>
+
+  <div class="drilldown-step">
+    <div class="step-badge">2</div>
+    <div class="step-content">
+      <div class="step-title">バロン＆ケニー（Baron &amp; Kenny 1986）の古典的手法とその限界</div>
+      <div class="step-desc">かつては「① XがYに効く」「② XがMに効く」「③ MがYに効く」という3本の回帰式を別々に推定し、Mを入れたらXの効果が弱まるかを見る手法が主流でした。しかし、この方法では「間接効果そのものの大きさ（a × b）」に統計的有意差があるかどうかを直接テストできないという欠点がありました。</div>
+    </div>
+  </div>
+
+  <div class="drilldown-step">
+    <div class="step-badge">3</div>
+    <div class="step-content">
+      <div class="step-title">積の分布（a × b）が正規分布にならない問題</div>
+      <div class="step-desc">係数 a も係数 b もそれぞれ正規分布に従っていたとしても、その掛け算である「a × b」の分布は左右対称の山型にはならず、裾が長く伸びて歪んだ分布になってしまいます。そのため、通常の正規分布を前提とした検定（ソベル検定）を使うと、誤った判定を下す危険がありました。</div>
+    </div>
+  </div>
+
+  <div class="drilldown-step">
+    <div class="step-badge">4</div>
+    <div class="step-content">
+      <div class="step-title">ブートストラップ法（Bootstrap）— 手元のデータから何千回も再サンプリングする知恵</div>
+      <div class="step-desc">「理論的な数式で分布の形が分からないなら、コンピュータの計算力で手元のデータから疑似データを何千回も作り出せばいい」という発想がブートストラップ法です。手元の 2,035 人のデータから重複を許してランダムに 2,035 人を抜き出し、a × b を計算する。これを 5,000 回繰り返してヒストグラムを作り、「下位 2.5% から 上位 97.5% の間（95%信頼区間）」にゼロが含まれていないかを確かめます。ゼロを跨がなければ、「間接効果は100%確実に存在する」と胸を張って結論づけられます。</div>
+    </div>
+  </div>
+
+</div>
+
+</body>
+</html>

@@ -1,0 +1,80 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:epub="http://www.idpf.org/2007/ops" xml:lang="ja">
+<head>
+  <meta charset="utf-8" />
+  <title>CHAPTER 02: 就業者の内面的な心理特性を探る — 非階層クラスタリング（k-means法）</title>
+  <link rel="stylesheet" type="text/css" href="../styles/stylesheet.css" />
+</head>
+<body>
+  <div class="chapter-number">CHAPTER 02</div>
+  <h2 class="chapter-title">就業者の内面的な心理特性を探る — 非階層クラスタリング（k-means法）</h2>
+  <p class="chapter-lead">役職や年齢などの「外見の属性」にとらわれず、回答者の「心理パターンの近さ」で自然なグループを発見する。</p>
+
+  
+  <h3 class="subhead">1. 直感アナロジー: 多次元空間の「引力」と「島」の発見</h3>
+  
+<p>
+「管理職だからこう考えるはず」「若手だからDXに積極的なはず」という先入観で分析を始めると、現実を見誤ります。管理職の中にも意欲的なDX推進派はいますし、若手の中にも変化を警戒する保守派がいます。
+</p>
+<p>
+<strong>k-means法</strong> は、あらかじめ決められた肩書を一切忘れ、回答者の心理スコア（DX推進意欲、現状維持志向、不安感など）だけを手がかりに、多次元の空間の中で「近くに集まっている人たち（島）」をアルゴリズムが自動的に見つけ出す手法です。
+</p>
+
+
+  <h3 class="subhead">2. アルゴリズムの反復運動: 重心の移動と収束</h3>
+  
+<p>
+k-meansの動きは、驚くほど直感的です：
+</p>
+<ol>
+  <li>あらかじめ指定した個数（例: k = 3）の「仮のリーダー（重心）」を空間内にランダムに配置する。</li>
+  <li>全回答者（2,035人）が、自分から最も距離が近いリーダーのチームに所属する。</li>
+  <li>集まったメンバーたちの真ん中（平均座標）を計算し、リーダーの位置をそこへ移動させる。</li>
+  <li>リーダーの位置が動かなくなるまで「2」と「3」を繰り返す。</li>
+</ol>
+
+
+  
+<div class="foundations-box">
+  <div class="foundations-header">
+    <span class="foundations-tag">Roots &amp; Foundations</span>
+    <h4 class="foundations-title">難易度の階層を下げる基礎学習: 距離の幾何学と多次元空間の直感へ遡る</h4>
+  </div>
+  
+  <div class="drilldown-step">
+    <div class="step-badge">1</div>
+    <div class="step-content">
+      <div class="step-title">「似ている」を数値化する — ユークリッド距離とピタゴラスの定理</div>
+      <div class="step-desc">2人の回答者が「どれくらい似ているか」をどう計算するでしょうか？ 中学校で習ったピタゴラスの定理（三平方の定理: a² + b² = c²）を使います。2次元なら横の差の2乗と縦の差の2乗を足してルートを取ります。アンケートの項目が10個あれば、10次元空間における2点間の直線距離（ユークリッド距離）を計算するだけです。</div>
+    </div>
+  </div>
+
+  <div class="drilldown-step">
+    <div class="step-badge">2</div>
+    <div class="step-content">
+      <div class="step-title">なぜアンケートの尺度を揃える（標準化: z得点）必要があるのか？</div>
+      <div class="step-desc">もし「DX意識（1〜5点尺度）」と「年収（200万〜1500万円）」をそのまま距離計算に使うと、年収の数字の大きさに引っ張られ、DX意識の差が完全に無視されてしまいます。そこで、すべての変数の平均を0、標準偏差を1に変換する「標準化（z得点化）」を行い、公平な土俵で距離を測ります。</div>
+    </div>
+  </div>
+
+  <div class="drilldown-step">
+    <div class="step-badge">3</div>
+    <div class="step-content">
+      <div class="step-title">重心の計算 — 多次元ベクトルの相加平均</div>
+      <div class="step-desc">同じグループに属する全員の各項目の平均値を求めたものが「重心（セントロイド）」です。k-means法は、「各人を一番近い重心に割り当てる」→「新しいメンバーで重心を再計算する」というシンプルな作業を、メンバーの移動がなくなるまで繰り返すアルゴリズムです。</div>
+    </div>
+  </div>
+
+  <div class="drilldown-step">
+    <div class="step-badge">4</div>
+    <div class="step-content">
+      <div class="step-title">最適なグループ数は誰が決めるのか？ — エルボー法とシルエット分析</div>
+      <div class="step-desc">グループ数 k を1から増やしていくと、重心からの距離の合計（クラスタ内誤差平方和: WSS）は必ず減っていきます。しかし、全員をバラバラに分ければ誤差はゼロになりますが、それは分類の意味がありません。グラフが「肘（エルボー）」のように急に緩やかになる変曲点や、他グループとの離れ具合を測るシルエット係数を見て、客観的・数学的に最適グループ数を決定します。</div>
+    </div>
+  </div>
+
+</div>
+
+</body>
+</html>

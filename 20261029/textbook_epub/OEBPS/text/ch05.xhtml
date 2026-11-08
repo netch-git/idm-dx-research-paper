@@ -1,0 +1,54 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:epub="http://www.idpf.org/2007/ops" xml:lang="ja" lang="ja">
+<head>
+  <meta charset="utf-8" />
+  <title>第5章: 調整効果検定と平均中心化の数理</title>
+  <link rel="stylesheet" type="text/css" href="../styles/stylesheet.css" />
+</head>
+<body>
+
+<div class="chapter-start">
+  <div class="chapter-number">CHAPTER 05</div>
+  <h2 class="chapter-title">関係性を動的に捉える — 階層的重回帰分析による調整効果検定</h2>
+  <p class="chapter-lead">原因と結果の間に働く緩衝作用。多重共線性（VIF）を解消する「平均中心化」の工夫と、対話がもたらす緩和効果。</p>
+
+  <h3 class="subhead">1. 単なる「相関」から「条件付きのメカニズム（調整効果）」へ</h3>
+  <p>
+    「DX推進において手続きの不公平感が高まると、社員の抵抗感が増す」という知見は重要ですが、実務が真に求めているのは、<strong>「では、どのような環境や関わりがあれば、その抵抗感を和らげることができるのか」</strong> という実践的な処方箋です。
+  </p>
+  <p>
+    この問いを明らかにするのが <strong>調整効果検定（Moderated Regression）</strong> です。「不公平感（X）」と「DXへの抵抗感（Y）」の間の傾き（影響の強さ）が、「組織内の対話の豊かさ（Z）」によってどのように変化するかを、<strong>交互作用項（交差項: X × Z）</strong> を回帰式に投入して検証します。
+  </p>
+  <p>
+    対話が不足している組織環境（−1.5 SD）では、不公平感が高まるにつれて抵抗感が急激に跳ね上がります（急な正の傾斜）。一方で、日常的な対話が豊かに保たれている組織環境（+1.5 SD）では、<strong>傾きが水平に近づき、不公平感が抵抗感へと直結する連鎖が大幅に緩和される</strong> 様子が見事に確認できます。
+  </p>
+
+  <h3 class="subhead">2. 平均中心化（Mean-centering）: 多重共線性（VIF）を防ぐ知恵</h3>
+  <p>
+    交互作用項を分析する際、生のデータ同士を単純に掛け合わせて（X × Z）回帰モデルに投入すると、掛け算項が元の変数と強い相関を持つため、<strong>多重共線性（Multicollinearity: VIF &gt; 10）</strong> が発生し、推定値が不安定になるという計算上の問題が生じます。
+  </p>
+  <p>
+    この技術的課題を解決するために Aiken &amp; West (1991) が提唱した標準的手法が <strong>「平均中心化（Mean-centering）」</strong> です。
+    各変数の値から、その変数の「平均値」をあらかじめ差し引いてから掛け合わせます：
+  </p>
+
+  <div class="formula-box">
+    X<sub>centered</sub> = X − X̄, &#8195; Z<sub>centered</sub> = Z − Z̄, &#8195; 交互作用項 = X<sub>centered</sub> × Z<sub>centered</sub>
+  </div>
+
+  <p>
+    平均値を差し引くことで、データの中心が原点付近に移動し、変数の対称性が高まるため、元の変数と交互作用項との相関が大幅に低減されます。本研究でもこの手続きを徹底した結果、投入したすべての変数の VIF 値は 1.8 以下の良好な安全圏に収まっています。
+  </p>
+
+  <div class="defense-box">
+    <div class="defense-role">💬 学術的対話のための討議ノート</div>
+    <p><strong>想定される問いかけ:</strong> 「交互作用項を投入したことで多重共線性が発生していませんか？ また調整効果の具体的な現れ方をどう解釈していますか？」</p>
+    <p><strong>討議の視点と回答方針:</strong><br />
+    「交差項の投入に伴う多重共線性のリスクに対しては、Aiken &amp; West (1991) のガイドラインに従い、独立変数および調整変数の双方を平均中心化した上で交差項を生成いたしました。その結果、全投入変数の VIF は最大でも 1.8 にとどまり、多重共線性の懸念はクリアされています。<br />
+    さらに、単純傾斜検定（Simple Slope Test）を実施した結果、対話量が平均＋1標準偏差以上の高群においては、不公平感の主効果が有意に平坦化することを確認いたしました。対話の存在が現場の不安を緩和する緩衝材として機能していることを実証的に示しております。」</p>
+  </div>
+</div>
+
+</body>
+</html>

@@ -1,0 +1,103 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ncx xmlns="http://www.daisy.org/z3986/2005/ncx/" version="2005-1">
+  <head>
+    <meta name="dtb:uid" content="urn:uuid:idm-study-guide-2026-v2"/>
+    <meta name="dtb:depth" content="1"/>
+    <meta name="dtb:totalPageCount" content="0"/>
+    <meta name="dtb:maxPageNumber" content="0"/>
+  </head>
+  <docTitle><text>組織調査と計量分析の実践知 — チームで深めるアンケート・統計手法の直感と数理（完全体系化版）</text></docTitle>
+  <navMap>
+    
+    <navPoint id="np_1" playOrder="1">
+      <navLabel><text>表紙</text></navLabel>
+      <content src="text/cover.xhtml"/>
+    </navPoint>
+
+    <navPoint id="np_2" playOrder="2">
+      <navLabel><text>第00章: プロローグ: なぜ私たちは「分析手法」を誠実に問うのか？</text></navLabel>
+      <content src="text/ch0.xhtml"/>
+    </navPoint>
+
+    <navPoint id="np_3" playOrder="3">
+      <navLabel><text>第01章: グループの差を丁寧に確かめる — 分散分析（ANOVA）と効果量 η²</text></navLabel>
+      <content src="text/ch1.xhtml"/>
+    </navPoint>
+
+    <navPoint id="np_4" playOrder="4">
+      <navLabel><text>第02章: 就業者の内面的な心理特性を探る — 非階層クラスタリング（k-means法）</text></navLabel>
+      <content src="text/ch2.xhtml"/>
+    </navPoint>
+
+    <navPoint id="np_5" playOrder="5">
+      <navLabel><text>第03章: 境界のある確率を誠実に捉える — 二項＆多項ロジスティック回帰分析</text></navLabel>
+      <content src="text/ch3.xhtml"/>
+    </navPoint>
+
+    <navPoint id="np_6" playOrder="6">
+      <navLabel><text>第04章: 自らの前提を疑い、確かめる — 重複項目除外の再クラスタリング感度分析</text></navLabel>
+      <content src="text/ch4.xhtml"/>
+    </navPoint>
+
+    <navPoint id="np_7" playOrder="7">
+      <navLabel><text>第05章: 関係性を動的に捉える — 階層的重回帰分析による調整効果検定</text></navLabel>
+      <content src="text/ch5.xhtml"/>
+    </navPoint>
+
+    <navPoint id="np_8" playOrder="8">
+      <navLabel><text>第06章: 調査の限界を自覚し、数理で吟味する — 共通方法バイアスとSiemsen減衰定理</text></navLabel>
+      <content src="text/ch6.xhtml"/>
+    </navPoint>
+
+    <navPoint id="np_9" playOrder="9">
+      <navLabel><text>第07章: 目に見えない概念を測る物差しを磨く — 共分散構造分析（SEM）と確認的因子分析（CFA）</text></navLabel>
+      <content src="text/ch7.xhtml"/>
+    </navPoint>
+
+    <navPoint id="np_10" playOrder="10">
+      <navLabel><text>第08章: 数字の背後にある「生々しい営み」に耳を澄ます — 縦断的質的調査とセンスメイキング理論</text></navLabel>
+      <content src="text/ch8.xhtml"/>
+    </navPoint>
+
+    <navPoint id="np_11" playOrder="11">
+      <navLabel><text>第09章: 計量経済学の標準選択モデル — プロビット回帰（Probit）と限界効果</text></navLabel>
+      <content src="text/ch9.xhtml"/>
+    </navPoint>
+
+    <navPoint id="np_12" playOrder="12">
+      <navLabel><text>第10章: 時間と企業個性をコントロールする — パネルデータ分析（固定効果・ランダム効果）</text></navLabel>
+      <content src="text/ch10.xhtml"/>
+    </navPoint>
+
+    <navPoint id="np_13" playOrder="13">
+      <navLabel><text>第11章: 予測志向の中小企業モデリング — PLS-SEM（SmartPLS）の思想と使い分け</text></navLabel>
+      <content src="text/ch11.xhtml"/>
+    </navPoint>
+
+    <navPoint id="np_14" playOrder="14">
+      <navLabel><text>第12章: 因果の伝播経路を証明する — 媒介効果分析（Mediation）とブートストラップ法</text></navLabel>
+      <content src="text/ch12.xhtml"/>
+    </navPoint>
+
+    <navPoint id="np_15" playOrder="15">
+      <navLabel><text>第13章: 何十編もの研究成果を客観的に統合する — メタアナリシス（Meta-Analysis）の技法</text></navLabel>
+      <content src="text/ch13.xhtml"/>
+    </navPoint>
+
+    <navPoint id="np_16" playOrder="16">
+      <navLabel><text>第14章: 現場の生々しい声を科学的理論に昇華させる — 帰納的テーマ分析（Gioiaメソッド）</text></navLabel>
+      <content src="text/ch14.xhtml"/>
+    </navPoint>
+
+    <navPoint id="np_17" playOrder="17">
+      <navLabel><text>第15章: 組織内の変革伝播をシミュレーションする — エージェントベースモデル（ABM）</text></navLabel>
+      <content src="text/ch15.xhtml"/>
+    </navPoint>
+
+    <navPoint id="np_18" playOrder="18">
+      <navLabel><text>エピローグ: 学術的対話のための討議手引（15選）</text></navLabel>
+      <content src="text/epilogue.xhtml"/>
+    </navPoint>
+
+  </navMap>
+</ncx>

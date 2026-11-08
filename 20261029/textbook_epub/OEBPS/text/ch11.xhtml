@@ -1,0 +1,77 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:epub="http://www.idpf.org/2007/ops" xml:lang="ja">
+<head>
+  <meta charset="utf-8" />
+  <title>CHAPTER 11: 予測志向の中小企業モデリング — PLS-SEM（SmartPLS）の思想と使い分け</title>
+  <link rel="stylesheet" type="text/css" href="../styles/stylesheet.css" />
+</head>
+<body>
+  <div class="chapter-number">CHAPTER 11</div>
+  <h2 class="chapter-title">予測志向の中小企業モデリング — PLS-SEM（SmartPLS）の思想と使い分け</h2>
+  <p class="chapter-lead">大標本や正規分布が手に入らない現場のリアルに応える。分散最大化アルゴリズムによる実務志向の構造方程式モデリング。</p>
+
+  
+  <h3 class="subhead">1. 中小企業研究における現実の壁とPLS-SEMの台頭</h3>
+  
+<p>
+伝統的な共分散構造分析（CB-SEM: Amos, lavaan等）は、理論の真理性（共分散の一致）を検証するために、多変量正規分布と大規模なサンプルサイズ（通常N ≥ 200〜300以上）を要求します。
+</p>
+<p>
+しかし、中小企業や特定の専門職を対象とした調査では、サンプルサイズが数十社〜100社程度にとどまることが珍しくありません。このような現実の制約下で強力な武器となるのが <strong>PLS-SEM（部分最小二乗法SEM）</strong> です。
+</p>
+
+
+  <h3 class="subhead">2. 理論検証（CB）と予測重視（PLS）の明確な使い分け</h3>
+  
+<p>
+PLS-SEMは、正規分布の仮定を必要とせず（ノンパラメトリック）、目的変数の説明力（決定係数 R²）を最大化することを目指すアルゴリズムです。
+</p>
+<p>
+「既存理論の正しさを厳密にテストしたい」場合はCB-SEMを採用し、「探索的な新規領域において、どの施策が変革成果を最も強く予測するかを解明したい」場合はPLS-SEMを採用するという明確な使い分け基準が存在します。
+</p>
+
+
+  
+<div class="foundations-box">
+  <div class="foundations-header">
+    <span class="foundations-tag">Roots &amp; Foundations</span>
+    <h4 class="foundations-title">難易度の階層を下げる基礎学習: 共分散基準（CB-SEM）と分散最大化（PLS）の違いへ遡る</h4>
+  </div>
+  
+  <div class="drilldown-step">
+    <div class="step-badge">1</div>
+    <div class="step-content">
+      <div class="step-title">中小企業調査の現実的制約 — なぜサンプルサイズが限られるのか？</div>
+      <div class="step-desc">大企業と異なり、中小企業を対象とした調査では、回答社数が数十社〜100社程度にとどまることが多々あります。従来の共分散構造分析（CB-SEM: AmosやMplus）は、大標本（通常200〜300以上）かつ多変量正規分布を前提とするため、中小企業データでは計算が収束せずエラーになってしまう壁がありました。</div>
+    </div>
+  </div>
+
+  <div class="drilldown-step">
+    <div class="step-badge">2</div>
+    <div class="step-content">
+      <div class="step-title">理論検証（CB-SEM） vs 予測・説明（PLS-SEM）の目的の違い</div>
+      <div class="step-desc">CB-SEMは「理論モデルが現実の共分散行列と一致しているか」という真理の検証を目指します。これに対し、PLS-SEM（Partial Least Squares）は、機械学習のように「目的変数（売上や変革成果など）の分散をどれだけ説明・予測できるか（R²の最大化）」を主目的に置きます。</div>
+    </div>
+  </div>
+
+  <div class="drilldown-step">
+    <div class="step-badge">3</div>
+    <div class="step-content">
+      <div class="step-title">正規性の仮定からの解放 — ノンパラメトリックな反復推定</div>
+      <div class="step-desc">PLSはデータの分布に特定の正規分布を仮定せず、部分最小二乗法という反復アルゴリズムで潜在変数のスコアを直接計算します。そのため、データが多少歪んでいても、サンプルサイズが比較的小さくても、複雑なモデルを安定して推定できます。</div>
+    </div>
+  </div>
+
+  <div class="drilldown-step">
+    <div class="step-badge">4</div>
+    <div class="step-content">
+      <div class="step-title">リフレクティブ指標とフォーマティブ指標の違い</div>
+      <div class="step-desc">「心理的ストレス」が高まるから「不眠」「食欲不振」という症状が現れる（本質から漏れ出る影）のが「リフレクティブ指標」です。一方、「飲酒量」「労働時間」「睡眠不足」が合算されて「健康リスク」が形成される（原因の束ね）のが「フォーマティブ指標」です。PLS-SEMはこのフォーマティブ指標のモデル化に極めて強いという特徴を持ちます。</div>
+    </div>
+  </div>
+
+</div>
+
+</body>
+</html>

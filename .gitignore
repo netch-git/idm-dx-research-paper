@@ -1,0 +1,16 @@
+# Environment variables and secrets
+.env
+.env.*
+*.key
+*.token
+
+# Python cache
+__pycache__/
+*.py[cod]
+*$py.class
+*.ipynb_checkpoints
+.pytest_cache/
+
+# OS files
+.DS_Store
+Thumbs.db
