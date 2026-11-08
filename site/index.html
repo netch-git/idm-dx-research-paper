@@ -5,44 +5,61 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>IDM DX CITATION COCKPIT | 論文引用文献・分析手法＆結論 統合コックピット</title>
   
-  <!-- Google Fonts: Noto Sans JP & JetBrains Mono -->
+  <!-- Google Fonts: Noto Sans JP, JetBrains Mono, Material Symbols Outlined -->
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;600;700;800&family=Noto+Sans+JP:wght@400;500;700;900&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200" />
   
   <!-- Chart.js 4.4.1 -->
   <script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.1/dist/chart.umd.min.js"></script>
 
   <style>
     /* ==========================================================
-       CSS デザイントークン (Grid-Note Neo-Brutalism)
+       CSS デザイントークン (Slate & Deep Navy Engineering Tone)
        ========================================================== */
     :root {
-      --bg-paper: #FAF8F0;
-      --grid-line: rgba(30, 30, 30, 0.06);
+      /* 背景・方眼 */
+      --bg-paper: #F8FAFC;
+      --grid-line: rgba(15, 23, 42, 0.05);
 
+      /* サーフェス */
       --surface-white: #FFFFFF;
-      --surface-muted: #F7F5EE;
+      --surface-card: #FFFFFF;
+      --surface-muted: #F1F5F9;
+      --surface-slate: #E2E8F0;
 
-      --ink-black: #1E1E1E;
-      --ink-gray: #555555;
-      --ink-light: #777777;
+      /* ディープネイビー & ダークサーフェス（AIパステルカラー回避） */
+      --navy-darkest: #0B1120;
+      --navy-dark: #0F172A;
+      --navy-card: #1E293B;
+      --navy-subtle: #334155;
 
-      --accent-yellow: #F5C518;
-      --accent-red: #D93829;
-      --accent-blue: #1D63B8;
-      --accent-green: #129956;
-      --accent-purple: #7B1FA2;
+      /* テキストカラー */
+      --ink-darkest: #0F172A;
+      --ink-slate: #334155;
+      --ink-gray: #64748B;
+      --text-light-primary: #F8FAFC;
+      --text-light-secondary: #E2E8F0;
+      --text-light-muted: #94A3B8;
 
-      --border-thin: 1.5px solid #1E1E1E;
-      --border-thick: 2px solid #1E1E1E;
-      --border-heavy: 3px solid #1E1E1E;
-      --border-dashed: 1.5px dashed #1E1E1E;
-      --shadow-card: 0px 4px 0px #1E1E1E;
-      --shadow-card-lg: 0px 6px 0px #1E1E1E;
-      --shadow-btn: 0px 2px 0px #1E1E1E;
-      --shadow-btn-active: 0px 0px 0px #1E1E1E;
+      /* アクセント（彩度を落とした端正な色調） */
+      --accent-navy: #1E3A8A;
+      --accent-steel: #0284C7;
+      --accent-amber: #D97706;
+      --accent-charcoal: #374151;
 
+      /* ボーダー & ソリッドシャドウ */
+      --border-thin: 1px solid #CBD5E1;
+      --border-thick: 2px solid #0F172A;
+      --border-heavy: 3px solid #0F172A;
+      --border-dashed: 1.5px dashed #94A3B8;
+      --shadow-card: 0px 4px 0px #0F172A;
+      --shadow-card-lg: 0px 6px 0px #0F172A;
+      --shadow-btn: 0px 2px 0px #0F172A;
+      --shadow-btn-active: 0px 0px 0px #0F172A;
+
+      /* フォントファミリ */
       --font-sans: 'Noto Sans JP', sans-serif;
       --font-mono: 'JetBrains Mono', monospace;
     }
@@ -55,7 +72,7 @@
         linear-gradient(var(--grid-line) 1px, transparent 1px),
         linear-gradient(90deg, var(--grid-line) 1px, transparent 1px);
       background-size: 20px 20px;
-      color: var(--ink-black);
+      color: var(--ink-darkest);
       font-family: var(--font-sans);
       line-height: 1.6;
       padding: 24px 16px 80px;
@@ -67,7 +84,23 @@
       margin: 0 auto;
     }
 
-    /* 物理ボタンスタイル */
+    /* Google Fonts アイコン標準クラス */
+    .material-symbols-outlined {
+      font-family: 'Material Symbols Outlined';
+      font-weight: normal;
+      font-style: normal;
+      font-size: 16px;
+      line-height: 1;
+      display: inline-block;
+      vertical-align: -2px;
+      text-transform: none;
+      letter-spacing: normal;
+      word-wrap: normal;
+      white-space: nowrap;
+      direction: ltr;
+    }
+
+    /* 物理ボタン */
     .neo-btn {
       display: inline-flex;
       align-items: center;
@@ -80,23 +113,24 @@
       font-family: var(--font-mono);
       font-size: 13px;
       font-weight: 700;
-      color: var(--ink-black);
+      color: var(--ink-darkest);
       text-decoration: none;
       cursor: pointer;
       border-radius: 6px;
       transition: transform 0.08s ease, box-shadow 0.08s ease, background-color 0.08s ease;
       user-select: none;
     }
-    .neo-btn:hover { background: #FFF9E6; }
+    .neo-btn:hover { background: #F1F5F9; }
     .neo-btn:active {
       transform: translateY(2px);
       box-shadow: var(--shadow-btn-active);
     }
     .neo-btn-primary {
-      background: var(--accent-yellow);
+      background: var(--navy-dark);
+      color: #FFFFFF;
     }
     .neo-btn-primary:hover {
-      background: #E5B508;
+      background: #1E293B;
     }
 
     /* ヘッダーエリア */
@@ -105,17 +139,17 @@
       border: var(--border-heavy);
       box-shadow: var(--shadow-card-lg);
       border-radius: 12px;
-      padding: 24px 28px;
+      padding: 26px 28px;
       margin-bottom: 24px;
       position: relative;
-      overflow: hidden;
     }
     .header-tag {
       display: inline-flex;
       align-items: center;
       gap: 6px;
-      background: var(--accent-yellow);
-      border: var(--border-thin);
+      background: var(--navy-dark);
+      color: var(--text-light-primary);
+      border: 1px solid var(--navy-subtle);
       padding: 4px 10px;
       font-family: var(--font-mono);
       font-size: 11px;
@@ -123,6 +157,10 @@
       border-radius: 4px;
       margin-bottom: 12px;
       letter-spacing: 0.5px;
+    }
+    .header-tag .material-symbols-outlined {
+      font-size: 14px;
+      color: #94A3B8;
     }
     .header-title-row {
       display: flex;
@@ -137,6 +175,7 @@
       letter-spacing: -0.5px;
       line-height: 1.25;
       margin-bottom: 8px;
+      color: var(--navy-dark);
     }
     .header-subtitle {
       font-size: 14px;
@@ -154,7 +193,7 @@
 
     .meta-badges-row {
       display: flex;
-      gap: 12px;
+      gap: 10px;
       margin-top: 18px;
       flex-wrap: wrap;
     }
@@ -163,17 +202,21 @@
       align-items: center;
       gap: 6px;
       background: var(--surface-muted);
-      border: var(--border-thin);
+      border: 1px solid #CBD5E1;
       padding: 4px 10px;
       border-radius: 4px;
       font-size: 12px;
       font-family: var(--font-mono);
       font-weight: 700;
+      color: var(--ink-slate);
     }
     .meta-badge.active {
-      background: #E8F5E9;
-      color: #1B5E20;
-      border-color: #2E7D32;
+      background: var(--navy-dark);
+      color: var(--text-light-primary);
+      border-color: var(--navy-dark);
+    }
+    .meta-badge .material-symbols-outlined {
+      font-size: 14px;
     }
 
     /* KPIカードグリッド */
@@ -203,12 +246,16 @@
       align-items: center;
       margin-bottom: 8px;
     }
+    .kpi-label .material-symbols-outlined {
+      font-size: 18px;
+      color: var(--ink-slate);
+    }
     .kpi-value {
       font-size: 28px;
       font-weight: 900;
       font-family: var(--font-mono);
       line-height: 1.1;
-      color: var(--ink-black);
+      color: var(--navy-dark);
     }
     .kpi-desc {
       font-size: 12px;
@@ -237,7 +284,7 @@
       align-items: center;
       margin-bottom: 12px;
       padding-bottom: 8px;
-      border-bottom: var(--border-thin);
+      border-bottom: 1px solid var(--surface-slate);
     }
     .chart-title {
       font-size: 14px;
@@ -245,6 +292,10 @@
       display: flex;
       align-items: center;
       gap: 6px;
+      color: var(--navy-dark);
+    }
+    .chart-title .material-symbols-outlined {
+      font-size: 18px;
     }
 
     /* 検索＆コントロールパネル */
@@ -266,24 +317,27 @@
       border: var(--border-thick);
       border-radius: 6px;
       padding: 12px 16px 12px 42px;
-      font-size: 15px;
+      font-size: 14px;
       font-family: var(--font-sans);
       font-weight: 500;
       outline: none;
       transition: background 0.15s, border-color 0.15s;
+      color: var(--ink-darkest);
     }
     .search-input:focus {
       background: #FFFFFF;
-      border-color: var(--accent-blue);
+      border-color: var(--navy-dark);
     }
     .search-icon {
       position: absolute;
       left: 14px;
       top: 50%;
       transform: translateY(-50%);
-      font-size: 16px;
       color: var(--ink-gray);
       pointer-events: none;
+    }
+    .search-icon .material-symbols-outlined {
+      font-size: 18px;
     }
 
     .tabs-wrap {
@@ -294,7 +348,7 @@
     }
     .tab-btn {
       background: var(--surface-muted);
-      border: var(--border-thin);
+      border: 1.5px solid #CBD5E1;
       padding: 6px 12px;
       font-size: 12px;
       font-weight: 700;
@@ -303,12 +357,16 @@
       transition: all 0.08s ease;
       font-family: var(--font-mono);
       user-select: none;
+      color: var(--ink-slate);
     }
-    .tab-btn:hover { background: #FFF9E6; }
+    .tab-btn:hover {
+      background: #E2E8F0;
+    }
     .tab-btn.active {
-      background: var(--accent-yellow);
-      border: var(--border-thick);
-      box-shadow: 0px 2px 0px #1E1E1E;
+      background: var(--navy-dark);
+      color: #FFFFFF;
+      border: 1.5px solid var(--navy-dark);
+      box-shadow: 0px 2px 0px #000000;
       transform: translateY(-1px);
     }
 
@@ -318,7 +376,7 @@
       flex-wrap: wrap;
       align-items: center;
       padding-top: 10px;
-      border-top: var(--border-dashed);
+      border-top: 1px dashed #CBD5E1;
     }
     .method-filter-label {
       font-size: 11px;
@@ -329,19 +387,21 @@
     }
     .method-badge-btn {
       background: var(--surface-white);
-      border: 1px solid var(--ink-black);
+      border: 1px solid #94A3B8;
       padding: 3px 8px;
       font-size: 11px;
       border-radius: 4px;
       cursor: pointer;
       font-weight: 600;
+      color: var(--ink-slate);
       transition: background 0.08s;
       user-select: none;
     }
-    .method-badge-btn:hover { background: #EEEEEE; }
+    .method-badge-btn:hover { background: #E2E8F0; }
     .method-badge-btn.active {
-      background: var(--ink-black);
+      background: var(--navy-card);
       color: #FFFFFF;
+      border-color: var(--navy-card);
     }
 
     /* 文献カードリスト */
@@ -353,6 +413,7 @@
       display: flex;
       justify-content: space-between;
       align-items: center;
+      color: var(--ink-slate);
     }
 
     .cards-list {
@@ -389,17 +450,19 @@
       flex-wrap: wrap;
     }
     .ref-id-badge {
-      background: var(--accent-yellow);
-      border: var(--border-thin);
+      background: var(--navy-dark);
+      color: #FFFFFF;
       padding: 3px 8px;
       font-family: var(--font-mono);
       font-size: 12px;
       font-weight: 900;
       border-radius: 4px;
+      letter-spacing: 0.5px;
     }
     .year-badge {
-      background: var(--ink-black);
-      color: #FFFFFF;
+      background: #F1F5F9;
+      color: var(--ink-darkest);
+      border: 1px solid #CBD5E1;
       padding: 3px 8px;
       font-family: var(--font-mono);
       font-size: 11px;
@@ -407,18 +470,18 @@
       border-radius: 4px;
     }
     .category-badge {
-      background: #E3F2FD;
-      color: #0D47A1;
-      border: 1px solid #1976D2;
+      background: #F1F5F9;
+      color: var(--ink-slate);
+      border: 1px solid #CBD5E1;
       padding: 2px 8px;
       font-size: 11px;
       font-weight: 700;
       border-radius: 4px;
     }
     .method-badge-tag {
-      background: #F3E5F5;
-      color: #4A148C;
-      border: 1px solid #7B1FA2;
+      background: #F8FAFC;
+      color: var(--navy-subtle);
+      border: 1px solid #94A3B8;
       padding: 2px 8px;
       font-size: 11px;
       font-weight: 700;
@@ -426,13 +489,20 @@
       font-family: var(--font-mono);
     }
     .pdf-verified-badge {
-      background: #E8F5E9;
-      color: #1B5E20;
-      border: 1px solid #2E7D32;
+      background: #F1F5F9;
+      color: var(--navy-dark);
+      border: 1px solid #94A3B8;
       padding: 2px 8px;
       font-size: 11px;
       font-weight: 700;
       border-radius: 4px;
+      display: inline-flex;
+      align-items: center;
+      gap: 4px;
+    }
+    .pdf-verified-badge .material-symbols-outlined {
+      font-size: 13px;
+      color: var(--navy-dark);
     }
 
     .card-title-ja {
@@ -440,7 +510,7 @@
       font-weight: 900;
       line-height: 1.35;
       margin-bottom: 6px;
-      color: var(--ink-black);
+      color: var(--navy-dark);
     }
     .card-title-en {
       font-size: 13px;
@@ -455,22 +525,28 @@
       font-family: var(--font-mono);
       margin-bottom: 16px;
       padding-bottom: 12px;
-      border-bottom: var(--border-thin);
+      border-bottom: 1px solid var(--surface-slate);
       display: flex;
       flex-wrap: wrap;
       gap: 12px;
       align-items: center;
     }
     .doi-link {
-      color: var(--accent-blue);
+      color: var(--accent-steel);
       text-decoration: none;
       font-weight: 700;
+      display: inline-flex;
+      align-items: center;
+      gap: 3px;
     }
     .doi-link:hover {
       text-decoration: underline;
     }
+    .doi-link .material-symbols-outlined {
+      font-size: 14px;
+    }
 
-    /* 入門者向けハイライト解説ボックス */
+    /* 入門者向け解説ボックス（ディープネイビー背景 ＆ フォント薄いグレー） */
     .plain-boxes-grid {
       display: grid;
       grid-template-columns: 1fr 1fr;
@@ -484,59 +560,77 @@
     }
 
     .plain-box {
-      border: var(--border-thin);
       border-radius: 6px;
-      padding: 12px 14px;
+      padding: 14px 16px;
+      box-shadow: inset 0 1px 1px rgba(255, 255, 255, 0.05);
     }
+    /* 分析方法ボックス：ディープネイビー */
     .box-method {
-      background: #F0F7FF;
-      border-color: #1D63B8;
+      background: var(--navy-dark);
+      border: 1px solid var(--navy-subtle);
+      color: var(--text-light-secondary);
     }
+    /* 結論ボックス：スレートネイビー */
     .box-conclusion {
-      background: #F1FBF4;
-      border-color: #129956;
+      background: var(--navy-card);
+      border: 1px solid var(--navy-subtle);
+      color: var(--text-light-secondary);
     }
+
     .box-header {
       display: flex;
       align-items: center;
       gap: 6px;
-      font-size: 12px;
-      font-weight: 900;
-      margin-bottom: 6px;
+      font-size: 11px;
+      font-weight: 800;
+      margin-bottom: 8px;
       font-family: var(--font-mono);
+      letter-spacing: 0.5px;
+      text-transform: uppercase;
+      color: var(--text-light-muted);
     }
-    .box-method .box-header { color: #1D63B8; }
-    .box-conclusion .box-header { color: #129956; }
+    .box-header .material-symbols-outlined {
+      font-size: 15px;
+      color: #CBD5E1;
+    }
     .box-content {
       font-size: 13px;
-      line-height: 1.5;
-      color: #222222;
+      line-height: 1.6;
+      color: var(--text-light-secondary);
       font-weight: 500;
     }
 
-    /* 本論文での役割コールアウト */
+    /* 本論文での役割コールアウト（ニュートラル薄いグレー背景） */
     .role-callout {
-      background: #FFFDF0;
-      border: var(--border-thin);
-      border-left: 4px solid var(--accent-yellow);
+      background: #F1F5F9;
+      border: 1px solid #CBD5E1;
+      border-left: 4px solid var(--navy-dark);
       border-radius: 4px;
       padding: 10px 14px;
       font-size: 12px;
       line-height: 1.5;
       margin-bottom: 14px;
+      color: var(--ink-darkest);
     }
     .role-title {
-      font-weight: 900;
+      font-weight: 800;
       font-size: 11px;
       font-family: var(--font-mono);
-      color: #8C6D00;
-      margin-bottom: 2px;
+      color: var(--ink-slate);
+      margin-bottom: 4px;
+      display: flex;
+      align-items: center;
+      gap: 5px;
+    }
+    .role-title .material-symbols-outlined {
+      font-size: 15px;
+      color: var(--navy-dark);
     }
 
     /* 詳細アコーディオン */
     .accordion-toggle {
       background: var(--surface-muted);
-      border: var(--border-thin);
+      border: 1px solid #CBD5E1;
       padding: 10px 14px;
       border-radius: 6px;
       font-size: 12px;
@@ -548,15 +642,25 @@
       font-family: var(--font-mono);
       user-select: none;
       transition: background 0.08s ease;
+      color: var(--ink-darkest);
     }
     .accordion-toggle:hover {
-      background: #ECEAE0;
+      background: #E2E8F0;
+    }
+    .accordion-toggle-left {
+      display: flex;
+      align-items: center;
+      gap: 6px;
+    }
+    .accordion-toggle-left .material-symbols-outlined {
+      font-size: 16px;
+      color: var(--ink-gray);
     }
     .accordion-content {
       display: none;
       padding-top: 14px;
       margin-top: 10px;
-      border-top: var(--border-dashed);
+      border-top: 1px dashed #CBD5E1;
       font-size: 12px;
       line-height: 1.6;
     }
@@ -571,58 +675,77 @@
       font-size: 12px;
     }
     .details-subtable th, .details-subtable td {
-      border: 1px solid #DDDDDD;
+      border: 1px solid #CBD5E1;
       padding: 6px 10px;
       text-align: left;
     }
     .details-subtable th {
-      background: #F5F5F5;
+      background: #F1F5F9;
       font-weight: 700;
       width: 25%;
       font-family: var(--font-mono);
+      color: var(--ink-slate);
+    }
+    .details-subtable td {
+      color: var(--ink-darkest);
     }
 
     .qa-box {
-      background: #FFF9F9;
-      border: 1px solid #FFCDD2;
-      border-left: 4px solid var(--accent-red);
-      padding: 10px 14px;
+      background: #F8FAFC;
+      border: 1px solid #CBD5E1;
+      border-left: 4px solid var(--navy-subtle);
+      padding: 12px 14px;
       border-radius: 4px;
       margin-bottom: 12px;
     }
     .qa-q {
       font-weight: 800;
-      color: #C62828;
+      color: var(--navy-dark);
       margin-bottom: 4px;
       font-size: 12px;
+      display: flex;
+      align-items: flex-start;
+      gap: 6px;
+    }
+    .qa-q .material-symbols-outlined {
+      font-size: 16px;
+      color: var(--navy-subtle);
+      margin-top: 1px;
     }
     .qa-a {
-      color: #333333;
+      color: var(--ink-slate);
       font-size: 12px;
+      padding-left: 22px;
+      line-height: 1.5;
     }
 
     /* コピーボタン */
     .copy-btn {
       display: inline-flex;
       align-items: center;
-      gap: 4px;
+      gap: 5px;
       background: #FFFFFF;
-      border: 1px solid var(--ink-black);
+      border: 1.5px solid var(--navy-dark);
       padding: 5px 10px;
       font-size: 11px;
       font-family: var(--font-mono);
       font-weight: 700;
       border-radius: 4px;
       cursor: pointer;
-      box-shadow: 0 1px 0 #1E1E1E;
+      box-shadow: 0 1px 0 var(--navy-dark);
       user-select: none;
+      color: var(--navy-dark);
+      transition: background 0.08s, color 0.08s;
     }
     .copy-btn:hover {
-      background: #FFF9E6;
+      background: #F1F5F9;
     }
     .copy-btn:active {
       transform: translateY(1px);
       box-shadow: none;
+    }
+    .copy-btn .material-symbols-outlined {
+      font-size: 14px;
     }
 
     /* フッター */
@@ -647,18 +770,21 @@
   
   <!-- ヘッダー -->
   <header class="header-card">
-    <div class="header-tag">⚡ IDM ACADEMIC RESEARCH & CITATION DEFENSE COCKPIT</div>
+    <div class="header-tag">
+      <span class="material-symbols-outlined">terminal</span>
+      IDM ACADEMIC RESEARCH & CITATION DEFENSE COCKPIT
+    </div>
     <div class="header-title-row">
       <div>
         <h1 class="header-title">IDM DX CITATION COCKPIT</h1>
         <p class="header-subtitle">
           就業者2,035名の完全決定論的マイクロデータ解析に基づくDX推進意識と組織摩擦の階層乖離研究。<br>
-          論文を強固に防衛する全45編の引用文献・手元保有実体PDFを完全網羅。専門用語を平易に解説し、初学者や実務家でも直感的に理解できる「分析方法」と「結論」を徹底解説。
+          論文を論理防衛する全45編の引用文献・手元保有実体PDFを完全網羅。専門用語を平易に解説し、初学者や実務家でも直感的に理解できる「分析方法」と「結論」を徹底解説。
         </p>
       </div>
       <div class="header-actions">
         <a href="https://github.com/netch-git/idm-dx-research-paper" target="_blank" class="neo-btn neo-btn-primary">
-          <svg height="16" width="16" viewBox="0 0 16 16" fill="currentColor">
+          <svg height="15" width="15" viewBox="0 0 16 16" fill="currentColor">
             <path d="M8 0C3.58 0 0 3.58 0 8c0 3.54 2.29 6.53 5.47 7.59.4.07.55-.17.55-.38 0-.19-.01-.82-.01-1.49-2.01.37-2.53-.49-2.69-.94-.09-.23-.48-.94-.82-1.13-.28-.15-.68-.52-.01-.53.63-.01 1.08.58 1.23.82.72 1.21 1.87.87 2.33.66.07-.52.28-.87.51-1.07-1.78-.2-3.64-.89-3.64-3.95 0-.87.31-1.59.82-2.15-.08-.2-.36-1.02.08-2.12 0 0 .67-.21 2.2.82.64-.18 1.32-.27 2-.27.68 0 1.36.09 2 .27 1.53-1.04 2.2-.82 2.2-.82.44 1.1.16 1.92.08 2.12.51.56.82 1.27.82 2.15 0 3.07-1.87 3.75-3.65 3.95.29.25.54.73.54 1.48 0 1.07-.01 1.93-.01 2.2 0 .21.15.46.55.38A8.013 8.013 0 0016 8c0-4.42-3.58-8-8-8z"/>
           </svg>
           GitHub Repository
@@ -668,10 +794,22 @@
 
     <!-- メタ情報 -->
     <div class="meta-badges-row">
-      <div class="meta-badge active">● ANALYTICAL SAMPLE: N = 2,035 (欠損値ゼロ完全決定論的解析)</div>
-      <div class="meta-badge">● CITATION CORPUS: 全45編 (一次資料現物照合済)</div>
-      <div class="meta-badge">● DEPLOYED ON: Cloudflare Pages</div>
-      <div class="meta-badge">● GENERATIVE AI QUIRKS: 完全封印・ソリッド解説</div>
+      <div class="meta-badge active">
+        <span class="material-symbols-outlined">database</span>
+        ANALYTICAL SAMPLE: N = 2,035 (決定論的完全解析)
+      </div>
+      <div class="meta-badge">
+        <span class="material-symbols-outlined">verified</span>
+        CITATION CORPUS: 全45編 (一次資料現物照合済)
+      </div>
+      <div class="meta-badge">
+        <span class="material-symbols-outlined">cloud_done</span>
+        DEPLOYED ON: Cloudflare Pages
+      </div>
+      <div class="meta-badge">
+        <span class="material-symbols-outlined">menu_book</span>
+        入門者向け解説・専門用語平易化
+      </div>
     </div>
   </header>
 
@@ -680,7 +818,7 @@
     <div class="kpi-card">
       <div class="kpi-label">
         <span>TOTAL CITATIONS</span>
-        <span>📚</span>
+        <span class="material-symbols-outlined">library_books</span>
       </div>
       <div class="kpi-value" id="kpi-total">45</div>
       <div class="kpi-desc">理論基盤26編 ＋ 中小企業実体PDF14編 ＋ 政策白書5編</div>
@@ -689,27 +827,27 @@
     <div class="kpi-card">
       <div class="kpi-label">
         <span>PRIMARY SOURCE VERIFICATION</span>
-        <span>🔍</span>
+        <span class="material-symbols-outlined">verified</span>
       </div>
-      <div class="kpi-value" style="color: var(--accent-green);">100%</div>
+      <div class="kpi-value" style="color: var(--navy-dark);">100%</div>
       <div class="kpi-desc">実体PDF・スキャン原書と頁単位照合。架空引用ゼロ保証</div>
     </div>
 
     <div class="kpi-card">
       <div class="kpi-label">
         <span>ANALYTICAL FRAMEWORKS</span>
-        <span>🔬</span>
+        <span class="material-symbols-outlined">science</span>
       </div>
-      <div class="kpi-value" style="color: var(--accent-blue);">7 系統</div>
+      <div class="kpi-value" style="color: var(--accent-steel);">7 系統</div>
       <div class="kpi-desc">統制実験、ANOVA、SEM、ロジット、メタ分析、質的、数理証明</div>
     </div>
 
     <div class="kpi-card">
       <div class="kpi-label">
         <span>SENSITIVITY & CMB DEFENSE</span>
-        <span>🛡️</span>
+        <span class="material-symbols-outlined">shield</span>
       </div>
-      <div class="kpi-value" style="color: var(--accent-purple);">OR 2.409</div>
+      <div class="kpi-value" style="color: var(--navy-subtle);">OR 2.409</div>
       <div class="kpi-desc">重複項目外科的除外＆Siemsen減衰定理で査読疑義を完全論破</div>
     </div>
   </section>
@@ -718,7 +856,10 @@
   <section class="charts-row">
     <div class="chart-card">
       <div class="chart-header">
-        <div class="chart-title">📊 分析手法カテゴリ別構成比</div>
+        <div class="chart-title">
+          <span class="material-symbols-outlined">donut_small</span>
+          分析手法カテゴリ別構成比
+        </div>
         <span style="font-family: var(--font-mono); font-size: 11px; color: var(--ink-gray);">METHODOLOGY BREAKDOWN</span>
       </div>
       <div style="height: 220px; position: relative;">
@@ -728,7 +869,10 @@
 
     <div class="chart-card">
       <div class="chart-header">
-        <div class="chart-title">📈 発行年代別分布（古典理論 〜 2026年最新実証）</div>
+        <div class="chart-title">
+          <span class="material-symbols-outlined">bar_chart</span>
+          発行年代別分布（古典理論 〜 2026年最新実証）
+        </div>
         <span style="font-family: var(--font-mono); font-size: 11px; color: var(--ink-gray);">TIMELINE CHRONOLOGY</span>
       </div>
       <div style="height: 220px; position: relative;">
@@ -741,7 +885,9 @@
   <section class="control-panel">
     <!-- 検索バー -->
     <div class="search-input-wrap">
-      <span class="search-icon">🔍</span>
+      <span class="search-icon">
+        <span class="material-symbols-outlined">search</span>
+      </span>
       <input type="text" id="searchInput" class="search-input" placeholder="タイトル、著者名、発行年、キーワード（例: 不公平、レディネス、ANOVA、オッズ比、ミドル）でリアルタイム検索...">
     </div>
 
@@ -774,7 +920,7 @@
 
   <!-- 結果件数 -->
   <div class="results-count">
-    <span>SHOWING <span id="currentCount" style="color: var(--accent-blue);">45</span> CITATION CARDS</span>
+    <span>SHOWING <span id="currentCount" style="color: var(--accent-steel);">45</span> CITATION CARDS</span>
     <span style="color: var(--ink-gray); font-size: 11px;">クリックで学術詳細・査読Q&A・引用テキストを展開</span>
   </div>
 
@@ -857,10 +1003,10 @@ function renderCards() {
 
   if (filtered.length === 0) {
     container.innerHTML = `
-      <div style="background: #FFFFFF; border: 2px solid #1E1E1E; border-radius: 8px; padding: 40px; text-align: center;">
-        <div style="font-size: 24px; margin-bottom: 8px;">🔍</div>
-        <div style="font-weight: 800; font-size: 16px;">該当する引用文献が見つかりませんでした</div>
-        <div style="color: #666; font-size: 13px; margin-top: 4px;">検索条件やフィルターを変更してお試しください。</div>
+      <div style="background: #FFFFFF; border: 2px solid #0F172A; border-radius: 8px; padding: 40px; text-align: center;">
+        <div style="margin-bottom: 8px;"><span class="material-symbols-outlined" style="font-size: 28px; color: #64748B;">search_off</span></div>
+        <div style="font-weight: 800; font-size: 15px; color: #0F172A;">該当する引用文献が見つかりませんでした</div>
+        <div style="color: #64748B; font-size: 13px; margin-top: 4px;">検索条件やフィルターを変更してお試しください。</div>
       </div>
     `;
     return;
@@ -868,8 +1014,8 @@ function renderCards() {
 
   let html = "";
   filtered.forEach(item => {
-    const doiDisplay = item.doi ? `<a href="${escapeHtml(item.doi)}" target="_blank" rel="noopener noreferrer" class="doi-link">🔗 ${escapeHtml(item.doi)}</a>` : `<span>No DOI (書籍/白書)</span>`;
-    const pdfBadge = item.pdf_file ? `<span class="pdf-verified-badge">✓ PDF照合済 (${escapeHtml(item.pdf_file)})</span>` : `<span class="pdf-verified-badge">✓ 現物照合済</span>`;
+    const doiDisplay = item.doi ? `<a href="${escapeHtml(item.doi)}" target="_blank" rel="noopener noreferrer" class="doi-link"><span class="material-symbols-outlined">open_in_new</span> ${escapeHtml(item.doi)}</a>` : `<span>No DOI (書籍/白書)</span>`;
+    const pdfBadge = item.pdf_file ? `<span class="pdf-verified-badge"><span class="material-symbols-outlined">verified</span> PDF照合済 (${escapeHtml(item.pdf_file)})</span>` : `<span class="pdf-verified-badge"><span class="material-symbols-outlined">verified</span> 現物照合済</span>`;
     const apaText = `${item.author} (${item.year}). ${item.title_en}. ${item.journal || ''}. ${item.doi || ''}`.trim();
 
     html += `
@@ -898,12 +1044,12 @@ function renderCards() {
           <span>${doiDisplay}</span>
         </div>
 
-        <!-- 入門者向け解説ボックス（2カラム） -->
+        <!-- 入門者向け解説ボックス（ディープネイビー・スレート背景 ＆ フォント薄いグレー） -->
         <div class="plain-boxes-grid">
-          <!-- 分析方法 -->
+          <!-- 分析方法（ディープネイビー背景） -->
           <div class="plain-box box-method">
             <div class="box-header">
-              <span>🔍</span>
+              <span class="material-symbols-outlined">search</span>
               <span>入門者向け分析方法解説（どうやって調べたか）</span>
             </div>
             <div class="box-content">
@@ -911,10 +1057,10 @@ function renderCards() {
             </div>
           </div>
 
-          <!-- コンクルージョン -->
+          <!-- コンクルージョン（スレートネイビー背景） -->
           <div class="plain-box box-conclusion">
             <div class="box-header">
-              <span>💡</span>
+              <span class="material-symbols-outlined">lightbulb</span>
               <span>入門者向け結論解説（要するに何がわかったか）</span>
             </div>
             <div class="box-content">
@@ -923,16 +1069,22 @@ function renderCards() {
           </div>
         </div>
 
-        <!-- 本論文での役割 -->
+        <!-- 本論文での役割（上品なニュートラルグレー背景） -->
         <div class="role-callout">
-          <div class="role-title">🛡️ 本研究（IDM就業者2,035名解析）での防衛役割・支える仮説</div>
+          <div class="role-title">
+            <span class="material-symbols-outlined">shield</span>
+            本研究（就業者2,035名解析）での防衛役割・支える仮説
+          </div>
           <div>${escapeHtml(item.role_in_idm)}</div>
         </div>
 
         <!-- アコーディオン（学術詳細） -->
         <div class="accordion-toggle" onclick="toggleAccordion('${escapeHtml(item.id)}')">
-          <span>📖 学術的標本設計・適用統計モデル・想定試問(Q&A) を見る</span>
-          <span id="arrow-${escapeHtml(item.id)}">▼ 開く</span>
+          <div class="accordion-toggle-left">
+            <span class="material-symbols-outlined">menu_book</span>
+            <span>学術的標本設計・適用統計モデル・想定試問(Q&A) を見る</span>
+          </div>
+          <span id="arrow-${escapeHtml(item.id)}" style="font-size: 11px;">展開する</span>
         </div>
 
         <div class="accordion-content" id="content-${escapeHtml(item.id)}">
@@ -953,17 +1105,21 @@ function renderCards() {
 
           ${item.q_text ? `
             <div class="qa-box">
-              <div class="qa-q">❓ 指導教官・査読者の想定試問 (Q): ${escapeHtml(item.q_text)}</div>
-              <div class="qa-a">💡 論理防衛回答 (A): ${escapeHtml(item.a_text)}</div>
+              <div class="qa-q">
+                <span class="material-symbols-outlined">help</span>
+                指導教官・査読者の想定試問 (Q): ${escapeHtml(item.q_text)}
+              </div>
+              <div class="qa-a">論理防衛回答 (A): ${escapeHtml(item.a_text)}</div>
             </div>
           ` : ''}
 
-          <div style="display: flex; justify-content: space-between; align-items: center; background: #F8F8F8; padding: 8px 12px; border-radius: 4px; border: 1px solid #E0E0E0; gap: 8px; flex-wrap: wrap;">
-            <div class="citation-text" id="cite-text-${escapeHtml(item.id)}" style="font-family: var(--font-mono); font-size: 11px; color: #444; word-break: break-all; flex: 1;">
+          <div style="display: flex; justify-content: space-between; align-items: center; background: #F8FAFC; padding: 10px 14px; border-radius: 4px; border: 1px solid #CBD5E1; gap: 8px; flex-wrap: wrap;">
+            <div class="citation-text" id="cite-text-${escapeHtml(item.id)}" style="font-family: var(--font-mono); font-size: 11px; color: var(--ink-slate); word-break: break-all; flex: 1;">
               ${escapeHtml(apaText)}
             </div>
             <button class="copy-btn" onclick="copyCitationFromElement('cite-text-${escapeHtml(item.id)}', this)">
-              📋 APA引用をコピー
+              <span class="material-symbols-outlined">content_copy</span>
+              APA引用をコピー
             </button>
           </div>
         </div>
@@ -981,10 +1137,10 @@ window.toggleAccordion = function(id) {
   if (!content || !arrow) return;
   if (content.classList.contains("open")) {
     content.classList.remove("open");
-    arrow.textContent = "▼ 開く";
+    arrow.textContent = "展開する";
   } else {
     content.classList.add("open");
-    arrow.textContent = "▲ 閉じる";
+    arrow.textContent = "閉じる";
   }
 };
 
@@ -1006,14 +1162,12 @@ window.copyCitationFromElement = function(elementId, btn) {
 };
 
 function showCopiedSuccess(btn) {
-  const originalText = btn.innerHTML;
-  btn.innerHTML = "✓ コピー完了!";
-  btn.style.background = "#E8F5E9";
-  btn.style.color = "#1B5E20";
+  const originalHtml = btn.innerHTML;
+  btn.innerHTML = `<span class="material-symbols-outlined" style="color: #0F172A;">check</span> コピー完了`;
+  btn.style.background = "#E2E8F0";
   setTimeout(() => {
-    btn.innerHTML = originalText;
+    btn.innerHTML = originalHtml;
     btn.style.background = "#FFFFFF";
-    btn.style.color = "#1E1E1E";
   }, 2000);
 }
 
@@ -1031,7 +1185,7 @@ function fallbackCopy(text, btn) {
   document.body.removeChild(textArea);
 }
 
-// Chart.js初期化（エラーで画面が止まらないよう保護）
+// Chart.js初期化（モノトーン・スレート・エンジニアリング配色）
 function initCharts() {
   if (typeof Chart === 'undefined') {
     console.warn("Chart.js not loaded yet");
@@ -1054,10 +1208,10 @@ function initCharts() {
           datasets: [{
             data: Object.values(methodCounts),
             backgroundColor: [
-              '#1D63B8', '#129956', '#F5C518', '#7B1FA2', '#D93829', '#E67E22', '#16A085', '#8E44AD'
+              '#0F172A', '#1E293B', '#334155', '#475569', '#64748B', '#94A3B8', '#CBD5E1', '#E2E8F0'
             ],
-            borderWidth: 2,
-            borderColor: '#1E1E1E'
+            borderWidth: 1.5,
+            borderColor: '#FFFFFF'
           }]
         },
         options: {
@@ -1068,6 +1222,7 @@ function initCharts() {
               position: 'right',
               labels: {
                 font: { family: "'Noto Sans JP', sans-serif", size: 10 },
+                color: '#334155',
                 boxWidth: 12
               }
             }
@@ -1101,9 +1256,10 @@ function initCharts() {
           datasets: [{
             label: '文献数',
             data: Object.values(eraCounts),
-            backgroundColor: '#F5C518',
-            borderColor: '#1E1E1E',
-            borderWidth: 2
+            backgroundColor: '#0F172A',
+            borderColor: '#0F172A',
+            borderWidth: 1,
+            borderRadius: 4
           }]
         },
         options: {
@@ -1112,10 +1268,12 @@ function initCharts() {
           scales: {
             y: {
               beginAtZero: true,
-              ticks: { stepSize: 5, font: { family: "'JetBrains Mono', monospace" } }
+              ticks: { stepSize: 5, font: { family: "'JetBrains Mono', monospace" }, color: '#64748B' },
+              grid: { color: '#E2E8F0' }
             },
             x: {
-              ticks: { font: { family: "'Noto Sans JP', sans-serif", size: 10 } }
+              ticks: { font: { family: "'Noto Sans JP', sans-serif", size: 10 }, color: '#334155' },
+              grid: { display: false }
             }
           },
           plugins: {
